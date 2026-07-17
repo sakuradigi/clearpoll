@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="ClearPoll 透析民調 — 台灣選舉民調科學分析平台，透過加權模型與數據透明化，提供精準的選情預測。">
-  <meta name="keywords" content="台灣選舉, 民調分析, 選情預測, ClearPoll, 透析民調, 2022高雄市長">
+  <meta name="keywords" content="台灣選舉, 民調分析, 選情預測, ClearPoll, 透析民調, 2022高雄市長, 2026高雄市長">
   <meta name="author" content="ClearPoll 透析民調">
 
   <!-- Open Graph -->
@@ -39,14 +39,36 @@
         <span class="logo-sub">透析民調</span>
       </div>
 
-      <div class="election-selector">
-        <label for="electionSelect">選舉：</label>
-        <select id="electionSelect">
-          <option value="2022-kaohsiung-mayor">2022 高雄市長選舉</option>
-        </select>
+      <div class="header-actions">
+        <!-- Font Size Adjuster -->
+        <div class="font-adjuster" id="fontAdjuster">
+          <span class="font-adjuster-label">字體大小</span>
+          <button id="fontSizeDown" title="減小字體" class="font-btn">A-</button>
+          <button id="fontSizeReset" title="重設字體" class="font-btn active">A</button>
+          <button id="fontSizeUp" title="加大字體" class="font-btn">A+</button>
+        </div>
       </div>
     </div>
   </header>
+
+  <!-- ===== 2D Navigator (City & Year Switcher) ===== -->
+  <div class="nav-switcher-container">
+    <nav class="nav-switcher">
+      <div class="city-selector" id="citySelector">
+        <button class="city-btn active" data-city="kaohsiung">高雄市</button>
+        <button class="city-btn" data-city="taipei">台北市</button>
+        <button class="city-btn" data-city="newtaipei">新北市</button>
+        <button class="city-btn" data-city="taoyuan">桃園市</button>
+        <button class="city-btn" data-city="taichung">台中市</button>
+        <button class="city-btn" data-city="tainan">台南市</button>
+      </div>
+      <div class="year-selector" id="yearSelector">
+        <button class="year-btn active" data-year="2026">2026 預測</button>
+        <button class="year-btn" data-year="2022">2022 歷史</button>
+        <button class="year-btn" data-year="2018">2018 歷史</button>
+      </div>
+    </nav>
+  </div>
 
   <!-- ===== Main Content ===== -->
   <main class="main-container">
@@ -60,17 +82,36 @@
       </div>
     </div>
 
+    <!-- Construction State (for unimplemented pages) -->
+    <div id="constructionState" class="section card text-center hidden" style="padding: 60px var(--space-lg); margin-top: var(--space-md);">
+      <div class="construction-content" style="max-width: 600px; margin: 0 auto;">
+        <div style="font-size: 3.5rem; margin-bottom: var(--space-md);">🚧</div>
+        <h2 style="font-size: 1.8rem; margin-bottom: var(--space-sm); font-weight: 700;">此選區正施工中</h2>
+        <p style="color: var(--color-text-secondary); margin-bottom: var(--space-lg); line-height: 1.8;">
+          該選區的民調資料正在收集中，即將開放。目前本站已建置完成高雄市長選區，供您進行 Demo 與實戰分析：
+        </p>
+        <div style="display: flex; flex-direction: column; gap: var(--space-sm); align-items: stretch; max-width: 320px; margin: 0 auto;">
+          <button class="btn-demo-link" data-target-city="kaohsiung" data-target-year="2026">
+            👉 2026 高雄市長選舉 (實戰選區)
+          </button>
+          <button class="btn-demo-link" data-target-city="kaohsiung" data-target-year="2022">
+            👉 2022 高雄市長選舉 (Demo 選區)
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- App Content (hidden until loaded) -->
     <div id="appContent" class="hidden">
 
       <!-- ===== Hero / Prediction Section ===== -->
       <section class="hero-section fade-in" id="heroSection">
         <p class="hero-update-time" id="heroUpdateTime">最後更新：--</p>
-        <h1 class="hero-title text-gradient">選情預測</h1>
+        <h1 class="hero-title text-gradient">選情預測總覽</h1>
         <p class="hero-election-name" id="heroElectionName">載入中...</p>
 
-        <!-- Prediction Cards -->
-        <div class="prediction-grid stagger-children" id="predictionGrid">
+        <!-- Prediction Summary Table (Optimized Blogger style) -->
+        <div class="prediction-table-card mt-lg" id="predictionTableContainer">
           <!-- Dynamically populated by app.js -->
         </div>
 
@@ -111,16 +152,16 @@
         </div>
       </section>
 
-      <!-- ===== Vote Share Bar Chart ===== -->
+      <!-- ===== Vote Share Chart (Pie/Donut Chart) ===== -->
       <section class="section fade-in" id="voteShareSection">
         <div class="section-header">
           <div>
             <h2 class="section-title"><span class="icon">📊</span> 預測得票率</h2>
-            <p class="section-subtitle">模型加權預測之各候選人得票率</p>
+            <p class="section-subtitle">模型加權預測之各候選人得票分配比例</p>
           </div>
         </div>
-        <div class="chart-card">
-          <div class="chart-wrapper" style="height: 200px;">
+        <div class="chart-card pie-chart-card">
+          <div class="chart-wrapper" style="height: 300px; max-width: 450px; margin: 0 auto;">
             <canvas id="voteShareChart"></canvas>
           </div>
         </div>
@@ -138,17 +179,7 @@
         <div class="table-container">
           <table class="data-table" id="pollDataTable">
             <thead>
-              <tr>
-                <th data-sort="date">日期 <span class="sort-icon">▼</span></th>
-                <th data-sort="pollster">民調機構 <span class="sort-icon">▼</span></th>
-                <th data-sort="method">方法 <span class="sort-icon">▼</span></th>
-                <th data-sort="sampleSize">樣本數 <span class="sort-icon">▼</span></th>
-                <th data-sort="candidate1" class="text-right">候選人1 <span class="sort-icon">▼</span></th>
-                <th data-sort="candidate2" class="text-right">候選人2 <span class="sort-icon">▼</span></th>
-                <th data-sort="undecided" class="text-right">未決定 <span class="sort-icon">▼</span></th>
-                <th data-sort="weight" class="text-right">權重 <span class="sort-icon">▼</span></th>
-                <th>來源</th>
-              </tr>
+              <!-- Dynamically populated -->
             </thead>
             <tbody id="pollDataBody">
               <!-- Dynamically populated -->
@@ -168,14 +199,7 @@
         <div class="table-container">
           <table class="data-table" id="predictionLogTable">
             <thead>
-              <tr>
-                <th>日期</th>
-                <th>累計民調數</th>
-                <th class="text-right">候選人1 得票率</th>
-                <th class="text-right">候選人2 得票率</th>
-                <th class="text-right">候選人1 勝率</th>
-                <th class="text-right">候選人2 勝率</th>
-              </tr>
+              <!-- Dynamically populated -->
             </thead>
             <tbody id="predictionLogBody">
               <!-- Dynamically populated -->
@@ -249,22 +273,22 @@
               <div class="vote-bar-container">
                 <div class="vote-bar-label">
                   <span style="font-weight: 600; color: var(--color-dpp);">陳其邁 (DPP)</span>
-                  <span class="number-medium text-dpp">實際 71.2%</span>
+                  <span class="number-medium text-dpp">實際 72.0%</span>
                 </div>
                 <div class="vote-bar-track large">
-                  <div class="vote-bar-fill dpp animate-bar" style="width: 71.2%;"></div>
+                  <div class="vote-bar-fill dpp animate-bar" style="width: 72.0%;"></div>
                 </div>
               </div>
               <div class="vote-bar-container mt-md">
                 <div class="vote-bar-label">
                   <span style="font-weight: 600; color: var(--color-kmt);">柯志恩 (KMT)</span>
-                  <span class="number-medium text-kmt">實際 25.4%</span>
+                  <span class="number-medium text-kmt">實際 23.6%</span>
                 </div>
                 <div class="vote-bar-track large">
-                  <div class="vote-bar-fill kmt animate-bar" style="width: 25.4%;"></div>
+                  <div class="vote-bar-fill kmt animate-bar" style="width: 23.6%;"></div>
                 </div>
               </div>
-              <p class="mt-md" style="font-size: 0.85rem;">投票率：56.28%・總有效票：1,077,557</p>
+              <p class="mt-md" style="font-size: 0.85rem;">投票率：58.28%・總有效票：1,140,718</p>
             </div>
           </div>
         </div>
@@ -284,7 +308,7 @@
       <div class="footer-links">
         <a href="#methodologySection">分析方法</a>
         <a href="#pollTableSection">原始資料</a>
-        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/sakuradigi/clearpoll" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
     <p class="footer-copy">

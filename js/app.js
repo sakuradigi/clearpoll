@@ -6,12 +6,19 @@
   'use strict';
 
   // ---- State ----
-  let currentElectionId = '2022-kaohsiung-mayor';
+  let selectedCity = 'kaohsiung';
+  let selectedYear = '2026';
+  let currentElectionId = '2026-kaohsiung-mayor';
+  
+  let electionsMetadata = null;
   let analysisResult = null;
   let pollData = null;
   let pollsterData = null;
+  let pastResultsData = null;
+  
   let tableSortColumn = 'date';
   let tableSortAsc = false;
+  let currentFontScale = parseFloat(localStorage.getItem('clearPollFontScale')) || 1.0;
 
   // ---- DOM References ----
   const $ = (id) => document.getElementById(id);
@@ -19,14 +26,16 @@
   const DOM = {
     loadingState: $('loadingState'),
     appContent: $('appContent'),
-    electionSelect: $('electionSelect'),
+    constructionState: $('constructionState'),
     heroElectionName: $('heroElectionName'),
     heroUpdateTime: $('heroUpdateTime'),
     heroSummaryText: $('heroSummaryText'),
-    predictionGrid: $('predictionGrid'),
+    predictionTableContainer: $('predictionTableContainer'),
     pollDataBody: $('pollDataBody'),
     pollCountLabel: $('pollCountLabel'),
     predictionLogBody: $('predictionLogBody'),
+    citySelector: $('citySelector'),
+    yearSelector: $('yearSelector'),
   };
 
   // ---- Data Loading ----
@@ -49,17 +58,26 @@
    * Load all data for the current election.
    */
   async function loadElectionData(electionId) {
-    const [electionsData, pollsterData] = await Promise.all([
+    // Load metadata and past results
+    const [electionsData, pollsterData, pastResults] = await Promise.all([
       loadJSON('data/meta/elections.json'),
-      loadJSON('data/meta/pollsters.json')
+      loadJSON('data/meta/pollsters.json'),
+      loadJSON('data/history/past-results.json')
     ]);
 
     if (!electionsData || !pollsterData) return null;
+    
+    electionsMetadata = electionsData.elections;
+    pastResultsData = pastResults;
 
-    const election = electionsData.elections.find(e => e.id === electionId);
+    const election = electionsMetadata.find(e => e.id === electionId);
     if (!election) {
       console.error(`[ClearPoll] Election not found in metadata: ${electionId}`);
       return null;
+    }
+
+    if (election.status === 'construction' || !election.pollsFile) {
+      return { election, polls: null, pollsters: pollsterData, pastResults };
     }
 
     const pollsData = await loadJSON(election.pollsFile);
@@ -73,75 +91,152 @@
       polls: pollsData.polls || []
     };
 
-    return { polls: pollDataMerged, pollsters: pollsterData };
+    return { election, polls: pollDataMerged, pollsters: pollsterData, pastResults };
   }
 
   // ---- Rendering ----
 
   /**
-   * Show/hide loading state.
+   * Show/hide loading state and handle construction pages.
    */
-  function setLoading(isLoading) {
-    DOM.loadingState.classList.toggle('hidden', !isLoading);
-    DOM.appContent.classList.toggle('hidden', isLoading);
+  function setViewState(state) {
+    // state: 'loading' | 'construction' | 'content'
+    DOM.loadingState.classList.toggle('hidden', state !== 'loading');
+    DOM.constructionState.classList.toggle('hidden', state !== 'construction');
+    DOM.appContent.classList.toggle('hidden', state !== 'content');
   }
 
   /**
-   * Render the hero prediction cards.
+   * Calculate weighted neutral support for a candidate.
    */
-  function renderPredictionCards(result) {
-    const { candidates, predictedVoteShares, winProbabilities } = result;
+  function calcWeightedNeutralSupport(weightedPolls, candidateId) {
+    let weightedSum = 0;
+    let totalWeight = 0;
 
-    DOM.heroElectionName.textContent = result.electionName;
-    DOM.heroUpdateTime.textContent = `最後更新：${new Date(result.analysisTimestamp).toLocaleString('zh-TW')}`;
-    DOM.heroSummaryText.textContent =
-      `根據 ${result.pollCount} 筆民調加權分析，標準誤差 ±${result.standardError}%。`;
+    for (const poll of weightedPolls) {
+      if (poll.neutralResults && poll.neutralResults[candidateId] != null) {
+        const support = poll.neutralResults[candidateId];
+        const weight = poll.weights.combined;
+        weightedSum += support * weight;
+        totalWeight += weight;
+      }
+    }
 
-    let html = '';
-    for (const candidate of candidates) {
-      const vote = predictedVoteShares[candidate.id] || 0;
-      const prob = winProbabilities[candidate.id] || 0;
-      const probPercent = (prob * 100).toFixed(1);
-      const partyClass = candidate.party.toLowerCase();
+    if (totalWeight > 0) {
+      return Math.round((weightedSum / totalWeight) * 10) / 10;
+    }
+    return null; // N/A
+  }
 
-      // Determine probability badge level
-      let probLevel = 'low';
-      if (prob >= 0.8) probLevel = 'high';
-      else if (prob >= 0.3) probLevel = 'medium';
+  /**
+   * Render the prediction summary table.
+   */
+  function renderPredictionSummaryTable(result, pastResults) {
+    const { candidates, predictedVoteShares, winProbabilities, weightedPolls } = result;
 
-      const probIcon = prob >= 0.8 ? '✅' : prob >= 0.3 ? '⚠️' : '❌';
+    // Find actual results if completed
+    const actualResult = pastResults?.results?.find(r => r.electionId === result.electionId);
 
-      html += `
-        <div class="prediction-card ${partyClass}">
-          <div class="party-accent"></div>
-          <span class="candidate-party ${partyClass}">${candidate.party}</span>
-          <h3 class="candidate-name">${candidate.name}</h3>
-          <div class="predicted-vote">
-            <p class="label">預測得票率</p>
-            <p class="number-large count-up" style="color: ${candidate.color};">${vote.toFixed(1)}<span class="unit">%</span></p>
-          </div>
-          <div class="vote-bar-container">
-            <div class="vote-bar-track large">
-              <div class="vote-bar-fill ${partyClass} animate-bar" style="width: ${vote}%;"></div>
-            </div>
-          </div>
-          <div class="mt-md">
-            <p class="label">勝選機率</p>
-            <span class="win-prob-badge ${probLevel}">
-              <span class="prob-icon">${probIcon}</span>
-              ${probPercent}%
-            </span>
-          </div>
-        </div>
+    // Build headers
+    let candidateHeaders = candidates.map(c => 
+      `<th class="candidate-header-cell" style="background-color: ${c.color};">${c.name} (${c.party})</th>`
+    ).join('');
+
+    // Row: 中間選民支持度
+    let neutralSupportRow = candidates.map(c => {
+      const val = calcWeightedNeutralSupport(weightedPolls, c.id);
+      return `<td>${val != null ? val.toFixed(1) + '%' : 'N/A'}</td>`;
+    }).join('');
+
+    // Row: 勝選機會
+    let winOpportunityRow = candidates.map(c => {
+      const prob = winProbabilities[c.id] || 0;
+      let level = 'none';
+      let text = '機會渺茫';
+      if (prob >= 0.92) { level = 'high'; text = '機會極高'; }
+      else if (prob >= 0.79) { level = 'high'; text = '機會高'; }
+      else if (prob >= 0.68) { level = 'medium'; text = '機會略高'; }
+      else if (prob >= 0.32) { level = 'medium'; text = '五五波'; }
+      else if (prob > 0.05) { level = 'low'; text = '機會低'; }
+      return `<td><span class="win-opportunity-badge ${level}">${text}</span></td>`;
+    }).join('');
+
+    // Row: 勝率
+    let winProbabilityRow = candidates.map(c => {
+      const prob = winProbabilities[c.id] || 0;
+      return `<td style="font-weight: 700;">${(prob * 100).toFixed(1)}%</td>`;
+    }).join('');
+
+    // Row: 得票率預測
+    let voteShareProjectionRow = candidates.map(c => {
+      const share = predictedVoteShares[c.id] || 0;
+      return `<td class="val-large" style="color: ${c.color}; font-weight: 800;">${share.toFixed(1)}%</td>`;
+    }).join('');
+
+    // Row: 實際選舉結果
+    let actualResultsRow = '';
+    let predictionGapRow = '';
+
+    if (actualResult) {
+      actualResultsRow = `
+        <tr>
+          <td class="row-label">選舉結果 (實際得票率)</td>
+          ${candidates.map(c => {
+            const candResult = actualResult.candidates.find(ac => ac.id === c.id);
+            return `<td style="font-weight: 600;">${candResult ? candResult.voteShare.toFixed(1) + '%' : '-'}</td>`;
+          }).join('')}
+        </tr>
+      `;
+
+      predictionGapRow = `
+        <tr>
+          <td class="row-label">預測誤差</td>
+          ${candidates.map(c => {
+            const candResult = actualResult.candidates.find(ac => ac.id === c.id);
+            if (!candResult) return '<td>-</td>';
+            const proj = predictedVoteShares[c.id] || 0;
+            const act = candResult.voteShare;
+            const diff = proj - act;
+            const colorClass = diff >= 0 ? 'text-dpp' : 'text-danger';
+            const sign = diff >= 0 ? '+' : '';
+            return `<td class="${colorClass}" style="font-weight: 600;">${sign}${diff.toFixed(1)}%</td>`;
+          }).join('')}
+        </tr>
       `;
     }
 
-    DOM.predictionGrid.innerHTML = html;
+    const tableHtml = `
+      <table class="prediction-summary-table">
+        <thead>
+          <tr>
+            <th style="width: 220px; text-align: left; background-color: var(--color-bg-secondary);">預測項目</th>
+            ${candidateHeaders}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">中間選民平均支持度</td>
+            ${neutralSupportRow}
+          </tr>
+          <tr>
+            <td class="row-label">勝選機會</td>
+            ${winOpportunityRow}
+          </tr>
+          <tr>
+            <td class="row-label">勝率預測</td>
+            ${winProbabilityRow}
+          </tr>
+          <tr>
+            <td class="row-label" style="border-bottom: 2px solid var(--color-border);">得票率加權預測</td>
+            ${voteShareProjectionRow}
+          </tr>
+          ${actualResultsRow}
+          ${predictionGapRow}
+        </tbody>
+      </table>
+    `;
 
-    // Trigger stagger animation
-    requestAnimationFrame(() => {
-      DOM.predictionGrid.classList.add('visible');
-    });
+    DOM.predictionTableContainer.innerHTML = tableHtml;
   }
 
   /**
@@ -328,7 +423,7 @@
     // Win probability trend chart
     ClearPollCharts.renderWinProbChart('winProbChart', predictionLog, candidates);
 
-    // Vote share bar chart
+    // Vote share pie/donut chart
     ClearPollCharts.renderVoteShareBar('voteShareChart', predictedVoteShares, candidates);
   }
 
@@ -340,7 +435,6 @@
         for (const entry of entries) {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            // Stop observing once visible
             observer.unobserve(entry.target);
           }
         }
@@ -360,12 +454,8 @@
 
   function initHeaderScroll() {
     const header = $('siteHeader');
-    let lastScroll = 0;
-
     window.addEventListener('scroll', () => {
-      const currentScroll = window.scrollY;
-      header.classList.toggle('scrolled', currentScroll > 10);
-      lastScroll = currentScroll;
+      header.classList.toggle('scrolled', window.scrollY > 10);
     }, { passive: true });
   }
 
@@ -396,41 +486,136 @@
     });
   }
 
-  // ---- Election Switcher ----
+  // ---- 2D Switcher Navigation ----
 
-  function initElectionSwitcher() {
-    DOM.electionSelect.addEventListener('change', async (e) => {
-      currentElectionId = e.target.value;
+  function init2DNavigation() {
+    // City buttons
+    DOM.citySelector.addEventListener('click', async (e) => {
+      const btn = e.target.closest('.city-btn');
+      if (!btn) return;
+
+      document.querySelectorAll('#citySelector .city-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedCity = btn.dataset.city;
+
+      updateElectionId();
+      await loadAndRender(currentElectionId);
+    });
+
+    // Year buttons
+    DOM.yearSelector.addEventListener('click', async (e) => {
+      const btn = e.target.closest('.year-btn');
+      if (!btn) return;
+
+      document.querySelectorAll('#yearSelector .year-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedYear = btn.dataset.year;
+
+      updateElectionId();
+      await loadAndRender(currentElectionId);
+    });
+
+    // Handle "Under Construction" demo links
+    document.addEventListener('click', async (e) => {
+      const btn = e.target.closest('.btn-demo-link');
+      if (!btn) return;
+
+      const targetCity = btn.dataset.targetCity;
+      const targetYear = btn.dataset.targetYear;
+
+      // Set active city button
+      document.querySelectorAll('#citySelector .city-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.city === targetCity);
+      });
+      // Set active year button
+      document.querySelectorAll('#yearSelector .year-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.year === targetYear);
+      });
+
+      selectedCity = targetCity;
+      selectedYear = targetYear;
+      
+      updateElectionId();
       await loadAndRender(currentElectionId);
     });
   }
 
-  // ---- Main Init ----
+  function updateElectionId() {
+    currentElectionId = `${selectedYear}-${selectedCity}-mayor`;
+  }
+
+  // ---- Font Size Adjuster ----
+
+  function initFontAdjuster() {
+    const setFontScale = (scale) => {
+      currentFontScale = scale;
+      localStorage.setItem('clearPollFontScale', scale);
+      document.documentElement.style.setProperty('--font-scale', scale);
+
+      document.querySelectorAll('#fontAdjuster .font-btn').forEach(btn => btn.classList.remove('active'));
+      if (scale < 1.0) {
+        $('fontSizeDown').classList.add('active');
+      } else if (scale > 1.0) {
+        $('fontSizeUp').classList.add('active');
+      } else {
+        $('fontSizeReset').classList.add('active');
+      }
+    };
+
+    // Set initial scale
+    setFontScale(currentFontScale);
+
+    $('fontSizeDown').addEventListener('click', () => {
+      if (currentFontScale > 0.85) setFontScale(parseFloat((currentFontScale - 0.15).toFixed(2)));
+    });
+    $('fontSizeReset').addEventListener('click', () => {
+      setFontScale(1.0);
+    });
+    $('fontSizeUp').addEventListener('click', () => {
+      if (currentFontScale < 1.30) setFontScale(parseFloat((currentFontScale + 0.15).toFixed(2)));
+    });
+  }
+
+  // ---- Main Loader & Renderer ----
 
   async function loadAndRender(electionId) {
-    setLoading(true);
+    setViewState('loading');
 
     const data = await loadElectionData(electionId);
-    pollData = data.polls;
-    pollsterData = data.pollsters;
-
-    if (!pollData || !pollsterData) {
-      // If no data files exist yet, use embedded demo data
-      console.warn('[ClearPoll] Data files not found, using embedded demo data.');
-      pollData = getDemoData();
-      pollsterData = getDemoPollsterData();
+    
+    if (!data) {
+      console.warn('[ClearPoll] No data loaded, using fallbacks.');
+      setViewState('construction');
+      return;
     }
+
+    const { election, polls, pollsters, pastResults } = data;
+
+    // Check if it's marked as construction
+    if (election.status === 'construction' || !polls || polls.polls.length === 0) {
+      DOM.heroElectionName.textContent = election.name;
+      setViewState('construction');
+      return;
+    }
+
+    pollData = polls;
+    pollsterData = pollsters;
 
     // Run analysis
     analysisResult = ClearPollModel.analyze(pollData, pollsterData);
     console.log('[ClearPoll] Analysis complete:', analysisResult);
 
     // Render everything
-    renderPredictionCards(analysisResult);
+    DOM.heroElectionName.textContent = analysisResult.electionName;
+    DOM.heroUpdateTime.textContent = `最後更新：${new Date(analysisResult.analysisTimestamp).toLocaleString('zh-TW')}`;
+    DOM.heroSummaryText.textContent =
+      `根據 ${analysisResult.pollCount} 筆民調加權分析，標準誤差 ±${analysisResult.standardError}%。`;
+
+    renderPredictionSummaryTable(analysisResult, pastResults);
     renderPollTable(analysisResult);
     renderPredictionLog(analysisResult);
 
-    setLoading(false);
+    setViewState('content');
 
     // Wait a tick for DOM to settle, then render charts
     requestAnimationFrame(() => {
@@ -439,128 +624,16 @@
     });
   }
 
-  // ---- Demo Data (Fallback) ----
-
-  function getDemoData() {
-    return {
-      electionId: '2022-kaohsiung-mayor',
-      electionName: '2022 高雄市長選舉',
-      electionDate: '2022-11-26',
-      candidates: [
-        { id: 'chen', name: '陳其邁', party: 'DPP', color: '#1B9431' },
-        { id: 'ke', name: '柯志恩', party: 'KMT', color: '#000095' },
-      ],
-      polls: [
-        {
-          id: 'poll-001', date: '2022-08-01', pollster: 'udn', pollsterName: '聯合報',
-          sampleSize: 1073, method: 'phone',
-          results: { chen: 53.0, ke: 18.0 }, neutralResults: { chen: 48.0, ke: 12.0 },
-          undecided: 29.0, source: 'https://udn.com'
-        },
-        {
-          id: 'poll-002', date: '2022-08-15', pollster: 'tvbs', pollsterName: 'TVBS',
-          sampleSize: 1005, method: 'phone',
-          results: { chen: 50.0, ke: 20.0 }, neutralResults: { chen: 45.0, ke: 15.0 },
-          undecided: 30.0, source: 'https://tvbs.com.tw'
-        },
-        {
-          id: 'poll-003', date: '2022-09-01', pollster: 'ettoday', pollsterName: 'ETtoday',
-          sampleSize: 1102, method: 'phone',
-          results: { chen: 55.2, ke: 21.3 }, neutralResults: { chen: 50.0, ke: 16.0 },
-          undecided: 23.5, source: 'https://ettoday.net'
-        },
-        {
-          id: 'poll-004', date: '2022-09-15', pollster: 'formosa', pollsterName: '美麗島電子報',
-          sampleSize: 1074, method: 'phone',
-          results: { chen: 56.8, ke: 19.5 }, neutralResults: { chen: 52.0, ke: 14.0 },
-          undecided: 23.7, source: 'https://formosa.tw'
-        },
-        {
-          id: 'poll-005', date: '2022-10-01', pollster: 'udn', pollsterName: '聯合報',
-          sampleSize: 1087, method: 'phone',
-          results: { chen: 52.5, ke: 22.0 }, neutralResults: { chen: 47.5, ke: 17.0 },
-          undecided: 25.5, source: 'https://udn.com'
-        },
-        {
-          id: 'poll-006', date: '2022-10-12', pollster: 'chinatimes', pollsterName: '中國時報',
-          sampleSize: 1007, method: 'phone',
-          results: { chen: 49.0, ke: 24.0 }, neutralResults: { chen: 44.0, ke: 19.0 },
-          undecided: 27.0, source: 'https://chinatimes.com'
-        },
-        {
-          id: 'poll-007', date: '2022-10-20', pollster: 'tvbs', pollsterName: 'TVBS',
-          sampleSize: 1012, method: 'phone',
-          results: { chen: 51.5, ke: 23.5 }, neutralResults: { chen: 46.5, ke: 18.5 },
-          undecided: 25.0, source: 'https://tvbs.com.tw'
-        },
-        {
-          id: 'poll-008', date: '2022-11-01', pollster: 'formosa', pollsterName: '美麗島電子報',
-          sampleSize: 1068, method: 'phone',
-          results: { chen: 57.3, ke: 22.8 }, neutralResults: { chen: 53.0, ke: 17.0 },
-          undecided: 19.9, source: 'https://formosa.tw'
-        },
-        {
-          id: 'poll-009', date: '2022-11-08', pollster: 'ettoday', pollsterName: 'ETtoday',
-          sampleSize: 1116, method: 'phone',
-          results: { chen: 54.0, ke: 25.0 }, neutralResults: { chen: 49.0, ke: 20.0 },
-          undecided: 21.0, source: 'https://ettoday.net'
-        },
-        {
-          id: 'poll-010', date: '2022-11-12', pollster: 'udn', pollsterName: '聯合報',
-          sampleSize: 1092, method: 'phone',
-          results: { chen: 51.0, ke: 26.0 }, neutralResults: { chen: 46.0, ke: 21.0 },
-          undecided: 23.0, source: 'https://udn.com'
-        },
-        {
-          id: 'poll-011', date: '2022-11-15', pollster: 'tvbs', pollsterName: 'TVBS',
-          sampleSize: 1024, method: 'phone',
-          results: { chen: 52.0, ke: 27.0 }, neutralResults: { chen: 47.5, ke: 22.0 },
-          undecided: 21.0, source: 'https://tvbs.com.tw'
-        },
-        {
-          id: 'poll-012', date: '2022-11-18', pollster: 'formosa', pollsterName: '美麗島電子報',
-          sampleSize: 1081, method: 'phone',
-          results: { chen: 58.0, ke: 24.5 }, neutralResults: { chen: 54.0, ke: 19.0 },
-          undecided: 17.5, source: 'https://formosa.tw'
-        },
-      ],
-    };
-  }
-
-  function getDemoPollsterData() {
-    return {
-      pollsters: [
-        { id: 'udn', name: '聯合報', credibilityScore: 0.82, leanDirection: 'slightly-blue', leanMagnitude: 0.12 },
-        { id: 'tvbs', name: 'TVBS', credibilityScore: 0.85, leanDirection: 'slightly-blue', leanMagnitude: 0.08 },
-        { id: 'ettoday', name: 'ETtoday', credibilityScore: 0.78, leanDirection: 'neutral', leanMagnitude: 0.03 },
-        { id: 'formosa', name: '美麗島電子報', credibilityScore: 0.88, leanDirection: 'slightly-green', leanMagnitude: 0.10 },
-        { id: 'chinatimes', name: '中國時報', credibilityScore: 0.75, leanDirection: 'blue', leanMagnitude: 0.18 },
-        { id: 'ltn', name: '自由時報', credibilityScore: 0.80, leanDirection: 'green', leanMagnitude: 0.15 },
-      ],
-    };
-  }
-
   // ---- Boot ----
 
-  async function init() {
+  document.addEventListener('DOMContentLoaded', () => {
     initHeaderScroll();
     initTableSorting();
-    initElectionSwitcher();
-
-    // Dynamically load elections to populate dropdown
-    const electionsData = await loadJSON('data/meta/elections.json');
-    if (electionsData && electionsData.elections) {
-      DOM.electionSelect.innerHTML = electionsData.elections.map(e => 
-        `<option value="${e.id}">${e.name}</option>`
-      ).join('');
-      currentElectionId = electionsData.elections[0].id;
-    }
-
-    await loadAndRender(currentElectionId);
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    init();
+    init2DNavigation();
+    initFontAdjuster();
+    
+    // Trigger initial load
+    loadAndRender(currentElectionId);
   });
 
 })();

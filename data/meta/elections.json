@@ -1,10 +1,27 @@
 {
   "elections": [
     {
+      "id": "2026-kaohsiung-mayor",
+      "name": "2026 高雄市長選舉",
+      "type": "mayor",
+      "city": "kaohsiung",
+      "cityName": "高雄市",
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-kaohsiung.json",
+      "candidates": [
+        { "id": "lai", "name": "賴瑞隆", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": false },
+        { "id": "ke", "name": "柯志恩", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": false }
+      ],
+      "status": "upcoming"
+    },
+    {
       "id": "2022-kaohsiung-mayor",
       "name": "2022 高雄市長選舉",
       "type": "mayor",
-      "city": "高雄市",
+      "city": "kaohsiung",
+      "cityName": "高雄市",
+      "year": "2022",
       "date": "2022-11-26",
       "pollsFile": "data/polls/2022-kaohsiung.json",
       "candidates": [
@@ -14,17 +31,196 @@
       "status": "completed"
     },
     {
-      "id": "2026-kaohsiung-mayor",
-      "name": "2026 高雄市長選舉",
+      "id": "2018-kaohsiung-mayor",
+      "name": "2018 高雄市長選舉",
       "type": "mayor",
-      "city": "高雄市",
+      "city": "kaohsiung",
+      "cityName": "高雄市",
+      "year": "2018",
+      "date": "2018-11-24",
+      "pollsFile": "",
+      "candidates": [],
+      "status": "construction"
+    },
+    {
+      "id": "2026-taipei-mayor",
+      "name": "2026 台北市長選舉",
+      "type": "mayor",
+      "city": "taipei",
+      "cityName": "台北市",
+      "year": "2026",
       "date": "2026-11-28",
-      "pollsFile": "data/polls/2026-kaohsiung.json",
-      "candidates": [
-        { "id": "lai", "name": "賴瑞隆", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": false },
-        { "id": "ke", "name": "柯志恩", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": false }
-      ],
-      "status": "upcoming"
+      "pollsFile": "",
+      "candidates": [],
+      "status": "construction"
+    },
+    {
+      "id": "2022-taipei-mayor",
+      "name": "2022 台北市長選舉",
+      "type": "mayor",
+      "city": "taipei",
+      "cityName": "台北市",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [],
+      "status": "construction"
+    },
+    {
+      "id": "2018-taipei-mayor",
+      "name": "2018 台北市長選舉",
+      "type": "mayor",
+      "city": "taipei",
+      "cityName": "台北市",
+      "year": "2018",
+      "date": "2018-11-24",
+      "pollsFile": "",
+      "candidates": [],
+      "status": "construction"
+    },
+    {
+      "id": "2026-newtaipei-mayor",
+      "name": "2026 新北市長選舉",
+      "type": "mayor",
+      "city": "newtaipei",
+      "cityName": "新北市",
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "",
+      "candidates": [],
+      "status": "construction"
+    },
+    {
+      "id": "2022-newtaipei-mayor",
+      "name": "2022 新北市長選舉",
+      "type": "mayor",
+      "city": "newtaipei",
+      "cityName": "新北市",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [],
+      "status": "construction"
+    },
+    {
+      "id": "2018-newtaipei-mayor",
+      "name": "2018 新北市長選舉",
+      "type": "mayor",
+      "city": "newtaipei",
+      "cityName": "新北市",
+      "year": "2018",
+      "date": "2018-11-24",
+      "pollsFile": "",
+      "candidates": [],
+      "status": "construction"
+    },
+    {
+      "id": "2026-taoyuan-mayor",
+      "name": "2026 桃園市長選舉",
+      "type": "mayor",
+      "city": "taoyuan",
+      "cityName": "桃園市",
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "",
+      "candidates": [],
+      "status": "construction"
+    },
+    {
+      "id": "2022-taoyuan-mayor",
+      "name": "2022 桃園市長選舉",
+      "type": "mayor",
+      "city": "taoyuan",
+      "cityName": "桃園市",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [],
+      "status": "construction"
+    },
+    {
+      "id": "2018-taoyuan-mayor",
+      "name": "2018 桃園市長選舉",
+      "type": "mayor",
+      "city": "taoyuan",
+      "cityName": "桃園市",
+      "year": "2018",
+      "date": "2018-11-24",
+      "pollsFile": "",
+      "candidates": [],
+      "status": "construction"
+    },
+    {
+      "id": "2026-taichung-mayor",
+      "name": "2026 台中市長選舉",
+      "type": "mayor",
+      "city": "taichung",
+      "cityName": "台中市",
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "",
+      "candidates": [],
+      "status": "construction"
+    },
+    {
+      "id": "2022-taichung-mayor",
+      "name": "2022 台中市長選舉",
+      "type": "mayor",
+      "city": "taichung",
+      "cityName": "台中市",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [],
+      "status": "construction"
+    },
+    {
+      "id": "2018-taichung-mayor",
+      "name": "2018 台中市長選舉",
+      "type": "mayor",
+      "city": "taichung",
+      "cityName": "台中市",
+      "year": "2018",
+      "date": "2018-11-24",
+      "pollsFile": "",
+      "candidates": [],
+      "status": "construction"
+    },
+    {
+      "id": "2026-tainan-mayor",
+      "name": "2026 台南市長選舉",
+      "type": "mayor",
+      "city": "tainan",
+      "cityName": "台南市",
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "",
+      "candidates": [],
+      "status": "construction"
+    },
+    {
+      "id": "2022-tainan-mayor",
+      "name": "2022 台南市長選舉",
+      "type": "mayor",
+      "city": "tainan",
+      "cityName": "台南市",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [],
+      "status": "construction"
+    },
+    {
+      "id": "2018-tainan-mayor",
+      "name": "2018 台南市長選舉",
+      "type": "mayor",
+      "city": "tainan",
+      "cityName": "台南市",
+      "year": "2018",
+      "date": "2018-11-24",
+      "pollsFile": "",
+      "candidates": [],
+      "status": "construction"
     }
   ]
 }

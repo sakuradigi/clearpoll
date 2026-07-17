@@ -13,10 +13,10 @@
   --color-surface: #FFFFFF;
   --color-surface-hover: #F8F9FA;
 
-  /* Text */
+  /* Text - Darkened for better contrast */
   --color-text-primary: #1A1A2E;
-  --color-text-secondary: #6B7280;
-  --color-text-tertiary: #9CA3AF;
+  --color-text-secondary: #374151; /* Darker grey */
+  --color-text-tertiary: #4B5563;  /* Darker grey */
   --color-text-inverse: #FFFFFF;
 
   /* Borders */
@@ -84,6 +84,9 @@
   --header-height: 64px;
   --max-width: 1200px;
   --sidebar-width: 320px;
+
+  /* Font Scale Variable */
+  --font-scale: 1.0;
 }
 
 
@@ -99,7 +102,7 @@
 }
 
 html {
-  font-size: 16px;
+  font-size: calc(18px * var(--font-scale)); /* Default base set to 18px with variable scaling */
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1155,3 +1158,204 @@ p {
 .items-center { align-items: center; }
 .justify-between { justify-content: space-between; }
 .hidden { display: none !important; }
+
+/* ------------------------------------------
+   ClearPoll Custom Additions (Changelog Edits)
+   ------------------------------------------ */
+
+/* Font Size Adjuster */
+.font-adjuster {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background-color: var(--color-bg-secondary);
+  padding: 3px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+}
+.font-adjuster-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-right: var(--space-xs);
+  padding-left: var(--space-sm);
+}
+.font-btn {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+  background: transparent;
+  border: none;
+}
+.font-btn:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-tertiary);
+}
+.font-btn.active {
+  color: var(--color-text-inverse);
+  background: var(--gradient-accent);
+  box-shadow: var(--shadow-sm);
+}
+
+/* 2D Navigator (City & Year Switcher) */
+.nav-switcher-container {
+  width: 100%;
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: var(--header-height);
+  z-index: 40;
+  backdrop-filter: blur(var(--glass-blur));
+  background-color: var(--glass-bg);
+}
+.nav-switcher {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-sm) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+.city-selector, .year-selector {
+  display: flex;
+  gap: var(--space-sm);
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none; /* Hide scrollbar for clean look */
+}
+.city-selector::-webkit-scrollbar, .year-selector::-webkit-scrollbar {
+  display: none;
+}
+.city-btn, .year-btn {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-primary);
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+.city-btn:hover, .year-btn:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-text-secondary);
+}
+.city-btn.active {
+  background-color: var(--color-text-primary);
+  color: var(--color-text-inverse);
+  border-color: var(--color-text-primary);
+  box-shadow: var(--shadow-sm);
+}
+.year-btn.active {
+  background: var(--gradient-accent);
+  color: var(--color-text-inverse);
+  border-color: transparent;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Prediction Summary Table */
+.prediction-table-card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  overflow-x: auto;
+  margin-bottom: var(--space-lg);
+}
+.prediction-summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  min-width: 500px;
+}
+.prediction-summary-table th, .prediction-summary-table td {
+  padding: var(--space-md) var(--space-lg);
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+}
+.prediction-summary-table th {
+  font-weight: 700;
+  font-size: 1rem;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+.prediction-summary-table tr:last-child td {
+  border-bottom: none;
+}
+.prediction-summary-table td.row-label {
+  font-weight: 700;
+  text-align: left;
+  background-color: var(--color-bg-secondary);
+  width: 220px;
+  border-right: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  position: sticky;
+  left: 0;
+  z-index: 5;
+}
+.candidate-header-cell {
+  color: var(--color-text-inverse) !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+.prediction-summary-table td.candidate-cell {
+  font-weight: 600;
+}
+.win-opportunity-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.85rem;
+  box-shadow: var(--shadow-sm);
+}
+.win-opportunity-badge.high {
+  background-color: #D1FAE5;
+  color: #065F46;
+}
+.win-opportunity-badge.medium {
+  background-color: #FEF3C7;
+  color: #92400E;
+}
+.win-opportunity-badge.low {
+  background-color: #FEE2E2;
+  color: #991B1B;
+}
+.win-opportunity-badge.none {
+  background-color: #F3F4F6;
+  color: #374151;
+}
+.val-large {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* Demo Links & Buttons */
+.btn-demo-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 12px var(--space-md);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  transition: all var(--transition-fast);
+  text-align: left;
+  cursor: pointer;
+}
+.btn-demo-link:hover {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-text-secondary);
+  transform: translateY(-1px);
+}
+
+/* Donut Chart Wrapper Styling */
+.pie-chart-card {
+  padding: var(--space-lg) !important;
+}
+

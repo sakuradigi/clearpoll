@@ -351,7 +351,7 @@ const ClearPollCharts = {
     for (const candidate of candidates) {
       labels.push(candidate.name);
       data.push(voteShares[candidate.id] || 0);
-      bgColors.push(this._alpha(candidate.color, 0.75));
+      bgColors.push(this._alpha(candidate.color, 0.85));
       borderColors.push(candidate.color);
     }
 
@@ -359,12 +359,12 @@ const ClearPollCharts = {
     if (voteShares.others) {
       labels.push('其他');
       data.push(voteShares.others);
-      bgColors.push('rgba(156, 163, 175, 0.5)');
+      bgColors.push('rgba(156, 163, 175, 0.7)');
       borderColors.push('#9CA3AF');
     }
 
     this._instances[canvasId] = new Chart(ctx, {
-      type: 'bar',
+      type: 'doughnut',
       data: {
         labels,
         datasets: [{
@@ -372,16 +372,24 @@ const ClearPollCharts = {
           backgroundColor: bgColors,
           borderColor: borderColors,
           borderWidth: 1.5,
-          borderRadius: 6,
-          barPercentage: 0.6,
+          hoverOffset: 8
         }],
       },
       options: {
-        indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
+        cutout: '60%', // Sleek modern donut cutout
         plugins: {
-          legend: { display: false },
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              font: { family: defaults.fontFamily, size: 12 },
+              color: defaults.tickColor,
+              usePointStyle: true,
+              padding: 16
+            }
+          },
           tooltip: {
             backgroundColor: 'rgba(255, 255, 255, 0.95)',
             titleColor: '#1A1A2E',
@@ -393,26 +401,7 @@ const ClearPollCharts = {
             titleFont: { family: defaults.fontFamily, weight: '600' },
             bodyFont: { family: defaults.fontFamily },
             callbacks: {
-              label: (item) => `預測得票率: ${item.parsed.x?.toFixed(1)}%`,
-            },
-          },
-        },
-        scales: {
-          x: {
-            beginAtZero: true,
-            max: 100,
-            grid: { color: defaults.gridColor, drawBorder: false },
-            ticks: {
-              font: { family: defaults.fontFamily, size: 11 },
-              color: defaults.tickColor,
-              callback: (val) => val + '%',
-            },
-          },
-          y: {
-            grid: { display: false },
-            ticks: {
-              font: { family: defaults.fontFamily, size: 13, weight: '600' },
-              color: '#1A1A2E',
+              label: (item) => ` 預測得票率: ${item.parsed.toFixed(1)}%`,
             },
           },
         },
