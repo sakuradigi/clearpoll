@@ -1,0 +1,7 @@
+id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralResults,undecided,source
+kh2026-000,2025-09-30,tvbs,TVBS,1117,phone,2.9,"lai:41.0,ke:41.0","lai:31.0,ke:37.0",18.0,https://news.tvbs.com.tw/
+kh2026-000b,2025-12-01,tvbs,TVBS,1184,phone,2.85,"lai:42.0,ke:40.0","lai:31.0,ke:36.0",18.0,https://news.tvbs.com.tw/
+kh2026-001,2026-06-02,tvbs,TVBS,1207,phone,2.8,"lai:40.3,ke:39.7","lai:29.0,ke:35.0",20.0,https://news.tvbs.com.tw/
+kh2026-002,2026-06-09,rwnews,鏡新聞（大地民調委託）,1116,phone,2.93,"lai:45.1,ke:24.8","lai:34.0,ke:22.0",30.1,https://www.mnews.tw/
+kh2026-003,2026-06-10,asia-pacific,新台灣國策智庫,1094,phone,2.96,"lai:46.2,ke:28.4","lai:36.0,ke:24.0",25.4,http://www.braintrust.tw/
+kh2026-004,2026-06-19,ettoday,ETtoday,1070,online,3.0,"lai:42.0,ke:46.8","lai:32.0,ke:41.0",11.2,https://www.ettoday.net/

@@ -1,0 +1,11 @@
+id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralResults,undecided,source
+kh2022-001,2022-08-01,udn,聯合報,1078,phone,3.0,"chen:53.0,ke:18.0","chen:48.0,ke:12.0",29.0,https://udn.com/news/story/122682/6513601
+kh2022-002,2022-08-05,shanshui,山水民調（三立委託）,1074,phone,3.0,"chen:62.8,ke:12.5",,24.7,https://tw.news.yahoo.com/
+kh2022-003,2022-08-08,formosa,美麗島電子報,1074,phone,3.0,"chen:59.1,ke:13.3","chen:47.2,ke:9.6",27.6,http://www.my-formosa.com/DOC_186438.htm
+kh2022-004,2022-09-01,asia-pacific,中華亞太菁英交流協會,1020,phone,3.1,"chen:61.8,ke:17.0",,21.2,https://news.ltn.com.tw/news/politics/breakingnews/4048138
+kh2022-005,2022-09-06,shanshui,山水民調（上報委託）,1072,phone,3.0,"chen:58.5,ke:13.5",,28.0,https://www.upmedia.mg/news_info.php?Type=24&SerialNo=153988
+kh2022-006,2022-09-03,candidate-ke,柯志恩委託民調,1000,phone,3.1,"chen:47.5,ke:25.1",,27.4,https://www.storm.mg/article/4514038
+kh2022-007,2022-09-14,cnews,匯流新聞網,1068,phone,3.0,"chen:62.8,ke:15.7",,21.5,https://cnews.com.tw/212220918a01/
+kh2022-008,2022-09-29,rwnews,菱傳媒,1085,phone,3.0,"chen:53.7,ke:36.9","chen:46.19,ke:36.47",9.4,https://rwnews.tw/article.php?news=4941
+kh2022-009,2022-10-20,shanshui,山水民調（三立委託）,1074,phone,3.0,"chen:51.0,ke:13.4",,35.6,https://www.setn.com/news.aspx?newsid=1193125
+kh2022-010,2022-10-05,asia-pacific,中華亞太菁英交流協會,1020,phone,3.1,"chen:51.0,ke:13.4","chen:41.9,ke:7.9",35.6,https://www.storm.mg/article/4555534
