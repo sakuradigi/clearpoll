@@ -1,0 +1,18 @@
+{
+  "electionId": "2026-newtaipei-mayor",
+  "polls": [
+    {
+      "id": "nt2026-001",
+      "date": "2026-07-16",
+      "pollster": "asia-pacific",
+      "pollsterName": "新台灣國策智庫",
+      "sampleSize": 1083,
+      "method": "phone",
+      "marginOfError": 2.97,
+      "results": { "li": 40.0, "su": 40.2 },
+      "neutralResults": null,
+      "undecided": 19.8,
+      "source": "http://www.braintrust.tw/"
+    }
+  ]
+}

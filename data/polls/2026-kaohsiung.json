@@ -2,6 +2,18 @@
   "electionId": "2026-kaohsiung-mayor",
   "polls": [
     {
+      "id": "kh2026-000",
+      "date": "2025-09-19",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1117,
+      "method": "phone",
+      "marginOfError": 2.9,
+      "results": { "lai": 41.0, "ke": 41.0 },
+      "neutralResults": null,
+      "undecided": 18.0,
+      "source": "https://news.tvbs.com.tw/"
+    },
       "id": "kh2026-001",
       "date": "2026-06-02",
       "pollster": "tvbs",

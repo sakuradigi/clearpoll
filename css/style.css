@@ -1140,8 +1140,8 @@ p {
 /* ------------------------------------------
    Utility Classes
    ------------------------------------------ */
-.text-center { text-align: center; }
-.text-right { text-align: right; }
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
 .text-dpp { color: var(--color-dpp); }
 .text-kmt { color: var(--color-kmt); }
 .text-tpp { color: var(--color-tpp); }
@@ -1358,4 +1358,13 @@ p {
 .pie-chart-card {
   padding: var(--space-lg) !important;
 }
+
+/* Neutral voter sub-text in main table cells */
+.neutral-sub {
+  font-size: 0.72rem;
+  color: var(--color-text-tertiary);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
 

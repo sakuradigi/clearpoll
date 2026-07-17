@@ -320,7 +320,17 @@
       let candidateCells = candidates.map(c => {
         const val = poll.results[c.id];
         const displayVal = typeof val === 'number' ? val.toFixed(1) + '%' : '-';
-        return `<td class="number-cell text-right" style="color: ${c.color}; font-weight: 500;">${displayVal}</td>`;
+        
+        let neutralHtml = '';
+        if (poll.neutralResults && poll.neutralResults[c.id] != null) {
+          const nVal = poll.neutralResults[c.id];
+          neutralHtml = `<div class="neutral-sub">中立: ${nVal.toFixed(1)}%</div>`;
+        }
+        
+        return `<td class="number-cell text-right" style="color: ${c.color}; font-weight: 500; vertical-align: middle;">
+          <div>${displayVal}</div>
+          ${neutralHtml}
+        </td>`;
       }).join('');
 
       html += `
@@ -379,13 +389,13 @@
     const thead = $('predictionLogTable').querySelector('thead');
     if (!thead) return;
 
-    let shareHeaders = candidates.map(c => `<th class="text-right">${c.name} 得票率</th>`).join('');
-    let probHeaders = candidates.map(c => `<th class="text-right">${c.name} 勝率</th>`).join('');
+    let shareHeaders = candidates.map(c => `<th class="text-center">${c.name} 得票率</th>`).join('');
+    let probHeaders = candidates.map(c => `<th class="text-center">${c.name} 勝率</th>`).join('');
 
     thead.innerHTML = `
       <tr>
-        <th>日期</th>
-        <th class="text-right">累計民調數</th>
+        <th class="text-center">日期</th>
+        <th class="text-center">累計民調數</th>
         ${shareHeaders}
         ${probHeaders}
       </tr>
@@ -395,18 +405,18 @@
     for (const entry of predictionLog) {
       let shareCells = candidates.map(c => {
         const val = entry.voteShares[c.id];
-        return `<td class="number-cell text-right" style="color: ${c.color}; font-weight: 500;">${val != null ? val.toFixed(1) + '%' : '-'}</td>`;
+        return `<td class="number-cell text-center" style="color: ${c.color}; font-weight: 600;">${val != null ? val.toFixed(1) + '%' : '-'}</td>`;
       }).join('');
 
       let probCells = candidates.map(c => {
         const val = entry.winProbabilities[c.id];
-        return `<td class="number-cell text-right" style="font-weight: 500;">${val != null ? (val * 100).toFixed(1) + '%' : '-'}</td>`;
+        return `<td class="number-cell text-center" style="font-weight: 600;">${val != null ? (val * 100).toFixed(1) + '%' : '-'}</td>`;
       }).join('');
 
       html += `
         <tr>
-          <td>${entry.date}</td>
-          <td class="number-cell text-right">${entry.pollCount}</td>
+          <td class="text-center">${entry.date}</td>
+          <td class="number-cell text-center" style="font-weight: 600;">${entry.pollCount}</td>
           ${shareCells}
           ${probCells}
         </tr>

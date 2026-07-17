@@ -1,0 +1,31 @@
+{
+  "electionId": "2026-taipei-mayor",
+  "polls": [
+    {
+      "id": "tp2026-001",
+      "date": "2026-05-12",
+      "pollster": "asia-pacific",
+      "pollsterName": "新台灣國策智庫",
+      "sampleSize": 1078,
+      "method": "phone",
+      "marginOfError": 2.98,
+      "results": { "chiang": 52.9, "shen": 29.7 },
+      "neutralResults": null,
+      "undecided": 17.4,
+      "source": "http://www.braintrust.tw/"
+    },
+    {
+      "id": "tp2026-002",
+      "date": "2026-05-25",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1105,
+      "method": "phone",
+      "marginOfError": 2.95,
+      "results": { "chiang": 58.0, "shen": 30.0 },
+      "neutralResults": null,
+      "undecided": 12.0,
+      "source": "https://news.tvbs.com.tw/"
+    }
+  ]
+}

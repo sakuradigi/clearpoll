@@ -1,0 +1,18 @@
+{
+  "electionId": "2026-taoyuan-mayor",
+  "polls": [
+    {
+      "id": "ty2026-001",
+      "date": "2026-01-20",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1000,
+      "method": "phone",
+      "marginOfError": 3.1,
+      "results": { "chang": 58.0, "huang": 22.0 },
+      "neutralResults": null,
+      "undecided": 20.0,
+      "source": "https://news.tvbs.com.tw/"
+    }
+  ]
+}

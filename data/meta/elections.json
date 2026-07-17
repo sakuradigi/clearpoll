@@ -50,9 +50,12 @@
       "cityName": "台北市",
       "year": "2026",
       "date": "2026-11-28",
-      "pollsFile": "",
-      "candidates": [],
-      "status": "construction"
+      "pollsFile": "data/polls/2026-taipei.json",
+      "candidates": [
+        { "id": "chiang", "name": "蔣萬安", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": true },
+        { "id": "shen", "name": "沈伯洋", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": false }
+      ],
+      "status": "upcoming"
     },
     {
       "id": "2022-taipei-mayor",
@@ -86,9 +89,12 @@
       "cityName": "新北市",
       "year": "2026",
       "date": "2026-11-28",
-      "pollsFile": "",
-      "candidates": [],
-      "status": "construction"
+      "pollsFile": "data/polls/2026-newtaipei.json",
+      "candidates": [
+        { "id": "li", "name": "李四川", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": false },
+        { "id": "su", "name": "蘇巧慧", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": false }
+      ],
+      "status": "upcoming"
     },
     {
       "id": "2022-newtaipei-mayor",
@@ -122,9 +128,12 @@
       "cityName": "桃園市",
       "year": "2026",
       "date": "2026-11-28",
-      "pollsFile": "",
-      "candidates": [],
-      "status": "construction"
+      "pollsFile": "data/polls/2026-taoyuan.json",
+      "candidates": [
+        { "id": "chang", "name": "張善政", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": true },
+        { "id": "huang", "name": "黃世杰", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": false }
+      ],
+      "status": "upcoming"
     },
     {
       "id": "2022-taoyuan-mayor",
@@ -158,9 +167,12 @@
       "cityName": "台中市",
       "year": "2026",
       "date": "2026-11-28",
-      "pollsFile": "",
-      "candidates": [],
-      "status": "construction"
+      "pollsFile": "data/polls/2026-taichung.json",
+      "candidates": [
+        { "id": "chiang_k", "name": "江啟臣", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": false },
+        { "id": "ho", "name": "何欣純", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": false }
+      ],
+      "status": "upcoming"
     },
     {
       "id": "2022-taichung-mayor",
@@ -194,9 +206,12 @@
       "cityName": "台南市",
       "year": "2026",
       "date": "2026-11-28",
-      "pollsFile": "",
-      "candidates": [],
-      "status": "construction"
+      "pollsFile": "data/polls/2026-tainan.json",
+      "candidates": [
+        { "id": "chen_t", "name": "陳亭妃", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": false },
+        { "id": "hsie", "name": "謝龍介", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": false }
+      ],
+      "status": "upcoming"
     },
     {
       "id": "2022-tainan-mayor",

@@ -1,0 +1,18 @@
+{
+  "electionId": "2026-taichung-mayor",
+  "polls": [
+    {
+      "id": "tc2026-001",
+      "date": "2026-02-15",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1020,
+      "method": "phone",
+      "marginOfError": 3.07,
+      "results": { "chiang_k": 54.0, "ho": 28.0 },
+      "neutralResults": null,
+      "undecided": 18.0,
+      "source": "https://news.tvbs.com.tw/"
+    }
+  ]
+}
