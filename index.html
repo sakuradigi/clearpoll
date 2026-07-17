@@ -7,6 +7,27 @@
   <meta name="keywords" content="台灣選舉, 民調分析, 選情預測, ClearPoll, 透析民調, 2022高雄市長, 2026高雄市長">
   <meta name="author" content="ClearPoll 透析民調">
 
+  <!-- Global Error Handler for Diagnostics -->
+  <script>
+    window.onerror = function (msg, url, lineNo, columnNo, error) {
+      const div = document.createElement('div');
+      div.style.position = 'fixed';
+      div.style.top = '0';
+      div.style.left = '0';
+      div.style.width = '100%';
+      div.style.backgroundColor = '#EF4444';
+      div.style.color = '#FFFFFF';
+      div.style.padding = '20px';
+      div.style.zIndex = '999999';
+      div.style.fontSize = '14px';
+      div.style.fontFamily = 'monospace';
+      div.style.whiteSpace = 'pre-wrap';
+      div.innerHTML = '<strong>[JS Crash]</strong> ' + msg + '<br>Line: ' + lineNo + ':' + columnNo + '<br>File: ' + url + '<br>' + (error ? error.stack : '');
+      document.body.appendChild(div);
+      return false;
+    };
+  </script>
+
   <!-- Open Graph -->
   <meta property="og:title" content="ClearPoll 透析民調 — 台灣選舉民調分析">
   <meta property="og:description" content="透過科學化加權模型，提供透明、精準的台灣選舉民調分析與預測。">
@@ -15,7 +36,7 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ClearPoll 透析民調">
+  <meta name="twitter:title" content="ClearPoll">
   <meta name="twitter:description" content="台灣選舉民調科學分析平台">
 
   <title>ClearPoll 透析民調 — 台灣選舉民調分析平台</title>

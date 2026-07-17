@@ -18,7 +18,12 @@
   
   let tableSortColumn = 'date';
   let tableSortAsc = false;
-  let currentFontScale = parseFloat(localStorage.getItem('clearPollFontScale')) || 1.0;
+  let currentFontScale = 1.0;
+  try {
+    currentFontScale = parseFloat(localStorage.getItem('clearPollFontScale')) || 1.0;
+  } catch (e) {
+    console.warn('[ClearPoll] localStorage is blocked or not available:', e);
+  }
 
   // ---- DOM References ----
   const $ = (id) => document.getElementById(id);
@@ -417,14 +422,26 @@
   function renderCharts(result) {
     const { candidates, weightedPolls, predictionLog, predictedVoteShares } = result;
 
-    // Poll trend scatter chart
-    ClearPollCharts.renderPollTrendChart('pollTrendChart', weightedPolls, candidates);
+    try {
+      // Poll trend scatter chart
+      ClearPollCharts.renderPollTrendChart('pollTrendChart', weightedPolls, candidates);
+    } catch (e) {
+      console.error('[ClearPoll] Failed to render pollTrendChart (possibly missing date adapter):', e);
+    }
 
-    // Win probability trend chart
-    ClearPollCharts.renderWinProbChart('winProbChart', predictionLog, candidates);
+    try {
+      // Win probability trend chart
+      ClearPollCharts.renderWinProbChart('winProbChart', predictionLog, candidates);
+    } catch (e) {
+      console.error('[ClearPoll] Failed to render winProbChart:', e);
+    }
 
-    // Vote share pie/donut chart
-    ClearPollCharts.renderVoteShareBar('voteShareChart', predictedVoteShares, candidates);
+    try {
+      // Vote share pie/donut chart
+      ClearPollCharts.renderVoteShareBar('voteShareChart', predictedVoteShares, candidates);
+    } catch (e) {
+      console.error('[ClearPoll] Failed to render voteShareChart:', e);
+    }
   }
 
   // ---- Scroll Animations ----
@@ -549,7 +566,11 @@
   function initFontAdjuster() {
     const setFontScale = (scale) => {
       currentFontScale = scale;
-      localStorage.setItem('clearPollFontScale', scale);
+      try {
+        localStorage.setItem('clearPollFontScale', scale);
+      } catch (e) {
+        console.warn('[ClearPoll] localStorage set failed:', e);
+      }
       document.documentElement.style.setProperty('--font-scale', scale);
 
       document.querySelectorAll('#fontAdjuster .font-btn').forEach(btn => btn.classList.remove('active'));
