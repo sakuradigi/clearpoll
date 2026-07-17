@@ -1,0 +1,94 @@
+{
+  "pollsters": [
+    {
+      "id": "udn",
+      "name": "聯合報",
+      "fullName": "聯合報系民調中心",
+      "credibilityScore": 0.85,
+      "leanDirection": "slightly-blue",
+      "leanMagnitude": 0.12,
+      "historicalAccuracy": 0.80,
+      "notes": "泛藍傾向，但長期追蹤品質穩定"
+    },
+    {
+      "id": "formosa",
+      "name": "美麗島電子報",
+      "fullName": "美麗島電子報民調",
+      "credibilityScore": 0.82,
+      "leanDirection": "slightly-green",
+      "leanMagnitude": 0.08,
+      "historicalAccuracy": 0.79,
+      "notes": "每月定期發布，交叉分析詳細"
+    },
+    {
+      "id": "tvbs",
+      "name": "TVBS",
+      "fullName": "TVBS民調中心",
+      "credibilityScore": 0.88,
+      "leanDirection": "slightly-blue",
+      "leanMagnitude": 0.10,
+      "historicalAccuracy": 0.83,
+      "notes": "長期追蹤型民調，樣本品質穩定"
+    },
+    {
+      "id": "shanshui",
+      "name": "山水民調",
+      "fullName": "山水民意研究公司",
+      "credibilityScore": 0.75,
+      "leanDirection": "slightly-green",
+      "leanMagnitude": 0.15,
+      "historicalAccuracy": 0.72,
+      "notes": "常受三立、放言委託"
+    },
+    {
+      "id": "rwnews",
+      "name": "菱傳媒",
+      "fullName": "菱傳媒民調",
+      "credibilityScore": 0.70,
+      "leanDirection": "slightly-blue",
+      "leanMagnitude": 0.18,
+      "historicalAccuracy": 0.68,
+      "notes": "相對較新的媒體民調"
+    },
+    {
+      "id": "asia-pacific",
+      "name": "中華亞太菁英交流協會",
+      "fullName": "中華亞太菁英交流協會",
+      "credibilityScore": 0.72,
+      "leanDirection": "neutral",
+      "leanMagnitude": 0.05,
+      "historicalAccuracy": 0.70,
+      "notes": "學術性質民調"
+    },
+    {
+      "id": "cnews",
+      "name": "匯流新聞網",
+      "fullName": "匯流新聞網民調",
+      "credibilityScore": 0.68,
+      "leanDirection": "slightly-green",
+      "leanMagnitude": 0.10,
+      "historicalAccuracy": 0.66,
+      "notes": "媒體民調"
+    },
+    {
+      "id": "upmedia",
+      "name": "上報",
+      "fullName": "上報",
+      "credibilityScore": 0.73,
+      "leanDirection": "slightly-green",
+      "leanMagnitude": 0.12,
+      "historicalAccuracy": 0.70,
+      "notes": "委託山水執行"
+    },
+    {
+      "id": "candidate-ke",
+      "name": "柯志恩陣營",
+      "fullName": "柯志恩委託民調",
+      "credibilityScore": 0.55,
+      "leanDirection": "blue",
+      "leanMagnitude": 0.25,
+      "historicalAccuracy": 0.55,
+      "notes": "候選人自行委託，公信力較低"
+    }
+  ]
+}

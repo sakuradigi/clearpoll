@@ -1,0 +1,30 @@
+{
+  "elections": [
+    {
+      "id": "2022-kaohsiung-mayor",
+      "name": "2022 高雄市長選舉",
+      "type": "mayor",
+      "city": "高雄市",
+      "date": "2022-11-26",
+      "pollsFile": "data/polls/2022-kaohsiung.json",
+      "candidates": [
+        { "id": "chen", "name": "陳其邁", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": true },
+        { "id": "ke", "name": "柯志恩", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": false }
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "2026-kaohsiung-mayor",
+      "name": "2026 高雄市長選舉",
+      "type": "mayor",
+      "city": "高雄市",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-kaohsiung.json",
+      "candidates": [
+        { "id": "lai", "name": "賴瑞隆", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": false },
+        { "id": "ke", "name": "柯志恩", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": false }
+      ],
+      "status": "upcoming"
+    }
+  ]
+}

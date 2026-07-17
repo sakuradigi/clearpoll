@@ -1,0 +1,58 @@
+{
+  "electionId": "2026-kaohsiung-mayor",
+  "polls": [
+    {
+      "id": "kh2026-001",
+      "date": "2026-06-02",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1207,
+      "method": "phone",
+      "marginOfError": 2.8,
+      "results": { "lai": 40.3, "ke": 39.7 },
+      "neutralResults": null,
+      "undecided": 20.0,
+      "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "kh2026-002",
+      "date": "2026-06-09",
+      "pollster": "rwnews",
+      "pollsterName": "鏡新聞（大地民調委託）",
+      "commissioner": "鏡新聞",
+      "sampleSize": 1116,
+      "method": "phone",
+      "marginOfError": 2.93,
+      "results": { "lai": 45.1, "ke": 24.8 },
+      "neutralResults": null,
+      "undecided": 30.1,
+      "source": "https://www.mnews.tw/"
+    },
+    {
+      "id": "kh2026-003",
+      "date": "2026-06-10",
+      "pollster": "asia-pacific",
+      "pollsterName": "新台灣國策智庫",
+      "sampleSize": 1094,
+      "method": "phone",
+      "marginOfError": 2.96,
+      "results": { "lai": 46.2, "ke": 28.4 },
+      "neutralResults": null,
+      "undecided": 25.4,
+      "source": "http://www.braintrust.tw/"
+    },
+    {
+      "id": "kh2026-004",
+      "date": "2026-06-19",
+      "pollster": "ettoday",
+      "pollsterName": "ETtoday",
+      "sampleSize": 1070,
+      "method": "online",
+      "marginOfError": 3.0,
+      "results": { "lai": 42.0, "ke": 46.8 },
+      "neutralResults": null,
+      "undecided": 11.2,
+      "source": "https://www.ettoday.net/"
+    }
+  ]
+}

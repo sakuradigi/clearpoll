@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "electionId": "2022-kaohsiung-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 58.28,
+      "totalVotes": 1140718,
+      "candidates": [
+        {
+          "id": "chen",
+          "name": "陳其邁",
+          "party": "DPP",
+          "votes": 821396,
+          "voteShare": 72.04,
+          "elected": true
+        },
+        {
+          "id": "ke",
+          "name": "柯志恩",
+          "party": "KMT",
+          "votes": 268810,
+          "voteShare": 23.58,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 50512,
+          "voteShare": 4.38,
+          "elected": false
+        }
+      ]
+    }
+  ]
+}

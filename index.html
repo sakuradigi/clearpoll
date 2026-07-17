@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ClearPoll 透析民調 — 台灣選舉民調科學分析平台，透過加權模型與數據透明化，提供精準的選情預測。">
+  <meta name="keywords" content="台灣選舉, 民調分析, 選情預測, ClearPoll, 透析民調, 2022高雄市長">
+  <meta name="author" content="ClearPoll 透析民調">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="ClearPoll 透析民調 — 台灣選舉民調分析">
+  <meta property="og:description" content="透過科學化加權模型，提供透明、精準的台灣選舉民調分析與預測。">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_TW">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ClearPoll 透析民調">
+  <meta name="twitter:description" content="台灣選舉民調科學分析平台">
+
+  <title>ClearPoll 透析民調 — 台灣選舉民調分析平台</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <div class="site-logo">
+        <div class="logo-icon">📊</div>
+        <span>ClearPoll</span>
+        <span class="logo-sub">透析民調</span>
+      </div>
+
+      <div class="election-selector">
+        <label for="electionSelect">選舉：</label>
+        <select id="electionSelect">
+          <option value="2022-kaohsiung-mayor">2022 高雄市長選舉</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Main Content ===== -->
+  <main class="main-container">
+
+    <!-- Loading State -->
+    <div id="loadingState" class="section text-center" style="padding: 80px 0;">
+      <div style="display: inline-flex; flex-direction: column; align-items: center; gap: 16px;">
+        <div class="loading-shimmer" style="width: 200px; height: 24px;"></div>
+        <div class="loading-shimmer" style="width: 300px; height: 16px;"></div>
+        <div class="loading-shimmer" style="width: 160px; height: 16px;"></div>
+      </div>
+    </div>
+
+    <!-- App Content (hidden until loaded) -->
+    <div id="appContent" class="hidden">
+
+      <!-- ===== Hero / Prediction Section ===== -->
+      <section class="hero-section fade-in" id="heroSection">
+        <p class="hero-update-time" id="heroUpdateTime">最後更新：--</p>
+        <h1 class="hero-title text-gradient">選情預測</h1>
+        <p class="hero-election-name" id="heroElectionName">載入中...</p>
+
+        <!-- Prediction Cards -->
+        <div class="prediction-grid stagger-children" id="predictionGrid">
+          <!-- Dynamically populated by app.js -->
+        </div>
+
+        <!-- Summary info -->
+        <div class="info-callout" id="heroSummary">
+          <span class="info-icon">ℹ️</span>
+          <span id="heroSummaryText">根據所有民調加權分析結果。</span>
+        </div>
+      </section>
+
+      <!-- ===== Poll Trend Chart ===== -->
+      <section class="section fade-in" id="pollTrendSection">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><span class="icon">📈</span> 民調趨勢</h2>
+            <p class="section-subtitle">各候選人支持度隨時間變化（圓點大小代表權重）</p>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-wrapper" style="height: 400px;">
+            <canvas id="pollTrendChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Win Probability Chart ===== -->
+      <section class="section fade-in" id="winProbSection">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><span class="icon">🏆</span> 勝選機率趨勢</h2>
+            <p class="section-subtitle">隨民調資料累積，勝選機率如何演變</p>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-wrapper" style="height: 350px;">
+            <canvas id="winProbChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Vote Share Bar Chart ===== -->
+      <section class="section fade-in" id="voteShareSection">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><span class="icon">📊</span> 預測得票率</h2>
+            <p class="section-subtitle">模型加權預測之各候選人得票率</p>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-wrapper" style="height: 200px;">
+            <canvas id="voteShareChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Poll Data Table ===== -->
+      <section class="section fade-in" id="pollTableSection">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><span class="icon">📋</span> 民調資料</h2>
+            <p class="section-subtitle">點擊欄位標題可排序</p>
+          </div>
+          <span class="label" id="pollCountLabel">共 0 筆民調</span>
+        </div>
+        <div class="table-container">
+          <table class="data-table" id="pollDataTable">
+            <thead>
+              <tr>
+                <th data-sort="date">日期 <span class="sort-icon">▼</span></th>
+                <th data-sort="pollster">民調機構 <span class="sort-icon">▼</span></th>
+                <th data-sort="method">方法 <span class="sort-icon">▼</span></th>
+                <th data-sort="sampleSize">樣本數 <span class="sort-icon">▼</span></th>
+                <th data-sort="candidate1" class="text-right">候選人1 <span class="sort-icon">▼</span></th>
+                <th data-sort="candidate2" class="text-right">候選人2 <span class="sort-icon">▼</span></th>
+                <th data-sort="undecided" class="text-right">未決定 <span class="sort-icon">▼</span></th>
+                <th data-sort="weight" class="text-right">權重 <span class="sort-icon">▼</span></th>
+                <th>來源</th>
+              </tr>
+            </thead>
+            <tbody id="pollDataBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== Prediction Log ===== -->
+      <section class="section fade-in" id="predictionLogSection">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><span class="icon">📝</span> 預測紀錄</h2>
+            <p class="section-subtitle">模型預測如何隨新民調資料而變化</p>
+          </div>
+        </div>
+        <div class="table-container">
+          <table class="data-table" id="predictionLogTable">
+            <thead>
+              <tr>
+                <th>日期</th>
+                <th>累計民調數</th>
+                <th class="text-right">候選人1 得票率</th>
+                <th class="text-right">候選人2 得票率</th>
+                <th class="text-right">候選人1 勝率</th>
+                <th class="text-right">候選人2 勝率</th>
+              </tr>
+            </thead>
+            <tbody id="predictionLogBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== Methodology ===== -->
+      <section class="section fade-in" id="methodologySection">
+        <div class="methodology-section">
+          <h2 class="section-title"><span class="icon">🔬</span> 分析方法</h2>
+          <p class="section-subtitle mt-sm">ClearPoll 採用多層次加權模型，透明揭示每一步計算過程</p>
+
+          <div class="methodology-grid">
+            <div class="method-card">
+              <div class="method-icon">⏱️</div>
+              <h4>時效性權重</h4>
+              <p>採用指數衰減函數，半衰期為 14 天。越接近選舉日的民調獲得越高權重，反映最新民意走向。</p>
+            </div>
+
+            <div class="method-card">
+              <div class="method-icon">📐</div>
+              <h4>樣本品質權重</h4>
+              <p>根據樣本大小（√n 正規化）與調查方法（面訪 > 電訪 > 網路）調整權重，確保統計品質。</p>
+            </div>
+
+            <div class="method-card">
+              <div class="method-icon">🏛️</div>
+              <h4>機構可信度</h4>
+              <p>每個民調機構有可信度評分（0-1），依據過往準確度、獨立性與透明度評估。</p>
+            </div>
+
+            <div class="method-card">
+              <div class="method-icon">🎯</div>
+              <h4>中間選民校正</h4>
+              <p>混合原始結果與中間選民回答（alpha=0.5），降低機構偏差（House Effect）影響。</p>
+            </div>
+
+            <div class="method-card">
+              <div class="method-icon">📊</div>
+              <h4>未決定選民分配</h4>
+              <p>將未決定選民依各候選人現有支持度比例分配，轉換為預測得票率。</p>
+            </div>
+
+            <div class="method-card">
+              <div class="method-icon">🎲</div>
+              <h4>勝選機率計算</h4>
+              <p>基於常態分布，以領先幅度與標準誤差計算勝選機率。標準誤差從民調變異程度估算。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Historical Comparison ===== -->
+      <section class="section fade-in" id="historicalSection">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><span class="icon">📚</span> 歷史對照</h2>
+            <p class="section-subtitle">模型預測 vs. 實際選舉結果</p>
+          </div>
+        </div>
+        <div class="grid-auto" id="historicalGrid">
+          <!-- Dynamically populated or static placeholder -->
+          <div class="card">
+            <div class="card-header">
+              <h3>2022 高雄市長選舉</h3>
+              <span class="label">2022/11/26</span>
+            </div>
+            <div class="card-body">
+              <div class="vote-bar-container">
+                <div class="vote-bar-label">
+                  <span style="font-weight: 600; color: var(--color-dpp);">陳其邁 (DPP)</span>
+                  <span class="number-medium text-dpp">實際 71.2%</span>
+                </div>
+                <div class="vote-bar-track large">
+                  <div class="vote-bar-fill dpp animate-bar" style="width: 71.2%;"></div>
+                </div>
+              </div>
+              <div class="vote-bar-container mt-md">
+                <div class="vote-bar-label">
+                  <span style="font-weight: 600; color: var(--color-kmt);">柯志恩 (KMT)</span>
+                  <span class="number-medium text-kmt">實際 25.4%</span>
+                </div>
+                <div class="vote-bar-track large">
+                  <div class="vote-bar-fill kmt animate-bar" style="width: 25.4%;"></div>
+                </div>
+              </div>
+              <p class="mt-md" style="font-size: 0.85rem;">投票率：56.28%・總有效票：1,077,557</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /appContent -->
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        ClearPoll 透析民調
+        <br>
+        <span>台灣選舉民調科學分析平台</span>
+      </div>
+      <div class="footer-links">
+        <a href="#methodologySection">分析方法</a>
+        <a href="#pollTableSection">原始資料</a>
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <p class="footer-copy">
+      © 2024 ClearPoll 透析民調。本站預測僅供參考，不構成任何政治立場。所有民調資料來源均已標註。
+    </p>
+  </footer>
+
+  <!-- ===== Scripts ===== -->
+  <!-- Chart.js with date adapter -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+  <!-- App modules -->
+  <script src="js/model.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
