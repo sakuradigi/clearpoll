@@ -3,15 +3,28 @@
   "polls": [
     {
       "id": "nt2026-001",
+      "date": "2026-01-20",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1050,
+      "method": "phone",
+      "marginOfError": 2.95,
+      "results": { "li": 40.0, "su": 38.0, "huang": 12.0 },
+      "neutralResults": null,
+      "undecided": 10.0,
+      "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "nt2026-002",
       "date": "2026-07-16",
       "pollster": "asia-pacific",
       "pollsterName": "新台灣國策智庫",
       "sampleSize": 1083,
       "method": "phone",
       "marginOfError": 2.97,
-      "results": { "li": 40.0, "su": 40.2 },
+      "results": { "li": 40.0, "su": 40.2, "huang": 10.0 },
       "neutralResults": null,
-      "undecided": 19.8,
+      "undecided": 9.8,
       "source": "http://www.braintrust.tw/"
     }
   ]

@@ -1367,4 +1367,164 @@ p {
   margin-top: 2px;
 }
 
+/* Header Navigation */
+.header-nav {
+  display: flex;
+  gap: var(--space-md);
+  margin-left: var(--space-xl);
+}
+.nav-link {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  position: relative;
+  padding: 6px 14px;
+  transition: all var(--transition-fast);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+.nav-link:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-secondary);
+}
+.nav-link.active {
+  color: var(--color-text-inverse);
+  background: var(--gradient-accent);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Dashboard Grid & Cards */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-md);
+  padding-bottom: var(--space-3xl);
+}
+.dashboard-card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-lg);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 290px;
+}
+.dashboard-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+  border-color: var(--color-accent-blue);
+}
+.dashboard-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--color-border);
+  transition: background var(--transition-base);
+}
+.dashboard-card:hover::before {
+  background: var(--gradient-accent);
+}
+.dash-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border-light);
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+.dash-city-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+.dash-status-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+.dash-status-label.upcoming {
+  background-color: #DBEAFE;
+  color: #1E40AF;
+}
+.dash-status-label.completed {
+  background-color: #D1FAE5;
+  color: #065F46;
+}
+.dash-status-label.construction {
+  background-color: #F3F4F6;
+  color: #374151;
+}
+
+/* Dashboard Candidate Row */
+.dash-cand-row {
+  margin-bottom: var(--space-sm);
+}
+.dash-cand-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.dash-progress-track {
+  width: 100%;
+  height: 8px;
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.dash-progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+}
+
+/* Dashboard Footer */
+.dash-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border-light);
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+.dash-win-badge {
+  font-weight: 700;
+}
+.dash-detail-link {
+  font-weight: 600;
+  color: var(--color-accent-blue);
+  transition: transform var(--transition-fast);
+}
+.dashboard-card:hover .dash-detail-link {
+  transform: translateX(4px);
+}
+
+/* Construction content inside dashboard card */
+.dash-construction-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  color: var(--color-text-tertiary);
+  gap: var(--space-xs);
+  font-size: 0.9rem;
+}
+
+
 

@@ -60,6 +60,13 @@
         <span class="logo-sub">透析民調</span>
       </div>
 
+      <!-- Header Navigation -->
+      <nav class="header-nav" id="headerNav">
+        <button class="nav-link active" id="navLinkDashboard">選情總覽</button>
+        <button class="nav-link" id="navLinkDetail">選區深度分析</button>
+        <button class="nav-link" id="navLinkMethodology">方法與算式</button>
+      </nav>
+
       <div class="header-actions">
         <!-- Font Size Adjuster -->
         <div class="font-adjuster" id="fontAdjuster">
@@ -100,6 +107,77 @@
         <div class="loading-shimmer" style="width: 200px; height: 24px;"></div>
         <div class="loading-shimmer" style="width: 300px; height: 16px;"></div>
         <div class="loading-shimmer" style="width: 160px; height: 16px;"></div>
+      </div>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboardSection" class="fade-in">
+      <section class="hero-section" style="padding: var(--space-lg) 0 var(--space-md) 0;">
+        <h1 class="hero-title text-gradient" style="margin-bottom: var(--space-xs);">直轄市選情大盤總覽</h1>
+        <p style="color: var(--color-text-secondary); max-width: 650px; margin: 0 auto var(--space-lg) auto;">
+          本站彙整各大機構民調數據，透過加權模型與未表態分配，即時呈現六都市長選舉預測結果。點擊卡片可查看深度分析。
+        </p>
+      </section>
+      <div class="dashboard-grid" id="dashboardGrid">
+        <!-- Dynamically populated cards -->
+      </div>
+    </div>
+
+    <!-- Methodology View Section -->
+    <div id="methodologyViewSection" class="fade-in hidden" style="margin-top: var(--space-md); padding-bottom: var(--space-2xl);">
+      <section class="hero-section" style="padding: var(--space-lg) 0 var(--space-md) 0;">
+        <h1 class="hero-title text-gradient">預測模型方法說明</h1>
+        <p style="color: var(--color-text-secondary); max-width: 600px; margin: 0 auto;">
+          ClearPoll 秉持科學、透明原則，公開所有民調加權公式、衰減模型與機率分配機制。
+        </p>
+      </section>
+      
+      <div class="card" style="margin-top: var(--space-lg); max-width: 800px; margin-left: auto; margin-right: auto; padding: var(--space-xl);">
+        <h3 style="font-size: 1.3rem; margin-bottom: var(--space-md); font-weight: 700;">🔮 六步分析模型</h3>
+        
+        <div class="methodology-flow" style="display: flex; flex-direction: column; gap: var(--space-md); margin-top: var(--space-md);">
+          <div style="border-left: 3px solid var(--color-accent-blue); padding-left: var(--space-md);">
+            <h4 style="font-weight: 700; margin-bottom: 2px;">第一步：樣本品質加權 ($W_{\text{sample}}$)</h4>
+            <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7;">
+              以標準樣本數 1,000 為基準，進行根號正規化：$\sqrt{N / 1000}$。大樣本民調（如 N=1200+）會獲得更高權重，藉此降低統計抽樣誤差（Margin of Error）。
+            </p>
+          </div>
+
+          <div style="border-left: 3px solid var(--color-accent-green); padding-left: var(--space-md);">
+            <h4 style="font-weight: 700; margin-bottom: 2px;">第二步：時效性指數衰減加權 ($W_{\text{recency}}$)</h4>
+            <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7;">
+              越接近投票日的民調越具時效性。我們採用指數衰減函數：$2^{-\Delta t / 14}$。$\Delta t$ 代表民調結束與投票日的天數差。半衰期設定為 14 天，即每提早兩週，該民調的時效性權重便折半。
+            </p>
+          </div>
+
+          <div style="border-left: 3px solid var(--color-warning); padding-left: var(--space-md);">
+            <h4 style="font-weight: 700; margin-bottom: 2px;">第三步：機構公信力加權 ($W_{\text{credibility}}$)</h4>
+            <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7;">
+              評定各大民調機構（如 TVBS、美麗島等）歷史準確度及透明度，評估分數為 0.5–1.0。若為信譽度較低或缺乏過往實績的機構，則調降其信譽度係數，降低其在總加權模型中的波動干擾。
+            </p>
+          </div>
+
+          <div style="border-left: 3px solid var(--color-info); padding-left: var(--space-md);">
+            <h4 style="font-weight: 700; margin-bottom: 2px;">第四步：中立選民加權校正</h4>
+            <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7;">
+              為減少政黨支持者帶來的機構效應（House Effect），若該民調提供「中間選民/中立選民」交叉分析數據，我們以 50% 權重混合中立選民支持度，以中和政黨歸屬帶來的統計偏差。
+            </p>
+          </div>
+
+          <div style="border-left: 3px solid var(--color-danger); padding-left: var(--space-md);">
+            <h4 style="font-weight: 700; margin-bottom: 2px;">第五步：未決定選民（未表態率）等比分配</h4>
+            <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7;">
+              由於最終大選投票不會有「未表態」選項，模型會將民調中的未決定選民，依照加權計算後的候選人支持度比例，等比例分配至各候選人，轉換為最終「預測得票率」。
+            </p>
+          </div>
+
+          <div style="border-left: 3px solid var(--color-text-primary); padding-left: var(--space-md);">
+            <h4 style="font-weight: 700; margin-bottom: 2px;">第六步：勝選機率運算（CDF）</h4>
+            <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7;">
+              計算加權堆疊後的民調領先幅度，並根據各機構民調數據的變異程度（方差）推估標準誤差 $\sigma$。最後代入常態累積分布函數（Normal CDF）求出勝選機率。領先幅度大於兩倍誤差時，勝率將高於 95%。
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 

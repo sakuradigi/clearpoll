@@ -3,6 +3,19 @@
   "polls": [
     {
       "id": "tc2026-001",
+      "date": "2026-01-15",
+      "pollster": "ettoday",
+      "pollsterName": "ETtoday",
+      "sampleSize": 1000,
+      "method": "phone",
+      "marginOfError": 3.1,
+      "results": { "chiang_k": 51.0, "ho": 32.4 },
+      "neutralResults": null,
+      "undecided": 16.6,
+      "source": "https://www.ettoday.net/"
+    },
+    {
+      "id": "tc2026-002",
       "date": "2026-02-15",
       "pollster": "tvbs",
       "pollsterName": "TVBS",
@@ -13,6 +26,19 @@
       "neutralResults": null,
       "undecided": 18.0,
       "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "tc2026-003",
+      "date": "2026-05-15",
+      "pollster": "cnews",
+      "pollsterName": "匯流新聞網",
+      "sampleSize": 1068,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": { "chiang_k": 40.6, "ho": 24.4 },
+      "neutralResults": null,
+      "undecided": 35.0,
+      "source": "https://cnews.com.tw/"
     }
   ]
 }

@@ -5,10 +5,16 @@
 (function () {
   'use strict';
 
+  // ==== Google Sheets Integration Config ====
+  // To sync with Google Sheets (方案 A), replace this with your public Spreadsheet ID:
+  // (Format: '1aBcDeFgHiJkLmNoPqRsTuVwXyZ')
+  const GOOGLE_SPREADSHEET_ID = '';
+
   // ---- State ----
   let selectedCity = 'kaohsiung';
   let selectedYear = '2026';
   let currentElectionId = '2026-kaohsiung-mayor';
+  let activeTab = 'dashboard'; // 'dashboard' | 'detail' | 'methodology'
   
   let electionsMetadata = null;
   let analysisResult = null;
@@ -41,6 +47,9 @@
     predictionLogBody: $('predictionLogBody'),
     citySelector: $('citySelector'),
     yearSelector: $('yearSelector'),
+    dashboardSection: $('dashboardSection'),
+    dashboardGrid: $('dashboardGrid'),
+    methodologyViewSection: $('methodologyViewSection'),
   };
 
   // ---- Data Loading ----
@@ -60,20 +69,120 @@
   }
 
   /**
+   * Fetch CSV content from a public Google Sheet.
+   */
+  async function fetchCSVFromGoogleSheets(spreadsheetId, sheetName) {
+    try {
+      const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:csv&sheet=${sheetName}`;
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error(`HTTP ${resp.status} on sheet: ${sheetName}`);
+      return await resp.text();
+    } catch (err) {
+      console.warn(`[ClearPoll] Failed to fetch Google Sheet CSV for ${sheetName}:`, err);
+      return null;
+    }
+  }
+
+  /**
+   * Standard RFC 4180 compliant CSV Parser.
+   */
+  function parseCSV(text) {
+    const lines = [];
+    let row = [""];
+    let insideQuote = false;
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      const next = text[i + 1];
+      if (char === '"') {
+        if (insideQuote && next === '"') {
+          row[row.length - 1] += '"';
+          i++;
+        } else {
+          insideQuote = !insideQuote;
+        }
+      } else if (char === ',' && !insideQuote) {
+        row.push('');
+      } else if ((char === '\n' || char === '\r') && !insideQuote) {
+        if (char === '\r' && next === '\n') i++;
+        lines.push(row);
+        row = [''];
+      } else {
+        row[row.length - 1] += char;
+      }
+    }
+    if (row.length > 1 || row[0] !== '') {
+      lines.push(row);
+    }
+    return lines;
+  }
+
+  /**
+   * Map parsed CSV rows to poll data objects.
+   */
+  function mapCSVToPolls(csvRows) {
+    if (csvRows.length < 2) return [];
+    const headers = csvRows[0].map(h => h.trim().toLowerCase());
+    
+    const parseResultPairs = (str) => {
+      if (!str) return null;
+      const res = {};
+      str.split(',').forEach(pair => {
+        const parts = pair.split(':');
+        if (parts.length === 2) {
+          res[parts[0].trim()] = parseFloat(parts[1].trim());
+        }
+      });
+      return Object.keys(res).length > 0 ? res : null;
+    };
+
+    const polls = [];
+    for (let i = 1; i < csvRows.length; i++) {
+      const row = csvRows[i];
+      if (row.length < headers.length) continue;
+      
+      const poll = {};
+      headers.forEach((header, idx) => {
+        const val = row[idx]?.trim();
+        if (!val) return;
+
+        if (header === 'id') poll.id = val;
+        else if (header === 'date') poll.date = val;
+        else if (header === 'pollster') poll.pollster = val;
+        else if (header === 'pollstername') poll.pollsterName = val;
+        else if (header === 'samplesize') poll.sampleSize = parseInt(val, 10) || 0;
+        else if (header === 'method') poll.method = val;
+        else if (header === 'marginoferror') poll.marginOfError = parseFloat(val) || 0;
+        else if (header === 'results') poll.results = parseResultPairs(val);
+        else if (header === 'neutralresults') poll.neutralResults = parseResultPairs(val);
+        else if (header === 'undecided') poll.undecided = parseFloat(val) || 0;
+        else if (header === 'source') poll.source = val;
+      });
+
+      if (poll.id && poll.date && poll.results) {
+        polls.push(poll);
+      }
+    }
+    return polls;
+  }
+
+  /**
    * Load all data for the current election.
    */
   async function loadElectionData(electionId) {
-    // Load metadata and past results
-    const [electionsData, pollsterData, pastResults] = await Promise.all([
-      loadJSON('data/meta/elections.json'),
-      loadJSON('data/meta/pollsters.json'),
-      loadJSON('data/history/past-results.json')
-    ]);
+    // Lazy load metadata and pollsters if not loaded
+    if (!electionsMetadata || !pollsterData || !pastResultsData) {
+      const [electionsData, pollsterD, pastResults] = await Promise.all([
+        loadJSON('data/meta/elections.json'),
+        loadJSON('data/meta/pollsters.json'),
+        loadJSON('data/history/past-results.json')
+      ]);
 
-    if (!electionsData || !pollsterData) return null;
-    
-    electionsMetadata = electionsData.elections;
-    pastResultsData = pastResults;
+      if (!electionsData || !pollsterD) return null;
+      
+      electionsMetadata = electionsData.elections;
+      pollsterData = pollsterD;
+      pastResultsData = pastResults;
+    }
 
     const election = electionsMetadata.find(e => e.id === electionId);
     if (!election) {
@@ -82,21 +191,40 @@
     }
 
     if (election.status === 'construction' || !election.pollsFile) {
-      return { election, polls: null, pollsters: pollsterData, pastResults };
+      return { election, polls: null, pollsters: pollsterData, pastResults: pastResultsData };
     }
 
-    const pollsData = await loadJSON(election.pollsFile);
-    if (!pollsData) return null;
+    // Try fetching from Google Sheet first if enabled
+    let polls = null;
+    if (GOOGLE_SPREADSHEET_ID) {
+      console.log(`[ClearPoll] Attempting Google Sheets fetch for ${electionId}`);
+      const csvText = await fetchCSVFromGoogleSheets(GOOGLE_SPREADSHEET_ID, electionId);
+      if (csvText) {
+        const csvRows = parseCSV(csvText);
+        polls = mapCSVToPolls(csvRows);
+        console.log(`[ClearPoll] Google Sheets fetch success! Parsed ${polls.length} polls.`);
+      }
+    }
+
+    // Fallback to local JSON
+    if (!polls || polls.length === 0) {
+      const pollsData = await loadJSON(election.pollsFile);
+      if (pollsData) {
+        polls = pollsData.polls || [];
+      }
+    }
+
+    if (!polls) return null;
 
     const pollDataMerged = {
       electionId: election.id,
       electionName: election.name,
       electionDate: election.date,
       candidates: election.candidates,
-      polls: pollsData.polls || []
+      polls: polls
     };
 
-    return { election, polls: pollDataMerged, pollsters: pollsterData, pastResults };
+    return { election, polls: pollDataMerged, pollsters: pollsterData, pastResults: pastResultsData };
   }
 
   // ---- Rendering ----
@@ -454,6 +582,164 @@
     }
   }
 
+  // ---- Dashboard Render ----
+
+  async function renderDashboard() {
+    DOM.dashboardGrid.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 60px 0;">
+        <div class="loading-shimmer" style="width: 180px; height: 24px; margin: 0 auto;"></div>
+        <p class="mt-md" style="color: var(--color-text-secondary);">正在彙整與加權計算六都選情大盤...</p>
+      </div>
+    `;
+
+    // Ensure metadata is loaded
+    if (!electionsMetadata || !pollsterData) {
+      const [electionsData, pollsterD] = await Promise.all([
+        loadJSON('data/meta/elections.json'),
+        loadJSON('data/meta/pollsters.json')
+      ]);
+      if (!electionsData || !pollsterD) {
+        DOM.dashboardGrid.innerHTML = `<div class="card text-center" style="grid-column:1/-1;">資料載入失敗</div>`;
+        return;
+      }
+      electionsMetadata = electionsData.elections;
+      pollsterData = pollsterD;
+    }
+
+    const yearElections = electionsMetadata.filter(e => e.year === selectedYear);
+
+    const cardPromises = yearElections.map(async (election) => {
+      // Check if under construction
+      if (election.status === 'construction' || !election.pollsFile) {
+        return `
+          <div class="dashboard-card" style="opacity: 0.85; cursor: default;">
+            <div class="dash-card-header">
+              <span class="dash-city-name">${election.cityName}</span>
+              <span class="dash-status-label construction">施工中</span>
+            </div>
+            <div class="dash-construction-body">
+              <div style="font-size: 2rem; margin-bottom: var(--space-xs);">🚧</div>
+              <div style="font-weight: 600;">資料正收集中</div>
+              <div style="font-size: 0.72rem; color: var(--color-text-tertiary);">施工中選區</div>
+            </div>
+            <div class="dash-card-footer">
+              <span>-</span>
+              <span style="font-weight: 600; color: var(--color-text-tertiary);">敬請期待</span>
+            </div>
+          </div>
+        `;
+      }
+
+      try {
+        // Load election data using our Google Sheet / local JSON loader
+        const data = await loadElectionData(election.id);
+        if (!data || !data.polls || data.polls.polls.length === 0) {
+          throw new Error(`No polls for ${election.id}`);
+        }
+
+        const result = ClearPollModel.analyze(data.polls, data.pollsters);
+
+        // Map candidates to sorted support bars
+        let barsHtml = election.candidates.map(c => {
+          const share = result.predictedVoteShares[c.id] || 0;
+          return `
+            <div class="dash-cand-row">
+              <div class="dash-cand-info">
+                <span style="color: ${c.color}; font-weight: 700;">${c.name} (${c.party})</span>
+                <span style="color: ${c.color}; font-weight: 800;">${share.toFixed(1)}%</span>
+              </div>
+              <div class="dash-progress-track">
+                <div class="dash-progress-fill" style="width: ${share.toFixed(1)}%; background-color: ${c.color};"></div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        // Find leader
+        let leader = election.candidates[0];
+        let maxProb = 0;
+        for (const c of election.candidates) {
+          const prob = result.winProbabilities[c.id] || 0;
+          if (prob > maxProb) {
+            maxProb = prob;
+            leader = c;
+          }
+        }
+
+        let oppText = '五五波';
+        let badgeClass = 'medium';
+        if (maxProb >= 0.92) { oppText = '機會極高'; badgeClass = 'high'; }
+        else if (maxProb >= 0.79) { oppText = '機會高'; badgeClass = 'high'; }
+        else if (maxProb >= 0.68) { oppText = '機會略高'; badgeClass = 'medium'; }
+        else if (maxProb < 0.32) { oppText = '機會低'; badgeClass = 'low'; }
+
+        const statusClass = election.status === 'completed' ? 'completed' : 'upcoming';
+        const statusText = election.status === 'completed' ? '已落幕' : '預測中';
+
+        return `
+          <div class="dashboard-card" data-election-id="${election.id}" data-city="${election.city}">
+            <div>
+              <div class="dash-card-header">
+                <span class="dash-city-name">${election.cityName}</span>
+                <span class="dash-status-label ${statusClass}">${statusText}</span>
+              </div>
+              <div class="dash-card-body">
+                ${barsHtml}
+              </div>
+            </div>
+            <div class="dash-card-footer">
+              <div>
+                <span class="dash-win-badge" style="color: ${leader.color};">${leader.name}</span>
+                <span class="win-opportunity-badge ${badgeClass}" style="margin-left: 6px; padding: 2px 8px; font-size: 0.72rem;">${oppText}</span>
+              </div>
+              <span class="dash-detail-link">深度分析 →</span>
+            </div>
+          </div>
+        `;
+      } catch (err) {
+        console.error(`Failed to render dashboard card for ${election.id}:`, err);
+        return `
+          <div class="dashboard-card" style="opacity: 0.85; cursor: default;">
+            <div class="dash-card-header">
+              <span class="dash-city-name">${election.cityName}</span>
+              <span class="dash-status-label construction">錯誤</span>
+            </div>
+            <div class="dash-construction-body">
+              <div style="font-size: 2rem; margin-bottom: var(--space-xs);">⚠️</div>
+              <div style="font-weight: 600;">數據載入失敗</div>
+              <div style="font-size: 0.72rem; color: var(--color-text-tertiary);">連線或結構錯誤</div>
+            </div>
+            <div class="dash-card-footer">
+              <span>-</span>
+              <span style="font-weight: 600; color: var(--color-text-tertiary);">重試</span>
+            </div>
+          </div>
+        `;
+      }
+    });
+
+    const cardsHtml = await Promise.all(cardPromises);
+    DOM.dashboardGrid.innerHTML = cardsHtml.join('');
+
+    // Bind card clicks
+    DOM.dashboardGrid.querySelectorAll('.dashboard-card[data-election-id]').forEach(card => {
+      card.addEventListener('click', () => {
+        const eid = card.dataset.electionId;
+        const city = card.dataset.city;
+
+        selectedCity = city;
+        currentElectionId = eid;
+
+        // Set active city button in detail navigator
+        document.querySelectorAll('#citySelector .city-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.city === city);
+        });
+
+        switchTab('detail');
+      });
+    });
+  }
+
   // ---- Scroll Animations ----
 
   function initScrollAnimations() {
@@ -539,7 +825,12 @@
       selectedYear = btn.dataset.year;
 
       updateElectionId();
-      await loadAndRender(currentElectionId);
+
+      if (activeTab === 'dashboard') {
+        renderDashboard();
+      } else {
+        await loadAndRender(currentElectionId);
+      }
     });
 
     // Handle "Under Construction" demo links
@@ -569,6 +860,48 @@
 
   function updateElectionId() {
     currentElectionId = `${selectedYear}-${selectedCity}-mayor`;
+  }
+
+  // ---- SPA Navigation ----
+
+  function switchTab(tab) {
+    activeTab = tab;
+    
+    // Update header nav active styles
+    $('navLinkDashboard').classList.toggle('active', tab === 'dashboard');
+    $('navLinkDetail').classList.toggle('active', tab === 'detail');
+    $('navLinkMethodology').classList.toggle('active', tab === 'methodology');
+
+    // Update section visibility
+    DOM.dashboardSection.classList.toggle('hidden', tab !== 'dashboard');
+    DOM.methodologyViewSection.classList.toggle('hidden', tab !== 'methodology');
+
+    if (tab === 'detail') {
+      document.querySelector('.nav-switcher-container').classList.remove('hidden');
+      DOM.citySelector.classList.remove('hidden');
+      loadAndRender(currentElectionId);
+    } else if (tab === 'dashboard') {
+      document.querySelector('.nav-switcher-container').classList.remove('hidden');
+      DOM.citySelector.classList.add('hidden');
+      
+      DOM.loadingState.classList.add('hidden');
+      DOM.constructionState.classList.add('hidden');
+      DOM.appContent.classList.add('hidden');
+
+      renderDashboard();
+    } else if (tab === 'methodology') {
+      document.querySelector('.nav-switcher-container').classList.add('hidden');
+      
+      DOM.loadingState.classList.add('hidden');
+      DOM.constructionState.classList.add('hidden');
+      DOM.appContent.classList.add('hidden');
+    }
+  }
+
+  function initSPANavigation() {
+    $('navLinkDashboard').addEventListener('click', () => switchTab('dashboard'));
+    $('navLinkDetail').addEventListener('click', () => switchTab('detail'));
+    $('navLinkMethodology').addEventListener('click', () => switchTab('methodology'));
   }
 
   // ---- Font Size Adjuster ----
@@ -662,9 +995,10 @@
     initTableSorting();
     init2DNavigation();
     initFontAdjuster();
+    initSPANavigation();
     
-    // Trigger initial load
-    loadAndRender(currentElectionId);
+    // Set initial tab state
+    switchTab('dashboard');
   });
 
 })();
