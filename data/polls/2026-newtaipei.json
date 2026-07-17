@@ -10,7 +10,7 @@
       "method": "phone",
       "marginOfError": 2.95,
       "results": { "li": 48.0, "su": 33.0 },
-      "neutralResults": null,
+      "neutralResults": { "li": 39.0, "su": 26.0 },
       "undecided": 19.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -23,7 +23,7 @@
       "method": "phone",
       "marginOfError": 2.97,
       "results": { "li": 40.0, "su": 40.2 },
-      "neutralResults": null,
+      "neutralResults": { "li": 33.0, "su": 34.0 },
       "undecided": 19.8,
       "source": "http://www.braintrust.tw/"
     }

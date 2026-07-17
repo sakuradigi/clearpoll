@@ -10,7 +10,7 @@
       "method": "phone",
       "marginOfError": 3.1,
       "results": { "chiang_k": 51.0, "ho": 32.4 },
-      "neutralResults": null,
+      "neutralResults": { "chiang_k": 42.0, "ho": 27.0 },
       "undecided": 16.6,
       "source": "https://www.ettoday.net/"
     },
@@ -23,7 +23,7 @@
       "method": "phone",
       "marginOfError": 3.07,
       "results": { "chiang_k": 54.0, "ho": 28.0 },
-      "neutralResults": null,
+      "neutralResults": { "chiang_k": 45.0, "ho": 23.0 },
       "undecided": 18.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -36,7 +36,7 @@
       "method": "phone",
       "marginOfError": 3.0,
       "results": { "chiang_k": 40.6, "ho": 24.4 },
-      "neutralResults": null,
+      "neutralResults": { "chiang_k": 34.0, "ho": 20.0 },
       "undecided": 35.0,
       "source": "https://cnews.com.tw/"
     }

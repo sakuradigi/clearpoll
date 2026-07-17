@@ -10,7 +10,7 @@
       "method": "phone",
       "marginOfError": 3.08,
       "results": { "chiang": 54.0, "shen": 28.0 },
-      "neutralResults": null,
+      "neutralResults": { "chiang": 45.0, "shen": 22.0 },
       "undecided": 18.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -23,7 +23,7 @@
       "method": "phone",
       "marginOfError": 2.98,
       "results": { "chiang": 52.9, "shen": 29.7 },
-      "neutralResults": null,
+      "neutralResults": { "chiang": 42.0, "shen": 24.0 },
       "undecided": 17.4,
       "source": "http://www.braintrust.tw/"
     },
@@ -36,7 +36,7 @@
       "method": "phone",
       "marginOfError": 2.95,
       "results": { "chiang": 58.0, "shen": 30.0 },
-      "neutralResults": null,
+      "neutralResults": { "chiang": 48.0, "shen": 23.0 },
       "undecided": 12.0,
       "source": "https://news.tvbs.com.tw/"
     }
