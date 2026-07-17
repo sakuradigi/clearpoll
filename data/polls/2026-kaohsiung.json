@@ -15,6 +15,19 @@
       "source": "https://news.tvbs.com.tw/"
     },
     {
+      "id": "kh2026-000b",
+      "date": "2025-12-01",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1184,
+      "method": "phone",
+      "marginOfError": 2.85,
+      "results": { "lai": 42.0, "ke": 40.0 },
+      "neutralResults": { "lai": 31.0, "ke": 36.0 },
+      "undecided": 18.0,
+      "source": "https://news.tvbs.com.tw/"
+    },
+    {
       "id": "kh2026-001",
       "date": "2026-06-02",
       "pollster": "tvbs",
