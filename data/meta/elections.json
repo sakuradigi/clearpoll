@@ -40,7 +40,7 @@
       "date": "2018-11-24",
       "pollsFile": "",
       "candidates": [],
-      "status": "construction"
+      "status": "completed"
     },
     {
       "id": "2026-taipei-mayor",
@@ -67,7 +67,7 @@
       "date": "2022-11-26",
       "pollsFile": "",
       "candidates": [],
-      "status": "construction"
+      "status": "completed"
     },
     {
       "id": "2018-taipei-mayor",
@@ -79,7 +79,7 @@
       "date": "2018-11-24",
       "pollsFile": "",
       "candidates": [],
-      "status": "construction"
+      "status": "completed"
     },
     {
       "id": "2026-newtaipei-mayor",
@@ -92,8 +92,7 @@
       "pollsFile": "data/polls/2026-newtaipei.json",
       "candidates": [
         { "id": "li", "name": "李四川", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": false },
-        { "id": "su", "name": "蘇巧慧", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": false },
-        { "id": "huang", "name": "黃國昌", "party": "TPP", "partyName": "台灣民眾黨", "color": "#28C8C8", "incumbent": false }
+        { "id": "su", "name": "蘇巧慧", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": false }
       ],
       "status": "upcoming"
     },
@@ -107,7 +106,7 @@
       "date": "2022-11-26",
       "pollsFile": "",
       "candidates": [],
-      "status": "construction"
+      "status": "completed"
     },
     {
       "id": "2018-newtaipei-mayor",
@@ -119,7 +118,7 @@
       "date": "2018-11-24",
       "pollsFile": "",
       "candidates": [],
-      "status": "construction"
+      "status": "completed"
     },
     {
       "id": "2026-taoyuan-mayor",
@@ -146,7 +145,7 @@
       "date": "2022-11-26",
       "pollsFile": "",
       "candidates": [],
-      "status": "construction"
+      "status": "completed"
     },
     {
       "id": "2018-taoyuan-mayor",
@@ -158,7 +157,7 @@
       "date": "2018-11-24",
       "pollsFile": "",
       "candidates": [],
-      "status": "construction"
+      "status": "completed"
     },
     {
       "id": "2026-taichung-mayor",
@@ -185,7 +184,7 @@
       "date": "2022-11-26",
       "pollsFile": "",
       "candidates": [],
-      "status": "construction"
+      "status": "completed"
     },
     {
       "id": "2018-taichung-mayor",
@@ -197,7 +196,7 @@
       "date": "2018-11-24",
       "pollsFile": "",
       "candidates": [],
-      "status": "construction"
+      "status": "completed"
     },
     {
       "id": "2026-tainan-mayor",
@@ -224,7 +223,7 @@
       "date": "2022-11-26",
       "pollsFile": "",
       "candidates": [],
-      "status": "construction"
+      "status": "completed"
     },
     {
       "id": "2018-tainan-mayor",
@@ -236,7 +235,7 @@
       "date": "2018-11-24",
       "pollsFile": "",
       "candidates": [],
-      "status": "construction"
+      "status": "completed"
     }
   ]
 }

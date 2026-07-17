@@ -13,6 +13,19 @@
       "neutralResults": null,
       "undecided": 20.0,
       "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "ty2026-002",
+      "date": "2026-05-18",
+      "pollster": "cnews",
+      "pollsterName": "匯流新聞網",
+      "sampleSize": 1050,
+      "method": "phone",
+      "marginOfError": 3.02,
+      "results": { "chang": 54.0, "huang": 25.0 },
+      "neutralResults": null,
+      "undecided": 21.0,
+      "source": "https://cnews.com.tw/"
     }
   ]
 }

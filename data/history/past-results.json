@@ -6,30 +6,132 @@
       "turnoutRate": 58.28,
       "totalVotes": 1140718,
       "candidates": [
-        {
-          "id": "chen",
-          "name": "陳其邁",
-          "party": "DPP",
-          "votes": 821396,
-          "voteShare": 72.04,
-          "elected": true
-        },
-        {
-          "id": "ke",
-          "name": "柯志恩",
-          "party": "KMT",
-          "votes": 268810,
-          "voteShare": 23.58,
-          "elected": false
-        },
-        {
-          "id": "others",
-          "name": "其他候選人",
-          "party": "OTHER",
-          "votes": 50512,
-          "voteShare": 4.38,
-          "elected": false
-        }
+        { "id": "chen", "name": "陳其邁", "party": "DPP", "votes": 821396, "voteShare": 72.04, "elected": true },
+        { "id": "ke", "name": "柯志恩", "party": "KMT", "votes": 268810, "voteShare": 23.58, "elected": false },
+        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 50512, "voteShare": 4.38, "elected": false }
+      ]
+    },
+    {
+      "electionId": "2022-taipei-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 67.70,
+      "totalVotes": 1361111,
+      "candidates": [
+        { "id": "chiang", "name": "蔣萬安", "party": "KMT", "votes": 575590, "voteShare": 42.29, "elected": true },
+        { "id": "chen_s", "name": "陳時中", "party": "DPP", "votes": 434558, "voteShare": 31.93, "elected": false },
+        { "id": "huang_s", "name": "黃珊珊", "party": "IND", "votes": 342141, "voteShare": 25.14, "elected": false },
+        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 8822, "voteShare": 0.64, "elected": false }
+      ]
+    },
+    {
+      "electionId": "2022-newtaipei-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 56.60,
+      "totalVotes": 1846531,
+      "candidates": [
+        { "id": "hou", "name": "侯友宜", "party": "KMT", "votes": 1152555, "voteShare": 62.42, "elected": true },
+        { "id": "lin_c", "name": "林佳龍", "party": "DPP", "votes": 693976, "voteShare": 37.58, "elected": false }
+      ]
+    },
+    {
+      "electionId": "2022-taoyuan-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 58.01,
+      "totalVotes": 1071763,
+      "candidates": [
+        { "id": "chang", "name": "張善政", "party": "KMT", "votes": 557572, "voteShare": 52.02, "elected": true },
+        { "id": "cheng_y", "name": "鄭運鵬", "party": "DPP", "votes": 428983, "voteShare": 40.03, "elected": false },
+        { "id": "lai_h", "name": "賴香伶", "party": "TPP", "votes": 54926, "voteShare": 5.12, "elected": false },
+        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 30282, "voteShare": 2.83, "elected": false }
+      ]
+    },
+    {
+      "electionId": "2022-taichung-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 60.01,
+      "totalVotes": 1346471,
+      "candidates": [
+        { "id": "lu", "name": "盧秀燕", "party": "KMT", "votes": 799107, "voteShare": 59.35, "elected": true },
+        { "id": "tsai", "name": "蔡其昌", "party": "DPP", "votes": 524224, "voteShare": 38.93, "elected": false },
+        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 23140, "voteShare": 1.72, "elected": false }
+      ]
+    },
+    {
+      "electionId": "2022-tainan-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 58.97,
+      "totalVotes": 889674,
+      "candidates": [
+        { "id": "huang_w", "name": "黃偉哲", "party": "DPP", "votes": 433684, "voteShare": 48.80, "elected": true },
+        { "id": "hsie", "name": "謝龍介", "party": "KMT", "votes": 387731, "voteShare": 43.63, "elected": false },
+        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 68259, "voteShare": 7.57, "elected": false }
+      ]
+    },
+    {
+      "electionId": "2018-kaohsiung-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 73.54,
+      "totalVotes": 1657252,
+      "candidates": [
+        { "id": "han", "name": "韓國瑜", "party": "KMT", "votes": 892545, "voteShare": 53.87, "elected": true },
+        { "id": "chen_c", "name": "陳其邁", "party": "DPP", "votes": 742239, "voteShare": 44.80, "elected": false },
+        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 22468, "voteShare": 1.33, "elected": false }
+      ]
+    },
+    {
+      "electionId": "2018-taipei-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 65.97,
+      "totalVotes": 1413824,
+      "candidates": [
+        { "id": "ko", "name": "柯文哲", "party": "IND", "votes": 580820, "voteShare": 41.07, "elected": true },
+        { "id": "ting", "name": "丁守中", "party": "KMT", "votes": 577566, "voteShare": 40.82, "elected": false },
+        { "id": "yao", "name": "姚文智", "party": "DPP", "votes": 244641, "voteShare": 17.29, "elected": false },
+        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 10797, "voteShare": 0.82, "elected": false }
+      ]
+    },
+    {
+      "electionId": "2018-newtaipei-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 64.00,
+      "totalVotes": 2038760,
+      "candidates": [
+        { "id": "hou", "name": "侯友宜", "party": "KMT", "votes": 1165130, "voteShare": 57.15, "elected": true },
+        { "id": "su_t", "name": "蘇貞昌", "party": "DPP", "votes": 873630, "voteShare": 42.85, "elected": false }
+      ]
+    },
+    {
+      "electionId": "2018-taoyuan-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 60.63,
+      "totalVotes": 1033096,
+      "candidates": [
+        { "id": "cheng_w", "name": "鄭文燦", "party": "DPP", "votes": 552330, "voteShare": 53.46, "elected": true },
+        { "id": "chen_h", "name": "陳學聖", "party": "KMT", "votes": 407234, "voteShare": 39.42, "elected": false },
+        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 73532, "voteShare": 7.12, "elected": false }
+      ]
+    },
+    {
+      "electionId": "2018-taichung-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 67.46,
+      "totalVotes": 1463378,
+      "candidates": [
+        { "id": "lu", "name": "盧秀燕", "party": "KMT", "votes": 827996, "voteShare": 56.57, "elected": true },
+        { "id": "lin_c", "name": "林佳龍", "party": "DPP", "votes": 619855, "voteShare": 42.35, "elected": false },
+        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 15527, "voteShare": 1.08, "elected": false }
+      ]
+    },
+    {
+      "electionId": "2018-tainan-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 64.01,
+      "totalVotes": 966670,
+      "candidates": [
+        { "id": "huang_w", "name": "黃偉哲", "party": "DPP", "votes": 367518, "voteShare": 38.02, "elected": true },
+        { "id": "kao", "name": "高思博", "party": "KMT", "votes": 312874, "voteShare": 32.37, "elected": false },
+        { "id": "chen_y", "name": "陳永和", "party": "IND", "votes": 117179, "voteShare": 12.12, "elected": false },
+        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 169099, "voteShare": 17.49, "elected": false }
       ]
     }
   ]

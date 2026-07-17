@@ -3,6 +3,19 @@
   "polls": [
     {
       "id": "tn2026-001",
+      "date": "2026-01-15",
+      "pollster": "ettoday",
+      "pollsterName": "ETtoday",
+      "sampleSize": 1000,
+      "method": "phone",
+      "marginOfError": 3.1,
+      "results": { "chen_t": 49.0, "hsie": 34.0 },
+      "neutralResults": null,
+      "undecided": 17.0,
+      "source": "https://www.ettoday.net/"
+    },
+    {
+      "id": "tn2026-002",
       "date": "2026-03-22",
       "pollster": "tvbs",
       "pollsterName": "TVBS",

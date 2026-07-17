@@ -3,6 +3,19 @@
   "polls": [
     {
       "id": "tp2026-001",
+      "date": "2025-10-15",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1012,
+      "method": "phone",
+      "marginOfError": 3.08,
+      "results": { "chiang": 54.0, "shen": 28.0 },
+      "neutralResults": null,
+      "undecided": 18.0,
+      "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "tp2026-002",
       "date": "2026-05-12",
       "pollster": "asia-pacific",
       "pollsterName": "新台灣國策智庫",
@@ -15,7 +28,7 @@
       "source": "http://www.braintrust.tw/"
     },
     {
-      "id": "tp2026-002",
+      "id": "tp2026-003",
       "date": "2026-05-25",
       "pollster": "tvbs",
       "pollsterName": "TVBS",

@@ -9,9 +9,9 @@
       "sampleSize": 1050,
       "method": "phone",
       "marginOfError": 2.95,
-      "results": { "li": 40.0, "su": 38.0, "huang": 12.0 },
+      "results": { "li": 48.0, "su": 33.0 },
       "neutralResults": null,
-      "undecided": 10.0,
+      "undecided": 19.0,
       "source": "https://news.tvbs.com.tw/"
     },
     {
@@ -22,9 +22,9 @@
       "sampleSize": 1083,
       "method": "phone",
       "marginOfError": 2.97,
-      "results": { "li": 40.0, "su": 40.2, "huang": 10.0 },
+      "results": { "li": 40.0, "su": 40.2 },
       "neutralResults": null,
-      "undecided": 9.8,
+      "undecided": 19.8,
       "source": "http://www.braintrust.tw/"
     }
   ]

@@ -942,6 +942,68 @@
 
   // ---- Main Loader & Renderer ----
 
+  function renderHistoricalOnlyResults(election, pastResults) {
+    const actual = pastResults?.results?.find(r => r.electionId === election.id);
+    
+    DOM.heroSummaryText.textContent = `本選區為已落幕之歷史選舉（實際投票率 ${actual ? actual.turnoutRate + '%' : 'N/A'}）。本站在此選舉期間尚未啟動，故無歷史民調預測，以下為最終實際選舉開票結果對照：`;
+    
+    if (!actual) {
+      DOM.predictionTableContainer.innerHTML = `<div class="card text-center" style="padding:40px;">暫無此選區的歷史得票統計數據</div>`;
+      return;
+    }
+
+    // Build headers
+    let candidateHeaders = actual.candidates.map(c => {
+      const colors = { 'DPP': '#1B9431', 'KMT': '#000095', 'TPP': '#28C8C8', 'IND': '#888888', 'OTHER': '#666666' };
+      const color = colors[c.party] || '#555555';
+      return `<th class="candidate-header-cell text-center" style="background-color: ${color}; color: #ffffff; font-weight: 700; padding: var(--space-sm);">${c.name} (${c.party})</th>`;
+    }).join('');
+
+    // Row: 實際得票數
+    let votesRow = actual.candidates.map(c => {
+      return `<td class="text-center val-medium" style="font-weight: 600; padding: var(--space-md);">${c.votes.toLocaleString()} 票</td>`;
+    }).join('');
+
+    // Row: 實際得票率
+    let shareRow = actual.candidates.map(c => {
+      const colors = { 'DPP': '#1B9431', 'KMT': '#000095', 'TPP': '#28C8C8', 'IND': '#888888', 'OTHER': '#666666' };
+      const color = colors[c.party] || '#555555';
+      return `<td class="text-center val-large" style="color: ${color}; font-weight: 800; padding: var(--space-md);">${c.voteShare.toFixed(2)}%</td>`;
+    }).join('');
+
+    // Row: 是否當選
+    let electedRow = actual.candidates.map(c => {
+      return `<td class="text-center" style="padding: var(--space-md);">${c.elected ? '<span class="win-opportunity-badge high" style="background-color: #D1FAE5; color: #065F46; font-weight: 700; padding: 4px 12px; border-radius: var(--radius-full);">🏆 當選</span>' : '<span style="color: var(--color-text-tertiary);">未當選</span>'}</td>`;
+    }).join('');
+
+    const tableHtml = `
+      <table class="prediction-summary-table" style="width: 100%; border-collapse: collapse; margin-top: var(--space-md);">
+        <thead>
+          <tr>
+            <th style="width: 220px; text-align: left; background-color: var(--color-bg-secondary); padding: var(--space-sm);">項目</th>
+            ${candidateHeaders}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label" style="padding: var(--space-md); font-weight: 600; background-color: var(--color-bg-secondary-light);">實際得票數</td>
+            ${votesRow}
+          </tr>
+          <tr>
+            <td class="row-label" style="padding: var(--space-md); font-weight: 600; border-bottom: 2px solid var(--color-border); background-color: var(--color-bg-secondary-light);">實際得票率</td>
+            ${shareRow}
+          </tr>
+          <tr>
+            <td class="row-label" style="padding: var(--space-md); font-weight: 600; background-color: var(--color-bg-secondary-light);">選舉當選狀態</td>
+            ${electedRow}
+          </tr>
+        </tbody>
+      </table>
+    `;
+
+    DOM.predictionTableContainer.innerHTML = tableHtml;
+  }
+
   async function loadAndRender(electionId) {
     setViewState('loading');
 
@@ -954,6 +1016,24 @@
     }
 
     const { election, polls, pollsters, pastResults } = data;
+
+    // Check if it's a completed election with no polls data (Pure Historical Results page)
+    const isHistoricalOnly = election.status === 'completed' && (!polls || polls.polls.length === 0);
+
+    $('pollTrendSection').classList.toggle('hidden', isHistoricalOnly);
+    $('winProbSection').classList.toggle('hidden', isHistoricalOnly);
+    $('voteShareSection').classList.toggle('hidden', isHistoricalOnly);
+    $('pollTableSection').classList.toggle('hidden', isHistoricalOnly);
+    $('predictionLogSection').classList.toggle('hidden', isHistoricalOnly);
+
+    if (isHistoricalOnly) {
+      const actual = pastResults?.results?.find(r => r.electionId === election.id);
+      DOM.heroElectionName.textContent = election.name;
+      DOM.heroUpdateTime.textContent = `開票日期：${actual ? actual.date : election.date}`;
+      renderHistoricalOnlyResults(election, pastResults);
+      setViewState('content');
+      return;
+    }
 
     // Check if it's marked as construction
     if (election.status === 'construction' || !polls || polls.polls.length === 0) {
