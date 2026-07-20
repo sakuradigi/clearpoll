@@ -79,6 +79,19 @@
       "neutralResults": { "lai": 32.0, "ke": 41.0 },
       "undecided": 11.2,
       "source": "https://www.ettoday.net/"
+    },
+    {
+      "id": "kh2026-005",
+      "date": "2026-07-20",
+      "pollster": "era",
+      "pollsterName": "年代民調",
+      "sampleSize": 1068,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": { "lai": 36.2, "ke": 23.6 },
+      "neutralResults": { "lai": 28.0, "ke": 20.0 },
+      "undecided": 40.2,
+      "source": "https://news.nexttv.com.tw/"
     }
   ]
 }

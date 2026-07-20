@@ -45,6 +45,17 @@
       "notes": "大型網路媒體，委託專業調查機構執行，部分為網路投票（權重較低），但電話調查品質穩定"
     },
     {
+      "id": "era",
+      "name": "年代民調",
+      "fullName": "年代民意調查中心",
+      "credibilityScore": 0.78,
+      "leanDirection": "slightly-green",
+      "leanMagnitude": 0.12,
+      "historicalAccuracy": 0.75,
+      "methodology": "CATI電腦輔助電話訪問",
+      "notes": "媒體民調機構，長期追蹤台灣選舉，電話訪問抽樣方法穩定"
+    },
+    {
       "id": "shanshui",
       "name": "山水民調",
       "fullName": "山水民意研究公司",
