@@ -15,6 +15,19 @@
       "source": "https://news.tvbs.com.tw/"
     },
     {
+      "id": "nt2026-001c",
+      "date": "2026-04-13",
+      "pollster": "formosa",
+      "pollsterName": "美麗島",
+      "sampleSize": 1070,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": { "li": 35.5, "su": 34.5 },
+      "neutralResults": { "li": 28.0, "su": 27.0 },
+      "undecided": 30.0,
+      "source": "https://www.my-formosa.com/"
+    },
+    {
       "id": "nt2026-001b",
       "date": "2026-05-05",
       "pollster": "zmedia",
@@ -27,6 +40,19 @@
       "neutralResults": { "li": 32.0, "su": 28.0 },
       "undecided": 25.6,
       "source": "https://www.zmedia.com.tw/"
+    },
+    {
+      "id": "nt2026-001d",
+      "date": "2026-05-12",
+      "pollster": "ettoday",
+      "pollsterName": "ETtoday",
+      "sampleSize": 1142,
+      "method": "online",
+      "marginOfError": 2.9,
+      "results": { "li": 42.5, "su": 41.7 },
+      "neutralResults": { "li": 35.0, "su": 34.0 },
+      "undecided": 15.8,
+      "source": "https://www.ettoday.net/"
     },
     {
       "id": "nt2026-002",
