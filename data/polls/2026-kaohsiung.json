@@ -85,11 +85,11 @@
       "date": "2026-07-20",
       "pollster": "era",
       "pollsterName": "年代民調",
-      "sampleSize": 1068,
+      "sampleSize": 1071,
       "method": "phone",
       "marginOfError": 3.0,
       "results": { "lai": 36.2, "ke": 23.6 },
-      "neutralResults": { "lai": 28.0, "ke": 20.0 },
+      "neutralResults": { "lai": 10.6, "ke": 17.4 },
       "undecided": 40.2,
       "source": "https://news.nexttv.com.tw/"
     }
