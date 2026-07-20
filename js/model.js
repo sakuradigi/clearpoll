@@ -118,12 +118,20 @@ const ClearPollModel = {
     const weightedSums = {};
     candidateIds.forEach(cid => { weightedSums[cid] = 0; });
 
+    // Use the latest poll's date in the dataset as the reference date for recency decay.
+    // This ensures the latest poll has 100% recency weight (1.0), and older polls decay relative to it.
+    // The relative weights (and thus the final prediction results) remain mathematically identical,
+    // but it avoids all polls having 0% recency weight when the election is far in the future.
+    const pollDates = polls.map(p => new Date(p.date).getTime());
+    const latestPollTime = Math.max(...pollDates);
+    const referenceDate = new Date(latestPollTime).toISOString().split('T')[0];
+
     let totalWeight = 0;
     const weightedPolls = [];
 
     for (const poll of polls) {
       // Calculate individual weights
-      const recencyW = this.calcRecencyWeight(poll.date, electionDate);
+      const recencyW = this.calcRecencyWeight(poll.date, referenceDate);
       const sampleW = this.calcSampleWeight(poll.sampleSize, poll.method);
       const credibilityW = this.getCredibilityWeight(poll.pollster, pollsters);
 
