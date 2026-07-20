@@ -721,6 +721,7 @@
           switchTab('detail');
         });
       });
+      initScrollAnimations();
       return;
     }
 
@@ -858,6 +859,8 @@
         switchTab('detail');
       });
     });
+
+    initScrollAnimations();
   }
 
   // ---- Scroll Animations ----
@@ -1058,6 +1061,8 @@
         </tr>
       `;
     }).join('');
+
+    initScrollAnimations();
   }
 
   function switchTab(tab) {
