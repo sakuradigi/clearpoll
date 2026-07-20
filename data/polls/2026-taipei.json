@@ -39,6 +39,20 @@
       "neutralResults": { "chiang": 48.0, "shen": 23.0 },
       "undecided": 12.0,
       "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "tp2026-004",
+      "date": "2026-06-24",
+      "pollster": "zmedia",
+      "pollsterName": "震傳媒（委山水執行）",
+      "commissioner": "震傳媒",
+      "sampleSize": 1074,
+      "method": "phone",
+      "marginOfError": 2.99,
+      "results": { "chiang": 55.2, "shen": 27.5 },
+      "neutralResults": { "chiang": 47.0, "shen": 10.2 },
+      "undecided": 17.3,
+      "source": "https://www.zmedia.com.tw/"
     }
   ]
 }

@@ -32,8 +32,8 @@ const ClearPollModel = {
    * @returns {number} weight between 0 and 1
    */
   calcSampleWeight(sampleSize, method) {
-    // Sample size component: sqrt(n) / sqrt(1500), capped at 1
-    const sizeWeight = Math.min(Math.sqrt(sampleSize) / Math.sqrt(1500), 1.0);
+    // Sample size component: sqrt(n) / sqrt(1000), capped at 1
+    const sizeWeight = Math.min(Math.sqrt(sampleSize) / Math.sqrt(1000), 1.0);
 
     // Method quality multiplier
     const methodMultipliers = {

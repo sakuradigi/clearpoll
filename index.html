@@ -48,6 +48,16 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -177,6 +187,28 @@
               計算加權堆疊後的民調領先幅度，並根據各機構民調數據的變異程度（方差）推估標準誤差 $\sigma$。最後代入常態累積分布函數（Normal CDF）求出勝選機率。領先幅度大於兩倍誤差時，勝率將高於 95%。
             </p>
           </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: var(--space-lg); max-width: 800px; margin-left: auto; margin-right: auto; padding: var(--space-xl);">
+        <h3 style="font-size: 1.3rem; margin-bottom: var(--space-md); font-weight: 700;">🏛️ 民調機構權重與信譽評估表</h3>
+        <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: var(--space-md);">
+          ClearPoll 根據民調機構之<b>調查方法透明度</b>、<b>歷史預測準確度</b>、<b>機構獨立性</b>等維度進行信譽度評估。評估得分（0.5-1.0）會作為加權模型中的重要參數：
+        </p>
+        <div class="table-container" style="overflow-x: auto;">
+          <table class="data-table" style="width: 100%; border-collapse: collapse; min-width: 600px;">
+            <thead>
+              <tr>
+                <th style="text-align: left; padding: var(--space-sm) var(--space-md);">民調機構</th>
+                <th style="text-align: center; padding: var(--space-sm) var(--space-md);">信譽得分 ($W_{\text{credibility}}$)</th>
+                <th style="text-align: left; padding: var(--space-sm) var(--space-md);">主要調查方法</th>
+                <th style="text-align: left; padding: var(--space-sm) var(--space-md);">信譽與加權說明</th>
+              </tr>
+            </thead>
+            <tbody id="pollsterWeightsTableBody">
+              <!-- Dynamically populated by app.js -->
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -411,7 +443,7 @@
       </div>
     </div>
     <p class="footer-copy">
-      © 2024 ClearPoll 透析民調。本站預測僅供參考，不構成任何政治立場。所有民調資料來源均已標註。
+      © 2025-2026 ClearPoll 透析民調。本站預測僅供參考，不構成任何政治立場。所有民調資料來源均已標註。
     </p>
   </footer>
 

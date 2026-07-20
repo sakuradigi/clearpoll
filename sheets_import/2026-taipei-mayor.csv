@@ -2,3 +2,4 @@ id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralRes
 tp2026-001,2025-10-15,tvbs,TVBS,1012,phone,3.08,"chiang:54.0,shen:28.0","chiang:45.0,shen:22.0",18.0,https://news.tvbs.com.tw/
 tp2026-002,2026-05-12,asia-pacific,新台灣國策智庫,1078,phone,2.98,"chiang:52.9,shen:29.7","chiang:42.0,shen:24.0",17.4,http://www.braintrust.tw/
 tp2026-003,2026-05-25,tvbs,TVBS,1105,phone,2.95,"chiang:58.0,shen:30.0","chiang:48.0,shen:23.0",12.0,https://news.tvbs.com.tw/
+tp2026-004,2026-06-24,zmedia,震傳媒（委山水執行）,1074,phone,2.99,"chiang:55.2,shen:27.5","chiang:47.0,shen:10.2",17.3,https://www.zmedia.com.tw/

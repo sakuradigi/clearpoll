@@ -469,7 +469,14 @@
           <td class="number-cell text-right">${poll.sampleSize.toLocaleString()}</td>
           ${candidateCells}
           <td class="number-cell text-right">${poll.undecided != null ? poll.undecided.toFixed(1) + '%' : '-'}</td>
-          <td class="weight-cell text-right">${(w * 100).toFixed(1)}% ${weightBar}</td>
+          <td class="weight-cell text-right" style="vertical-align: middle; line-height: 1.3;">
+            <div style="font-weight: 700;">${(w * 100).toFixed(1)}% ${weightBar}</div>
+            <div style="font-size: 0.72rem; color: var(--color-text-tertiary); margin-top: 2px;">
+              時效:${Math.round((poll.weights?.recency || 0) * 100)}% | 
+              樣本:${Math.round((poll.weights?.sample || 0) * 100)}% | 
+              信譽:${Math.round((poll.weights?.credibility || 0) * 100)}%
+            </div>
+          </td>
           <td>${poll.source ? `<a href="${poll.source}" class="source-link" target="_blank" rel="noopener">🔗 來源</a>` : '-'}</td>
         </tr>
       `;
@@ -864,6 +871,82 @@
 
   // ---- SPA Navigation ----
 
+  async function renderMethodology() {
+    const tbody = document.getElementById('pollsterWeightsTableBody');
+    if (!tbody) return;
+
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="4" class="text-center" style="padding: var(--space-md); color: var(--color-text-secondary);">
+          載入民調機構信譽評分中...
+        </td>
+      </tr>
+    `;
+
+    // Ensure metadata is loaded
+    if (!pollsterData) {
+      const pollsterD = await loadJSON('data/meta/pollsters.json');
+      if (!pollsterD) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="4" class="text-center" style="padding: var(--space-md); color: var(--color-danger);">
+              資料載入失敗
+            </td>
+          </tr>
+        `;
+        return;
+      }
+      pollsterData = pollsterD;
+    }
+
+    const pollsters = pollsterData.pollsters || [];
+    
+    // Sort pollsters by credibilityScore descending
+    const sortedPollsters = [...pollsters].sort((a, b) => b.credibilityScore - a.credibilityScore);
+
+    tbody.innerHTML = sortedPollsters.map(p => {
+      let leanText = '中立';
+      let leanStyle = 'color: var(--color-text-secondary);';
+      if (p.leanDirection === 'blue') {
+        leanText = '偏藍';
+        leanStyle = 'color: #3b82f6; font-weight: 600;';
+      } else if (p.leanDirection === 'slightly-blue') {
+        leanText = '略藍';
+        leanStyle = 'color: #60a5fa; font-weight: 500;';
+      } else if (p.leanDirection === 'green') {
+        leanText = '偏綠';
+        leanStyle = 'color: #10b981; font-weight: 600;';
+      } else if (p.leanDirection === 'slightly-green') {
+        leanText = '略綠';
+        leanStyle = 'color: #34d399; font-weight: 500;';
+      }
+
+      const scorePercent = (p.credibilityScore * 100).toFixed(0) + '%';
+      
+      return `
+        <tr>
+          <td style="padding: var(--space-sm) var(--space-md); vertical-align: middle;">
+            <div style="font-weight: 700;">${p.name}</div>
+            <div style="font-size: 0.75rem; color: var(--color-text-tertiary);">${p.fullName}</div>
+          </td>
+          <td style="text-align: center; padding: var(--space-sm) var(--space-md); vertical-align: middle;">
+            <div style="font-weight: 800; font-size: 1.1rem; color: var(--color-accent-blue);">${p.credibilityScore.toFixed(2)}</div>
+            <div class="vote-bar-track" style="width: 80px; height: 6px; margin: 4px auto 0 auto; border-radius: 3px;">
+              <div class="vote-bar-fill" style="width: ${p.credibilityScore * 100}%; height: 100%; background: var(--color-accent-blue); border-radius: 3px;"></div>
+            </div>
+          </td>
+          <td style="padding: var(--space-sm) var(--space-md); font-size: 0.85rem; color: var(--color-text-secondary); vertical-align: middle;">
+            ${p.methodology || '電話調查'}
+          </td>
+          <td style="padding: var(--space-sm) var(--space-md); font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.5; vertical-align: middle;">
+            <div>${p.notes || ''}</div>
+            <div style="font-size: 0.72rem; margin-top: 4px; ${leanStyle}">傾向偏向：${leanText} (偏差值: ${p.leanMagnitude || 0.0})</div>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
   function switchTab(tab) {
     activeTab = tab;
     
@@ -895,6 +978,8 @@
       DOM.loadingState.classList.add('hidden');
       DOM.constructionState.classList.add('hidden');
       DOM.appContent.classList.add('hidden');
+
+      renderMethodology();
     }
   }
 

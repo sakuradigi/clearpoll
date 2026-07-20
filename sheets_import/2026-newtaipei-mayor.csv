@@ -1,3 +1,5 @@
 id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralResults,undecided,source
 nt2026-001,2026-01-20,tvbs,TVBS,1050,phone,2.95,"li:48.0,su:33.0","li:39.0,su:26.0",19.0,https://news.tvbs.com.tw/
+nt2026-001b,2026-05-05,zmedia,震傳媒（委山水執行）,1070,phone,3.0,"li:39.6,su:34.8","li:32.0,su:28.0",25.6,https://www.zmedia.com.tw/
 nt2026-002,2026-07-16,asia-pacific,新台灣國策智庫,1083,phone,2.97,"li:40.0,su:40.2","li:33.0,su:34.0",19.8,http://www.braintrust.tw/
+nt2026-003,2026-07-20,junews,鉅聞天下新聞網（委皮爾森數據）,1766,online,2.3,"li:50.85,su:44.06","li:54.81,su:33.21",5.09,https://www.ftnn.com.tw/

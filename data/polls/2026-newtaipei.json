@@ -15,6 +15,20 @@
       "source": "https://news.tvbs.com.tw/"
     },
     {
+      "id": "nt2026-001b",
+      "date": "2026-05-05",
+      "pollster": "zmedia",
+      "pollsterName": "震傳媒（委山水執行）",
+      "commissioner": "震傳媒",
+      "sampleSize": 1070,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": { "li": 39.6, "su": 34.8 },
+      "neutralResults": { "li": 32.0, "su": 28.0 },
+      "undecided": 25.6,
+      "source": "https://www.zmedia.com.tw/"
+    },
+    {
       "id": "nt2026-002",
       "date": "2026-07-16",
       "pollster": "asia-pacific",
@@ -26,6 +40,20 @@
       "neutralResults": { "li": 33.0, "su": 34.0 },
       "undecided": 19.8,
       "source": "http://www.braintrust.tw/"
+    },
+    {
+      "id": "nt2026-003",
+      "date": "2026-07-20",
+      "pollster": "junews",
+      "pollsterName": "鉅聞天下新聞網（委皮爾森數據）",
+      "commissioner": "鉅聞天下新聞網",
+      "sampleSize": 1766,
+      "method": "online",
+      "marginOfError": 2.3,
+      "results": { "li": 50.85, "su": 44.06 },
+      "neutralResults": { "li": 54.81, "su": 33.21 },
+      "undecided": 5.09,
+      "source": "https://www.ftnn.com.tw/"
     }
   ]
 }

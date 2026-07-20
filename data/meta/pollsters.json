@@ -1,6 +1,17 @@
 {
   "pollsters": [
     {
+      "id": "tvbs",
+      "name": "TVBS",
+      "fullName": "TVBS民調中心",
+      "credibilityScore": 0.88,
+      "leanDirection": "slightly-blue",
+      "leanMagnitude": 0.10,
+      "historicalAccuracy": 0.83,
+      "methodology": "CATI電腦輔助電話訪問（市話+手機雙底冊）",
+      "notes": "長期追蹤型民調，樣本品質穩定，歷屆選舉預測誤差約 2-3%，資訊揭露完整"
+    },
+    {
       "id": "udn",
       "name": "聯合報",
       "fullName": "聯合報系民調中心",
@@ -8,7 +19,8 @@
       "leanDirection": "slightly-blue",
       "leanMagnitude": 0.12,
       "historicalAccuracy": 0.80,
-      "notes": "泛藍傾向，但長期追蹤品質穩定"
+      "methodology": "CATI電腦輔助電話訪問",
+      "notes": "泛藍傾向，但長期追蹤品質穩定，具備學術合作基礎"
     },
     {
       "id": "formosa",
@@ -18,17 +30,19 @@
       "leanDirection": "slightly-green",
       "leanMagnitude": 0.08,
       "historicalAccuracy": 0.79,
-      "notes": "每月定期發布，交叉分析詳細"
+      "methodology": "CATI電話訪問，每月定期發布",
+      "notes": "每月定期發布，交叉分析詳細，公開政黨傾向資料，但偶有爭議"
     },
     {
-      "id": "tvbs",
-      "name": "TVBS",
-      "fullName": "TVBS民調中心",
-      "credibilityScore": 0.88,
-      "leanDirection": "slightly-blue",
-      "leanMagnitude": 0.10,
-      "historicalAccuracy": 0.83,
-      "notes": "長期追蹤型民調，樣本品質穩定"
+      "id": "ettoday",
+      "name": "ETtoday民調雲",
+      "fullName": "ETtoday新聞雲民調雲",
+      "credibilityScore": 0.75,
+      "leanDirection": "neutral",
+      "leanMagnitude": 0.08,
+      "historicalAccuracy": 0.73,
+      "methodology": "混合調查（電話+網路），委託專業機構執行",
+      "notes": "大型網路媒體，委託專業調查機構執行，部分為網路投票（權重較低），但電話調查品質穩定"
     },
     {
       "id": "shanshui",
@@ -38,37 +52,8 @@
       "leanDirection": "slightly-green",
       "leanMagnitude": 0.15,
       "historicalAccuracy": 0.72,
-      "notes": "常受三立、放言委託"
-    },
-    {
-      "id": "rwnews",
-      "name": "菱傳媒",
-      "fullName": "菱傳媒民調",
-      "credibilityScore": 0.70,
-      "leanDirection": "slightly-blue",
-      "leanMagnitude": 0.18,
-      "historicalAccuracy": 0.68,
-      "notes": "相對較新的媒體民調"
-    },
-    {
-      "id": "asia-pacific",
-      "name": "中華亞太菁英交流協會",
-      "fullName": "中華亞太菁英交流協會",
-      "credibilityScore": 0.72,
-      "leanDirection": "neutral",
-      "leanMagnitude": 0.05,
-      "historicalAccuracy": 0.70,
-      "notes": "學術性質民調"
-    },
-    {
-      "id": "cnews",
-      "name": "匯流新聞網",
-      "fullName": "匯流新聞網民調",
-      "credibilityScore": 0.68,
-      "leanDirection": "slightly-green",
-      "leanMagnitude": 0.10,
-      "historicalAccuracy": 0.66,
-      "notes": "媒體民調"
+      "methodology": "CATI電腦輔助電話訪問",
+      "notes": "常受三立、放言、震傳媒委託執行，調查方法論透明度中等"
     },
     {
       "id": "upmedia",
@@ -78,7 +63,85 @@
       "leanDirection": "slightly-green",
       "leanMagnitude": 0.12,
       "historicalAccuracy": 0.70,
-      "notes": "委託山水執行"
+      "methodology": "委託山水民調執行CATI電話訪問",
+      "notes": "委託山水執行，調查品質取決於執行單位"
+    },
+    {
+      "id": "zmedia",
+      "name": "震傳媒",
+      "fullName": "震傳媒",
+      "credibilityScore": 0.72,
+      "leanDirection": "slightly-blue",
+      "leanMagnitude": 0.12,
+      "historicalAccuracy": 0.70,
+      "methodology": "委託山水民意研究公司以CATI執行",
+      "notes": "2025-2026年新興媒體民調，委託山水執行，調查方法論揭露尚可，歷史驗證數據不足"
+    },
+    {
+      "id": "asia-pacific",
+      "name": "新台灣國策智庫",
+      "fullName": "新台灣國策智庫",
+      "credibilityScore": 0.72,
+      "leanDirection": "slightly-green",
+      "leanMagnitude": 0.15,
+      "historicalAccuracy": 0.70,
+      "methodology": "電話調查",
+      "notes": "具政治創辦背景（偏綠），定期發布六都民調，交叉分析齊全但獨立性略有疑慮"
+    },
+    {
+      "id": "rwnews",
+      "name": "鏡新聞",
+      "fullName": "鏡新聞（大地民調委託）",
+      "credibilityScore": 0.70,
+      "leanDirection": "slightly-green",
+      "leanMagnitude": 0.15,
+      "historicalAccuracy": 0.68,
+      "methodology": "委託大地民調執行電話訪問",
+      "notes": "相對較新的媒體民調，委託執行，調查方法論揭露有限"
+    },
+    {
+      "id": "cnews",
+      "name": "匯流新聞網",
+      "fullName": "匯流新聞網民調",
+      "credibilityScore": 0.68,
+      "leanDirection": "slightly-green",
+      "leanMagnitude": 0.10,
+      "historicalAccuracy": 0.66,
+      "methodology": "電話調查",
+      "notes": "媒體民調，調查方法論透明度偏低，歷史驗證數據有限"
+    },
+    {
+      "id": "junews",
+      "name": "鉅聞天下新聞網",
+      "fullName": "鉅聞天下新聞網（皮爾森數據委託）",
+      "credibilityScore": 0.65,
+      "leanDirection": "slightly-blue",
+      "leanMagnitude": 0.15,
+      "historicalAccuracy": 0.62,
+      "methodology": "委託皮爾森數據執行電話與網路調查",
+      "notes": "2026年新興的媒體民調，委託皮爾森數據，歷史驗證數據不足，公信力待建立"
+    },
+    {
+      "id": "pinview",
+      "name": "品觀點",
+      "fullName": "品觀點民調",
+      "credibilityScore": 0.65,
+      "leanDirection": "slightly-blue",
+      "leanMagnitude": 0.12,
+      "historicalAccuracy": 0.63,
+      "methodology": "電話調查",
+      "notes": "地方媒體民調，知名度與歷史驗證資料均有限"
+    },
+    {
+      "id": "fonnews",
+      "name": "放言",
+      "fullName": "放言媒體（委託山水民調）",
+      "credibilityScore": 0.68,
+      "leanDirection": "green",
+      "leanMagnitude": 0.20,
+      "historicalAccuracy": 0.65,
+      "methodology": "委託山水民意研究公司執行CATI電話訪問",
+      "notes": "偏綠色彩明顯，委託山水執行，機構獨立性較低"
     },
     {
       "id": "candidate-ke",
@@ -88,7 +151,8 @@
       "leanDirection": "blue",
       "leanMagnitude": 0.25,
       "historicalAccuracy": 0.55,
-      "notes": "候選人自行委託，公信力較低"
+      "methodology": "陣營委託民調",
+      "notes": "候選人自行委託，公信力較低，結果可能經選擇性揭露"
     }
   ]
 }
