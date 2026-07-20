@@ -647,6 +647,7 @@ p {
   background: var(--color-bg-tertiary);
   color: var(--color-text-secondary);
   font-weight: 500;
+  white-space: nowrap;
 }
 
 
