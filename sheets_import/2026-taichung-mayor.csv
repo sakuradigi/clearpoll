@@ -2,3 +2,5 @@ id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralRes
 tc2026-001,2026-01-15,ettoday,ETtoday,1000,phone,3.1,"chiang_k:51.0,ho:32.4","chiang_k:42.0,ho:27.0",16.6,https://www.ettoday.net/
 tc2026-002,2026-02-15,tvbs,TVBS,1020,phone,3.07,"chiang_k:54.0,ho:28.0","chiang_k:45.0,ho:23.0",18.0,https://news.tvbs.com.tw/
 tc2026-003,2026-05-15,cnews,匯流新聞網,1068,phone,3.0,"chiang_k:40.6,ho:24.4","chiang_k:34.0,ho:20.0",35.0,https://cnews.com.tw/
+tc2026-004,2026-06-28,tvbs,TVBS,1110,phone,2.94,"chiang_k:52.0,ho:31.0","chiang_k:43.0,ho:25.0",17.0,https://news.tvbs.com.tw/
+tc2026-005,2026-07-08,formosa,美麗島,1075,phone,2.98,"chiang_k:49.5,ho:33.5","chiang_k:41.0,ho:27.0",17.0,https://www.my-formosa.com/

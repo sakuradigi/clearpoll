@@ -304,7 +304,16 @@
     // Row: 得票率預測
     let voteShareProjectionRow = candidates.map(c => {
       const share = predictedVoteShares[c.id] || 0;
-      return `<td class="val-large" style="color: ${c.color}; font-weight: 800;">${share.toFixed(1)}%</td>`;
+      const ci = result.ci95 ? result.ci95[c.id] : null;
+      const ciHtml = ci
+        ? `<div class="ci-bounds-text" style="font-size:0.75rem; color: var(--color-text-secondary); font-weight: 500; margin-top: 3px;">
+             95% CI: ${ci.lower}% ~ ${ci.upper}%
+           </div>`
+        : '';
+      return `<td class="val-large" style="color: ${c.color}; font-weight: 800;">
+        ${share.toFixed(1)}%
+        ${ciHtml}
+      </td>`;
     }).join('');
 
     // Row: 實際選舉結果
@@ -463,7 +472,7 @@
       }).join('');
 
       html += `
-        <tr>
+        <tr data-poll-id="${poll.id}" style="cursor: pointer;" title="點擊檢視民調交叉分析與校正細項">
           <td>${poll.date}</td>
           <td class="pollster-cell">${poll.pollsterName || poll.pollster}</td>
           <td><span class="method-badge">${methodLabels[poll.method] || poll.method}</span></td>
@@ -763,10 +772,12 @@
         // Map candidates to sorted support bars
         let barsHtml = election.candidates.map(c => {
           const share = result.predictedVoteShares[c.id] || 0;
+          const ci = result.ci95 ? result.ci95[c.id] : null;
+          const ciTag = ci ? `<span class="ci-badge" style="font-size:0.7rem; font-weight:400; padding:1px 5px;">CI: ${ci.lower}%~${ci.upper}%</span>` : '';
           return `
             <div class="dash-cand-row">
               <div class="dash-cand-info">
-                <span style="color: ${c.color}; font-weight: 700;">${c.name} (${c.party})</span>
+                <span style="color: ${c.color}; font-weight: 700;">${c.name} (${c.party}) ${ciTag}</span>
                 <span style="color: ${c.color}; font-weight: 800;">${share.toFixed(1)}%</span>
               </div>
               <div class="dash-progress-track">
@@ -1309,8 +1320,9 @@
     pollData = polls;
     pollsterData = pollsters;
 
-    // Run analysis
-    analysisResult = ClearPollModel.analyze(pollData, pollsterData);
+    // Run analysis with scenario options
+    const scenarioOpts = getScenarioOptions();
+    analysisResult = ClearPollModel.analyze(pollData, pollsterData, scenarioOpts);
     console.log('[ClearPoll] Analysis complete:', analysisResult);
 
     // Render everything
@@ -1333,6 +1345,175 @@
     });
   }
 
+  function getScenarioOptions() {
+    const undecidedLeanEl = $('simUndecidedLean');
+    const applyBiasEl = $('simApplyBias');
+    return {
+      undecidedLean: undecidedLeanEl ? parseFloat(undecidedLeanEl.value) : 0,
+      applyBiasCorrection: applyBiasEl ? applyBiasEl.checked : true,
+    };
+  }
+
+  function openPollDetailModal(poll, result) {
+    const modal = $('pollDetailModal');
+    const modalBody = $('modalPollBody');
+    const modalTitle = $('modalPollsterTitle');
+    if (!modal || !modalBody) return;
+
+    const pollsterObj = pollsterData?.pollsters?.find(p => p.id === poll.pollster);
+    const candidates = result?.candidates || [];
+
+    modalTitle.textContent = `${poll.pollsterName || poll.pollster} (${poll.date})`;
+
+    let candidateRows = candidates.map(c => {
+      const raw = poll.results[c.id] != null ? poll.results[c.id].toFixed(1) + '%' : '-';
+      const neutral = poll.neutralResults && poll.neutralResults[c.id] != null ? poll.neutralResults[c.id].toFixed(1) + '%' : raw;
+      const adjusted = poll.adjustedResults && poll.adjustedResults[c.id] != null ? poll.adjustedResults[c.id].toFixed(1) + '%' : raw;
+      const proj = poll.projectedVoteShare && poll.projectedVoteShare[c.id] != null ? poll.projectedVoteShare[c.id].toFixed(1) + '%' : '-';
+
+      return `
+        <tr>
+          <td style="font-weight: 700; color: ${c.color};">${c.name} (${c.party})</td>
+          <td class="text-right">${raw}</td>
+          <td class="text-right">${neutral}</td>
+          <td class="text-right">${adjusted}</td>
+          <td class="text-right" style="font-weight: 800; color: ${c.color};">${proj}</td>
+        </tr>
+      `;
+    }).join('');
+
+    let leanText = '中立';
+    if (pollsterObj) {
+      if (pollsterObj.leanDirection?.includes('blue')) leanText = '偏藍 (機構效應校正中)';
+      else if (pollsterObj.leanDirection?.includes('green')) leanText = '偏綠 (機構效應校正中)';
+    }
+
+    modalBody.innerHTML = `
+      <div style="margin-bottom: var(--space-md); font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.7; background: var(--color-bg-secondary); padding: 12px; border-radius: var(--radius-md);">
+        <div><b>調查日期：</b> ${poll.date}</div>
+        <div><b>樣本規模：</b> ${poll.sampleSize.toLocaleString()} 份 (${poll.method === 'phone' ? '電話CATI' : '網路調查'})</div>
+        <div><b>抽樣誤差：</b> ±${poll.marginOfError}%</div>
+        <div><b>機構信譽得分：</b> ${pollsterObj ? pollsterObj.credibilityScore : 0.75} (${leanText})</div>
+        ${poll.commissioner ? `<div><b>委託單位：</b> ${poll.commissioner}</div>` : ''}
+      </div>
+
+      <h4 style="font-weight: 700; margin-bottom: var(--space-xs); font-size: 0.95rem;">📊 交叉分析與偏差校正比對表</h4>
+      <div style="overflow-x: auto; margin-bottom: var(--space-md);">
+        <table class="data-table" style="width: 100%;">
+          <thead>
+            <tr>
+              <th style="text-align: left;">候選人</th>
+              <th class="text-right">原始民調支持度</th>
+              <th class="text-right">中立選民支持度</th>
+              <th class="text-right">偏差校正後支持度</th>
+              <th class="text-right">推估得票率</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${candidateRows}
+          </tbody>
+        </table>
+      </div>
+
+      <div style="background: var(--color-bg-tertiary); padding: 10px 14px; border-radius: var(--radius-md); font-size: 0.8rem; color: var(--color-text-secondary);">
+        <b>加權拆解：</b> 時效 ${Math.round((poll.weights?.recency || 0)*100)}% | 樣本 ${Math.round((poll.weights?.sample || 0)*100)}% | 信譽 ${Math.round((poll.weights?.credibility || 0)*100)}% | <b>綜合權重：${((poll.weights?.combined || 0)*100).toFixed(1)}%</b>
+      </div>
+    `;
+
+    modal.classList.remove('hidden');
+  }
+
+  function initPollModal() {
+    const modal = $('pollDetailModal');
+    const closeBtn = $('closeModalBtn');
+
+    if (closeBtn && modal) {
+      closeBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.add('hidden');
+        }
+      });
+    }
+
+    if (DOM.pollDataBody) {
+      DOM.pollDataBody.addEventListener('click', (e) => {
+        const tr = e.target.closest('tr[data-poll-id]');
+        if (!tr || e.target.closest('a.source-link')) return;
+
+        const pid = tr.dataset.pollId;
+        if (analysisResult && analysisResult.weightedPolls) {
+          const poll = analysisResult.weightedPolls.find(p => p.id === pid);
+          if (poll) {
+            openPollDetailModal(poll, analysisResult);
+          }
+        }
+      });
+    }
+  }
+
+  function initScenarioSimulator() {
+    const slider = $('simUndecidedLean');
+    const valBadge = $('simUndecidedLeanVal');
+    const biasCheck = $('simApplyBias');
+    const biasBadge = $('simBiasVal');
+    const resetBtn = $('resetSimBtn');
+
+    if (!slider || !biasCheck) return;
+
+    function updateLabels() {
+      const val = parseFloat(slider.value);
+      if (val === 0) {
+        valBadge.textContent = '50/50 中立等比';
+        valBadge.style.background = 'var(--color-accent-blue)';
+      } else if (val < 0) {
+        valBadge.textContent = `偏藍/野 (${(val * -6).toFixed(1)}%)`;
+        valBadge.style.background = '#3b82f6';
+      } else {
+        valBadge.textContent = `偏綠/執 (${(val * 6).toFixed(1)}%)`;
+        valBadge.style.background = '#10b981';
+      }
+
+      if (biasCheck.checked) {
+        biasBadge.textContent = '已啟動';
+        biasBadge.style.background = 'var(--color-accent-green)';
+      } else {
+        biasBadge.textContent = '未啟動';
+        biasBadge.style.background = 'var(--color-text-tertiary)';
+      }
+    }
+
+    slider.addEventListener('input', async () => {
+      updateLabels();
+      if (currentElectionId) {
+        await loadAndRender(currentElectionId);
+      }
+    });
+
+    biasCheck.addEventListener('change', async () => {
+      updateLabels();
+      if (currentElectionId) {
+        await loadAndRender(currentElectionId);
+      }
+    });
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', async () => {
+        slider.value = 0;
+        biasCheck.checked = true;
+        updateLabels();
+        if (currentElectionId) {
+          await loadAndRender(currentElectionId);
+        }
+      });
+    }
+
+    updateLabels();
+  }
+
   // ---- Boot ----
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -1341,7 +1522,9 @@
     init2DNavigation();
     initFontAdjuster();
     initSPANavigation();
-    
+    initPollModal();
+    initScenarioSimulator();
+
     // Set initial tab state
     switchTab('dashboard');
   });

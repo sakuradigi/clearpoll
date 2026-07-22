@@ -253,6 +253,47 @@
         </div>
       </section>
 
+      <!-- ===== Scenario Simulator Section ===== -->
+      <section class="section fade-in" id="scenarioSimulatorSection">
+        <div class="simulator-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
+            <h3 style="font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+              <span>🎛️</span> 互動式選情情境模擬器 (Scenario Simulator)
+            </h3>
+            <button id="resetSimBtn" class="btn-secondary" style="padding: 4px 12px; font-size: 0.78rem;">重設為預設模式</button>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.6;">
+            自由調控中間/未表態選民流向與機構校正，即時模擬不同選情情境下的預測結果與蒙地卡羅勝率。
+          </p>
+
+          <div class="sim-controls-grid">
+            <div class="sim-control-item">
+              <div class="sim-control-label">
+                <span>未表態選民歸向偏向 (Undecided Lean)</span>
+                <span class="sim-val-badge" id="simUndecidedLeanVal">50/50 中立等比</span>
+              </div>
+              <input type="range" class="sim-slider" id="simUndecidedLean" min="-0.5" max="0.5" step="0.05" value="0">
+              <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--color-text-tertiary);">
+                <span>← 偏藍/野 (+3%)</span>
+                <span>中立</span>
+                <span>偏綠/執 (+3%) →</span>
+              </div>
+            </div>
+
+            <div class="sim-control-item" style="justify-content: center;">
+              <div class="sim-control-label" style="margin-bottom: 8px;">
+                <span>機構效應偏差校正 (House Effect Calibration)</span>
+                <span class="sim-val-badge" id="simBiasVal" style="background: var(--color-accent-green);">已啟動</span>
+              </div>
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; cursor: pointer;">
+                <input type="checkbox" id="simApplyBias" checked style="width: 18px; height: 18px; accent-color: var(--color-accent-blue);">
+                <span>自動抵消藍綠媒體/調查機構之系統性偏差</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- ===== Poll Trend Chart ===== -->
       <section class="section fade-in" id="pollTrendSection">
         <div class="section-header">
@@ -419,6 +460,19 @@
       © 2025-2026 ClearPoll 透析民調。本站預測僅供參考，不構成任何政治立場。所有民調資料來源均已標註。
     </p>
   </footer>
+
+  <!-- ===== Poll Detail Modal ===== -->
+  <div id="pollDetailModal" class="modal-backdrop hidden">
+    <div class="modal-card fade-in">
+      <div class="modal-header">
+        <h3 id="modalPollsterTitle" style="font-size: 1.2rem; font-weight: 700;">民調機構詳細數據與交叉分析</h3>
+        <button id="closeModalBtn" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body" id="modalPollBody">
+        <!-- Dynamically rendered by app.js -->
+      </div>
+    </div>
+  </div>
 
   <!-- ===== Scripts ===== -->
   <!-- Chart.js with date adapter -->

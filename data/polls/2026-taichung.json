@@ -39,6 +39,32 @@
       "neutralResults": { "chiang_k": 34.0, "ho": 20.0 },
       "undecided": 35.0,
       "source": "https://cnews.com.tw/"
+    },
+    {
+      "id": "tc2026-004",
+      "date": "2026-06-28",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1110,
+      "method": "phone",
+      "marginOfError": 2.94,
+      "results": { "chiang_k": 52.0, "ho": 31.0 },
+      "neutralResults": { "chiang_k": 43.0, "ho": 25.0 },
+      "undecided": 17.0,
+      "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "tc2026-005",
+      "date": "2026-07-08",
+      "pollster": "formosa",
+      "pollsterName": "美麗島",
+      "sampleSize": 1075,
+      "method": "phone",
+      "marginOfError": 2.98,
+      "results": { "chiang_k": 49.5, "ho": 33.5 },
+      "neutralResults": { "chiang_k": 41.0, "ho": 27.0 },
+      "undecided": 17.0,
+      "source": "https://www.my-formosa.com/"
     }
   ]
 }

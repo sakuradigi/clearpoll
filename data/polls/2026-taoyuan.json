@@ -15,6 +15,19 @@
       "source": "https://news.tvbs.com.tw/"
     },
     {
+      "id": "ty2026-001b",
+      "date": "2026-04-10",
+      "pollster": "ettoday",
+      "pollsterName": "ETtoday",
+      "sampleSize": 1080,
+      "method": "online",
+      "marginOfError": 2.98,
+      "results": { "chang": 56.5, "huang": 24.5 },
+      "neutralResults": { "chang": 46.0, "huang": 20.0 },
+      "undecided": 19.0,
+      "source": "https://www.ettoday.net/"
+    },
+    {
       "id": "ty2026-002",
       "date": "2026-05-18",
       "pollster": "cnews",
@@ -26,6 +39,19 @@
       "neutralResults": { "chang": 44.0, "huang": 21.0 },
       "undecided": 21.0,
       "source": "https://cnews.com.tw/"
+    },
+    {
+      "id": "ty2026-003",
+      "date": "2026-06-25",
+      "pollster": "era",
+      "pollsterName": "年代民調",
+      "sampleSize": 1065,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": { "chang": 52.0, "huang": 27.0 },
+      "neutralResults": { "chang": 42.0, "huang": 22.0 },
+      "undecided": 21.0,
+      "source": "https://www.eranews.com.tw/"
     }
   ]
 }
