@@ -57,6 +57,8 @@ const ClearPollModel = {
     const pollster = pollsters.find(p => p.id === pollsterId);
     if (!pollster) return 0.7; // Default for unknown pollster
     return pollster.credibilityScore || 0.7;
+  },
+
   /**
    * Calibrate pollster house effects (bias calibration).
    * @param {Object} poll
