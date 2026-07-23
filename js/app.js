@@ -171,12 +171,11 @@
    */
   async function loadElectionData(electionId) {
     // Lazy load metadata and pollsters if not loaded
-    if (!electionsMetadata || !pollsterData || !pastResultsData || !demographicsData) {
-      const [electionsData, pollsterD, pastResults, demoData] = await Promise.all([
+    if (!electionsMetadata || !pollsterData || !pastResultsData) {
+      const [electionsData, pollsterD, pastResults] = await Promise.all([
         loadJSON('data/meta/elections.json'),
         loadJSON('data/meta/pollsters.json'),
-        loadJSON('data/history/past-results.json'),
-        loadJSON('data/meta/demographics.json')
+        loadJSON('data/history/past-results.json')
       ]);
 
       if (!electionsData || !pollsterD) return null;
@@ -184,7 +183,6 @@
       electionsMetadata = electionsData.elections;
       pollsterData = pollsterD;
       pastResultsData = pastResults;
-      demographicsData = demoData;
     }
 
     const election = electionsMetadata.find(e => e.id === electionId);
@@ -1517,20 +1515,22 @@
     updateLabels();
   }
 
+  let historicalDemographicsData = null;
+
   async function renderDemographics(cityId) {
     const container = $('demographicsCardContainer');
     if (!container) return;
 
-    if (!demographicsData) {
-      demographicsData = await loadJSON('data/history/historical-demographics.json');
+    if (!historicalDemographicsData) {
+      historicalDemographicsData = await loadJSON('data/history/historical-demographics.json');
     }
 
-    if (!demographicsData) {
+    if (!historicalDemographicsData) {
       container.innerHTML = '<p class="text-secondary">選民結構資料載入中...</p>';
       return;
     }
 
-    const demoResult = ClearPollModel.calculateDemographics(demographicsData);
+    const demoResult = ClearPollModel.calculateDemographics(historicalDemographicsData);
     if (!demoResult) return;
 
     const cityData = demoResult.cities.find(c => c.id === cityId) || demoResult.cities[0];
