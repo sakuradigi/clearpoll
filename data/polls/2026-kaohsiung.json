@@ -92,6 +92,18 @@
       "neutralResults": { "lai": 10.6, "ke": 17.4 },
       "undecided": 40.2,
       "source": "https://www.eranews.com.tw/"
+    },
+    {
+      "id": "kh2026-006",
+      "date": "2026-07-23",
+      "pollster": "zmedia",
+      "pollsterName": "震傳媒",
+      "sampleSize": 1071,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": { "lai": 39.6, "ke": 31.6 },
+      "undecided": 28.8,
+      "source": "https://www.zmedia.com.tw/"
     }
   ]
 }

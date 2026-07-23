@@ -479,6 +479,81 @@ const ClearPollModel = {
       analysisTimestamp: new Date().toISOString(),
     };
   },
+
+  /**
+   * Calculate dynamic partisan demographics (CDPSM Model) from historical election dataset.
+   * @param {Object} historicalData - Data from historical-demographics.json
+   * @returns {Object} Computed demographics breakdown for national and all cities
+   */
+  calculateDemographics(historicalData) {
+    if (!historicalData || !historicalData.elections) return null;
+
+    const cities = ['taipei', 'newtaipei', 'taoyuan', 'taichung', 'tainan', 'kaohsiung'];
+    const entities = ['national', ...cities];
+    const resultsByEntity = {};
+
+    for (const ent of entities) {
+      let greenWeighted = 0;
+      let blueWeighted = 0;
+      let whiteWeighted = 0;
+      let totalW = 0;
+
+      for (const elec of historicalData.elections) {
+        const w = (elec.weightType || 0.3) * (elec.weightTime || 0.5);
+        const res = elec.results[ent];
+        if (res) {
+          greenWeighted += (res.green || 0) * w;
+          blueWeighted += (res.blue || 0) * w;
+          whiteWeighted += (res.white || 0) * w;
+          totalW += w;
+        }
+      }
+
+      if (totalW > 0) {
+        const g = greenWeighted / totalW;
+        const b = blueWeighted / totalW;
+        const w = whiteWeighted / totalW;
+        const sum = g + b + w;
+
+        resultsByEntity[ent] = {
+          green: Math.round((g / sum) * 10000) / 100,
+          blue: Math.round((b / sum) * 10000) / 100,
+          white: Math.round((w / sum) * 10000) / 100,
+        };
+      }
+    }
+
+    const national = resultsByEntity.national || { green: 47.19, blue: 37.07, white: 15.74 };
+
+    const computedCities = cities.map(cityId => {
+      const entData = resultsByEntity[cityId] || national;
+      const greenIdx = Math.round(entData.green - national.green);
+      const blueIdx = Math.round(entData.blue - national.blue);
+      const whiteIdx = Math.round(entData.white - national.white);
+
+      // Head to Head proportional reallocation
+      const h2hGreen = Math.round((entData.green / (entData.green + entData.blue)) * 10000) / 100;
+      const h2hBlue = Math.round((100 - h2hGreen) * 100) / 100;
+
+      return {
+        id: cityId,
+        index: { green: greenIdx, blue: blueIdx, white: whiteIdx },
+        structure: { green: entData.green, blue: entData.blue, white: entData.white },
+        headToHead: { green: h2hGreen, blue: h2hBlue }
+      };
+    });
+
+    const natH2hGreen = Math.round((national.green / (national.green + national.blue)) * 10000) / 100;
+    const natH2hBlue = Math.round((100 - natH2hGreen) * 100) / 100;
+
+    return {
+      national: {
+        structure: national,
+        headToHead: { green: natH2hGreen, blue: natH2hBlue }
+      },
+      cities: computedCities
+    };
+  },
 };
 
 // Export for use in other modules

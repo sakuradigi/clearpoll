@@ -1,0 +1,40 @@
+{
+  "cities": [
+    {
+      "id": "taipei",
+      "index": { "green": -5, "blue": 3, "white": 1 },
+      "structure": { "green": 42.46, "blue": 40.44, "white": 17.10 },
+      "headToHead": { "green": 49.68, "blue": 50.32 }
+    },
+    {
+      "id": "newtaipei",
+      "index": { "green": -2, "blue": 1, "white": 1 },
+      "structure": { "green": 45.52, "blue": 37.96, "white": 16.52 },
+      "headToHead": { "green": 53.69, "blue": 46.31 }
+    },
+    {
+      "id": "taoyuan",
+      "index": { "green": -3, "blue": 2, "white": 2 },
+      "structure": { "green": 43.74, "blue": 38.67, "white": 17.60 },
+      "headToHead": { "green": 51.58, "blue": 48.42 }
+    },
+    {
+      "id": "taichung",
+      "index": { "green": -2, "blue": -1, "white": 2 },
+      "structure": { "green": 45.54, "blue": 36.47, "white": 17.99 },
+      "headToHead": { "green": 49.09, "blue": 50.91 }
+    },
+    {
+      "id": "tainan",
+      "index": { "green": 11, "blue": -8, "white": -2 },
+      "structure": { "green": 58.03, "blue": 28.63, "white": 13.34 },
+      "headToHead": { "green": 61.27, "blue": 38.73 }
+    },
+    {
+      "id": "kaohsiung",
+      "index": { "green": 8, "blue": -4, "white": -4 },
+      "structure": { "green": 55.21, "blue": 32.64, "white": 12.15 },
+      "headToHead": { "green": 57.10, "blue": 42.90 }
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "lastUpdated": "2026-06-01",
+  "elections": [
+    {
+      "id": "2024-presidential",
+      "year": 2024,
+      "type": "presidential",
+      "weightType": 0.35,
+      "weightTime": 1.00,
+      "results": {
+        "national": { "green": 40.05, "blue": 33.49, "white": 26.46 },
+        "taipei": { "green": 38.13, "blue": 38.08, "white": 23.79 },
+        "newtaipei": { "green": 38.59, "blue": 35.17, "white": 26.24 },
+        "taoyuan": { "green": 35.27, "blue": 34.12, "white": 30.61 },
+        "taichung": { "green": 37.58, "blue": 32.36, "white": 30.06 },
+        "tainan": { "green": 50.95, "blue": 25.61, "white": 23.44 },
+        "kaohsiung": { "green": 48.89, "blue": 29.23, "white": 21.88 }
+      }
+    },
+    {
+      "id": "2024-partylist",
+      "year": 2024,
+      "type": "partyList",
+      "weightType": 0.45,
+      "weightTime": 1.00,
+      "results": {
+        "national": { "green": 36.16, "blue": 34.58, "white": 22.07, "other": 7.19 },
+        "taipei": { "green": 34.10, "blue": 38.20, "white": 20.80, "other": 6.90 },
+        "newtaipei": { "green": 35.80, "blue": 35.20, "white": 22.10, "other": 6.90 },
+        "taoyuan": { "green": 32.40, "blue": 36.10, "white": 24.50, "other": 7.00 },
+        "taichung": { "green": 34.20, "blue": 34.80, "white": 24.10, "other": 6.90 },
+        "tainan": { "green": 45.90, "blue": 27.10, "white": 19.80, "other": 7.20 },
+        "kaohsiung": { "green": 44.20, "blue": 30.50, "white": 18.20, "other": 7.10 }
+      }
+    },
+    {
+      "id": "2022-mayoral",
+      "year": 2022,
+      "type": "mayoral",
+      "weightType": 0.20,
+      "weightTime": 0.80,
+      "results": {
+        "national": { "green": 41.57, "blue": 50.02, "white": 8.41 },
+        "taipei": { "green": 31.93, "blue": 42.29, "white": 25.14 },
+        "newtaipei": { "green": 37.58, "blue": 62.42, "white": 0.00 },
+        "taoyuan": { "green": 40.03, "blue": 52.02, "white": 5.12 },
+        "taichung": { "green": 38.93, "blue": 59.35, "white": 1.72 },
+        "tainan": { "green": 48.05, "blue": 43.63, "white": 8.32 },
+        "kaohsiung": { "green": 58.10, "blue": 40.16, "white": 1.74 }
+      }
+    },
+    {
+      "id": "2020-presidential",
+      "year": 2020,
+      "type": "presidential",
+      "weightType": 0.35,
+      "weightTime": 0.60,
+      "results": {
+        "national": { "green": 57.13, "blue": 38.61, "white": 4.26 },
+        "taipei": { "green": 53.65, "blue": 42.01, "white": 4.34 },
+        "newtaipei": { "green": 56.52, "blue": 38.91, "white": 4.57 },
+        "taoyuan": { "green": 54.82, "blue": 40.40, "white": 4.78 },
+        "taichung": { "green": 56.95, "blue": 38.06, "white": 4.99 },
+        "tainan": { "green": 67.05, "blue": 29.10, "white": 3.85 },
+        "kaohsiung": { "green": 62.23, "blue": 34.63, "white": 3.14 }
+      }
+    },
+    {
+      "id": "2020-partylist",
+      "year": 2020,
+      "type": "partyList",
+      "weightType": 0.45,
+      "weightTime": 0.60,
+      "results": {
+        "national": { "green": 33.98, "blue": 33.36, "white": 11.22, "other": 21.44 },
+        "taipei": { "green": 31.05, "blue": 35.80, "white": 12.94, "other": 20.21 },
+        "newtaipei": { "green": 33.72, "blue": 34.10, "white": 11.95, "other": 20.23 },
+        "taoyuan": { "green": 31.42, "blue": 35.25, "white": 12.10, "other": 21.23 },
+        "taichung": { "green": 33.10, "blue": 33.90, "white": 12.20, "other": 20.80 },
+        "tainan": { "green": 44.68, "blue": 25.80, "white": 9.10, "other": 20.42 },
+        "kaohsiung": { "green": 38.80, "blue": 29.90, "white": 9.80, "other": 21.50 }
+      }
+    },
+    {
+      "id": "2018-mayoral",
+      "year": 2018,
+      "type": "mayoral",
+      "weightType": 0.20,
+      "weightTime": 0.40,
+      "results": {
+        "national": { "green": 38.98, "blue": 48.79, "white": 12.23 },
+        "taipei": { "green": 17.28, "blue": 40.82, "white": 41.05 },
+        "newtaipei": { "green": 42.94, "blue": 57.06, "white": 0.00 },
+        "taoyuan": { "green": 53.11, "blue": 39.42, "white": 7.47 },
+        "taichung": { "green": 42.34, "blue": 56.57, "white": 1.09 },
+        "tainan": { "green": 38.02, "blue": 32.37, "white": 29.61 },
+        "kaohsiung": { "green": 44.80, "blue": 53.87, "white": 1.33 }
+      }
+    },
+    {
+      "id": "2016-presidential",
+      "year": 2016,
+      "type": "presidential",
+      "weightType": 0.35,
+      "weightTime": 0.25,
+      "results": {
+        "national": { "green": 56.12, "blue": 31.04, "white": 12.84 },
+        "taipei": { "green": 51.96, "blue": 37.49, "white": 10.55 },
+        "newtaipei": { "green": 54.79, "blue": 33.34, "white": 11.87 },
+        "taoyuan": { "green": 51.03, "blue": 34.38, "white": 14.59 },
+        "taichung": { "green": 55.01, "blue": 29.82, "white": 15.17 },
+        "tainan": { "green": 67.52, "blue": 22.07, "white": 10.41 },
+        "kaohsiung": { "green": 63.39, "blue": 26.00, "white": 10.61 }
+      }
+    }
+  ]
+}

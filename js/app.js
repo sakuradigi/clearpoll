@@ -171,11 +171,12 @@
    */
   async function loadElectionData(electionId) {
     // Lazy load metadata and pollsters if not loaded
-    if (!electionsMetadata || !pollsterData || !pastResultsData) {
-      const [electionsData, pollsterD, pastResults] = await Promise.all([
+    if (!electionsMetadata || !pollsterData || !pastResultsData || !demographicsData) {
+      const [electionsData, pollsterD, pastResults, demoData] = await Promise.all([
         loadJSON('data/meta/elections.json'),
         loadJSON('data/meta/pollsters.json'),
-        loadJSON('data/history/past-results.json')
+        loadJSON('data/history/past-results.json'),
+        loadJSON('data/meta/demographics.json')
       ]);
 
       if (!electionsData || !pollsterD) return null;
@@ -183,6 +184,7 @@
       electionsMetadata = electionsData.elections;
       pollsterData = pollsterD;
       pastResultsData = pastResults;
+      demographicsData = demoData;
     }
 
     const election = electionsMetadata.find(e => e.id === electionId);
@@ -1335,6 +1337,7 @@
     renderPollTable(analysisResult);
     renderPredictionLog(analysisResult);
     renderHistoricalComparison(selectedCity, pastResults);
+    renderDemographics(selectedCity);
 
     setViewState('content');
 
@@ -1512,6 +1515,109 @@
     }
 
     updateLabels();
+  }
+
+  async function renderDemographics(cityId) {
+    const container = $('demographicsCardContainer');
+    if (!container) return;
+
+    if (!demographicsData) {
+      demographicsData = await loadJSON('data/history/historical-demographics.json');
+    }
+
+    if (!demographicsData) {
+      container.innerHTML = '<p class="text-secondary">選民結構資料載入中...</p>';
+      return;
+    }
+
+    const demoResult = ClearPollModel.calculateDemographics(demographicsData);
+    if (!demoResult) return;
+
+    const cityData = demoResult.cities.find(c => c.id === cityId) || demoResult.cities[0];
+    const cityNames = {
+      taipei: '臺北市',
+      newtaipei: '新北市',
+      taoyuan: '桃園市',
+      taichung: '臺中市',
+      tainan: '臺南市',
+      kaohsiung: '高雄市'
+    };
+
+    const cName = cityNames[cityId] || '該市';
+
+    const fmtSign = (val) => val > 0 ? `+${val}` : `${val}`;
+    const greenIdxText = `綠 ${fmtSign(cityData.index.green)}`;
+    const blueIdxText = `藍 ${fmtSign(cityData.index.blue)}`;
+    const whiteIdxText = `白 ${fmtSign(cityData.index.white)}`;
+
+    const gPct = cityData.structure.green.toFixed(1);
+    const bPct = cityData.structure.blue.toFixed(1);
+    const wPct = cityData.structure.white.toFixed(1);
+
+    const h2hGPct = cityData.headToHead.green.toFixed(1);
+    const h2hBPct = cityData.headToHead.blue.toFixed(1);
+
+    container.innerHTML = `
+      <div class="demo-header-bar">
+        <div class="demo-title">【${cName}】當前選民結構與政治基本盤推估 (CDPSM 模型)</div>
+        <div class="demo-index-tags">
+          <span class="demo-tag green">2026投票指數：${greenIdxText}</span>
+          <span class="demo-tag blue">${blueIdxText}</span>
+          <span class="demo-tag white">${whiteIdxText}</span>
+        </div>
+      </div>
+
+      <div style="font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: 8px; font-weight: 600;">
+        三腳督基本盤分佈 (泛綠 ${gPct}% | 泛藍 ${bPct}% | 民眾黨/第三勢力 ${wPct}%)
+      </div>
+
+      <div class="demo-stack-bar">
+        <div class="demo-stack-seg" style="width: ${gPct}%; background-color: #10b981;" title="泛綠 ${gPct}%">
+          ${gPct > 10 ? `泛綠 ${gPct}%` : ''}
+        </div>
+        <div class="demo-stack-seg" style="width: ${bPct}%; background-color: #3b82f6;" title="泛藍 ${bPct}%">
+          ${bPct > 10 ? `泛藍 ${bPct}%` : ''}
+        </div>
+        <div class="demo-stack-seg" style="width: ${wPct}%; background-color: #f59e0b;" title="民眾黨 ${wPct}%">
+          ${wPct > 10 ? `民眾黨 ${wPct}%` : ''}
+        </div>
+      </div>
+
+      <div style="margin-top: var(--space-lg);">
+        <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;">⚔️ 藍綠對決（一對一）極限盤勢推估</h4>
+        <div style="overflow-x: auto;">
+          <table class="demo-table">
+            <thead>
+              <tr>
+                <th>地區別</th>
+                <th>2026 藍綠投票指數</th>
+                <th>泛綠支持率估算</th>
+                <th>藍綠對決極限</th>
+                <th>泛藍支持率估算</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight: 700;">${cName}</td>
+                <td style="font-weight: 700; color: ${cityData.index.green >= 0 ? '#10b981' : '#3b82f6'};">
+                  ${cityData.index.green >= 0 ? `綠 +${cityData.index.green}` : `藍 +${Math.abs(cityData.index.green)}`}
+                </td>
+                <td style="font-weight: 800; color: #10b981;">${h2hGPct}%</td>
+                <td style="font-weight: 600; color: var(--color-text-secondary);">${cName}</td>
+                <td style="font-weight: 800; color: #3b82f6;">${h2hBPct}%</td>
+              </tr>
+              <tr style="background: var(--color-bg-secondary-light);">
+                <td>全國基準</td>
+                <td>基準 0</td>
+                <td style="font-weight: 700;">${demoResult.national.headToHead.green}%</td>
+                <td>全國</td>
+                <td style="font-weight: 700;">${demoResult.national.headToHead.blue}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
   }
 
   // ---- Boot ----
