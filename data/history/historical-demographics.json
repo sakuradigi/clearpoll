@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-01",
+  "lastUpdated": "2026-07-24",
   "elections": [
     {
       "id": "2024-presidential",
@@ -41,11 +41,11 @@
       "weightTime": 0.80,
       "results": {
         "national": { "green": 41.57, "blue": 50.02, "white": 8.41 },
-        "taipei": { "green": 31.93, "blue": 42.29, "white": 25.14 },
+        "taipei": { "green": 31.93, "blue": 42.29, "white": 25.78 },
         "newtaipei": { "green": 37.58, "blue": 62.42, "white": 0.00 },
-        "taoyuan": { "green": 40.03, "blue": 52.02, "white": 5.12 },
+        "taoyuan": { "green": 40.03, "blue": 52.02, "white": 7.95 },
         "taichung": { "green": 38.93, "blue": 59.35, "white": 1.72 },
-        "tainan": { "green": 48.05, "blue": 43.63, "white": 8.32 },
+        "tainan": { "green": 48.80, "blue": 43.63, "white": 7.57 },
         "kaohsiung": { "green": 58.10, "blue": 40.16, "white": 1.74 }
       }
     },
@@ -89,10 +89,10 @@
       "weightTime": 0.40,
       "results": {
         "national": { "green": 38.98, "blue": 48.79, "white": 12.23 },
-        "taipei": { "green": 17.28, "blue": 40.82, "white": 41.05 },
-        "newtaipei": { "green": 42.94, "blue": 57.06, "white": 0.00 },
-        "taoyuan": { "green": 53.11, "blue": 39.42, "white": 7.47 },
-        "taichung": { "green": 42.34, "blue": 56.57, "white": 1.09 },
+        "taipei": { "green": 17.28, "blue": 40.82, "white": 41.90 },
+        "newtaipei": { "green": 42.85, "blue": 57.15, "white": 0.00 },
+        "taoyuan": { "green": 53.46, "blue": 39.42, "white": 7.12 },
+        "taichung": { "green": 42.35, "blue": 56.57, "white": 1.08 },
         "tainan": { "green": 38.02, "blue": 32.37, "white": 29.61 },
         "kaohsiung": { "green": 44.80, "blue": 53.87, "white": 1.33 }
       }
@@ -105,11 +105,11 @@
       "weightTime": 0.25,
       "results": {
         "national": { "green": 56.12, "blue": 31.04, "white": 12.84 },
-        "taipei": { "green": 51.96, "blue": 37.49, "white": 10.55 },
+        "taipei": { "green": 51.95, "blue": 37.49, "white": 10.56 },
         "newtaipei": { "green": 54.79, "blue": 33.34, "white": 11.87 },
         "taoyuan": { "green": 51.03, "blue": 34.38, "white": 14.59 },
         "taichung": { "green": 55.01, "blue": 29.82, "white": 15.17 },
-        "tainan": { "green": 67.52, "blue": 22.07, "white": 10.41 },
+        "tainan": { "green": 67.51, "blue": 22.07, "white": 10.42 },
         "kaohsiung": { "green": 63.39, "blue": 26.00, "white": 10.61 }
       }
     }
