@@ -1,5 +1,10 @@
 /* ============================================
-   ClearPoll 透析民調 — Analysis Model
+   ClearPoll 透析民調 — Analysis Model & Data Integrity Contract
+
+   【數據嚴謹度與誠實性最高原則 (Data Integrity Directives)】
+   1. 「數字正確、精準為最高原則」 (Accuracy and precision are supreme).
+   2. 「嚴禁使用錯誤民調數字、嚴禁未經查證之編撰、嚴禁模型或 AI 產生幻覺，避免數據謬誤」 (Strictly No Hallucination or Fabrication).
+   3. 所有輸入之民調與歷史選舉數據，必須強制與中央選舉委員會 (CEC) 官方紀錄或原始機構報告進行雙重核對。
    ============================================ */
 
 const ClearPollModel = {
