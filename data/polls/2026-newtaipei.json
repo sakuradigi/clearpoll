@@ -80,6 +80,20 @@
       "neutralResults": { "li": 54.81, "su": 33.21 },
       "undecided": 5.09,
       "source": "https://www.ftnn.com.tw/"
+    },
+    {
+      "id": "nt2026-004",
+      "date": "2026-07-29",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "commissioner": "國民黨新北市議會黨團",
+      "sampleSize": 1050,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": { "li": 43.7, "su": 36.8 },
+      "neutralResults": { "li": 36.0, "su": 30.0 },
+      "undecided": 19.5,
+      "source": "https://news.tvbs.com.tw/"
     }
   ]
 }
