@@ -65,6 +65,19 @@
       "neutralResults": { "chiang_k": 41.0, "ho": 27.0 },
       "undecided": 17.0,
       "source": "https://www.my-formosa.com/"
+    },
+    {
+      "id": "tc2026-006",
+      "date": "2026-08-05",
+      "pollster": "cnews",
+      "pollsterName": "艾普羅",
+      "sampleSize": 1077,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": { "chiang_k": 38.2, "ho": 24.1 },
+      "neutralResults": { "chiang_k": 32.0, "ho": 20.0 },
+      "undecided": 37.7,
+      "source": "https://cnews.com.tw/"
     }
   ]
 }

@@ -104,6 +104,19 @@
       "results": { "lai": 39.6, "ke": 31.6 },
       "undecided": 28.8,
       "source": "https://www.zmedia.com.tw/"
+    },
+    {
+      "id": "kh2026-007",
+      "date": "2026-08-10",
+      "pollster": "junews",
+      "pollsterName": "鉅聞天下（委皮爾森執行）",
+      "sampleSize": 1608,
+      "method": "online",
+      "marginOfError": 2.4,
+      "results": { "lai": 47.78, "ke": 46.14 },
+      "neutralResults": { "lai": 45.0, "ke": 43.0 },
+      "undecided": 4.24,
+      "source": "https://www.ftnn.com.tw/"
     }
   ]
 }
