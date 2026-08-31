@@ -53,6 +53,19 @@
       "neutralResults": { "chiang": 47.0, "shen": 10.2 },
       "undecided": 17.3,
       "source": "https://www.zmedia.com.tw/"
+    },
+    {
+      "id": "tp2026-005",
+      "date": "2026-08-08",
+      "pollster": "tpoc",
+      "pollsterName": "TPOC台灣議題研究中心",
+      "sampleSize": 1099,
+      "method": "phone",
+      "marginOfError": 2.96,
+      "results": { "chiang": 48.4, "shen": 33.0 },
+      "neutralResults": { "chiang": 42.0, "shen": 26.0 },
+      "undecided": 18.6,
+      "source": "https://www.tpoc.com.tw/"
     }
   ]
 }

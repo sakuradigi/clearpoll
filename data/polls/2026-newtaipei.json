@@ -94,6 +94,32 @@
       "neutralResults": { "li": 36.0, "su": 30.0 },
       "undecided": 19.5,
       "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "nt2026-005",
+      "date": "2026-08-14",
+      "pollster": "ettoday",
+      "pollsterName": "ETtoday",
+      "sampleSize": 1213,
+      "method": "online",
+      "marginOfError": 2.8,
+      "results": { "li": 39.3, "su": 37.3 },
+      "neutralResults": { "li": 34.0, "su": 32.0 },
+      "undecided": 23.4,
+      "source": "https://www.ettoday.net/"
+    },
+    {
+      "id": "nt2026-006",
+      "date": "2026-08-27",
+      "pollster": "era",
+      "pollsterName": "年代民調",
+      "sampleSize": 1070,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": { "li": 32.2, "su": 37.8 },
+      "neutralResults": { "li": 25.0, "su": 32.0 },
+      "undecided": 30.0,
+      "source": "https://www.eranews.com.tw/"
     }
   ]
 }

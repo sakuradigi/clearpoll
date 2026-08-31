@@ -155,6 +155,17 @@
       "notes": "偏綠色彩明顯，委託山水執行，機構獨立性較低"
     },
     {
+      "id": "tpoc",
+      "name": "TPOC",
+      "fullName": "TPOC台灣議題研究中心",
+      "credibilityScore": 0.76,
+      "leanDirection": "neutral",
+      "leanMagnitude": 0.08,
+      "historicalAccuracy": 0.74,
+      "methodology": "CATI電腦輔助市內電話調查（分層比例隨機抽樣）",
+      "notes": "專業輿情與民調研究機構，方法論與抽樣架構公開透明"
+    },
+    {
       "id": "candidate-ke",
       "name": "柯志恩陣營",
       "fullName": "柯志恩委託民調",
