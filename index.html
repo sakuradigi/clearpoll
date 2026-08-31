@@ -389,38 +389,38 @@
           <div class="methodology-grid">
             <div class="method-card">
               <div class="method-icon">⏱️</div>
-              <h4>時效性權重</h4>
-              <p>採用指數衰減函數，半衰期為 14 天。越接近選舉日的民調獲得越高權重，反映最新民意走向。</p>
+              <h4>動態時效性衰減</h4>
+              <p>依選前距離動態調節半衰期（中前期 28 天至封關 10 天），兼顧趨勢敏銳度與多機構基底穩定性。</p>
             </div>
 
             <div class="method-card">
               <div class="method-icon">📐</div>
-              <h4>樣本品質權重</h4>
-              <p>根據樣本大小（√n 正規化）與調查方法（面訪 > 電訪 > 網路）調整權重，確保統計品質。</p>
+              <h4>樣本品質與權重上限</h4>
+              <p>依樣本數與抽樣方法計分，並嚴格實施單一民調 35% 權重上限，防範單一機構效應劫持大盤預測。</p>
             </div>
 
             <div class="method-card">
               <div class="method-icon">🏛️</div>
-              <h4>機構可信度</h4>
-              <p>每個民調機構有可信度評分（0-1），依據過往準確度、獨立性與透明度評估。</p>
+              <h4>機構可信度與偏差校正</h4>
+              <p>綜合機構獨立性與歷史準確度，對政黨傾向機構施以偏差校正（House Effect Calibration）。</p>
             </div>
 
             <div class="method-card">
               <div class="method-icon">🎯</div>
-              <h4>中間選民校正</h4>
-              <p>混合原始結果與中間選民回答（alpha=0.5），降低機構偏差（House Effect）影響。</p>
-            </div>
-
-            <div class="method-card">
-              <div class="method-icon">📊</div>
-              <h4>未決定選民分配</h4>
-              <p>將未決定選民依各候選人現有支持度比例分配，轉換為預測得票率。</p>
+              <h4>中間選民與未決定分配</h4>
+              <p>結合中間選民意向與現有盤勢動態分配，精準將原始民調支持度轉化為預測得票率。</p>
             </div>
 
             <div class="method-card">
               <div class="method-icon">🎲</div>
-              <h4>勝選機率計算</h4>
-              <p>基於常態分布，以領先幅度與標準誤差計算勝選機率。標準誤差從民調變異程度估算。</p>
+              <h4>蒙地卡羅與分歧度模擬</h4>
+              <p>實施 3,000 次蒙地卡羅隨機擾動，將跨機構分歧度納入總體誤差，真實呈現選情不確定性。</p>
+            </div>
+
+            <div class="method-card">
+              <div class="method-icon">⚖️</div>
+              <h4>雙指標勝選機會判定</h4>
+              <p>結合「實質得票差距」與「模擬勝率」雙重門檻。差距 $\le 3.5\%$ 誤差內一律客觀判定為五五波。</p>
             </div>
 
             <div class="method-card" style="border: 2px solid #10b981; background: rgba(16, 185, 129, 0.05);">

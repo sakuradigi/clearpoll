@@ -10,23 +10,39 @@
 const ClearPollModel = {
 
   /**
-   * Calculate recency weight using exponential decay.
+   * Calculate adaptive half-life based on days remaining until the election.
+   * Prevents a single pollster from dominating 50%+ weight in the mid/early phase.
+   * @param {string} electionDate - ISO date string of election
+   * @param {string} referenceDate - ISO date string of latest poll
+   * @returns {number} half-life in days (10 to 28)
+   */
+  calcAdaptiveHalfLife(electionDate, referenceDate) {
+    if (!electionDate) return 28;
+    const election = new Date(electionDate).getTime();
+    const ref = new Date(referenceDate || new Date()).getTime();
+    const daysUntilElection = Math.max(0, (election - ref) / (1000 * 60 * 60 * 24));
+
+    if (daysUntilElection > 60) return 28; // Mid/early phase: 28 days (4 weeks)
+    if (daysUntilElection > 30) return 21; // Mid phase: 21 days (3 weeks)
+    if (daysUntilElection > 14) return 14; // Final stretch: 14 days (2 weeks)
+    return 10; // Final 2 weeks: 10 days
+  },
+
+  /**
+   * Calculate recency weight using exponential decay with adaptive half-life.
    * Polls closer to election day get higher weight.
    * @param {string} pollDate - ISO date string of the poll
-   * @param {string} electionDate - ISO date string of the election
-   * @param {number} halfLifeDays - Half-life in days (default 14)
+   * @param {string} referenceDate - ISO date string of reference latest poll
+   * @param {number} halfLifeDays - Half-life in days
    * @returns {number} weight between 0 and 1
    */
-  calcRecencyWeight(pollDate, electionDate, halfLifeDays = 14) {
-    const poll = new Date(pollDate);
-    const election = new Date(electionDate);
-    const daysBeforeElection = (election - poll) / (1000 * 60 * 60 * 24);
+  calcRecencyWeight(pollDate, referenceDate, halfLifeDays = 28) {
+    const poll = new Date(pollDate).getTime();
+    const ref = new Date(referenceDate).getTime();
+    const daysDiff = Math.max(0, (ref - poll) / (1000 * 60 * 60 * 24));
 
-    if (daysBeforeElection < 0) return 0.5; // Post-election poll, low weight
-    if (daysBeforeElection === 0) return 1;
-
-    // Exponential decay: w = 2^(-t / halfLife)
-    return Math.pow(2, -daysBeforeElection / halfLifeDays);
+    // Exponential decay: w = 2^(-daysDiff / halfLife)
+    return Math.pow(2, -daysDiff / halfLifeDays);
   },
 
   /**
@@ -143,8 +159,8 @@ const ClearPollModel = {
    * with optional undecided voter lean parameter.
    * @param {Object} adjustedResults - { candidateId: support% }
    * @param {Array} candidates - Candidate metadata array
-   * @param {number} undecidedLean - Undecided voter shift factor (-0.5 to +0.5, default 0)
-   * @returns {Object} projected vote shares { candidateId: voteShare% }
+   * @param {number} undecidedLean - User scenario slider (-1.0 to 1.0)
+   * @returns {Object} projected vote shares summing to 100%
    */
   convertToVoteShare(adjustedResults, candidates = [], undecidedLean = 0) {
     const totalSupport = Object.values(adjustedResults).reduce((a, b) => a + b, 0);
@@ -184,8 +200,8 @@ const ClearPollModel = {
   },
 
   /**
-   * Calculate weighted average across all polls.
-   * Each poll's weight = recency * sampleQuality * credibility
+   * Calculate weighted average across all polls with Single-Poll Weight Capping.
+   * Prevents a single recent poll from monopolizing the forecast.
    * @param {Array} polls - Array of poll objects
    * @param {Array} pollsters - Array of pollster objects
    * @param {string} electionDate - ISO date string
@@ -199,47 +215,97 @@ const ClearPollModel = {
     }
 
     const candidateIds = Object.keys(polls[0].results);
-    const weightedSums = {};
-    candidateIds.forEach(cid => { weightedSums[cid] = 0; });
-
     const pollDates = polls.map(p => new Date(p.date).getTime());
     const latestPollTime = Math.max(...pollDates);
     const referenceDate = new Date(latestPollTime).toISOString().split('T')[0];
 
     const applyBias = scenarioOptions?.applyBiasCorrection !== false;
     const undecidedLean = scenarioOptions?.undecidedLean || 0;
+    const halfLifeDays = this.calcAdaptiveHalfLife(electionDate, referenceDate);
 
-    let totalWeight = 0;
-    const weightedPolls = [];
+    // Step 1: Calculate raw weights & projected shares
+    const intermediatePolls = [];
+    let rawTotalWeight = 0;
 
     for (const poll of polls) {
-      const recencyW = this.calcRecencyWeight(poll.date, referenceDate);
+      const recencyW = this.calcRecencyWeight(poll.date, referenceDate, halfLifeDays);
       const sampleW = this.calcSampleWeight(poll.sampleSize, poll.method);
       const credibilityW = this.getCredibilityWeight(poll.pollster, pollsters);
-
-      const combinedWeight = recencyW * sampleW * credibilityW;
+      const rawCombined = recencyW * sampleW * credibilityW;
 
       // Adjust for neutral voters & pollster bias
       const adjusted = this.adjustForNeutralVoters(poll, pollsters, candidates, 0.5, applyBias);
-
-      // Convert to projected vote shares
       const voteShares = this.convertToVoteShare(adjusted, candidates, undecidedLean);
 
-      for (const cid of candidateIds) {
-        weightedSums[cid] += (voteShares[cid] || 0) * combinedWeight;
+      intermediatePolls.push({
+        poll,
+        recencyW,
+        sampleW,
+        credibilityW,
+        rawCombined,
+        adjusted,
+        voteShares,
+      });
+      rawTotalWeight += rawCombined;
+    }
+
+    // Step 2: Apply single-poll weight capping (Max 35% when >= 3 polls)
+    // Ensures robust multi-pollster consensus and prevents single-pollster hijack
+    let cappedWeights = intermediatePolls.map(p => p.rawCombined);
+    const maxWeightRatio = intermediatePolls.length >= 3 ? 0.35 : 1.0;
+
+    if (rawTotalWeight > 0 && maxWeightRatio < 1.0) {
+      for (let iter = 0; iter < 10; iter++) {
+        const currentSum = cappedWeights.reduce((a, b) => a + b, 0);
+        let excess = 0;
+        let uncappedCount = 0;
+
+        for (let i = 0; i < cappedWeights.length; i++) {
+          const maxAllowed = currentSum * maxWeightRatio;
+          if (cappedWeights[i] > maxAllowed) {
+            excess += cappedWeights[i] - maxAllowed;
+            cappedWeights[i] = maxAllowed;
+          } else {
+            uncappedCount++;
+          }
+        }
+
+        if (excess <= 0.0001 || uncappedCount === 0) break;
+        // Distribute excess among uncapped polls
+        const addPerPoll = excess / uncappedCount;
+        for (let i = 0; i < cappedWeights.length; i++) {
+          if (cappedWeights[i] < currentSum * maxWeightRatio) {
+            cappedWeights[i] += addPerPoll;
+          }
+        }
       }
-      totalWeight += combinedWeight;
+    }
+
+    // Step 3: Compute weighted sums with capped weights
+    let totalWeight = cappedWeights.reduce((a, b) => a + b, 0);
+    const weightedSums = {};
+    candidateIds.forEach(cid => { weightedSums[cid] = 0; });
+    const weightedPolls = [];
+
+    for (let i = 0; i < intermediatePolls.length; i++) {
+      const item = intermediatePolls[i];
+      const finalWeight = cappedWeights[i];
+
+      for (const cid of candidateIds) {
+        weightedSums[cid] += (item.voteShares[cid] || 0) * finalWeight;
+      }
 
       weightedPolls.push({
-        ...poll,
+        ...item.poll,
         weights: {
-          recency: recencyW,
-          sample: sampleW,
-          credibility: credibilityW,
-          combined: combinedWeight,
+          recency: item.recencyW,
+          sample: item.sampleW,
+          credibility: item.credibilityW,
+          combined: finalWeight,
+          rawCombined: item.rawCombined,
         },
-        adjustedResults: adjusted,
-        projectedVoteShare: voteShares,
+        adjustedResults: item.adjusted,
+        projectedVoteShare: item.voteShares,
       });
     }
 
@@ -251,21 +317,20 @@ const ClearPollModel = {
     }
 
     weightedPolls.sort((a, b) => b.weights.combined - a.weights.combined);
-
     return { voteShares, weightedPolls, totalWeight };
   },
 
   /**
-   * Run Monte Carlo simulation for win probability and 95% Confidence Intervals.
+   * Run Monte Carlo simulation with Inter-Pollster Divergence Noise.
    * @param {Array} polls
    * @param {Array} pollsters
    * @param {string} electionDate
    * @param {Array} candidates
-   * @param {number} iterations - Number of stochastic simulations (default 5000)
+   * @param {number} iterations - Number of stochastic simulations (default 3000)
    * @param {Object} scenarioOptions
    * @returns {Object} { winProbabilities, ci95 }
    */
-  runMonteCarloSimulation(polls, pollsters, electionDate, candidates, iterations = 5000, scenarioOptions = null) {
+  runMonteCarloSimulation(polls, pollsters, electionDate, candidates, iterations = 3000, scenarioOptions = null) {
     if (!polls || polls.length === 0 || !candidates || candidates.length === 0) {
       return { winProbabilities: {}, ci95: {} };
     }
@@ -278,8 +343,24 @@ const ClearPollModel = {
       samples[cid] = [];
     });
 
+    // Estimate cross-pollster divergence standard deviation
+    const { weightedPolls } = this.calcWeightedAverage(polls, pollsters, electionDate, candidates, scenarioOptions);
+    const firstCandId = candidateIds[0];
+    const shares = weightedPolls.map(p => p.projectedVoteShare[firstCandId] || 0);
+    const mean = shares.reduce((a, b) => a + b, 0) / (shares.length || 1);
+    const variance = shares.length > 1
+      ? shares.reduce((sum, v) => sum + Math.pow(v - mean, 2), 0) / (shares.length - 1)
+      : 4.0;
+    const divergenceSE = Math.sqrt(variance);
+
     for (let i = 0; i < iterations; i++) {
-      // Perturb poll results according to margin of error
+      // Macro divergence shock for the whole simulation iteration
+      const u1 = Math.random();
+      const u2 = Math.random();
+      const macroZ = Math.sqrt(-2.0 * Math.log(u1 || 0.0001)) * Math.cos(2.0 * Math.PI * u2);
+      const macroShift = macroZ * (divergenceSE * 0.4);
+
+      // Perturb individual polls
       const perturbedPolls = polls.map(poll => {
         const moe = poll.marginOfError || 3.0;
         const se = moe / 1.96;
@@ -287,11 +368,10 @@ const ClearPollModel = {
         const perturbedResults = {};
         for (const cid of candidateIds) {
           const original = poll.results[cid] || 0;
-          // Box-Muller normal sample
-          const u1 = Math.random();
-          const u2 = Math.random();
-          const z = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
-          perturbedResults[cid] = Math.max(0, original + z * se);
+          const pu1 = Math.random();
+          const pu2 = Math.random();
+          const pz = Math.sqrt(-2.0 * Math.log(pu1 || 0.0001)) * Math.cos(2.0 * Math.PI * pu2);
+          perturbedResults[cid] = Math.max(0, original + pz * se);
         }
 
         return { ...poll, results: perturbedResults };
@@ -299,11 +379,18 @@ const ClearPollModel = {
 
       const { voteShares } = this.calcWeightedAverage(perturbedPolls, pollsters, electionDate, candidates, scenarioOptions);
 
+      // Apply macro divergence shift to candidate 0 vs rest
+      const adjustedShares = { ...voteShares };
+      if (candidateIds.length >= 2) {
+        adjustedShares[candidateIds[0]] = Math.max(0, (adjustedShares[candidateIds[0]] || 0) + macroShift);
+        adjustedShares[candidateIds[1]] = Math.max(0, (adjustedShares[candidateIds[1]] || 0) - macroShift);
+      }
+
       // Determine winner of this iteration
       let winnerId = null;
       let maxShare = -1;
       for (const cid of candidateIds) {
-        const share = voteShares[cid] || 0;
+        const share = adjustedShares[cid] || 0;
         samples[cid].push(share);
         if (share > maxShare) {
           maxShare = share;
@@ -323,13 +410,13 @@ const ClearPollModel = {
       winProbabilities[cid] = Math.round((winCounts[cid] / iterations) * 1000) / 1000;
 
       const arr = samples[cid].sort((a, b) => a - b);
-      const mean = arr.reduce((sum, v) => sum + v, 0) / arr.length;
+      const meanVal = arr.reduce((sum, v) => sum + v, 0) / arr.length;
       const lower = arr[Math.floor(iterations * 0.025)] || arr[0];
       const upper = arr[Math.floor(iterations * 0.975)] || arr[arr.length - 1];
-      const stdDev = Math.sqrt(arr.reduce((sum, v) => sum + Math.pow(v - mean, 2), 0) / arr.length);
+      const stdDev = Math.sqrt(arr.reduce((sum, v) => sum + Math.pow(v - meanVal, 2), 0) / arr.length);
 
       ci95[cid] = {
-        mean: Math.round(mean * 10) / 10,
+        mean: Math.round(meanVal * 10) / 10,
         lower: Math.round(lower * 10) / 10,
         upper: Math.round(upper * 10) / 10,
         stdDev: Math.round(stdDev * 100) / 100,
@@ -337,6 +424,33 @@ const ClearPollModel = {
     }
 
     return { winProbabilities, ci95 };
+  },
+
+  /**
+   * Determine win opportunity rating with dual-threshold (Margin & Probability).
+   * Prevents declaring "High Chance" when race margin is within statistical noise.
+   * @param {number} margin - Absolute percentage lead between #1 and #2 (e.g. 2.0)
+   * @param {number} winProb - Win probability between 0 and 1 (e.g. 0.85)
+   * @returns {Object} { text, level }
+   */
+  getOpportunityRating(margin, winProb) {
+    // If within sampling margin of error (<= 3.5%) or probability is close to even (<= 65%), it's a toss-up
+    if (margin <= 3.5 || winProb <= 0.65) {
+      return { text: '五五波', level: 'medium' };
+    }
+    // Solid / Safe lead: margin > 12% and win prob >= 95%
+    if (margin > 12.0 && winProb >= 0.95) {
+      return { text: '機會極高', level: 'high' };
+    }
+    // Likely lead: margin > 7.0% and win prob >= 80%
+    if (margin > 7.0 && winProb >= 0.80) {
+      return { text: '機會高', level: 'high' };
+    }
+    // Lean lead: margin > 3.5% and win prob >= 65%
+    if (margin > 3.5 && winProb >= 0.65) {
+      return { text: '機會略高', level: 'medium' };
+    }
+    return { text: '五五波', level: 'medium' };
   },
 
   /**

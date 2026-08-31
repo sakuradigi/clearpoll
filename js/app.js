@@ -282,17 +282,29 @@
       return `<td>${val != null ? val.toFixed(1) + '%' : 'N/A'}</td>`;
     }).join('');
 
+    // Calculate margin between top 2 candidates
+    const sortedShares = [...candidates]
+      .map(c => ({ id: c.id, share: predictedVoteShares[c.id] || 0 }))
+      .sort((a, b) => b.share - a.share);
+    const topMargin = sortedShares.length >= 2 ? Math.abs(sortedShares[0].share - sortedShares[1].share) : 99;
+    const topCandidateId = sortedShares[0]?.id;
+
     // Row: 勝選機會
     let winOpportunityRow = candidates.map(c => {
       const prob = winProbabilities[c.id] || 0;
-      let level = 'none';
-      let text = '機會渺茫';
-      if (prob >= 0.92) { level = 'high'; text = '機會極高'; }
-      else if (prob >= 0.79) { level = 'high'; text = '機會高'; }
-      else if (prob >= 0.68) { level = 'medium'; text = '機會略高'; }
-      else if (prob >= 0.32) { level = 'medium'; text = '五五波'; }
-      else if (prob > 0.05) { level = 'low'; text = '機會低'; }
-      return `<td><span class="win-opportunity-badge ${level}">${text}</span></td>`;
+      let rating;
+      if (c.id === topCandidateId) {
+        rating = ClearPollModel.getOpportunityRating(topMargin, prob);
+      } else {
+        if (topMargin <= 3.5 || prob >= 0.35) {
+          rating = { text: '五五波', level: 'medium' };
+        } else if (prob > 0.05) {
+          rating = { text: '機會低', level: 'low' };
+        } else {
+          rating = { text: '機會渺茫', level: 'none' };
+        }
+      }
+      return `<td><span class="win-opportunity-badge ${rating.level}">${rating.text}</span></td>`;
     }).join('');
 
     // Row: 勝率
@@ -787,23 +799,15 @@
           `;
         }).join('');
 
-        // Find leader
-        let leader = election.candidates[0];
-        let maxProb = 0;
-        for (const c of election.candidates) {
-          const prob = result.winProbabilities[c.id] || 0;
-          if (prob > maxProb) {
-            maxProb = prob;
-            leader = c;
-          }
-        }
-
-        let oppText = '五五波';
-        let badgeClass = 'medium';
-        if (maxProb >= 0.92) { oppText = '機會極高'; badgeClass = 'high'; }
-        else if (maxProb >= 0.79) { oppText = '機會高'; badgeClass = 'high'; }
-        else if (maxProb >= 0.68) { oppText = '機會略高'; badgeClass = 'medium'; }
-        else if (maxProb < 0.32) { oppText = '機會低'; badgeClass = 'low'; }
+        // Find leader and runner-up margin
+        const sortedCands = [...election.candidates]
+          .map(c => ({ ...c, share: result.predictedVoteShares[c.id] || 0, prob: result.winProbabilities[c.id] || 0 }))
+          .sort((a, b) => b.share - a.share);
+        const leader = sortedCands[0] || election.candidates[0];
+        const margin = sortedCands.length >= 2 ? Math.abs(sortedCands[0].share - sortedCands[1].share) : 99;
+        const rating = ClearPollModel.getOpportunityRating(margin, leader.prob);
+        const oppText = rating.text;
+        const badgeClass = rating.level;
 
         const statusClass = election.status === 'completed' ? 'completed' : 'upcoming';
         const statusText = election.status === 'completed' ? '已落幕' : '預測中';
