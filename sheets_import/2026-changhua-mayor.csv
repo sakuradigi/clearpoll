@@ -1,3 +1,4 @@
 id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralResults,undecided,source
-ch2026-001,2026-06-12,tvbs,TVBS,1068,phone,3.0,"chiu_c_f:37.2,wei_p_c:36.8","chiu_c_f:30.0,wei_p_c:32.0",26.0,https://news.tvbs.com.tw/
-ch2026-002,2026-08-20,ettoday,ETtoday民調雲,1150,phone,2.89,"chiu_c_f:38.5,wei_p_c:35.2","chiu_c_f:32.0,wei_p_c:30.5",26.3,https://www.ettoday.net/
+ch2026-001,2026-06-12,tvbs,TVBS,1068,phone,3.0,"chen_s_y:35.5,wei_p_c:25.5,chiu_c_f:14.0","chen_s_y:30.5,wei_p_c:22.0,chiu_c_f:12.5",25.0,https://news.tvbs.com.tw/
+ch2026-002,2026-07-25,keypo,關鍵調查,1072,phone,2.99,"chen_s_y:28.0,wei_p_c:11.0,chiu_c_f:12.0","chen_s_y:24.0,wei_p_c:10.0,chiu_c_f:11.0",49.0,https://www.keypo.com.tw/
+ch2026-003,2026-08-18,ettoday,ETtoday民調雲,1150,phone,2.89,"chen_s_y:36.4,wei_p_c:19.4,chiu_c_f:12.7","chen_s_y:32.0,wei_p_c:18.0,chiu_c_f:11.5",31.5,https://www.ettoday.net/

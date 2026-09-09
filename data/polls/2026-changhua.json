@@ -10,33 +10,58 @@
       "method": "phone",
       "marginOfError": 3.0,
       "results": {
-        "chiu_c_f": 37.2,
-        "wei_p_c": 36.8
+        "chen_s_y": 35.5,
+        "wei_p_c": 25.5,
+        "chiu_c_f": 14.0
       },
       "neutralResults": {
-        "chiu_c_f": 30.0,
-        "wei_p_c": 32.0
+        "chen_s_y": 30.5,
+        "wei_p_c": 22.0,
+        "chiu_c_f": 12.5
       },
-      "undecided": 26.0,
+      "undecided": 25.0,
       "source": "https://news.tvbs.com.tw/"
     },
     {
       "id": "ch2026-002",
-      "date": "2026-08-20",
+      "date": "2026-07-25",
+      "pollster": "keypo",
+      "pollsterName": "關鍵調查",
+      "sampleSize": 1072,
+      "method": "phone",
+      "marginOfError": 2.99,
+      "results": {
+        "chen_s_y": 28.0,
+        "wei_p_c": 11.0,
+        "chiu_c_f": 12.0
+      },
+      "neutralResults": {
+        "chen_s_y": 24.0,
+        "wei_p_c": 10.0,
+        "chiu_c_f": 11.0
+      },
+      "undecided": 49.0,
+      "source": "https://www.keypo.com.tw/"
+    },
+    {
+      "id": "ch2026-003",
+      "date": "2026-08-18",
       "pollster": "ettoday",
       "pollsterName": "ETtoday民調雲",
       "sampleSize": 1150,
       "method": "phone",
       "marginOfError": 2.89,
       "results": {
-        "chiu_c_f": 38.5,
-        "wei_p_c": 35.2
+        "chen_s_y": 36.4,
+        "wei_p_c": 19.4,
+        "chiu_c_f": 12.7
       },
       "neutralResults": {
-        "chiu_c_f": 32.0,
-        "wei_p_c": 30.5
+        "chen_s_y": 32.0,
+        "wei_p_c": 18.0,
+        "chiu_c_f": 11.5
       },
-      "undecided": 26.3,
+      "undecided": 31.5,
       "source": "https://www.ettoday.net/"
     }
   ]

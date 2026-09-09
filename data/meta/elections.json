@@ -516,6 +516,14 @@
       "pollsFile": "data/polls/2026-changhua.json",
       "candidates": [
         {
+          "id": "chen_s_y",
+          "name": "陳素月",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        },
+        {
           "id": "wei_p_c",
           "name": "魏平政",
           "party": "KMT",
@@ -527,8 +535,8 @@
           "id": "chiu_c_f",
           "name": "邱建富",
           "party": "IND",
-          "partyName": "無黨籍(綠營背景)",
-          "color": "#1B9431",
+          "partyName": "無黨籍",
+          "color": "#888888",
           "incumbent": false
         }
       ],
