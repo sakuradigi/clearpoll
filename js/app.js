@@ -392,7 +392,7 @@
     `;
 
     // AI Model Detailed Election Assessment
-    const aiAssessment = result.aiAssessment || ClearPollModel.getAIElectionAssessment(result.electionId, result.city || currentCity, result);
+    const aiAssessment = result.aiAssessment || ClearPollModel.getAIElectionAssessment(result.electionId, result.city, result);
     const aiCardHtml = aiAssessment ? `
       <div class="ai-detail-assessment-card">
         <div class="ai-detail-header">
@@ -828,6 +828,8 @@
         const rating = ClearPollModel.getOpportunityRating(margin, leader.prob);
         const oppText = rating.text;
         const badgeClass = rating.level;
+        const statusClass = election.status === 'completed' ? 'completed' : 'upcoming';
+        const statusText = election.status === 'completed' ? '已落幕' : '預測中';
 
         // AI Model Election Assessment Brief
         const aiAssessment = result.aiAssessment || ClearPollModel.getAIElectionAssessment(election.id, election.city, result);
