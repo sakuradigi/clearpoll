@@ -120,6 +120,34 @@
       "neutralResults": { "li": 25.0, "su": 32.0 },
       "undecided": 30.0,
       "source": "https://www.eranews.com.tw/"
+    },
+    {
+      "id": "nt2026-007",
+      "date": "2026-09-01",
+      "pollster": "beacon",
+      "pollsterName": "信民協會（戴立安規劃／畢肯執行）",
+      "commissioner": "台北市信民兩岸研究協會",
+      "sampleSize": 1071,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": { "su": 35.2, "li": 34.7 },
+      "neutralResults": { "su": 30.0, "li": 29.0 },
+      "undecided": 30.1,
+      "source": "https://www.cmmedia.com.tw/"
+    },
+    {
+      "id": "nt2026-008",
+      "date": "2026-09-02",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "commissioner": "國民黨新北市議會黨團",
+      "sampleSize": 1224,
+      "method": "phone",
+      "marginOfError": 2.8,
+      "results": { "li": 39.8, "su": 33.1 },
+      "neutralResults": { "li": 33.0, "su": 27.0 },
+      "undecided": 27.1,
+      "source": "https://news.tvbs.com.tw/"
     }
   ]
 }

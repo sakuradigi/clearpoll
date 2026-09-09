@@ -166,6 +166,17 @@
       "notes": "專業輿情與民調研究機構，方法論與抽樣架構公開透明"
     },
     {
+      "id": "beacon",
+      "name": "信民協會",
+      "fullName": "台北市信民兩岸研究協會（戴立安規劃／畢肯執行）",
+      "credibilityScore": 0.84,
+      "leanDirection": "neutral",
+      "leanMagnitude": 0.08,
+      "historicalAccuracy": 0.81,
+      "methodology": "CATI電腦輔助電話訪問（市話+手機雙底冊）",
+      "notes": "由資深民調專家戴立安問卷設計與分析，畢肯市場研究執行市話與手機雙底冊抽樣，方法論完整透明"
+    },
+    {
       "id": "candidate-ke",
       "name": "柯志恩陣營",
       "fullName": "柯志恩委託民調",

@@ -1417,7 +1417,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 290px;
+  min-height: 330px;
 }
 .dashboard-card:hover {
   transform: translateY(-6px);
@@ -1492,6 +1492,35 @@ p {
   border-radius: var(--radius-full);
 }
 
+/* AI Model Brief inside Dashboard Card */
+.dash-ai-assessment {
+  margin-top: var(--space-sm);
+  padding: 8px 10px;
+  background: rgba(99, 102, 241, 0.05);
+  border-left: 3px solid #6366F1;
+  border-radius: 4px;
+}
+.dash-ai-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #4F46E5;
+  margin-bottom: 3px;
+  letter-spacing: 0.5px;
+}
+.dash-ai-text {
+  font-size: 0.76rem;
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* Dashboard Footer */
 .dash-card-footer {
   display: flex;
@@ -1513,6 +1542,61 @@ p {
 }
 .dashboard-card:hover .dash-detail-link {
   transform: translateX(4px);
+}
+
+/* AI Model Detailed Assessment Box in Detail Page */
+.ai-detail-assessment-card {
+  background: linear-gradient(135deg, rgba(238, 242, 255, 0.7) 0%, rgba(245, 243, 255, 0.8) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-lg);
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.08);
+  text-align: left;
+}
+.ai-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xs);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.15);
+}
+.ai-detail-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #4338CA;
+}
+.ai-detail-time {
+  font-size: 0.72rem;
+  color: var(--color-text-tertiary);
+  font-weight: 600;
+}
+.ai-detail-text {
+  font-size: 0.88rem;
+  color: var(--color-text-primary);
+  line-height: 1.65;
+  margin-bottom: var(--space-sm);
+  margin-top: 4px;
+}
+.ai-detail-factors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ai-factor-pill {
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: #3730A3;
 }
 
 /* Construction content inside dashboard card */

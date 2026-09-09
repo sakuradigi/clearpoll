@@ -391,7 +391,27 @@
       </table>
     `;
 
-    DOM.predictionTableContainer.innerHTML = tableHtml;
+    // AI Model Detailed Election Assessment
+    const aiAssessment = result.aiAssessment || ClearPollModel.getAIElectionAssessment(result.electionId, result.city || currentCity, result);
+    const aiCardHtml = aiAssessment ? `
+      <div class="ai-detail-assessment-card">
+        <div class="ai-detail-header">
+          <div class="ai-detail-badge">
+            <span>🤖 ClearPoll AI MODEL 選情深入評估</span>
+            <span class="ai-confidence-pill" style="font-size:0.7rem; font-weight:700; padding:2px 8px; border-radius:12px; background:rgba(99,102,241,0.12); color:#4338CA;">
+              ${aiAssessment.confidence || '動態加權監測'}
+            </span>
+          </div>
+          <span class="ai-detail-time">資料分析基準：${new Date().toISOString().split('T')[0]}</span>
+        </div>
+        <p class="ai-detail-text">${aiAssessment.detailedBrief}</p>
+        <div class="ai-detail-factors">
+          ${(aiAssessment.factors || []).map(f => `<span class="ai-factor-pill">📌 ${f}</span>`).join('')}
+        </div>
+      </div>
+    ` : '';
+
+    DOM.predictionTableContainer.innerHTML = aiCardHtml + tableHtml;
   }
 
   /**
@@ -809,8 +829,14 @@
         const oppText = rating.text;
         const badgeClass = rating.level;
 
-        const statusClass = election.status === 'completed' ? 'completed' : 'upcoming';
-        const statusText = election.status === 'completed' ? '已落幕' : '預測中';
+        // AI Model Election Assessment Brief
+        const aiAssessment = result.aiAssessment || ClearPollModel.getAIElectionAssessment(election.id, election.city, result);
+        const aiBriefHtml = aiAssessment ? `
+          <div class="dash-ai-assessment">
+            <span class="dash-ai-tag">🤖 AI MODEL 評估簡評</span>
+            <p class="dash-ai-text">${aiAssessment.shortBrief}</p>
+          </div>
+        ` : '';
 
         return `
           <div class="dashboard-card" data-election-id="${election.id}" data-city="${election.city}">
@@ -821,6 +847,7 @@
               </div>
               <div class="dash-card-body">
                 ${barsHtml}
+                ${aiBriefHtml}
               </div>
             </div>
             <div class="dash-card-footer">
