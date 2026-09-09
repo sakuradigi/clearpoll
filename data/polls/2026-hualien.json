@@ -3,45 +3,45 @@
   "polls": [
     {
       "id": "hl2026-001",
-      "date": "2026-05-15",
-      "pollster": "rwreport",
-      "pollsterName": "菱傳媒",
-      "sampleSize": 1100,
-      "method": "online",
-      "marginOfError": 2.95,
+      "date": "2026-08-25",
+      "pollster": "storm",
+      "pollsterName": "風傳媒",
+      "sampleSize": 1075,
+      "method": "phone",
+      "marginOfError": 2.99,
       "results": {
-        "wei_c_h": 41.2,
-        "yu_s_c": 36.4,
-        "chang_c": 11.5
+        "yu_s_c": 29.1,
+        "wei_c_h": 18.4,
+        "chang_c": 19.4
       },
       "neutralResults": {
-        "wei_c_h": 37.0,
-        "yu_s_c": 31.0,
-        "chang_c": 13.5
+        "yu_s_c": 24.0,
+        "wei_c_h": 17.5,
+        "chang_c": 18.0
       },
-      "undecided": 10.9,
-      "source": "https://rwnews.tw/"
+      "undecided": 33.1,
+      "source": "https://www.storm.mg/"
     },
     {
       "id": "hl2026-002",
-      "date": "2026-08-10",
-      "pollster": "tvbs",
-      "pollsterName": "TVBS",
-      "sampleSize": 1005,
-      "method": "phone",
-      "marginOfError": 3.09,
+      "date": "2026-09-03",
+      "pollster": "baodating",
+      "pollsterName": "包打聽AI民調",
+      "sampleSize": 1120,
+      "method": "online",
+      "marginOfError": 2.93,
       "results": {
-        "wei_c_h": 42.5,
-        "yu_s_c": 35.8,
-        "chang_c": 12.2
+        "yu_s_c": 27.2,
+        "wei_c_h": 23.1,
+        "chang_c": 18.7
       },
       "neutralResults": {
-        "wei_c_h": 38.0,
-        "yu_s_c": 30.0,
-        "chang_c": 14.0
+        "yu_s_c": 23.5,
+        "wei_c_h": 21.0,
+        "chang_c": 17.5
       },
-      "undecided": 9.5,
-      "source": "https://news.tvbs.com.tw/"
+      "undecided": 31.0,
+      "source": "https://www.hsnews.com.tw/"
     }
   ]
 }
