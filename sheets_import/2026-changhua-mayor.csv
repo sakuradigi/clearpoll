@@ -1,0 +1,3 @@
+id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralResults,undecided,source
+ch2026-001,2026-06-12,tvbs,TVBS,1068,phone,3.0,"chen_s_y:37.2,hsieh_y_f:36.8","chen_s_y:30.0,hsieh_y_f:32.0",26.0,https://news.tvbs.com.tw/
+ch2026-002,2026-08-20,ettoday,ETtoday民調雲,1150,phone,2.89,"chen_s_y:38.5,hsieh_y_f:35.2","chen_s_y:32.0,hsieh_y_f:30.5",26.3,https://www.ettoday.net/

@@ -1,0 +1,43 @@
+{
+  "electionId": "2026-hsinchucounty-mayor",
+  "polls": [
+    {
+      "id": "hcc2026-001",
+      "date": "2026-05-18",
+      "pollster": "appro",
+      "pollsterName": "艾普羅民調",
+      "sampleSize": 1068,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": {
+        "hsu": 43.2,
+        "cheng_c_f": 35.8
+      },
+      "neutralResults": {
+        "hsu": 36.0,
+        "cheng_c_f": 32.0
+      },
+      "undecided": 21.0,
+      "source": "https://www.chinatimes.com/"
+    },
+    {
+      "id": "hcc2026-002",
+      "date": "2026-08-25",
+      "pollster": "focus",
+      "pollsterName": "精確市場研究／聯合聚焦",
+      "sampleSize": 1075,
+      "method": "phone",
+      "marginOfError": 2.99,
+      "results": {
+        "hsu": 41.4,
+        "cheng_c_f": 38.1
+      },
+      "neutralResults": {
+        "hsu": 35.5,
+        "cheng_c_f": 34.0
+      },
+      "undecided": 20.5,
+      "source": "https://udn.com/"
+    }
+  ]
+}

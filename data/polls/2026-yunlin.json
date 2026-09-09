@@ -1,0 +1,43 @@
+{
+  "electionId": "2026-yunlin-mayor",
+  "polls": [
+    {
+      "id": "yl2026-001",
+      "date": "2026-05-10",
+      "pollster": "shanshui",
+      "pollsterName": "山水民調",
+      "sampleSize": 1072,
+      "method": "phone",
+      "marginOfError": 2.99,
+      "results": {
+        "chang_c_c": 44.8,
+        "liu_c_k": 40.5
+      },
+      "neutralResults": {
+        "chang_c_c": 37.0,
+        "liu_c_k": 36.0
+      },
+      "undecided": 14.7,
+      "source": "https://www.upmedia.mg/"
+    },
+    {
+      "id": "yl2026-002",
+      "date": "2026-08-22",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1068,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": {
+        "chang_c_c": 46.5,
+        "liu_c_k": 39.2
+      },
+      "neutralResults": {
+        "chang_c_c": 39.0,
+        "liu_c_k": 33.5
+      },
+      "undecided": 14.3,
+      "source": "https://news.tvbs.com.tw/"
+    }
+  ]
+}

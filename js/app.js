@@ -46,9 +46,19 @@
     pollCountLabel: $('pollCountLabel'),
     predictionLogBody: $('predictionLogBody'),
     citySelector: $('citySelector'),
+    otherCitiesSelect: $('otherCitiesSelect'),
     yearSelector: $('yearSelector'),
     dashboardSection: $('dashboardSection'),
     dashboardGrid: $('dashboardGrid'),
+    nationalOverviewSection: $('nationalOverviewSection'),
+    taiwanMapContainer: $('taiwanMapContainer'),
+    partyStatsContainer: $('partyStatsContainer'),
+    historicalTableContainer: $('historicalTableContainer'),
+    sixMetrosSection: $('sixMetrosSection'),
+    sixMetrosGrid: $('sixMetrosGrid'),
+    otherCountiesSection: $('otherCountiesSection'),
+    otherCountiesGrid: $('otherCountiesGrid'),
+    regionFilterBar: $('regionFilterBar'),
     methodologyViewSection: $('methodologyViewSection'),
     historicalGrid: $('historicalGrid'),
   };
@@ -633,167 +643,183 @@
 
   // ---- Dashboard Render ----
 
-  async function renderDashboard() {
-    DOM.dashboardGrid.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; padding: 60px 0;">
-        <div class="loading-shimmer" style="width: 180px; height: 24px; margin: 0 auto;"></div>
-        <p class="mt-md" style="color: var(--color-text-secondary);">正在彙整與加權計算六都選情大盤...</p>
-      </div>
-    `;
+  function updateCitySelectorUI(city) {
+    let matched = false;
+    document.querySelectorAll('#citySelector .city-btn').forEach(btn => {
+      const isMatch = btn.dataset.city === city;
+      btn.classList.toggle('active', isMatch);
+      if (isMatch) matched = true;
+    });
 
-    // Ensure metadata is loaded
+    if (DOM.otherCitiesSelect) {
+      if (!matched) {
+        DOM.otherCitiesSelect.value = city;
+        DOM.otherCitiesSelect.classList.add('active');
+      } else {
+        DOM.otherCitiesSelect.value = '';
+        DOM.otherCitiesSelect.classList.remove('active');
+      }
+    }
+  }
+
+  async function renderDashboard() {
+    if (DOM.sixMetrosGrid) {
+      DOM.sixMetrosGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px 0;">
+          <div class="loading-shimmer" style="width: 180px; height: 24px; margin: 0 auto;"></div>
+          <p class="mt-md" style="color: var(--color-text-secondary);">正在彙整與加權計算直轄市選情大盤...</p>
+        </div>
+      `;
+    }
+    if (DOM.otherCountiesGrid) {
+      DOM.otherCountiesGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px 0;">
+          <div class="loading-shimmer" style="width: 180px; height: 24px; margin: 0 auto;"></div>
+          <p class="mt-md" style="color: var(--color-text-secondary);">正在彙整與加權計算臺灣省及離島選情大盤...</p>
+        </div>
+      `;
+    }
+
     if (!electionsMetadata || !pollsterData) {
       const [electionsData, pollsterD] = await Promise.all([
         loadJSON('data/meta/elections.json'),
         loadJSON('data/meta/pollsters.json')
       ]);
       if (!electionsData || !pollsterD) {
-        DOM.dashboardGrid.innerHTML = `<div class="card text-center" style="grid-column:1/-1;">資料載入失敗</div>`;
+        if (DOM.sixMetrosGrid) DOM.sixMetrosGrid.innerHTML = `<div class="card text-center" style="grid-column:1/-1;">資料載入失敗</div>`;
         return;
       }
       electionsMetadata = electionsData.elections;
       pollsterData = pollsterD;
     }
 
-    const cityOrder = ['taipei', 'newtaipei', 'taoyuan', 'taichung', 'tainan', 'kaohsiung'];
+    const metroCityOrder = ['taipei', 'newtaipei', 'taoyuan', 'taichung', 'tainan', 'kaohsiung'];
+    const otherCityOrder = [
+      'keelung', 'hsinchucity', 'hsinchucounty',
+      'miaoli', 'changhua', 'nantou', 'yunlin',
+      'chiayicity', 'chiayicounty', 'pingtung',
+      'yilan', 'hualien', 'taitung', 'penghu', 'kinmen', 'lienchiang'
+    ];
 
     if (selectedYear === '2022' || selectedYear === '2018') {
-      // Render historical results as a master table
-      const rowsHtml = cityOrder.map(city => {
-        const electionId = `${selectedYear}-${city}-mayor`;
-        const electionMeta = electionsMetadata.find(e => e.id === electionId || (e.city === city && e.year === selectedYear));
-        const cityName = electionMeta ? electionMeta.cityName : city;
-        const result = pastResultsData.results.find(r => r.electionId === electionId);
+      if (DOM.nationalOverviewSection) DOM.nationalOverviewSection.style.display = 'none';
+      if (DOM.sixMetrosSection) DOM.sixMetrosSection.style.display = 'none';
+      if (DOM.otherCountiesSection) DOM.otherCountiesSection.style.display = 'none';
+      if (DOM.historicalTableContainer) {
+        DOM.historicalTableContainer.style.display = 'block';
 
-        if (!result) {
+        const rowsHtml = metroCityOrder.map(city => {
+          const electionId = `${selectedYear}-${city}-mayor`;
+          const electionMeta = electionsMetadata.find(e => e.id === electionId || (e.city === city && e.year === selectedYear));
+          const cityName = electionMeta ? electionMeta.cityName : city;
+          const result = pastResultsData ? pastResultsData.results.find(r => r.electionId === electionId) : null;
+
+          if (!result) {
+            return `
+              <tr data-city="${city}" data-election-id="${electionId}" style="cursor: pointer;">
+                <td style="padding: var(--space-sm) var(--space-md); font-weight: 600;">${cityName}</td>
+                <td colspan="7" class="text-center" style="color: var(--color-text-tertiary);">暫無此選區的歷史得票統計數據</td>
+              </tr>
+            `;
+          }
+
+          const sortedCandidates = [...result.candidates].sort((a, b) => b.votes - a.votes);
+          const winner = sortedCandidates[0];
+          const runnerUp = sortedCandidates[1] || { name: '-', party: '-', voteShare: 0 };
+          const lead = winner.voteShare - runnerUp.voteShare;
+
+          const partyColors = { 'DPP': '#1B9431', 'KMT': '#000095', 'TPP': '#28C8C8', 'IND': '#888888', 'OTHER': '#666666' };
+          const winnerColor = partyColors[winner.party] || 'var(--color-text-primary)';
+          const runnerColor = partyColors[runnerUp.party] || 'var(--color-text-secondary)';
+
           return `
-            <tr data-city="${city}" data-election-id="${electionId}" style="cursor: pointer;">
-              <td style="padding: var(--space-sm) var(--space-md); font-weight: 600;">${cityName}</td>
-              <td colspan="7" class="text-center" style="color: var(--color-text-tertiary);">暫無此選區的歷史得票統計數據</td>
+            <tr data-city="${city}" data-election-id="${electionId}" style="cursor: pointer;" class="hover-row">
+              <td style="padding: var(--space-md) var(--space-md); font-weight: 700; color: var(--color-accent-blue); vertical-align: middle;">
+                ${cityName}長
+              </td>
+              <td style="padding: var(--space-md) var(--space-md); vertical-align: middle;">
+                <span style="font-weight: 700; color: ${winnerColor};">${winner.name}</span>
+                <span class="label" style="font-size: 0.72rem; margin-left: 4px; background: var(--color-bg-tertiary);">${winner.party}</span>
+              </td>
+              <td style="text-align: right; padding: var(--space-md) var(--space-md); font-weight: 600; vertical-align: middle;">
+                ${winner.votes.toLocaleString()} 票
+              </td>
+              <td style="text-align: right; padding: var(--space-md) var(--space-md); font-weight: 800; color: ${winnerColor}; vertical-align: middle;">
+                ${winner.voteShare.toFixed(2)}%
+              </td>
+              <td style="padding: var(--space-md) var(--space-md); vertical-align: middle;">
+                <span style="font-weight: 600; color: ${runnerColor};">${runnerUp.name}</span>
+                <span class="label" style="font-size: 0.72rem; margin-left: 4px; background: var(--color-bg-tertiary);">${runnerUp.party}</span>
+              </td>
+              <td style="text-align: right; padding: var(--space-md) var(--space-md); font-weight: 600; vertical-align: middle;">
+                ${runnerUp.voteShare.toFixed(2)}%
+              </td>
+              <td style="text-align: right; padding: var(--space-md) var(--space-md); font-weight: 700; color: var(--color-danger); vertical-align: middle;">
+                +${lead.toFixed(2)}%
+              </td>
+              <td style="text-align: right; padding: var(--space-md) var(--space-md); color: var(--color-text-secondary); vertical-align: middle;">
+                ${result.turnoutRate.toFixed(2)}%
+              </td>
             </tr>
           `;
-        }
+        }).join('');
 
-        const sortedCandidates = [...result.candidates].sort((a, b) => b.votes - a.votes);
-        const winner = sortedCandidates[0];
-        const runnerUp = sortedCandidates[1] || { name: '-', party: '-', voteShare: 0 };
-        const lead = winner.voteShare - runnerUp.voteShare;
-
-        const partyColors = { 'DPP': '#1B9431', 'KMT': '#000095', 'TPP': '#28C8C8', 'IND': '#888888', 'OTHER': '#666666' };
-        const winnerColor = partyColors[winner.party] || 'var(--color-text-primary)';
-        const runnerColor = partyColors[runnerUp.party] || 'var(--color-text-secondary)';
-
-        return `
-          <tr data-city="${city}" data-election-id="${electionId}" style="cursor: pointer;" class="hover-row">
-            <td style="padding: var(--space-md) var(--space-md); font-weight: 700; color: var(--color-accent-blue); vertical-align: middle;">
-              ${cityName}長
-            </td>
-            <td style="padding: var(--space-md) var(--space-md); vertical-align: middle;">
-              <span style="font-weight: 700; color: ${winnerColor};">${winner.name}</span>
-              <span class="label" style="font-size: 0.72rem; margin-left: 4px; background: var(--color-bg-tertiary);">${winner.party}</span>
-            </td>
-            <td style="text-align: right; padding: var(--space-md) var(--space-md); font-weight: 600; vertical-align: middle;">
-              ${winner.votes.toLocaleString()} 票
-            </td>
-            <td style="text-align: right; padding: var(--space-md) var(--space-md); font-weight: 800; color: ${winnerColor}; vertical-align: middle;">
-              ${winner.voteShare.toFixed(2)}%
-            </td>
-            <td style="padding: var(--space-md) var(--space-md); vertical-align: middle;">
-              <span style="font-weight: 600; color: ${runnerColor};">${runnerUp.name}</span>
-              <span class="label" style="font-size: 0.72rem; margin-left: 4px; background: var(--color-bg-tertiary);">${runnerUp.party}</span>
-            </td>
-            <td style="text-align: right; padding: var(--space-md) var(--space-md); font-weight: 600; vertical-align: middle;">
-              ${runnerUp.voteShare.toFixed(2)}%
-            </td>
-            <td style="text-align: right; padding: var(--space-md) var(--space-md); font-weight: 700; color: var(--color-danger); vertical-align: middle;">
-              +${lead.toFixed(2)}%
-            </td>
-            <td style="text-align: right; padding: var(--space-md) var(--space-md); color: var(--color-text-secondary); vertical-align: middle;">
-              ${result.turnoutRate.toFixed(2)}%
-            </td>
-          </tr>
-        `;
-      }).join('');
-
-      DOM.dashboardGrid.innerHTML = `
-        <div class="card" style="grid-column: 1 / -1; padding: var(--space-xl); margin-top: var(--space-md); overflow-x: auto;">
-          <h2 style="font-size: 1.4rem; margin-bottom: var(--space-md); font-weight: 800; text-align: center;" class="text-gradient">
-            ${selectedYear} 年直轄市長選舉實際開票統計總表
-          </h2>
-          <p style="text-align: center; color: var(--color-text-secondary); font-size: 0.9rem; margin-bottom: var(--space-lg);">
-            以下為中選會公布之法定實際開票結果。點擊任何直轄市行可切換至該市的深度分析與詳細對照表。
-          </p>
-          <div class="table-container">
-            <table class="data-table" style="width: 100%; border-collapse: collapse; min-width: 800px;">
-              <thead>
-                <tr>
-                  <th style="text-align: left; padding: var(--space-sm) var(--space-md);">直轄市</th>
-                  <th style="text-align: left; padding: var(--space-sm) var(--space-md);">當選人 (政黨)</th>
-                  <th style="text-align: right; padding: var(--space-sm) var(--space-md);">當選得票數</th>
-                  <th style="text-align: right; padding: var(--space-sm) var(--space-md);">當選得票率</th>
-                  <th style="text-align: left; padding: var(--space-sm) var(--space-md);">次高票對手 (政黨)</th>
-                  <th style="text-align: right; padding: var(--space-sm) var(--space-md);">次高票得票率</th>
-                  <th style="text-align: right; padding: var(--space-sm) var(--space-md);">領先幅度</th>
-                  <th style="text-align: right; padding: var(--space-sm) var(--space-md);">投票率</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${rowsHtml}
-              </tbody>
-            </table>
+        DOM.historicalTableContainer.innerHTML = `
+          <div class="card" style="padding: var(--space-xl); margin-top: var(--space-md); overflow-x: auto;">
+            <h2 style="font-size: 1.4rem; margin-bottom: var(--space-md); font-weight: 800; text-align: center;" class="text-gradient">
+              ${selectedYear} 年直轄市長選舉實際開票統計總表
+            </h2>
+            <p style="text-align: center; color: var(--color-text-secondary); font-size: 0.9rem; margin-bottom: var(--space-lg);">
+              以下為中選會公布之法定實際開票結果。點擊任何直轄市行可切換至該市的深度分析與詳細對照表。
+            </p>
+            <div class="table-container">
+              <table class="data-table" style="width: 100%; border-collapse: collapse; min-width: 800px;">
+                <thead>
+                  <tr>
+                    <th style="text-align: left; padding: var(--space-sm) var(--space-md);">直轄市</th>
+                    <th style="text-align: left; padding: var(--space-sm) var(--space-md);">當選人 (政黨)</th>
+                    <th style="text-align: right; padding: var(--space-sm) var(--space-md);">當選得票數</th>
+                    <th style="text-align: right; padding: var(--space-sm) var(--space-md);">當選得票率</th>
+                    <th style="text-align: left; padding: var(--space-sm) var(--space-md);">次高票對手 (政黨)</th>
+                    <th style="text-align: right; padding: var(--space-sm) var(--space-md);">次高票得票率</th>
+                    <th style="text-align: right; padding: var(--space-sm) var(--space-md);">領先幅度</th>
+                    <th style="text-align: right; padding: var(--space-sm) var(--space-md);">投票率</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${rowsHtml}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-      `;
+        `;
 
-      // Bind click handlers to rows
-      DOM.dashboardGrid.querySelectorAll('tr[data-election-id]').forEach(row => {
-        row.addEventListener('click', () => {
-          const eid = row.dataset.electionId;
-          const city = row.dataset.city;
-
-          selectedCity = city;
-          currentElectionId = eid;
-
-          // Set active city button in detail navigator
-          document.querySelectorAll('#citySelector .city-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.city === city);
+        DOM.historicalTableContainer.querySelectorAll('tr[data-election-id]').forEach(row => {
+          row.addEventListener('click', () => {
+            const eid = row.dataset.electionId;
+            const city = row.dataset.city;
+            selectedCity = city;
+            currentElectionId = eid;
+            updateCitySelectorUI(city);
+            switchTab('detail');
           });
-
-          switchTab('detail');
         });
-      });
+      }
       initScrollAnimations();
       return;
     }
 
-    const yearElections = electionsMetadata
-      .filter(e => e.year === selectedYear)
-      .sort((a, b) => cityOrder.indexOf(a.city) - cityOrder.indexOf(b.city));
+    // 2026 Prediction View
+    if (DOM.nationalOverviewSection) DOM.nationalOverviewSection.style.display = 'block';
+    if (DOM.sixMetrosSection) DOM.sixMetrosSection.style.display = 'block';
+    if (DOM.otherCountiesSection) DOM.otherCountiesSection.style.display = 'block';
+    if (DOM.historicalTableContainer) DOM.historicalTableContainer.style.display = 'none';
 
-    const cardPromises = yearElections.map(async (election) => {
-      // Check if under construction
-      if (election.status === 'construction' || !election.pollsFile) {
-        return `
-          <div class="dashboard-card" style="opacity: 0.85; cursor: default;">
-            <div class="dash-card-header">
-              <span class="dash-city-name">${election.cityName}</span>
-              <span class="dash-status-label construction">施工中</span>
-            </div>
-            <div class="dash-construction-body">
-              <div style="font-size: 2rem; margin-bottom: var(--space-xs);">🚧</div>
-              <div style="font-weight: 600;">資料正收集中</div>
-              <div style="font-size: 0.72rem; color: var(--color-text-tertiary);">施工中選區</div>
-            </div>
-            <div class="dash-card-footer">
-              <span>-</span>
-              <span style="font-weight: 600; color: var(--color-text-tertiary);">敬請期待</span>
-            </div>
-          </div>
-        `;
-      }
+    const year2026Elections = electionsMetadata.filter(e => e.year === '2026');
+    const countyResults = {};
 
+    const buildCardHtml = async (election) => {
       try {
-        // Load election data using our Google Sheet / local JSON loader
         const data = await loadElectionData(election.id);
         if (!data || !data.polls || data.polls.polls.length === 0) {
           throw new Error(`No polls for ${election.id}`);
@@ -801,8 +827,29 @@
 
         const result = ClearPollModel.analyze(data.polls, data.pollsters);
 
-        // Map candidates to sorted support bars
-        let barsHtml = election.candidates.map(c => {
+        const sortedCands = [...election.candidates]
+          .map(c => ({
+            ...c,
+            share: result.predictedVoteShares[c.id] || 0,
+            prob: result.winProbabilities ? (result.winProbabilities[c.id] || 0) : 0
+          }))
+          .sort((a, b) => b.share - a.share);
+
+        const leader = sortedCands[0] || election.candidates[0];
+        const runner = sortedCands[1] || null;
+        const margin = runner ? Math.abs(leader.share - runner.share) : 99;
+        const rating = ClearPollModel.getOpportunityRating(margin, leader.prob);
+
+        countyResults[election.city] = {
+          election,
+          result,
+          leader,
+          runner,
+          margin,
+          rating
+        };
+
+        const barsHtml = election.candidates.map(c => {
           const share = result.predictedVoteShares[c.id] || 0;
           const ci = result.ci95 ? result.ci95[c.id] : null;
           const ciTag = ci ? `<span class="ci-badge" style="font-size:0.7rem; font-weight:400; padding:1px 5px;">CI: ${ci.lower}%~${ci.upper}%</span>` : '';
@@ -819,19 +866,11 @@
           `;
         }).join('');
 
-        // Find leader and runner-up margin
-        const sortedCands = [...election.candidates]
-          .map(c => ({ ...c, share: result.predictedVoteShares[c.id] || 0, prob: result.winProbabilities[c.id] || 0 }))
-          .sort((a, b) => b.share - a.share);
-        const leader = sortedCands[0] || election.candidates[0];
-        const margin = sortedCands.length >= 2 ? Math.abs(sortedCands[0].share - sortedCands[1].share) : 99;
-        const rating = ClearPollModel.getOpportunityRating(margin, leader.prob);
         const oppText = rating.text;
         const badgeClass = rating.level;
         const statusClass = election.status === 'completed' ? 'completed' : 'upcoming';
         const statusText = election.status === 'completed' ? '已落幕' : '預測中';
 
-        // AI Model Election Assessment Brief
         const aiAssessment = result.aiAssessment || ClearPollModel.getAIElectionAssessment(election.id, election.city, result);
         const aiBriefHtml = aiAssessment ? `
           <div class="dash-ai-assessment">
@@ -841,7 +880,7 @@
         ` : '';
 
         return `
-          <div class="dashboard-card" data-election-id="${election.id}" data-city="${election.city}">
+          <div class="dashboard-card" data-election-id="${election.id}" data-city="${election.city}" data-region="${election.region || 'north'}">
             <div>
               <div class="dash-card-header">
                 <span class="dash-city-name">${election.cityName}</span>
@@ -862,51 +901,103 @@
           </div>
         `;
       } catch (err) {
-        console.error(`Failed to render dashboard card for ${election.id}:`, err);
+        console.error(`Failed to render card for ${election.id}:`, err);
         return `
-          <div class="dashboard-card" style="opacity: 0.85; cursor: default;">
+          <div class="dashboard-card" style="opacity: 0.85; cursor: default;" data-city="${election.city}" data-region="${election.region || 'north'}">
             <div class="dash-card-header">
               <span class="dash-city-name">${election.cityName}</span>
-              <span class="dash-status-label construction">錯誤</span>
+              <span class="dash-status-label construction">資料收集中</span>
             </div>
             <div class="dash-construction-body">
-              <div style="font-size: 2rem; margin-bottom: var(--space-xs);">⚠️</div>
-              <div style="font-weight: 600;">數據載入失敗</div>
-              <div style="font-size: 0.72rem; color: var(--color-text-tertiary);">連線或結構錯誤</div>
-            </div>
-            <div class="dash-card-footer">
-              <span>-</span>
-              <span style="font-weight: 600; color: var(--color-text-tertiary);">重試</span>
+              <div style="font-size: 2rem; margin-bottom: var(--space-xs);">🚧</div>
+              <div style="font-weight: 600;">即將收錄</div>
+              <div style="font-size: 0.72rem; color: var(--color-text-tertiary);">敬請期待最新民調</div>
             </div>
           </div>
         `;
       }
+    };
+
+    const metroElections = metroCityOrder
+      .map(city => year2026Elections.find(e => e.city === city))
+      .filter(Boolean);
+
+    const otherElections = otherCityOrder
+      .map(city => year2026Elections.find(e => e.city === city))
+      .filter(Boolean);
+
+    const [metroCards, otherCards] = await Promise.all([
+      Promise.all(metroElections.map(buildCardHtml)),
+      Promise.all(otherElections.map(buildCardHtml))
+    ]);
+
+    if (DOM.sixMetrosGrid) DOM.sixMetrosGrid.innerHTML = metroCards.join('');
+    if (DOM.otherCountiesGrid) DOM.otherCountiesGrid.innerHTML = otherCards.join('');
+
+    const handleCountyFocus = (cityKey, electionId) => {
+      const targetCard = document.querySelector(`.dashboard-card[data-city="${cityKey}"]`);
+      if (!targetCard) return;
+
+      if (targetCard.closest('#otherCountiesGrid')) {
+        const region = targetCard.dataset.region;
+        const activeFilterBtn = document.querySelector('#regionFilterBar .region-btn.active');
+        if (activeFilterBtn && activeFilterBtn.dataset.region !== 'all' && activeFilterBtn.dataset.region !== region) {
+          document.querySelectorAll('#regionFilterBar .region-btn').forEach(b => b.classList.toggle('active', b.dataset.region === 'all'));
+          document.querySelectorAll('#otherCountiesGrid .dashboard-card').forEach(c => c.style.display = '');
+        }
+      }
+
+      targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      targetCard.classList.add('map-highlight-pulse');
+      setTimeout(() => targetCard.classList.remove('map-highlight-pulse'), 1800);
+    };
+
+    if (window.ClearPollMap) {
+      await ClearPollMap.renderMap('taiwanMapContainer', electionsMetadata, countyResults, handleCountyFocus);
+      ClearPollMap.renderPartyStatistics('partyStatsContainer', countyResults);
+    }
+
+    document.querySelectorAll('.county-chip').forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const name = chip.textContent.split('(')[0].trim();
+        const match = Object.values(countyResults).find(cr => cr.election.cityName.includes(name));
+        if (match) {
+          handleCountyFocus(match.election.city, match.election.id);
+        }
+      });
     });
 
-    const cardsHtml = await Promise.all(cardPromises);
-    DOM.dashboardGrid.innerHTML = cardsHtml.join('');
+    if (DOM.regionFilterBar) {
+      DOM.regionFilterBar.querySelectorAll('.region-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          DOM.regionFilterBar.querySelectorAll('.region-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const reg = btn.dataset.region;
+          document.querySelectorAll('#otherCountiesGrid .dashboard-card').forEach(card => {
+            if (reg === 'all' || card.dataset.region === reg) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    }
 
-    // Bind card clicks
-    DOM.dashboardGrid.querySelectorAll('.dashboard-card[data-election-id]').forEach(card => {
+    document.querySelectorAll('.dashboard-card[data-election-id]').forEach(card => {
       card.addEventListener('click', () => {
         const eid = card.dataset.electionId;
         const city = card.dataset.city;
-
         selectedCity = city;
         currentElectionId = eid;
-
-        // Set active city button in detail navigator
-        document.querySelectorAll('#citySelector .city-btn').forEach(btn => {
-          btn.classList.toggle('active', btn.dataset.city === city);
-        });
-
+        updateCitySelectorUI(city);
         switchTab('detail');
       });
     });
 
     initScrollAnimations();
   }
-
   // ---- Scroll Animations ----
 
   function initScrollAnimations() {
@@ -976,11 +1067,29 @@
 
       document.querySelectorAll('#citySelector .city-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      if (DOM.otherCitiesSelect) {
+        DOM.otherCitiesSelect.value = '';
+        DOM.otherCitiesSelect.classList.remove('active');
+      }
       selectedCity = btn.dataset.city;
 
       updateElectionId();
       await loadAndRender(currentElectionId);
     });
+
+    // Other 16 cities dropdown
+    if (DOM.otherCitiesSelect) {
+      DOM.otherCitiesSelect.addEventListener('change', async (e) => {
+        const city = e.target.value;
+        if (!city) return;
+        document.querySelectorAll('#citySelector .city-btn').forEach(b => b.classList.remove('active'));
+        DOM.otherCitiesSelect.classList.add('active');
+        selectedCity = city;
+
+        updateElectionId();
+        await loadAndRender(currentElectionId);
+      });
+    }
 
     // Year buttons
     DOM.yearSelector.addEventListener('click', async (e) => {

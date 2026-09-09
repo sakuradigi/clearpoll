@@ -1,0 +1,43 @@
+{
+  "electionId": "2026-chiayicounty-mayor",
+  "polls": [
+    {
+      "id": "cy2026-001",
+      "date": "2026-05-20",
+      "pollster": "rwnews",
+      "pollsterName": "鏡新聞",
+      "sampleSize": 1080,
+      "method": "phone",
+      "marginOfError": 2.98,
+      "results": {
+        "tsai_y_y": 52.1,
+        "chan_w_c": 29.8
+      },
+      "neutralResults": {
+        "tsai_y_y": 44.0,
+        "chan_w_c": 22.0
+      },
+      "undecided": 18.1,
+      "source": "https://www.mnews.tw/"
+    },
+    {
+      "id": "cy2026-002",
+      "date": "2026-08-16",
+      "pollster": "cnews",
+      "pollsterName": "匯流民調",
+      "sampleSize": 1070,
+      "method": "phone",
+      "marginOfError": 2.99,
+      "results": {
+        "tsai_y_y": 53.8,
+        "chan_w_c": 28.5
+      },
+      "neutralResults": {
+        "tsai_y_y": 46.0,
+        "chan_w_c": 21.0
+      },
+      "undecided": 17.7,
+      "source": "https://cnews.com.tw/"
+    }
+  ]
+}

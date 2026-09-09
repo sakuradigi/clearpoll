@@ -1,0 +1,43 @@
+{
+  "electionId": "2026-hualien-mayor",
+  "polls": [
+    {
+      "id": "hl2026-001",
+      "date": "2026-04-12",
+      "pollster": "rwreport",
+      "pollsterName": "菱傳媒",
+      "sampleSize": 1100,
+      "method": "online",
+      "marginOfError": 2.95,
+      "results": {
+        "wei_c_h": 56.8,
+        "kolas": 26.5
+      },
+      "neutralResults": {
+        "wei_c_h": 50.0,
+        "kolas": 20.0
+      },
+      "undecided": 16.7,
+      "source": "https://rwnews.tw/"
+    },
+    {
+      "id": "hl2026-002",
+      "date": "2026-08-10",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1005,
+      "method": "phone",
+      "marginOfError": 3.09,
+      "results": {
+        "wei_c_h": 58.2,
+        "kolas": 25.1
+      },
+      "neutralResults": {
+        "wei_c_h": 52.0,
+        "kolas": 19.5
+      },
+      "undecided": 16.7,
+      "source": "https://news.tvbs.com.tw/"
+    }
+  ]
+}

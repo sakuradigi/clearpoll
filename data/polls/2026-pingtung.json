@@ -1,0 +1,43 @@
+{
+  "electionId": "2026-pingtung-mayor",
+  "polls": [
+    {
+      "id": "pt2026-001",
+      "date": "2026-05-15",
+      "pollster": "shanshui",
+      "pollsterName": "山水民調",
+      "sampleSize": 1075,
+      "method": "phone",
+      "marginOfError": 2.99,
+      "results": {
+        "chou_c_m": 49.5,
+        "su_c_c": 36.2
+      },
+      "neutralResults": {
+        "chou_c_m": 41.0,
+        "su_c_c": 29.0
+      },
+      "undecided": 14.3,
+      "source": "https://www.upmedia.mg/"
+    },
+    {
+      "id": "pt2026-002",
+      "date": "2026-08-20",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1068,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": {
+        "chou_c_m": 48.2,
+        "su_c_c": 37.5
+      },
+      "neutralResults": {
+        "chou_c_m": 39.5,
+        "su_c_c": 31.0
+      },
+      "undecided": 14.3,
+      "source": "https://news.tvbs.com.tw/"
+    }
+  ]
+}

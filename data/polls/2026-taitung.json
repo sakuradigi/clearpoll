@@ -1,0 +1,43 @@
+{
+  "electionId": "2026-taitung-mayor",
+  "polls": [
+    {
+      "id": "tt2026-001",
+      "date": "2026-05-18",
+      "pollster": "cnews",
+      "pollsterName": "匯流民調",
+      "sampleSize": 1050,
+      "method": "phone",
+      "marginOfError": 3.02,
+      "results": {
+        "huang_c_p": 50.8,
+        "chen_y": 34.5
+      },
+      "neutralResults": {
+        "huang_c_p": 43.0,
+        "chen_y": 28.0
+      },
+      "undecided": 14.7,
+      "source": "https://cnews.com.tw/"
+    },
+    {
+      "id": "tt2026-002",
+      "date": "2026-08-15",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1008,
+      "method": "phone",
+      "marginOfError": 3.09,
+      "results": {
+        "huang_c_p": 52.6,
+        "chen_y": 33.4
+      },
+      "neutralResults": {
+        "huang_c_p": 45.0,
+        "chen_y": 27.0
+      },
+      "undecided": 14.0,
+      "source": "https://news.tvbs.com.tw/"
+    }
+  ]
+}

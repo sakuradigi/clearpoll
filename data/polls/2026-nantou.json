@@ -1,0 +1,43 @@
+{
+  "electionId": "2026-nantou-mayor",
+  "polls": [
+    {
+      "id": "nt2026-001",
+      "date": "2026-04-15",
+      "pollster": "focus",
+      "pollsterName": "關鍵調查",
+      "sampleSize": 1005,
+      "method": "phone",
+      "marginOfError": 3.09,
+      "results": {
+        "hsu_s_h": 52.8,
+        "tsai_p_h": 29.2
+      },
+      "neutralResults": {
+        "hsu_s_h": 46.0,
+        "tsai_p_h": 23.0
+      },
+      "undecided": 18.0,
+      "source": "https://www.storm.mg/"
+    },
+    {
+      "id": "nt2026-002",
+      "date": "2026-08-10",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1020,
+      "method": "phone",
+      "marginOfError": 3.07,
+      "results": {
+        "hsu_s_h": 54.2,
+        "tsai_p_h": 28.5
+      },
+      "neutralResults": {
+        "hsu_s_h": 48.0,
+        "tsai_p_h": 22.0
+      },
+      "undecided": 17.3,
+      "source": "https://news.tvbs.com.tw/"
+    }
+  ]
+}

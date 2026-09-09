@@ -1,0 +1,3 @@
+id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralResults,undecided,source
+tt2026-001,2026-05-18,cnews,匯流民調,1050,phone,3.02,"huang_c_p:50.8,chen_y:34.5","huang_c_p:43.0,chen_y:28.0",14.7,https://cnews.com.tw/
+tt2026-002,2026-08-15,tvbs,TVBS,1008,phone,3.09,"huang_c_p:52.6,chen_y:33.4","huang_c_p:45.0,chen_y:27.0",14.0,https://news.tvbs.com.tw/

@@ -1,0 +1,62 @@
+{
+  "electionId": "2026-keelung-mayor",
+  "polls": [
+    {
+      "id": "kl2026-001",
+      "date": "2026-03-15",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1005,
+      "method": "phone",
+      "marginOfError": 3.1,
+      "results": {
+        "hsieh": 45.0,
+        "tung": 30.0
+      },
+      "neutralResults": {
+        "hsieh": 38.0,
+        "tung": 25.0
+      },
+      "undecided": 25.0,
+      "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "kl2026-002",
+      "date": "2026-07-22",
+      "pollster": "rwnews",
+      "pollsterName": "鏡新聞",
+      "sampleSize": 1080,
+      "method": "phone",
+      "marginOfError": 2.98,
+      "results": {
+        "hsieh": 38.5,
+        "tung": 36.0
+      },
+      "neutralResults": {
+        "hsieh": 33.0,
+        "tung": 31.0
+      },
+      "undecided": 25.5,
+      "source": "https://www.mnews.tw/"
+    },
+    {
+      "id": "kl2026-003",
+      "date": "2026-08-18",
+      "pollster": "shanshui",
+      "pollsterName": "山水民調（上報委託）",
+      "sampleSize": 1072,
+      "method": "phone",
+      "marginOfError": 2.99,
+      "results": {
+        "hsieh": 38.6,
+        "tung": 33.2
+      },
+      "neutralResults": {
+        "hsieh": 32.5,
+        "tung": 29.8
+      },
+      "undecided": 28.2,
+      "source": "https://www.upmedia.mg/"
+    }
+  ]
+}

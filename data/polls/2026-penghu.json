@@ -1,0 +1,43 @@
+{
+  "electionId": "2026-penghu-mayor",
+  "polls": [
+    {
+      "id": "ph2026-001",
+      "date": "2026-06-08",
+      "pollster": "shanshui",
+      "pollsterName": "山水民調",
+      "sampleSize": 1070,
+      "method": "phone",
+      "marginOfError": 2.99,
+      "results": {
+        "chen_s_c": 41.0,
+        "chen_k_f": 41.2
+      },
+      "neutralResults": {
+        "chen_s_c": 34.0,
+        "chen_k_f": 34.5
+      },
+      "undecided": 17.8,
+      "source": "https://www.upmedia.mg/"
+    },
+    {
+      "id": "ph2026-002",
+      "date": "2026-08-25",
+      "pollster": "focus",
+      "pollsterName": "關鍵調查",
+      "sampleSize": 1068,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": {
+        "chen_s_c": 41.8,
+        "chen_k_f": 40.5
+      },
+      "neutralResults": {
+        "chen_s_c": 35.0,
+        "chen_k_f": 33.5
+      },
+      "undecided": 17.7,
+      "source": "https://www.storm.mg/"
+    }
+  ]
+}

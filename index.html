@@ -99,6 +99,25 @@
         <button class="city-btn" data-city="taichung">台中市</button>
         <button class="city-btn" data-city="tainan">台南市</button>
         <button class="city-btn" data-city="kaohsiung">高雄市</button>
+        <select id="otherCitiesSelect" class="city-select-dropdown" aria-label="選擇其他縣市">
+          <option value="" disabled selected>其他 16 縣市 ▾</option>
+          <option value="keelung">基隆市</option>
+          <option value="hsinchucity">新竹市</option>
+          <option value="hsinchucounty">新竹縣</option>
+          <option value="miaoli">苗栗縣</option>
+          <option value="changhua">彰化縣</option>
+          <option value="nantou">南投縣</option>
+          <option value="yunlin">雲林縣</option>
+          <option value="chiayicity">嘉義市</option>
+          <option value="chiayicounty">嘉義縣</option>
+          <option value="pingtung">屏東縣</option>
+          <option value="yilan">宜蘭縣</option>
+          <option value="hualien">花蓮縣</option>
+          <option value="taitung">台東縣</option>
+          <option value="penghu">澎湖縣</option>
+          <option value="kinmen">金門縣</option>
+          <option value="lienchiang">連江縣</option>
+        </select>
       </div>
       <div class="year-selector" id="yearSelector">
         <button class="year-btn active" data-year="2026">2026 預測</button>
@@ -122,15 +141,63 @@
 
     <!-- Dashboard Section -->
     <div id="dashboardSection" class="fade-in">
-      <section class="hero-section" style="padding: var(--space-lg) 0 var(--space-md) 0;">
-        <h1 class="hero-title text-gradient" style="margin-bottom: var(--space-xs);">直轄市選情大盤總覽</h1>
-        <p style="color: var(--color-text-secondary); max-width: 650px; margin: 0 auto var(--space-lg) auto;">
-          本站彙整各大機構民調數據，透過加權模型與未表態分配，即時呈現六都市長選舉預測結果。點擊卡片可查看深度分析。
-        </p>
+      
+      <!-- Tier 1: National Interactive Map & Party Statistics Overview -->
+      <section class="national-overview-section" id="nationalOverviewSection">
+        <section class="hero-section" style="padding: var(--space-md) 0 var(--space-sm) 0;">
+          <h1 class="hero-title text-gradient" style="margin-bottom: var(--space-xs);">2026 全台選戰版圖總覽</h1>
+          <p style="color: var(--color-text-secondary); max-width: 720px; margin: 0 auto var(--space-md) auto;">
+            整合全台 22 縣市最新公開科學民調，運用 ClearPoll 動態時效衰減、抗機構偏誤校正與蒙地卡羅隨機擾動模擬，即時推算各黨勝選機率與席次分佈。點擊地圖或卡片可直接跳轉深度分析。
+          </p>
+        </section>
+        <div class="national-map-layout">
+          <div class="taiwan-map-wrapper">
+            <div id="taiwanMapContainer" class="taiwan-map-container">
+              <div class="loading-shimmer" style="width: 180px; height: 180px; border-radius: 50%;"></div>
+            </div>
+          </div>
+          <div class="party-stats-wrapper" id="partyStatsContainer">
+            <div class="loading-shimmer" style="width: 100%; height: 360px; border-radius: 12px;"></div>
+          </div>
+        </div>
       </section>
-      <div class="dashboard-grid" id="dashboardGrid">
-        <!-- Dynamically populated cards -->
-      </div>
+
+      <!-- Historical View Table Container (when 2022 / 2018 is selected) -->
+      <div id="historicalTableContainer" style="display: none;"></div>
+
+      <!-- Tier 2: Six Municipalities (直轄市六都) -->
+      <section class="metro-overview-section" id="sixMetrosSection" style="margin-top: var(--space-2xl);">
+        <div class="section-title-bar">
+          <div>
+            <h2 class="section-heading"><span style="margin-right: 8px;">🏙️</span> 直轄市選情大盤 (六都)</h2>
+            <p class="section-subheading">全台焦點指標戰區，點擊卡片可查看深度民調趨勢與模型加權細項</p>
+          </div>
+        </div>
+        <div class="dashboard-grid" id="sixMetrosGrid">
+          <!-- Dynamically populated 6 metro cards -->
+        </div>
+      </section>
+
+      <!-- Tier 3: Remaining 16 Counties & Cities (臺灣省及離島16縣市) -->
+      <section class="other-counties-section" id="otherCountiesSection" style="margin-top: var(--space-2xl); padding-bottom: var(--space-3xl);">
+        <div class="section-title-bar">
+          <div>
+            <h2 class="section-heading"><span style="margin-right: 8px;">🗺️</span> 臺灣省及離島選情大盤 (16 縣市)</h2>
+            <p class="section-subheading">含北部、中部、南部、東部及離島縣市，點擊右方標籤可快速分區篩選</p>
+          </div>
+          <div class="region-filter-bar" id="regionFilterBar">
+            <button class="region-btn active" data-region="all">全部 (16)</button>
+            <button class="region-btn" data-region="north">北部 (3)</button>
+            <button class="region-btn" data-region="central">中部 (4)</button>
+            <button class="region-btn" data-region="south">南部 (3)</button>
+            <button class="region-btn" data-region="east_island">東部離島 (6)</button>
+          </div>
+        </div>
+        <div class="dashboard-grid" id="otherCountiesGrid">
+          <!-- Dynamically populated 16 county cards -->
+        </div>
+      </section>
+
     </div>
 
     <!-- Methodology View Section -->
@@ -503,6 +570,7 @@
   <!-- App modules -->
   <script src="js/model.js"></script>
   <script src="js/charts.js"></script>
+  <script src="js/map.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,47 @@
+{
+  "electionId": "2026-lienchiang-mayor",
+  "polls": [
+    {
+      "id": "lc2026-001",
+      "date": "2026-04-20",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS／地方聯合",
+      "sampleSize": 800,
+      "method": "phone",
+      "marginOfError": 3.46,
+      "results": {
+        "wang_c_m": 58.0,
+        "tsao_e_y": 31.5,
+        "lee_w": 7.0
+      },
+      "neutralResults": {
+        "wang_c_m": 52.0,
+        "tsao_e_y": 28.0,
+        "lee_w": 5.0
+      },
+      "undecided": 3.5,
+      "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "lc2026-002",
+      "date": "2026-08-15",
+      "pollster": "focus",
+      "pollsterName": "連江地方委託／關鍵調查",
+      "sampleSize": 850,
+      "method": "phone",
+      "marginOfError": 3.36,
+      "results": {
+        "wang_c_m": 56.5,
+        "tsao_e_y": 32.2,
+        "lee_w": 7.8
+      },
+      "neutralResults": {
+        "wang_c_m": 50.0,
+        "tsao_e_y": 29.0,
+        "lee_w": 6.0
+      },
+      "undecided": 3.5,
+      "source": "https://www.matsu-news.gov.tw/"
+    }
+  ]
+}

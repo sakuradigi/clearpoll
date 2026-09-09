@@ -10,10 +10,26 @@
       "date": "2026-11-28",
       "pollsFile": "data/polls/2026-kaohsiung.json",
       "candidates": [
-        { "id": "lai", "name": "賴瑞隆", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": false },
-        { "id": "ke", "name": "柯志恩", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": false }
+        {
+          "id": "lai",
+          "name": "賴瑞隆",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        },
+        {
+          "id": "ke",
+          "name": "柯志恩",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        }
       ],
-      "status": "upcoming"
+      "status": "upcoming",
+      "metro": true,
+      "region": "south"
     },
     {
       "id": "2022-kaohsiung-mayor",
@@ -25,10 +41,26 @@
       "date": "2022-11-26",
       "pollsFile": "data/polls/2022-kaohsiung.json",
       "candidates": [
-        { "id": "chen", "name": "陳其邁", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": true },
-        { "id": "ke", "name": "柯志恩", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": false }
+        {
+          "id": "chen",
+          "name": "陳其邁",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": true
+        },
+        {
+          "id": "ke",
+          "name": "柯志恩",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        }
       ],
-      "status": "completed"
+      "status": "completed",
+      "metro": true,
+      "region": "south"
     },
     {
       "id": "2018-kaohsiung-mayor",
@@ -40,7 +72,9 @@
       "date": "2018-11-24",
       "pollsFile": "",
       "candidates": [],
-      "status": "completed"
+      "status": "completed",
+      "metro": true,
+      "region": "south"
     },
     {
       "id": "2026-taipei-mayor",
@@ -52,10 +86,26 @@
       "date": "2026-11-28",
       "pollsFile": "data/polls/2026-taipei.json",
       "candidates": [
-        { "id": "chiang", "name": "蔣萬安", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": true },
-        { "id": "shen", "name": "沈伯洋", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": false }
+        {
+          "id": "chiang",
+          "name": "蔣萬安",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": true
+        },
+        {
+          "id": "shen",
+          "name": "沈伯洋",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
       ],
-      "status": "upcoming"
+      "status": "upcoming",
+      "metro": true,
+      "region": "north"
     },
     {
       "id": "2022-taipei-mayor",
@@ -67,7 +117,9 @@
       "date": "2022-11-26",
       "pollsFile": "",
       "candidates": [],
-      "status": "completed"
+      "status": "completed",
+      "metro": true,
+      "region": "north"
     },
     {
       "id": "2018-taipei-mayor",
@@ -79,7 +131,9 @@
       "date": "2018-11-24",
       "pollsFile": "",
       "candidates": [],
-      "status": "completed"
+      "status": "completed",
+      "metro": true,
+      "region": "north"
     },
     {
       "id": "2026-newtaipei-mayor",
@@ -91,10 +145,26 @@
       "date": "2026-11-28",
       "pollsFile": "data/polls/2026-newtaipei.json",
       "candidates": [
-        { "id": "li", "name": "李四川", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": false },
-        { "id": "su", "name": "蘇巧慧", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": false }
+        {
+          "id": "li",
+          "name": "李四川",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        },
+        {
+          "id": "su",
+          "name": "蘇巧慧",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
       ],
-      "status": "upcoming"
+      "status": "upcoming",
+      "metro": true,
+      "region": "north"
     },
     {
       "id": "2022-newtaipei-mayor",
@@ -106,7 +176,9 @@
       "date": "2022-11-26",
       "pollsFile": "",
       "candidates": [],
-      "status": "completed"
+      "status": "completed",
+      "metro": true,
+      "region": "north"
     },
     {
       "id": "2018-newtaipei-mayor",
@@ -118,7 +190,9 @@
       "date": "2018-11-24",
       "pollsFile": "",
       "candidates": [],
-      "status": "completed"
+      "status": "completed",
+      "metro": true,
+      "region": "north"
     },
     {
       "id": "2026-taoyuan-mayor",
@@ -130,10 +204,26 @@
       "date": "2026-11-28",
       "pollsFile": "data/polls/2026-taoyuan.json",
       "candidates": [
-        { "id": "chang", "name": "張善政", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": true },
-        { "id": "huang", "name": "黃世杰", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": false }
+        {
+          "id": "chang",
+          "name": "張善政",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": true
+        },
+        {
+          "id": "huang",
+          "name": "黃世杰",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
       ],
-      "status": "upcoming"
+      "status": "upcoming",
+      "metro": true,
+      "region": "north"
     },
     {
       "id": "2022-taoyuan-mayor",
@@ -145,7 +235,9 @@
       "date": "2022-11-26",
       "pollsFile": "",
       "candidates": [],
-      "status": "completed"
+      "status": "completed",
+      "metro": true,
+      "region": "north"
     },
     {
       "id": "2018-taoyuan-mayor",
@@ -157,7 +249,9 @@
       "date": "2018-11-24",
       "pollsFile": "",
       "candidates": [],
-      "status": "completed"
+      "status": "completed",
+      "metro": true,
+      "region": "north"
     },
     {
       "id": "2026-taichung-mayor",
@@ -169,10 +263,26 @@
       "date": "2026-11-28",
       "pollsFile": "data/polls/2026-taichung.json",
       "candidates": [
-        { "id": "chiang_k", "name": "江啟臣", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": false },
-        { "id": "ho", "name": "何欣純", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": false }
+        {
+          "id": "chiang_k",
+          "name": "江啟臣",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        },
+        {
+          "id": "ho",
+          "name": "何欣純",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
       ],
-      "status": "upcoming"
+      "status": "upcoming",
+      "metro": true,
+      "region": "central"
     },
     {
       "id": "2022-taichung-mayor",
@@ -184,7 +294,9 @@
       "date": "2022-11-26",
       "pollsFile": "",
       "candidates": [],
-      "status": "completed"
+      "status": "completed",
+      "metro": true,
+      "region": "central"
     },
     {
       "id": "2018-taichung-mayor",
@@ -196,7 +308,9 @@
       "date": "2018-11-24",
       "pollsFile": "",
       "candidates": [],
-      "status": "completed"
+      "status": "completed",
+      "metro": true,
+      "region": "central"
     },
     {
       "id": "2026-tainan-mayor",
@@ -208,10 +322,26 @@
       "date": "2026-11-28",
       "pollsFile": "data/polls/2026-tainan.json",
       "candidates": [
-        { "id": "chen_t", "name": "陳亭妃", "party": "DPP", "partyName": "民主進步黨", "color": "#1B9431", "incumbent": false },
-        { "id": "hsie", "name": "謝龍介", "party": "KMT", "partyName": "中國國民黨", "color": "#000095", "incumbent": false }
+        {
+          "id": "chen_t",
+          "name": "陳亭妃",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        },
+        {
+          "id": "hsie",
+          "name": "謝龍介",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        }
       ],
-      "status": "upcoming"
+      "status": "upcoming",
+      "metro": true,
+      "region": "south"
     },
     {
       "id": "2022-tainan-mayor",
@@ -223,7 +353,9 @@
       "date": "2022-11-26",
       "pollsFile": "",
       "candidates": [],
-      "status": "completed"
+      "status": "completed",
+      "metro": true,
+      "region": "south"
     },
     {
       "id": "2018-tainan-mayor",
@@ -235,7 +367,529 @@
       "date": "2018-11-24",
       "pollsFile": "",
       "candidates": [],
-      "status": "completed"
+      "status": "completed",
+      "metro": true,
+      "region": "south"
+    },
+    {
+      "id": "2026-keelung-mayor",
+      "name": "2026 基隆市長選舉",
+      "type": "mayor",
+      "city": "keelung",
+      "cityName": "基隆市",
+      "region": "north",
+      "metro": false,
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-keelung.json",
+      "candidates": [
+        {
+          "id": "hsieh",
+          "name": "謝國樑",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": true
+        },
+        {
+          "id": "tung",
+          "name": "童子瑋",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
+      ],
+      "status": "upcoming"
+    },
+    {
+      "id": "2026-hsinchucity-mayor",
+      "name": "2026 新竹市長選舉",
+      "type": "mayor",
+      "city": "hsinchucity",
+      "cityName": "新竹市",
+      "region": "north",
+      "metro": false,
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-hsinchucity.json",
+      "candidates": [
+        {
+          "id": "kao",
+          "name": "高虹安",
+          "party": "IND",
+          "partyName": "無黨籍(民眾黨支持)",
+          "color": "#28C8C8",
+          "incumbent": true
+        },
+        {
+          "id": "lin_c",
+          "name": "林志潔",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        },
+        {
+          "id": "cheng_c",
+          "name": "鄭正鈐",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        }
+      ],
+      "status": "upcoming"
+    },
+    {
+      "id": "2026-hsinchucounty-mayor",
+      "name": "2026 新竹縣長選舉",
+      "type": "mayor",
+      "city": "hsinchucounty",
+      "cityName": "新竹縣",
+      "region": "north",
+      "metro": false,
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-hsinchucounty.json",
+      "candidates": [
+        {
+          "id": "hsu",
+          "name": "徐欣瑩",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        },
+        {
+          "id": "cheng_c_f",
+          "name": "鄭朝方",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
+      ],
+      "status": "upcoming"
+    },
+    {
+      "id": "2026-miaoli-mayor",
+      "name": "2026 苗栗縣長選舉",
+      "type": "mayor",
+      "city": "miaoli",
+      "cityName": "苗栗縣",
+      "region": "central",
+      "metro": false,
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-miaoli.json",
+      "candidates": [
+        {
+          "id": "chung",
+          "name": "鍾東錦",
+          "party": "IND",
+          "partyName": "無黨籍(泛藍)",
+          "color": "#000095",
+          "incumbent": true
+        },
+        {
+          "id": "chen_k_h",
+          "name": "陳光軒",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
+      ],
+      "status": "upcoming"
+    },
+    {
+      "id": "2026-changhua-mayor",
+      "name": "2026 彰化縣長選舉",
+      "type": "mayor",
+      "city": "changhua",
+      "cityName": "彰化縣",
+      "region": "central",
+      "metro": false,
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-changhua.json",
+      "candidates": [
+        {
+          "id": "chen_s_y",
+          "name": "陳素月",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        },
+        {
+          "id": "hsieh_y_f",
+          "name": "謝衣鳯",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        }
+      ],
+      "status": "upcoming"
+    },
+    {
+      "id": "2026-nantou-mayor",
+      "name": "2026 南投縣長選舉",
+      "type": "mayor",
+      "city": "nantou",
+      "cityName": "南投縣",
+      "region": "central",
+      "metro": false,
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-nantou.json",
+      "candidates": [
+        {
+          "id": "hsu_s_h",
+          "name": "許淑華",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": true
+        },
+        {
+          "id": "tsai_p_h",
+          "name": "蔡培慧",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
+      ],
+      "status": "upcoming"
+    },
+    {
+      "id": "2026-yunlin-mayor",
+      "name": "2026 雲林縣長選舉",
+      "type": "mayor",
+      "city": "yunlin",
+      "cityName": "雲林縣",
+      "region": "central",
+      "metro": false,
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-yunlin.json",
+      "candidates": [
+        {
+          "id": "chang_c_c",
+          "name": "張嘉郡",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        },
+        {
+          "id": "liu_c_k",
+          "name": "劉建國",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
+      ],
+      "status": "upcoming"
+    },
+    {
+      "id": "2026-chiayicity-mayor",
+      "name": "2026 嘉義市長選舉",
+      "type": "mayor",
+      "city": "chiayicity",
+      "cityName": "嘉義市",
+      "region": "south",
+      "metro": false,
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-chiayicity.json",
+      "candidates": [
+        {
+          "id": "wang_m_h",
+          "name": "王美惠",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        },
+        {
+          "id": "chang_c_k",
+          "name": "張啓楷",
+          "party": "TPP",
+          "partyName": "台灣民眾黨",
+          "color": "#28C8C8",
+          "incumbent": false
+        },
+        {
+          "id": "cheng_k_h",
+          "name": "鄭光宏",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        }
+      ],
+      "status": "upcoming"
+    },
+    {
+      "id": "2026-chiayicounty-mayor",
+      "name": "2026 嘉義縣長選舉",
+      "type": "mayor",
+      "city": "chiayicounty",
+      "cityName": "嘉義縣",
+      "region": "south",
+      "metro": false,
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-chiayicounty.json",
+      "candidates": [
+        {
+          "id": "tsai_y_y",
+          "name": "蔡易餘",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        },
+        {
+          "id": "chan_w_c",
+          "name": "詹琬蓁",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        }
+      ],
+      "status": "upcoming"
+    },
+    {
+      "id": "2026-pingtung-mayor",
+      "name": "2026 屏東縣長選舉",
+      "type": "mayor",
+      "city": "pingtung",
+      "cityName": "屏東縣",
+      "region": "south",
+      "metro": false,
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-pingtung.json",
+      "candidates": [
+        {
+          "id": "chou_c_m",
+          "name": "周春米",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": true
+        },
+        {
+          "id": "su_c_c",
+          "name": "蘇清泉",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        }
+      ],
+      "status": "upcoming"
+    },
+    {
+      "id": "2026-yilan-mayor",
+      "name": "2026 宜蘭縣長選舉",
+      "type": "mayor",
+      "city": "yilan",
+      "cityName": "宜蘭縣",
+      "region": "east_island",
+      "metro": false,
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-yilan.json",
+      "candidates": [
+        {
+          "id": "chen_c_y",
+          "name": "陳俊宇",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        },
+        {
+          "id": "wu_t_h",
+          "name": "吳宗憲",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        }
+      ],
+      "status": "upcoming"
+    },
+    {
+      "id": "2026-hualien-mayor",
+      "name": "2026 花蓮縣長選舉",
+      "type": "mayor",
+      "city": "hualien",
+      "cityName": "花蓮縣",
+      "region": "east_island",
+      "metro": false,
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-hualien.json",
+      "candidates": [
+        {
+          "id": "wei_c_h",
+          "name": "魏嘉賢",
+          "party": "IND",
+          "partyName": "無黨籍(泛藍)",
+          "color": "#000095",
+          "incumbent": false
+        },
+        {
+          "id": "kolas",
+          "name": "Kolas Yotaka",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
+      ],
+      "status": "upcoming"
+    },
+    {
+      "id": "2026-taitung-mayor",
+      "name": "2026 台東縣長選舉",
+      "type": "mayor",
+      "city": "taitung",
+      "cityName": "台東縣",
+      "region": "east_island",
+      "metro": false,
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-taitung.json",
+      "candidates": [
+        {
+          "id": "huang_c_p",
+          "name": "黃建賓",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        },
+        {
+          "id": "chen_y",
+          "name": "陳瑩",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
+      ],
+      "status": "upcoming"
+    },
+    {
+      "id": "2026-penghu-mayor",
+      "name": "2026 澎湖縣長選舉",
+      "type": "mayor",
+      "city": "penghu",
+      "cityName": "澎湖縣",
+      "region": "east_island",
+      "metro": false,
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-penghu.json",
+      "candidates": [
+        {
+          "id": "chen_s_c",
+          "name": "陳雙全",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        },
+        {
+          "id": "chen_k_f",
+          "name": "陳光復",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": true
+        }
+      ],
+      "status": "upcoming"
+    },
+    {
+      "id": "2026-kinmen-mayor",
+      "name": "2026 金門縣長選舉",
+      "type": "mayor",
+      "city": "kinmen",
+      "cityName": "金門縣",
+      "region": "east_island",
+      "metro": false,
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-kinmen.json",
+      "candidates": [
+        {
+          "id": "chen_y_c",
+          "name": "陳玉珍",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        },
+        {
+          "id": "chen_f_h",
+          "name": "陳福海",
+          "party": "IND",
+          "partyName": "無黨籍(民眾黨支持)",
+          "color": "#28C8C8",
+          "incumbent": true
+        }
+      ],
+      "status": "upcoming"
+    },
+    {
+      "id": "2026-lienchiang-mayor",
+      "name": "2026 連江縣長選舉",
+      "type": "mayor",
+      "city": "lienchiang",
+      "cityName": "連江縣",
+      "region": "east_island",
+      "metro": false,
+      "year": "2026",
+      "date": "2026-11-28",
+      "pollsFile": "data/polls/2026-lienchiang.json",
+      "candidates": [
+        {
+          "id": "wang_c_m",
+          "name": "王忠銘",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": true
+        },
+        {
+          "id": "tsao_e_y",
+          "name": "曹爾元",
+          "party": "IND",
+          "partyName": "無黨籍(泛藍)",
+          "color": "#888888",
+          "incumbent": false
+        },
+        {
+          "id": "lee_w",
+          "name": "李問",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
+      ],
+      "status": "upcoming"
     }
   ]
 }

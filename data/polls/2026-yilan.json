@@ -1,0 +1,43 @@
+{
+  "electionId": "2026-yilan-mayor",
+  "polls": [
+    {
+      "id": "yln2026-001",
+      "date": "2026-06-10",
+      "pollster": "focus",
+      "pollsterName": "關鍵調查",
+      "sampleSize": 1060,
+      "method": "phone",
+      "marginOfError": 3.01,
+      "results": {
+        "chen_c_y": 38.2,
+        "wu_t_h": 33.5
+      },
+      "neutralResults": {
+        "chen_c_y": 31.0,
+        "wu_t_h": 27.0
+      },
+      "undecided": 28.3,
+      "source": "https://www.storm.mg/"
+    },
+    {
+      "id": "yln2026-002",
+      "date": "2026-08-24",
+      "pollster": "shanshui",
+      "pollsterName": "山水民調（林國漳陣營公布）",
+      "sampleSize": 1072,
+      "method": "phone",
+      "marginOfError": 2.99,
+      "results": {
+        "chen_c_y": 39.5,
+        "wu_t_h": 32.8
+      },
+      "neutralResults": {
+        "chen_c_y": 33.0,
+        "wu_t_h": 26.5
+      },
+      "undecided": 27.7,
+      "source": "https://www.upmedia.mg/"
+    }
+  ]
+}

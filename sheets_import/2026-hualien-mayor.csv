@@ -1,0 +1,3 @@
+id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralResults,undecided,source
+hl2026-001,2026-04-12,rwreport,菱傳媒,1100,online,2.95,"wei_c_h:56.8,kolas:26.5","wei_c_h:50.0,kolas:20.0",16.7,https://rwnews.tw/
+hl2026-002,2026-08-10,tvbs,TVBS,1005,phone,3.09,"wei_c_h:58.2,kolas:25.1","wei_c_h:52.0,kolas:19.5",16.7,https://news.tvbs.com.tw/

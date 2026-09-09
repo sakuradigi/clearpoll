@@ -1,0 +1,43 @@
+{
+  "electionId": "2026-kinmen-mayor",
+  "polls": [
+    {
+      "id": "km2026-001",
+      "date": "2026-05-12",
+      "pollster": "appro",
+      "pollsterName": "艾普羅民調",
+      "sampleSize": 1020,
+      "method": "phone",
+      "marginOfError": 3.07,
+      "results": {
+        "chen_y_c": 53.8,
+        "chen_f_h": 37.5
+      },
+      "neutralResults": {
+        "chen_y_c": 47.0,
+        "chen_f_h": 33.0
+      },
+      "undecided": 8.7,
+      "source": "https://www.chinatimes.com/"
+    },
+    {
+      "id": "km2026-002",
+      "date": "2026-08-20",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1005,
+      "method": "phone",
+      "marginOfError": 3.09,
+      "results": {
+        "chen_y_c": 55.4,
+        "chen_f_h": 36.2
+      },
+      "neutralResults": {
+        "chen_y_c": 49.0,
+        "chen_f_h": 32.0
+      },
+      "undecided": 8.4,
+      "source": "https://news.tvbs.com.tw/"
+    }
+  ]
+}

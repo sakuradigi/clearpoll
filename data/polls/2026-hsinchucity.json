@@ -1,0 +1,47 @@
+{
+  "electionId": "2026-hsinchucity-mayor",
+  "polls": [
+    {
+      "id": "hc2026-001",
+      "date": "2026-06-25",
+      "pollster": "rwnews",
+      "pollsterName": "鏡新聞",
+      "sampleSize": 1085,
+      "method": "phone",
+      "marginOfError": 2.97,
+      "results": {
+        "kao": 36.8,
+        "lin_c": 29.5,
+        "cheng_c": 17.8
+      },
+      "neutralResults": {
+        "kao": 35.0,
+        "lin_c": 22.0,
+        "cheng_c": 15.0
+      },
+      "undecided": 15.9,
+      "source": "https://www.mnews.tw/"
+    },
+    {
+      "id": "hc2026-002",
+      "date": "2026-08-12",
+      "pollster": "cnews",
+      "pollsterName": "匯流民調",
+      "sampleSize": 1068,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": {
+        "kao": 37.4,
+        "lin_c": 28.2,
+        "cheng_c": 18.5
+      },
+      "neutralResults": {
+        "kao": 36.2,
+        "lin_c": 21.5,
+        "cheng_c": 14.8
+      },
+      "undecided": 15.9,
+      "source": "https://cnews.com.tw/"
+    }
+  ]
+}

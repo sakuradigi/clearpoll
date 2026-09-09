@@ -1,0 +1,4 @@
+id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralResults,undecided,source
+kl2026-001,2026-03-15,tvbs,TVBS,1005,phone,3.1,"hsieh:45.0,tung:30.0","hsieh:38.0,tung:25.0",25.0,https://news.tvbs.com.tw/
+kl2026-002,2026-07-22,rwnews,鏡新聞,1080,phone,2.98,"hsieh:38.5,tung:36.0","hsieh:33.0,tung:31.0",25.5,https://www.mnews.tw/
+kl2026-003,2026-08-18,shanshui,山水民調（上報委託）,1072,phone,2.99,"hsieh:38.6,tung:33.2","hsieh:32.5,tung:29.8",28.2,https://www.upmedia.mg/

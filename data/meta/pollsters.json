@@ -6,7 +6,7 @@
       "fullName": "TVBS民調中心",
       "credibilityScore": 0.88,
       "leanDirection": "slightly-blue",
-      "leanMagnitude": 0.10,
+      "leanMagnitude": 0.1,
       "historicalAccuracy": 0.83,
       "methodology": "CATI電腦輔助電話訪問（市話+手機雙底冊）",
       "notes": "長期追蹤型民調，樣本品質穩定，歷屆選舉預測誤差約 2-3%，資訊揭露完整"
@@ -18,7 +18,7 @@
       "credibilityScore": 0.85,
       "leanDirection": "slightly-blue",
       "leanMagnitude": 0.12,
-      "historicalAccuracy": 0.80,
+      "historicalAccuracy": 0.8,
       "methodology": "CATI電腦輔助電話訪問",
       "notes": "泛藍傾向，但長期追蹤品質穩定，具備學術合作基礎"
     },
@@ -73,7 +73,7 @@
       "credibilityScore": 0.73,
       "leanDirection": "slightly-green",
       "leanMagnitude": 0.12,
-      "historicalAccuracy": 0.70,
+      "historicalAccuracy": 0.7,
       "methodology": "委託山水民調執行CATI電話訪問",
       "notes": "委託山水執行，調查品質取決於執行單位"
     },
@@ -84,7 +84,7 @@
       "credibilityScore": 0.72,
       "leanDirection": "slightly-blue",
       "leanMagnitude": 0.12,
-      "historicalAccuracy": 0.70,
+      "historicalAccuracy": 0.7,
       "methodology": "委託山水民意研究公司以CATI執行",
       "notes": "2025-2026年新興媒體民調，委託山水執行，調查方法論揭露尚可，歷史驗證數據不足"
     },
@@ -95,7 +95,7 @@
       "credibilityScore": 0.72,
       "leanDirection": "slightly-green",
       "leanMagnitude": 0.15,
-      "historicalAccuracy": 0.70,
+      "historicalAccuracy": 0.7,
       "methodology": "電話調查",
       "notes": "具政治創辦背景（偏綠），定期發布六都民調，交叉分析齊全但獨立性略有疑慮"
     },
@@ -103,7 +103,7 @@
       "id": "rwnews",
       "name": "鏡新聞",
       "fullName": "鏡新聞（大地民調委託）",
-      "credibilityScore": 0.70,
+      "credibilityScore": 0.7,
       "leanDirection": "slightly-green",
       "leanMagnitude": 0.15,
       "historicalAccuracy": 0.68,
@@ -116,7 +116,7 @@
       "fullName": "匯流新聞網民調",
       "credibilityScore": 0.68,
       "leanDirection": "slightly-green",
-      "leanMagnitude": 0.10,
+      "leanMagnitude": 0.1,
       "historicalAccuracy": 0.66,
       "methodology": "電話調查",
       "notes": "媒體民調，調查方法論透明度偏低，歷史驗證數據有限"
@@ -149,7 +149,7 @@
       "fullName": "放言媒體（委託山水民調）",
       "credibilityScore": 0.68,
       "leanDirection": "green",
-      "leanMagnitude": 0.20,
+      "leanMagnitude": 0.2,
       "historicalAccuracy": 0.65,
       "methodology": "委託山水民意研究公司執行CATI電話訪問",
       "notes": "偏綠色彩明顯，委託山水執行，機構獨立性較低"
@@ -186,6 +186,39 @@
       "historicalAccuracy": 0.55,
       "methodology": "陣營委託民調",
       "notes": "候選人自行委託，公信力較低，結果可能經選擇性揭露"
+    },
+    {
+      "id": "appro",
+      "name": "艾普羅民調",
+      "fullName": "艾普羅民意調查股份有限公司",
+      "credibilityScore": 0.77,
+      "leanDirection": "slightly-blue",
+      "leanMagnitude": 0.1,
+      "historicalAccuracy": 0.75,
+      "methodology": "CATI電腦輔助電話訪問",
+      "notes": "長期執行各地方縣市首長與政策滿意度調查，抽樣架構完整"
+    },
+    {
+      "id": "focus",
+      "name": "關鍵調查",
+      "fullName": "關鍵調查有限公司",
+      "credibilityScore": 0.74,
+      "leanDirection": "neutral",
+      "leanMagnitude": 0.08,
+      "historicalAccuracy": 0.72,
+      "methodology": "CATI電腦輔助電話訪問",
+      "notes": "專精地方縣市長選舉調查與公共政策評估"
+    },
+    {
+      "id": "rwreport",
+      "name": "菱傳媒",
+      "fullName": "菱傳媒（皮爾森數據執行）",
+      "credibilityScore": 0.75,
+      "leanDirection": "neutral",
+      "leanMagnitude": 0.08,
+      "historicalAccuracy": 0.73,
+      "methodology": "網路調查（皮爾森數據執行，性別、年齡、戶籍加權）",
+      "notes": "以大樣本網路調查見長，長期追蹤全國各縣市首長滿意度與支持度"
     }
   ]
 }

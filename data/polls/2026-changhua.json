@@ -1,0 +1,43 @@
+{
+  "electionId": "2026-changhua-mayor",
+  "polls": [
+    {
+      "id": "ch2026-001",
+      "date": "2026-06-12",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS",
+      "sampleSize": 1068,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": {
+        "chen_s_y": 37.2,
+        "hsieh_y_f": 36.8
+      },
+      "neutralResults": {
+        "chen_s_y": 30.0,
+        "hsieh_y_f": 32.0
+      },
+      "undecided": 26.0,
+      "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "ch2026-002",
+      "date": "2026-08-20",
+      "pollster": "ettoday",
+      "pollsterName": "ETtoday民調雲",
+      "sampleSize": 1150,
+      "method": "phone",
+      "marginOfError": 2.89,
+      "results": {
+        "chen_s_y": 38.5,
+        "hsieh_y_f": 35.2
+      },
+      "neutralResults": {
+        "chen_s_y": 32.0,
+        "hsieh_y_f": 30.5
+      },
+      "undecided": 26.3,
+      "source": "https://www.ettoday.net/"
+    }
+  ]
+}
