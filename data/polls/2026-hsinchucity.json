@@ -10,16 +10,16 @@
       "method": "phone",
       "marginOfError": 2.97,
       "results": {
-        "kao": 36.8,
-        "lin_c": 29.5,
-        "cheng_c": 17.8
+        "kao": 37.5,
+        "chuang_c_c": 30.2,
+        "ho_c_y": 16.1
       },
       "neutralResults": {
-        "kao": 35.0,
-        "lin_c": 22.0,
-        "cheng_c": 15.0
+        "kao": 36.0,
+        "chuang_c_c": 23.0,
+        "ho_c_y": 14.0
       },
-      "undecided": 15.9,
+      "undecided": 16.2,
       "source": "https://www.mnews.tw/"
     },
     {
@@ -31,14 +31,14 @@
       "method": "phone",
       "marginOfError": 3.0,
       "results": {
-        "kao": 37.4,
-        "lin_c": 28.2,
-        "cheng_c": 18.5
+        "kao": 38.2,
+        "chuang_c_c": 29.5,
+        "ho_c_y": 16.4
       },
       "neutralResults": {
-        "kao": 36.2,
-        "lin_c": 21.5,
-        "cheng_c": 14.8
+        "kao": 37.0,
+        "chuang_c_c": 22.5,
+        "ho_c_y": 14.5
       },
       "undecided": 15.9,
       "source": "https://cnews.com.tw/"

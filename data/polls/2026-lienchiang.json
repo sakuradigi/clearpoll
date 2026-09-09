@@ -10,16 +10,14 @@
       "method": "phone",
       "marginOfError": 3.46,
       "results": {
-        "wang_c_m": 58.0,
-        "tsao_e_y": 31.5,
-        "lee_w": 7.0
+        "wang_c_m": 60.1,
+        "tsao_e_y": 36.2
       },
       "neutralResults": {
-        "wang_c_m": 52.0,
-        "tsao_e_y": 28.0,
-        "lee_w": 5.0
+        "wang_c_m": 54.0,
+        "tsao_e_y": 32.5
       },
-      "undecided": 3.5,
+      "undecided": 3.7,
       "source": "https://news.tvbs.com.tw/"
     },
     {
@@ -31,16 +29,14 @@
       "method": "phone",
       "marginOfError": 3.36,
       "results": {
-        "wang_c_m": 56.5,
-        "tsao_e_y": 32.2,
-        "lee_w": 7.8
+        "wang_c_m": 58.5,
+        "tsao_e_y": 37.2
       },
       "neutralResults": {
-        "wang_c_m": 50.0,
-        "tsao_e_y": 29.0,
-        "lee_w": 6.0
+        "wang_c_m": 52.0,
+        "tsao_e_y": 34.0
       },
-      "undecided": 3.5,
+      "undecided": 4.3,
       "source": "https://www.matsu-news.gov.tw/"
     }
   ]

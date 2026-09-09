@@ -418,24 +418,24 @@
           "id": "kao",
           "name": "高虹安",
           "party": "IND",
-          "partyName": "無黨籍(民眾黨支持)",
+          "partyName": "無黨籍(獲藍白支持)",
           "color": "#28C8C8",
           "incumbent": true
         },
         {
-          "id": "lin_c",
-          "name": "林志潔",
+          "id": "chuang_c_c",
+          "name": "莊競程",
           "party": "DPP",
           "partyName": "民主進步黨",
           "color": "#1B9431",
           "incumbent": false
         },
         {
-          "id": "cheng_c",
-          "name": "鄭正鈐",
-          "party": "KMT",
-          "partyName": "中國國民黨",
-          "color": "#000095",
+          "id": "ho_c_y",
+          "name": "何志勇",
+          "party": "IND",
+          "partyName": "無黨籍",
+          "color": "#888888",
           "incumbent": false
         }
       ],
@@ -487,14 +487,14 @@
         {
           "id": "chung",
           "name": "鍾東錦",
-          "party": "IND",
-          "partyName": "無黨籍(泛藍)",
+          "party": "KMT",
+          "partyName": "中國國民黨",
           "color": "#000095",
           "incumbent": true
         },
         {
-          "id": "chen_k_h",
-          "name": "陳光軒",
+          "id": "chen_p_a",
+          "name": "陳品安",
           "party": "DPP",
           "partyName": "民主進步黨",
           "color": "#1B9431",
@@ -516,19 +516,19 @@
       "pollsFile": "data/polls/2026-changhua.json",
       "candidates": [
         {
-          "id": "chen_s_y",
-          "name": "陳素月",
-          "party": "DPP",
-          "partyName": "民主進步黨",
-          "color": "#1B9431",
-          "incumbent": false
-        },
-        {
-          "id": "hsieh_y_f",
-          "name": "謝衣鳯",
+          "id": "wei_p_c",
+          "name": "魏平政",
           "party": "KMT",
           "partyName": "中國國民黨",
           "color": "#000095",
+          "incumbent": false
+        },
+        {
+          "id": "chiu_c_f",
+          "name": "邱建富",
+          "party": "IND",
+          "partyName": "無黨籍(綠營背景)",
+          "color": "#1B9431",
           "incumbent": false
         }
       ],
@@ -555,8 +555,8 @@
           "incumbent": true
         },
         {
-          "id": "tsai_p_h",
-          "name": "蔡培慧",
+          "id": "wen_s_c",
+          "name": "温世政",
           "party": "DPP",
           "partyName": "民主進步黨",
           "color": "#1B9431",
@@ -623,14 +623,6 @@
           "partyName": "台灣民眾黨",
           "color": "#28C8C8",
           "incumbent": false
-        },
-        {
-          "id": "cheng_k_h",
-          "name": "鄭光宏",
-          "party": "KMT",
-          "partyName": "中國國民黨",
-          "color": "#000095",
-          "incumbent": false
         }
       ],
       "status": "upcoming"
@@ -656,10 +648,10 @@
           "incumbent": false
         },
         {
-          "id": "chan_w_c",
-          "name": "詹琬蓁",
-          "party": "KMT",
-          "partyName": "中國國民黨",
+          "id": "wu_p_j",
+          "name": "吳品叡",
+          "party": "IND",
+          "partyName": "無黨籍(朴子市長)",
           "color": "#000095",
           "incumbent": false
         }
@@ -710,8 +702,8 @@
       "pollsFile": "data/polls/2026-yilan.json",
       "candidates": [
         {
-          "id": "chen_c_y",
-          "name": "陳俊宇",
+          "id": "lin_k_c",
+          "name": "林國漳",
           "party": "DPP",
           "partyName": "民主進步黨",
           "color": "#1B9431",
@@ -744,16 +736,24 @@
           "id": "wei_c_h",
           "name": "魏嘉賢",
           "party": "IND",
-          "partyName": "無黨籍(泛藍)",
+          "partyName": "無黨籍(前花蓮市長)",
+          "color": "#888888",
+          "incumbent": false
+        },
+        {
+          "id": "yu_s_c",
+          "name": "游淑貞",
+          "party": "KMT",
+          "partyName": "中國國民黨(吉安鄉長)",
           "color": "#000095",
           "incumbent": false
         },
         {
-          "id": "kolas",
-          "name": "Kolas Yotaka",
-          "party": "DPP",
-          "partyName": "民主進步黨",
-          "color": "#1B9431",
+          "id": "chang_c",
+          "name": "張峻",
+          "party": "IND",
+          "partyName": "無黨籍(現任縣議長)",
+          "color": "#666666",
           "incumbent": false
         }
       ],
@@ -772,10 +772,10 @@
       "pollsFile": "data/polls/2026-taitung.json",
       "candidates": [
         {
-          "id": "huang_c_p",
-          "name": "黃建賓",
+          "id": "wu_s_h",
+          "name": "吳秀華",
           "party": "KMT",
-          "partyName": "中國國民黨",
+          "partyName": "中國國民黨(台東縣議長)",
           "color": "#000095",
           "incumbent": false
         },
@@ -803,20 +803,28 @@
       "pollsFile": "data/polls/2026-penghu.json",
       "candidates": [
         {
-          "id": "chen_s_c",
-          "name": "陳雙全",
+          "id": "wu_s_c",
+          "name": "吳淑瑾",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        },
+        {
+          "id": "chen_c_c",
+          "name": "陳振中",
           "party": "KMT",
           "partyName": "中國國民黨",
           "color": "#000095",
           "incumbent": false
         },
         {
-          "id": "chen_k_f",
-          "name": "陳光復",
-          "party": "DPP",
-          "partyName": "民主進步黨",
-          "color": "#1B9431",
-          "incumbent": true
+          "id": "yeh_c_l",
+          "name": "葉竹林",
+          "party": "IND",
+          "partyName": "無黨籍",
+          "color": "#888888",
+          "incumbent": false
         }
       ],
       "status": "upcoming"
@@ -842,12 +850,12 @@
           "incumbent": false
         },
         {
-          "id": "chen_f_h",
-          "name": "陳福海",
+          "id": "lee_w_l",
+          "name": "李文良",
           "party": "IND",
-          "partyName": "無黨籍(民眾黨支持)",
+          "partyName": "無黨籍(前副縣長)",
           "color": "#28C8C8",
-          "incumbent": true
+          "incumbent": false
         }
       ],
       "status": "upcoming"
@@ -876,16 +884,8 @@
           "id": "tsao_e_y",
           "name": "曹爾元",
           "party": "IND",
-          "partyName": "無黨籍(泛藍)",
+          "partyName": "無黨籍",
           "color": "#888888",
-          "incumbent": false
-        },
-        {
-          "id": "lee_w",
-          "name": "李問",
-          "party": "DPP",
-          "partyName": "民主進步黨",
-          "color": "#1B9431",
           "incumbent": false
         }
       ],

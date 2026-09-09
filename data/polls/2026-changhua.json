@@ -10,12 +10,12 @@
       "method": "phone",
       "marginOfError": 3.0,
       "results": {
-        "chen_s_y": 37.2,
-        "hsieh_y_f": 36.8
+        "chiu_c_f": 37.2,
+        "wei_p_c": 36.8
       },
       "neutralResults": {
-        "chen_s_y": 30.0,
-        "hsieh_y_f": 32.0
+        "chiu_c_f": 30.0,
+        "wei_p_c": 32.0
       },
       "undecided": 26.0,
       "source": "https://news.tvbs.com.tw/"
@@ -29,12 +29,12 @@
       "method": "phone",
       "marginOfError": 2.89,
       "results": {
-        "chen_s_y": 38.5,
-        "hsieh_y_f": 35.2
+        "chiu_c_f": 38.5,
+        "wei_p_c": 35.2
       },
       "neutralResults": {
-        "chen_s_y": 32.0,
-        "hsieh_y_f": 30.5
+        "chiu_c_f": 32.0,
+        "wei_p_c": 30.5
       },
       "undecided": 26.3,
       "source": "https://www.ettoday.net/"

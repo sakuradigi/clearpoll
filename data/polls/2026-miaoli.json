@@ -11,11 +11,11 @@
       "marginOfError": 2.83,
       "results": {
         "chung": 54.2,
-        "chen_k_h": 23.5
+        "chen_p_a": 23.5
       },
       "neutralResults": {
         "chung": 48.0,
-        "chen_k_h": 18.0
+        "chen_p_a": 18.0
       },
       "undecided": 22.3,
       "source": "https://rwnews.tw/"
@@ -30,11 +30,11 @@
       "marginOfError": 3.08,
       "results": {
         "chung": 56.4,
-        "chen_k_h": 24.8
+        "chen_p_a": 24.8
       },
       "neutralResults": {
         "chung": 50.0,
-        "chen_k_h": 19.5
+        "chen_p_a": 19.5
       },
       "undecided": 18.8,
       "source": "https://news.tvbs.com.tw/"

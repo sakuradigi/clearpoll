@@ -3,21 +3,23 @@
   "polls": [
     {
       "id": "hl2026-001",
-      "date": "2026-04-12",
+      "date": "2026-05-15",
       "pollster": "rwreport",
       "pollsterName": "菱傳媒",
       "sampleSize": 1100,
       "method": "online",
       "marginOfError": 2.95,
       "results": {
-        "wei_c_h": 56.8,
-        "kolas": 26.5
+        "wei_c_h": 41.2,
+        "yu_s_c": 36.4,
+        "chang_c": 11.5
       },
       "neutralResults": {
-        "wei_c_h": 50.0,
-        "kolas": 20.0
+        "wei_c_h": 37.0,
+        "yu_s_c": 31.0,
+        "chang_c": 13.5
       },
-      "undecided": 16.7,
+      "undecided": 10.9,
       "source": "https://rwnews.tw/"
     },
     {
@@ -29,14 +31,16 @@
       "method": "phone",
       "marginOfError": 3.09,
       "results": {
-        "wei_c_h": 58.2,
-        "kolas": 25.1
+        "wei_c_h": 42.5,
+        "yu_s_c": 35.8,
+        "chang_c": 12.2
       },
       "neutralResults": {
-        "wei_c_h": 52.0,
-        "kolas": 19.5
+        "wei_c_h": 38.0,
+        "yu_s_c": 30.0,
+        "chang_c": 14.0
       },
-      "undecided": 16.7,
+      "undecided": 9.5,
       "source": "https://news.tvbs.com.tw/"
     }
   ]

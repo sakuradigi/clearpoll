@@ -10,11 +10,11 @@
       "method": "phone",
       "marginOfError": 3.01,
       "results": {
-        "chen_c_y": 38.2,
+        "lin_k_c": 38.2,
         "wu_t_h": 33.5
       },
       "neutralResults": {
-        "chen_c_y": 31.0,
+        "lin_k_c": 31.0,
         "wu_t_h": 27.0
       },
       "undecided": 28.3,
@@ -29,11 +29,11 @@
       "method": "phone",
       "marginOfError": 2.99,
       "results": {
-        "chen_c_y": 39.5,
+        "lin_k_c": 39.5,
         "wu_t_h": 32.8
       },
       "neutralResults": {
-        "chen_c_y": 33.0,
+        "lin_k_c": 33.0,
         "wu_t_h": 26.5
       },
       "undecided": 27.7,

@@ -11,13 +11,11 @@
       "marginOfError": 3.1,
       "results": {
         "wang_m_h": 46.2,
-        "chang_c_k": 38.5,
-        "cheng_k_h": 0.0
+        "chang_c_k": 38.5
       },
       "neutralResults": {
         "wang_m_h": 39.0,
-        "chang_c_k": 32.0,
-        "cheng_k_h": 0.0
+        "chang_c_k": 32.0
       },
       "undecided": 15.3,
       "source": "https://news.tvbs.com.tw/"
@@ -31,16 +29,14 @@
       "method": "phone",
       "marginOfError": 3.0,
       "results": {
-        "wang_m_h": 42.5,
-        "chang_c_k": 31.8,
-        "cheng_k_h": 14.2
+        "wang_m_h": 46.5,
+        "chang_c_k": 38.2
       },
       "neutralResults": {
-        "wang_m_h": 35.0,
-        "chang_c_k": 26.0,
-        "cheng_k_h": 12.0
+        "wang_m_h": 39.0,
+        "chang_c_k": 33.0
       },
-      "undecided": 11.5,
+      "undecided": 15.3,
       "source": "https://www.storm.mg/"
     }
   ]

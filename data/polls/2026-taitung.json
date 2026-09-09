@@ -10,11 +10,11 @@
       "method": "phone",
       "marginOfError": 3.02,
       "results": {
-        "huang_c_p": 50.8,
+        "wu_s_h": 50.8,
         "chen_y": 34.5
       },
       "neutralResults": {
-        "huang_c_p": 43.0,
+        "wu_s_h": 43.0,
         "chen_y": 28.0
       },
       "undecided": 14.7,
@@ -29,11 +29,11 @@
       "method": "phone",
       "marginOfError": 3.09,
       "results": {
-        "huang_c_p": 52.6,
+        "wu_s_h": 52.6,
         "chen_y": 33.4
       },
       "neutralResults": {
-        "huang_c_p": 45.0,
+        "wu_s_h": 45.0,
         "chen_y": 27.0
       },
       "undecided": 14.0,

@@ -3,21 +3,23 @@
   "polls": [
     {
       "id": "ph2026-001",
-      "date": "2026-06-08",
+      "date": "2026-06-20",
       "pollster": "shanshui",
-      "pollsterName": "山水民調",
+      "pollsterName": "山水民調（徵召後）",
       "sampleSize": 1070,
       "method": "phone",
       "marginOfError": 2.99,
       "results": {
-        "chen_s_c": 41.0,
-        "chen_k_f": 41.2
+        "wu_s_c": 30.5,
+        "chen_c_c": 29.2,
+        "yeh_c_l": 22.1
       },
       "neutralResults": {
-        "chen_s_c": 34.0,
-        "chen_k_f": 34.5
+        "wu_s_c": 25.0,
+        "chen_c_c": 26.0,
+        "yeh_c_l": 23.5
       },
-      "undecided": 17.8,
+      "undecided": 18.2,
       "source": "https://www.upmedia.mg/"
     },
     {
@@ -29,14 +31,16 @@
       "method": "phone",
       "marginOfError": 3.0,
       "results": {
-        "chen_s_c": 41.8,
-        "chen_k_f": 40.5
+        "chen_c_c": 32.8,
+        "yeh_c_l": 20.9,
+        "wu_s_c": 19.2
       },
       "neutralResults": {
-        "chen_s_c": 35.0,
-        "chen_k_f": 33.5
+        "chen_c_c": 28.0,
+        "yeh_c_l": 22.0,
+        "wu_s_c": 16.5
       },
-      "undecided": 17.7,
+      "undecided": 27.1,
       "source": "https://www.storm.mg/"
     }
   ]

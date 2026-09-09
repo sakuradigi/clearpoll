@@ -1,3 +1,3 @@
 id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralResults,undecided,source
-ph2026-001,2026-06-08,shanshui,山水民調,1070,phone,2.99,"chen_s_c:41.0,chen_k_f:41.2","chen_s_c:34.0,chen_k_f:34.5",17.8,https://www.upmedia.mg/
-ph2026-002,2026-08-25,focus,關鍵調查,1068,phone,3.0,"chen_s_c:41.8,chen_k_f:40.5","chen_s_c:35.0,chen_k_f:33.5",17.7,https://www.storm.mg/
+ph2026-001,2026-06-20,shanshui,山水民調（徵召後）,1070,phone,2.99,"wu_s_c:30.5,chen_c_c:29.2,yeh_c_l:22.1","wu_s_c:25.0,chen_c_c:26.0,yeh_c_l:23.5",18.2,https://www.upmedia.mg/
+ph2026-002,2026-08-25,focus,關鍵調查,1068,phone,3.0,"chen_c_c:32.8,yeh_c_l:20.9,wu_s_c:19.2","chen_c_c:28.0,yeh_c_l:22.0,wu_s_c:16.5",27.1,https://www.storm.mg/

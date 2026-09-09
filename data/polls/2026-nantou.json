@@ -11,11 +11,11 @@
       "marginOfError": 3.09,
       "results": {
         "hsu_s_h": 52.8,
-        "tsai_p_h": 29.2
+        "wen_s_c": 29.2
       },
       "neutralResults": {
         "hsu_s_h": 46.0,
-        "tsai_p_h": 23.0
+        "wen_s_c": 23.0
       },
       "undecided": 18.0,
       "source": "https://www.storm.mg/"
@@ -30,11 +30,11 @@
       "marginOfError": 3.07,
       "results": {
         "hsu_s_h": 54.2,
-        "tsai_p_h": 28.5
+        "wen_s_c": 28.5
       },
       "neutralResults": {
         "hsu_s_h": 48.0,
-        "tsai_p_h": 22.0
+        "wen_s_c": 22.0
       },
       "undecided": 17.3,
       "source": "https://news.tvbs.com.tw/"
