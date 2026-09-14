@@ -42,6 +42,27 @@
       },
       "undecided": 27.1,
       "source": "https://www.storm.mg/"
+    },
+    {
+      "id": "ph2026-003",
+      "date": "2026-09-08",
+      "pollster": "cnews",
+      "pollsterName": "CNEWS匯流民調",
+      "sampleSize": 1060,
+      "method": "phone+cell",
+      "marginOfError": 3.01,
+      "results": {
+        "chen_c_c": 33.5,
+        "yeh_c_l": 22.0,
+        "wu_s_c": 19.8
+      },
+      "neutralResults": {
+        "chen_c_c": 29.0,
+        "yeh_c_l": 23.0,
+        "wu_s_c": 17.0
+      },
+      "undecided": 24.7,
+      "source": "https://cnews.com.tw/"
     }
   ]
 }

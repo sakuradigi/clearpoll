@@ -57,6 +57,25 @@
       },
       "undecided": 28.2,
       "source": "https://www.upmedia.mg/"
+    },
+    {
+      "id": "kl2026-004",
+      "date": "2026-09-08",
+      "pollster": "rwnews",
+      "pollsterName": "鏡新聞民調中心",
+      "sampleSize": 1085,
+      "method": "phone+cell",
+      "marginOfError": 2.97,
+      "results": {
+        "hsieh": 41.5,
+        "tung": 33.8
+      },
+      "neutralResults": {
+        "hsieh": 35.0,
+        "tung": 29.5
+      },
+      "undecided": 24.7,
+      "source": "https://www.mnews.tw/"
     }
   ]
 }

@@ -52,6 +52,19 @@
       "neutralResults": { "chen_t": 39.0, "hsie": 29.0 },
       "undecided": 17.0,
       "source": "https://www.eranews.com.tw/"
+    },
+    {
+      "id": "tn2026-005",
+      "date": "2026-09-08",
+      "pollster": "rwreport",
+      "pollsterName": "菱傳媒（皮爾森數據）",
+      "sampleSize": 1150,
+      "method": "online",
+      "marginOfError": 2.89,
+      "results": { "chen_t": 49.2, "hsie": 32.1 },
+      "neutralResults": { "chen_t": 45.0, "hsie": 29.0 },
+      "undecided": 18.7,
+      "source": "https://rwnews.tw/"
     }
   ]
 }

@@ -66,6 +66,19 @@
       "neutralResults": { "chiang": 42.0, "shen": 26.0 },
       "undecided": 18.6,
       "source": "https://www.tpoc.com.tw/"
+    },
+    {
+      "id": "tp2026-006",
+      "date": "2026-09-09",
+      "pollster": "ettoday",
+      "pollsterName": "ETtoday民調雲",
+      "sampleSize": 1180,
+      "method": "phone",
+      "marginOfError": 2.85,
+      "results": { "chiang": 53.8, "shen": 27.5 },
+      "neutralResults": { "chiang": 48.5, "shen": 23.0 },
+      "undecided": 18.7,
+      "source": "https://www.ettoday.net/"
     }
   ]
 }

@@ -91,6 +91,19 @@
       "neutralResults": { "chiang_k": 36.0, "ho": 30.0 },
       "undecided": 21.1,
       "source": "http://www.braintrust.tw/"
+    },
+    {
+      "id": "tc2026-008",
+      "date": "2026-09-07",
+      "pollster": "focus",
+      "pollsterName": "聯合聚焦（聯合報系）",
+      "sampleSize": 1102,
+      "method": "phone",
+      "marginOfError": 2.95,
+      "results": { "chiang_k": 47.8, "ho": 32.5 },
+      "neutralResults": { "chiang_k": 42.0, "ho": 28.5 },
+      "undecided": 19.7,
+      "source": "https://udn.com/"
     }
   ]
 }

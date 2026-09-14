@@ -38,6 +38,25 @@
       },
       "undecided": 18.8,
       "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "ml2026-003",
+      "date": "2026-09-07",
+      "pollster": "cnews",
+      "pollsterName": "CNEWS匯流民調",
+      "sampleSize": 1065,
+      "method": "phone+cell",
+      "marginOfError": 3.0,
+      "results": {
+        "chung": 56.5,
+        "chen_p_a": 23.2
+      },
+      "neutralResults": {
+        "chung": 50.0,
+        "chen_p_a": 18.0
+      },
+      "undecided": 20.3,
+      "source": "https://cnews.com.tw/"
     }
   ]
 }

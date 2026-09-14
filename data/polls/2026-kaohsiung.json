@@ -117,6 +117,19 @@
       "neutralResults": { "lai": 45.0, "ke": 43.0 },
       "undecided": 4.24,
       "source": "https://www.ftnn.com.tw/"
+    },
+    {
+      "id": "kh2026-008",
+      "date": "2026-09-08",
+      "pollster": "rwnews",
+      "pollsterName": "鏡新聞民調中心",
+      "sampleSize": 1095,
+      "method": "phone+cell",
+      "marginOfError": 2.96,
+      "results": { "lai": 44.6, "ke": 39.2 },
+      "neutralResults": { "lai": 40.0, "ke": 35.0 },
+      "undecided": 16.2,
+      "source": "https://www.mnews.tw/"
     }
   ]
 }

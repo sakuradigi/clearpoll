@@ -1,3 +1,4 @@
 id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralResults,undecided,source
 hc2026-001,2026-06-25,rwnews,鏡新聞,1085,phone,2.97,"kao:37.5,chuang_c_c:30.2,ho_c_y:16.1","kao:36.0,chuang_c_c:23.0,ho_c_y:14.0",16.2,https://www.mnews.tw/
 hc2026-002,2026-08-12,cnews,匯流民調,1068,phone,3.0,"kao:38.2,chuang_c_c:29.5,ho_c_y:16.4","kao:37.0,chuang_c_c:22.5,ho_c_y:14.5",15.9,https://cnews.com.tw/
+hc2026-003,2026-09-08,rwreport,菱傳媒（皮爾森數據）,1125,online,2.92,"kao:38.5,chuang_c_c:30.1,ho_c_y:15.8","kao:37.0,chuang_c_c:23.0,ho_c_y:14.0",15.6,https://rwnews.tw/

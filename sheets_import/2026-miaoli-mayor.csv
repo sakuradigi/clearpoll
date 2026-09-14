@@ -1,3 +1,4 @@
 id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralResults,undecided,source
 ml2026-001,2026-04-20,rwreport,菱傳媒,1200,online,2.83,"chung:54.2,chen_p_a:23.5","chung:48.0,chen_p_a:18.0",22.3,https://rwnews.tw/
 ml2026-002,2026-08-15,tvbs,TVBS,1012,phone,3.08,"chung:56.4,chen_p_a:24.8","chung:50.0,chen_p_a:19.5",18.8,https://news.tvbs.com.tw/
+ml2026-003,2026-09-07,cnews,CNEWS匯流民調,1065,phone+cell,3.0,"chung:56.5,chen_p_a:23.2","chung:50.0,chen_p_a:18.0",20.3,https://cnews.com.tw/

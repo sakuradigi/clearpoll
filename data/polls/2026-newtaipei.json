@@ -148,6 +148,19 @@
       "neutralResults": { "li": 33.0, "su": 27.0 },
       "undecided": 27.1,
       "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "nt2026-009",
+      "date": "2026-09-10",
+      "pollster": "cnews",
+      "pollsterName": "CNEWS匯流民調",
+      "sampleSize": 1205,
+      "method": "phone+cell",
+      "marginOfError": 2.82,
+      "results": { "li": 38.6, "su": 37.8 },
+      "neutralResults": { "li": 33.5, "su": 33.0 },
+      "undecided": 23.6,
+      "source": "https://cnews.com.tw/"
     }
   ]
 }

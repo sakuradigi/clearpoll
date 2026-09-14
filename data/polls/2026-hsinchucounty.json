@@ -38,6 +38,25 @@
       },
       "undecided": 20.5,
       "source": "https://udn.com/"
+    },
+    {
+      "id": "hcc2026-003",
+      "date": "2026-09-09",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS民調中心",
+      "sampleSize": 1082,
+      "method": "phone",
+      "marginOfError": 2.98,
+      "results": {
+        "hsu": 41.8,
+        "cheng_c_f": 38.6
+      },
+      "neutralResults": {
+        "hsu": 36.0,
+        "cheng_c_f": 34.5
+      },
+      "undecided": 19.6,
+      "source": "https://news.tvbs.com.tw/"
     }
   ]
 }

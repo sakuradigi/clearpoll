@@ -1,3 +1,4 @@
 id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralResults,undecided,source
 yl2026-001,2026-05-10,shanshui,山水民調,1072,phone,2.99,"chang_c_c:44.8,liu_c_k:40.5","chang_c_c:37.0,liu_c_k:36.0",14.7,https://www.upmedia.mg/
 yl2026-002,2026-08-22,tvbs,TVBS,1068,phone,3.0,"chang_c_c:46.5,liu_c_k:39.2","chang_c_c:39.0,liu_c_k:33.5",14.3,https://news.tvbs.com.tw/
+yl2026-003,2026-09-08,rwnews,鏡新聞民調中心,1080,phone+cell,2.98,"chang_c_c:45.2,liu_c_k:39.8","chang_c_c:38.0,liu_c_k:34.0",15.0,https://www.mnews.tw/

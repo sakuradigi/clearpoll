@@ -38,6 +38,25 @@
       },
       "undecided": 27.7,
       "source": "https://www.upmedia.mg/"
+    },
+    {
+      "id": "yln2026-003",
+      "date": "2026-09-08",
+      "pollster": "rwreport",
+      "pollsterName": "菱傳媒（皮爾森數據）",
+      "sampleSize": 1120,
+      "method": "online",
+      "marginOfError": 2.93,
+      "results": {
+        "lin_k_c": 40.2,
+        "wu_t_h": 34.1
+      },
+      "neutralResults": {
+        "lin_k_c": 35.0,
+        "wu_t_h": 28.0
+      },
+      "undecided": 25.7,
+      "source": "https://rwnews.tw/"
     }
   ]
 }

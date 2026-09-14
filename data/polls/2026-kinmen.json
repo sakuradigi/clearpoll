@@ -38,6 +38,25 @@
       },
       "undecided": 8.4,
       "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "km2026-003",
+      "date": "2026-09-07",
+      "pollster": "focus",
+      "pollsterName": "聯合聚焦（聯合報系）",
+      "sampleSize": 1015,
+      "method": "phone",
+      "marginOfError": 3.07,
+      "results": {
+        "chen_y_c": 56.2,
+        "lee_w_l": 35.8
+      },
+      "neutralResults": {
+        "chen_y_c": 49.5,
+        "lee_w_l": 31.5
+      },
+      "undecided": 8.0,
+      "source": "https://udn.com/"
     }
   ]
 }

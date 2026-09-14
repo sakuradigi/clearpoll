@@ -38,6 +38,25 @@
       },
       "undecided": 14.3,
       "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "pt2026-003",
+      "date": "2026-09-08",
+      "pollster": "rwnews",
+      "pollsterName": "鏡新聞民調中心",
+      "sampleSize": 1082,
+      "method": "phone+cell",
+      "marginOfError": 2.98,
+      "results": {
+        "chou_c_m": 48.8,
+        "su_c_c": 37.1
+      },
+      "neutralResults": {
+        "chou_c_m": 40.0,
+        "su_c_c": 31.0
+      },
+      "undecided": 14.1,
+      "source": "https://www.mnews.tw/"
     }
   ]
 }

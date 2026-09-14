@@ -38,6 +38,25 @@
       },
       "undecided": 17.7,
       "source": "https://cnews.com.tw/"
+    },
+    {
+      "id": "cy2026-003",
+      "date": "2026-09-06",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS民調中心",
+      "sampleSize": 1075,
+      "method": "phone",
+      "marginOfError": 2.99,
+      "results": {
+        "tsai_y_y": 54.5,
+        "wu_p_j": 27.8
+      },
+      "neutralResults": {
+        "tsai_y_y": 47.0,
+        "wu_p_j": 21.0
+      },
+      "undecided": 17.7,
+      "source": "https://news.tvbs.com.tw/"
     }
   ]
 }

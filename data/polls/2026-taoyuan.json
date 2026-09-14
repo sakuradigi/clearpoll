@@ -52,6 +52,19 @@
       "neutralResults": { "chang": 42.0, "huang": 22.0 },
       "undecided": 21.0,
       "source": "https://www.eranews.com.tw/"
+    },
+    {
+      "id": "ty2026-004",
+      "date": "2026-09-08",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS民調中心",
+      "sampleSize": 1086,
+      "method": "phone",
+      "marginOfError": 2.97,
+      "results": { "chang": 55.4, "huang": 24.2 },
+      "neutralResults": { "chang": 50.0, "huang": 21.0 },
+      "undecided": 20.4,
+      "source": "https://news.tvbs.com.tw/"
     }
   ]
 }

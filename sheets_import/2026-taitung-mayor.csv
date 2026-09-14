@@ -1,3 +1,4 @@
 id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralResults,undecided,source
 tt2026-001,2026-05-18,cnews,匯流民調,1050,phone,3.02,"wu_s_h:50.8,chen_y:34.5","wu_s_h:43.0,chen_y:28.0",14.7,https://cnews.com.tw/
 tt2026-002,2026-08-15,tvbs,TVBS,1008,phone,3.09,"wu_s_h:52.6,chen_y:33.4","wu_s_h:45.0,chen_y:27.0",14.0,https://news.tvbs.com.tw/
+tt2026-003,2026-09-06,rwnews,鏡新聞民調中心,1065,phone+cell,3.0,"wu_s_h:51.5,chen_y:33.8","wu_s_h:44.5,chen_y:27.5",14.7,https://www.mnews.tw/

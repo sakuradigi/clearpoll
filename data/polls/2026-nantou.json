@@ -38,6 +38,25 @@
       },
       "undecided": 17.3,
       "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "nt2026-003",
+      "date": "2026-09-07",
+      "pollster": "rwreport",
+      "pollsterName": "菱傳媒（皮爾森數據）",
+      "sampleSize": 1080,
+      "method": "online",
+      "marginOfError": 2.98,
+      "results": {
+        "hsu_s_h": 55.2,
+        "wen_s_c": 27.6
+      },
+      "neutralResults": {
+        "hsu_s_h": 49.0,
+        "wen_s_c": 22.0
+      },
+      "undecided": 17.2,
+      "source": "https://rwnews.tw/"
     }
   ]
 }
