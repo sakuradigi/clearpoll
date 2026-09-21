@@ -104,6 +104,20 @@
       "neutralResults": { "chiang_k": 42.0, "ho": 28.5 },
       "undecided": 19.7,
       "source": "https://udn.com/"
+    },
+    {
+      "id": "tc2026-009",
+      "date": "2026-09-15",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS民調中心",
+      "commissioner": "台中市議會國民黨團",
+      "sampleSize": 1085,
+      "method": "phone",
+      "marginOfError": 2.98,
+      "results": { "chiang_k": 45.1, "ho": 32.5 },
+      "neutralResults": { "chiang_k": 39.5, "ho": 31.0 },
+      "undecided": 22.4,
+      "source": "https://news.tvbs.com.tw/"
     }
   ]
 }

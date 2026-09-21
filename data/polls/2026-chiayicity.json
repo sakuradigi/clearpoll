@@ -57,6 +57,25 @@
       },
       "undecided": 16.3,
       "source": "https://cnews.com.tw/"
+    },
+    {
+      "id": "cyc2026-004",
+      "date": "2026-09-18",
+      "pollster": "ettoday",
+      "pollsterName": "ETtoday民調雲",
+      "sampleSize": 1068,
+      "method": "phone",
+      "marginOfError": 3.0,
+      "results": {
+        "wang_m_h": 45.2,
+        "chang_c_k": 39.5
+      },
+      "neutralResults": {
+        "wang_m_h": 41.5,
+        "chang_c_k": 36.5
+      },
+      "undecided": 15.3,
+      "source": "https://www.ettoday.net/"
     }
   ]
 }

@@ -130,6 +130,19 @@
       "neutralResults": { "lai": 40.0, "ke": 35.0 },
       "undecided": 16.2,
       "source": "https://www.mnews.tw/"
+    },
+    {
+      "id": "kh2026-009",
+      "date": "2026-09-18",
+      "pollster": "ettoday",
+      "pollsterName": "ETtoday民調雲",
+      "sampleSize": 1180,
+      "method": "phone",
+      "marginOfError": 2.85,
+      "results": { "ke": 43.8, "lai": 43.5 },
+      "neutralResults": { "ke": 39.0, "lai": 39.2 },
+      "undecided": 12.7,
+      "source": "https://www.ettoday.net/"
     }
   ]
 }

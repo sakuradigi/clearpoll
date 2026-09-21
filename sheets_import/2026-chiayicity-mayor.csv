@@ -2,3 +2,4 @@ id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralRes
 cyc2026-001,2026-06-05,tvbs,TVBS,1002,phone,3.1,"wang_m_h:46.2,chang_c_k:38.5","wang_m_h:39.0,chang_c_k:32.0",15.3,https://news.tvbs.com.tw/
 cyc2026-002,2026-08-18,focus,商傳媒／關鍵調查,1068,phone,3.0,"wang_m_h:46.5,chang_c_k:38.2","wang_m_h:39.0,chang_c_k:33.0",15.3,https://www.storm.mg/
 cyc2026-003,2026-09-07,cnews,CNEWS匯流民調,1085,phone+cell,2.97,"wang_m_h:45.8,chang_c_k:37.9","wang_m_h:39.5,chang_c_k:32.5",16.3,https://cnews.com.tw/
+cyc2026-004,2026-09-18,ettoday,ETtoday民調雲,1068,phone,3.0,"wang_m_h:45.2,chang_c_k:39.5","wang_m_h:41.5,chang_c_k:36.5",15.3,https://www.ettoday.net/

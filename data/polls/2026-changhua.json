@@ -84,6 +84,27 @@
       },
       "undecided": 29.5,
       "source": "https://www.mnews.tw/"
+    },
+    {
+      "id": "ch2026-005",
+      "date": "2026-09-18",
+      "pollster": "rwnews",
+      "pollsterName": "鏡新聞／鋒燦",
+      "sampleSize": 1080,
+      "method": "phone",
+      "marginOfError": 2.98,
+      "results": {
+        "chen_s_y": 37.2,
+        "wei_p_c": 22.5,
+        "chiu_c_f": 13.0
+      },
+      "neutralResults": {
+        "chen_s_y": 33.0,
+        "wei_p_c": 21.0,
+        "chiu_c_f": 12.0
+      },
+      "undecided": 27.3,
+      "source": "https://news.mnews.tw/"
     }
   ]
 }

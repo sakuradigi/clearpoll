@@ -42,6 +42,27 @@
       },
       "undecided": 31.0,
       "source": "https://www.hsnews.com.tw/"
+    },
+    {
+      "id": "hl2026-003",
+      "date": "2026-09-19",
+      "pollster": "storm",
+      "pollsterName": "風傳媒民調中心",
+      "sampleSize": 1082,
+      "method": "phone",
+      "marginOfError": 2.98,
+      "results": {
+        "yu_s_c": 28.8,
+        "wei_c_h": 23.5,
+        "chang_c": 19.1
+      },
+      "neutralResults": {
+        "yu_s_c": 24.5,
+        "wei_c_h": 21.5,
+        "chang_c": 18.0
+      },
+      "undecided": 28.6,
+      "source": "https://www.storm.mg/"
     }
   ]
 }

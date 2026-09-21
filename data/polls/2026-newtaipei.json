@@ -161,6 +161,19 @@
       "neutralResults": { "li": 33.5, "su": 33.0 },
       "undecided": 23.6,
       "source": "https://cnews.com.tw/"
+    },
+    {
+      "id": "nt2026-010",
+      "date": "2026-09-19",
+      "pollster": "formosa",
+      "pollsterName": "美麗島電子報",
+      "sampleSize": 1078,
+      "method": "phone",
+      "marginOfError": 2.98,
+      "results": { "li": 38.2, "su": 38.0 },
+      "neutralResults": { "li": 34.0, "su": 33.5 },
+      "undecided": 23.8,
+      "source": "http://www.my-formosa.com/"
     }
   ]
 }

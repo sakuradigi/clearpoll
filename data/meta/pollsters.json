@@ -219,6 +219,28 @@
       "historicalAccuracy": 0.73,
       "methodology": "網路調查（皮爾森數據執行，性別、年齡、戶籍加權）",
       "notes": "以大樣本網路調查見長，長期追蹤全國各縣市首長滿意度與支持度"
+    },
+    {
+      "id": "storm",
+      "name": "風傳媒",
+      "fullName": "風傳媒民調中心",
+      "credibilityScore": 0.72,
+      "leanDirection": "slightly-blue",
+      "leanMagnitude": 0.1,
+      "historicalAccuracy": 0.70,
+      "methodology": "CATI電腦輔助電話訪問",
+      "notes": "長期委託或自製各縣市大選調查"
+    },
+    {
+      "id": "baodating",
+      "name": "包打聽",
+      "fullName": "包打聽AI民調",
+      "credibilityScore": 0.65,
+      "leanDirection": "neutral",
+      "leanMagnitude": 0.08,
+      "historicalAccuracy": 0.62,
+      "methodology": "網路調查",
+      "notes": "2026年新興網路調查機構"
     }
   ]
 }

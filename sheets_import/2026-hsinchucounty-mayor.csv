@@ -2,3 +2,4 @@ id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralRes
 hcc2026-001,2026-05-18,appro,艾普羅民調,1068,phone,3.0,"hsu:43.2,cheng_c_f:35.8","hsu:36.0,cheng_c_f:32.0",21.0,https://www.chinatimes.com/
 hcc2026-002,2026-08-25,focus,精確市場研究／聯合聚焦,1075,phone,2.99,"hsu:41.4,cheng_c_f:38.1","hsu:35.5,cheng_c_f:34.0",20.5,https://udn.com/
 hcc2026-003,2026-09-09,tvbs,TVBS民調中心,1082,phone,2.98,"hsu:41.8,cheng_c_f:38.6","hsu:36.0,cheng_c_f:34.5",19.6,https://news.tvbs.com.tw/
+hcc2026-004,2026-09-21,era,年代民意調查中心,1072,phone,2.99,"cheng_c_f:35.1,hsu:28.7","cheng_c_f:32.5,hsu:27.5",36.2,https://www.erantv.com/

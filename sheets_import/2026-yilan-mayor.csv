@@ -2,3 +2,4 @@ id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralRes
 yln2026-001,2026-06-10,focus,關鍵調查,1060,phone,3.01,"lin_k_c:38.2,wu_t_h:33.5","lin_k_c:31.0,wu_t_h:27.0",28.3,https://www.storm.mg/
 yln2026-002,2026-08-24,shanshui,山水民調（林國漳陣營公布）,1072,phone,2.99,"lin_k_c:39.5,wu_t_h:32.8","lin_k_c:33.0,wu_t_h:26.5",27.7,https://www.upmedia.mg/
 yln2026-003,2026-09-08,rwreport,菱傳媒（皮爾森數據）,1120,online,2.93,"lin_k_c:40.2,wu_t_h:34.1","lin_k_c:35.0,wu_t_h:28.0",25.7,https://rwnews.tw/
+yln2026-004,2026-09-17,rwreport,菱傳媒（皮爾森數據）,1250,online,2.77,"lin_k_c:39.8,wu_t_h:35.2","lin_k_c:36.0,wu_t_h:32.5",25.0,https://rwnews.tw/

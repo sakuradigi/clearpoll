@@ -79,6 +79,19 @@
       "neutralResults": { "chiang": 48.5, "shen": 23.0 },
       "undecided": 18.7,
       "source": "https://www.ettoday.net/"
+    },
+    {
+      "id": "tp2026-007",
+      "date": "2026-09-18",
+      "pollster": "udn",
+      "pollsterName": "聯合報系／關鍵調查",
+      "sampleSize": 1088,
+      "method": "phone",
+      "marginOfError": 2.97,
+      "results": { "chiang": 52.6, "shen": 28.4 },
+      "neutralResults": { "chiang": 45.0, "shen": 27.5 },
+      "undecided": 19.0,
+      "source": "https://udn.com/"
     }
   ]
 }
