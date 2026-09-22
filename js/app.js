@@ -66,11 +66,13 @@
   // ---- Data Loading ----
 
   /**
-   * Load JSON from data/ directory.
+   * Load JSON from data/ directory with automatic cache-busting.
    */
   async function loadJSON(path) {
     try {
-      const resp = await fetch(path);
+      const sep = path.includes('?') ? '&' : '?';
+      const cacheBustPath = `${path}${sep}_t=${Date.now()}`;
+      const resp = await fetch(cacheBustPath, { cache: 'no-store' });
       if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${path}`);
       return await resp.json();
     } catch (err) {
@@ -483,6 +485,7 @@
     DOM.pollCountLabel.textContent = `共 ${sorted.length} 筆民調`;
 
     const methodLabels = {
+      'phone+cell': '市話+手機',
       'phone': '電訪',
       'online': '網路',
       'face-to-face': '面訪',
