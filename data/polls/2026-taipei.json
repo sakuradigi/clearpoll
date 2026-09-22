@@ -92,6 +92,20 @@
       "neutralResults": { "chiang": 45.0, "shen": 27.5 },
       "undecided": 19.0,
       "source": "https://udn.com/"
+    },
+    {
+      "id": "tp2026-008",
+      "date": "2026-09-22",
+      "pollster": "beacon",
+      "pollsterName": "信民協會（戴立安規劃／畢肯執行）",
+      "commissioner": "台北市信民兩岸研究協會",
+      "sampleSize": 1076,
+      "method": "phone+cell",
+      "marginOfError": 3.0,
+      "results": { "chiang": 41.7, "shen": 40.5 },
+      "neutralResults": { "chiang": 37.5, "shen": 36.5 },
+      "undecided": 17.8,
+      "source": "https://www.ettoday.net/"
     }
   ]
 }
