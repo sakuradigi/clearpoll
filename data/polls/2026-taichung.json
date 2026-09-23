@@ -118,20 +118,6 @@
       "neutralResults": { "chiang_k": 39.5, "ho": 31.0 },
       "undecided": 22.4,
       "source": "https://news.tvbs.com.tw/"
-    },
-    {
-      "id": "tc2026-010",
-      "date": "2026-09-23",
-      "pollster": "tpoc",
-      "pollsterName": "TPOC台灣議題研究中心",
-      "sampleSize": 1200,
-      "method": "online",
-      "marginOfError": 2.83,
-      "results": { "chiang_k": 44.5, "ho": 32.4 },
-      "neutralResults": { "chiang_k": 39.0, "ho": 29.5 },
-      "undecided": 23.1,
-      "notes": "9/23 AI民意模擬預測發布，江啟臣44.5%領先何欣純32.4%達12.1個百分點",
-      "source": "https://www.tpoc.com.tw/"
     }
   ]
 }

@@ -23,27 +23,6 @@
       "source": "https://www.storm.mg/"
     },
     {
-      "id": "hl2026-002",
-      "date": "2026-09-03",
-      "pollster": "baodating",
-      "pollsterName": "包打聽AI民調",
-      "sampleSize": 1120,
-      "method": "online",
-      "marginOfError": 2.93,
-      "results": {
-        "yu_s_c": 27.2,
-        "wei_c_h": 23.1,
-        "chang_c": 18.7
-      },
-      "neutralResults": {
-        "yu_s_c": 23.5,
-        "wei_c_h": 21.0,
-        "chang_c": 17.5
-      },
-      "undecided": 31.0,
-      "source": "https://www.hsnews.com.tw/"
-    },
-    {
       "id": "hl2026-003",
       "date": "2026-09-19",
       "pollster": "storm",

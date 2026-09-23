@@ -1,4 +1,3 @@
 id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralResults,undecided,source
 hl2026-001,2026-08-25,storm,風傳媒,1075,phone,2.99,"yu_s_c:29.1,wei_c_h:18.4,chang_c:19.4","yu_s_c:24.0,wei_c_h:17.5,chang_c:18.0",33.1,https://www.storm.mg/
-hl2026-002,2026-09-03,baodating,包打聽AI民調,1120,online,2.93,"yu_s_c:27.2,wei_c_h:23.1,chang_c:18.7","yu_s_c:23.5,wei_c_h:21.0,chang_c:17.5",31.0,https://www.hsnews.com.tw/
 hl2026-003,2026-09-19,storm,風傳媒民調中心,1082,phone,2.98,"yu_s_c:28.8,wei_c_h:23.5,chang_c:19.1","yu_s_c:24.5,wei_c_h:21.5,chang_c:18.0",28.6,https://www.storm.mg/
