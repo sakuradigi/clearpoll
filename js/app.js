@@ -828,7 +828,13 @@
           throw new Error(`No polls for ${election.id}`);
         }
 
-        const result = ClearPollModel.analyze(data.polls, data.pollsters);
+        if (!historicalDemographicsData) {
+          historicalDemographicsData = await loadJSON('data/history/historical-demographics.json');
+        }
+        const result = ClearPollModel.analyze(data.polls, data.pollsters, {
+          historicalDemographics: historicalDemographicsData,
+          pastResults: data.pastResults
+        });
 
         const sortedCands = [...election.candidates]
           .map(c => ({
@@ -1320,7 +1326,72 @@
     const partyColors = { 'DPP': '#1B9431', 'KMT': '#000095', 'TPP': '#28C8C8', 'IND': '#888888', 'OTHER': '#666666' };
     const partyColorClasses = { 'DPP': 'dpp', 'KMT': 'kmt', 'TPP': 'tpp', 'IND': 'ind', 'OTHER': 'other' };
 
-    container.innerHTML = cityResults.map(r => {
+    let shiftCardHtml = '';
+    if (analysisResult && analysisResult.partisanShift && analysisResult.partisanShift.past2022) {
+      const ps = analysisResult.partisanShift;
+      const shift = ps.shift;
+      const past = ps.past2022;
+      const pred = ps.predicted2026;
+
+      const swingBadgeColor = shift.direction === 'blue' ? '#3b82f6' : (shift.direction === 'green' ? '#10b981' : '#6b7280');
+      const swingBadgeText = shift.direction === 'blue'
+        ? `泛藍位移 +${shift.netBlueSwing}%`
+        : (shift.direction === 'green' ? `泛綠位移 +${Math.abs(shift.netBlueSwing)}%` : '板塊穩定五五波');
+
+      shiftCardHtml = `
+        <div class="card" style="grid-column: 1 / -1; border-top: 4px solid ${swingBadgeColor}; margin-bottom: var(--space-md); box-shadow: var(--shadow-md);">
+          <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:1.3rem;">📊</span>
+              <div>
+                <h3 style="font-weight:800; font-size:1.15rem; margin:0;">民意板塊位移指數 (Partisan Shift Index)</h3>
+                <span style="font-size:0.75rem; color: var(--color-text-tertiary);">對照中選會 2022 實際開票 vs 2026 ClearPoll 最新預測</span>
+              </div>
+            </div>
+            <span class="label" style="font-size:0.8rem; font-weight:700; background: ${swingBadgeColor}15; color: ${swingBadgeColor}; border: 1px solid ${swingBadgeColor}40; padding:4px 10px; border-radius:6px;">
+              ${swingBadgeText}
+            </span>
+          </div>
+          <div class="card-body" style="padding:0;">
+            <p style="font-size: 0.9rem; line-height: 1.6; color: var(--color-text-secondary); margin-bottom: var(--space-md);">
+              ${shift.summary}
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px;">
+              <div style="background: var(--color-bg-secondary); padding: 12px; border-radius: 8px; border: 1px solid var(--color-border);">
+                <div style="font-size: 0.75rem; color: var(--color-text-tertiary); font-weight:600;">泛藍板塊消長</div>
+                <div style="font-size: 1.3rem; font-weight: 800; color: #3b82f6; margin: 4px 0;">
+                  ${shift.blueDelta >= 0 ? '+' : ''}${shift.blueDelta}%
+                </div>
+                <div style="font-size: 0.75rem; color: var(--color-text-secondary);">2022: ${past.blueShare}% → 2026: ${pred.blueShare}%</div>
+              </div>
+              <div style="background: var(--color-bg-secondary); padding: 12px; border-radius: 8px; border: 1px solid var(--color-border);">
+                <div style="font-size: 0.75rem; color: var(--color-text-tertiary); font-weight:600;">泛綠板塊消長</div>
+                <div style="font-size: 1.3rem; font-weight: 800; color: #10b981; margin: 4px 0;">
+                  ${shift.greenDelta >= 0 ? '+' : ''}${shift.greenDelta}%
+                </div>
+                <div style="font-size: 0.75rem; color: var(--color-text-secondary);">2022: ${past.greenShare}% → 2026: ${pred.greenShare}%</div>
+              </div>
+              <div style="background: var(--color-bg-secondary); padding: 12px; border-radius: 8px; border: 1px solid var(--color-border);">
+                <div style="font-size: 0.75rem; color: var(--color-text-tertiary); font-weight:600;">第三勢力／其他</div>
+                <div style="font-size: 1.3rem; font-weight: 800; color: #f59e0b; margin: 4px 0;">
+                  ${shift.otherDelta >= 0 ? '+' : ''}${shift.otherDelta}%
+                </div>
+                <div style="font-size: 0.75rem; color: var(--color-text-secondary);">2022: ${past.otherShare}% → 2026: ${pred.otherShare}%</div>
+              </div>
+              <div style="background: var(--color-bg-secondary); padding: 12px; border-radius: 8px; border: 1px solid var(--color-border);">
+                <div style="font-size: 0.75rem; color: var(--color-text-tertiary); font-weight:600;">藍綠淨位移 (Net Swing)</div>
+                <div style="font-size: 1.3rem; font-weight: 800; color: ${swingBadgeColor}; margin: 4px 0;">
+                  ${shift.netBlueSwing >= 0 ? `藍 +${shift.netBlueSwing}%` : `綠 +${Math.abs(shift.netBlueSwing)}%`}
+                </div>
+                <div style="font-size: 0.75rem; color: var(--color-text-secondary);">2022勝者：${past.winner}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    const pastCardsHtml = cityResults.map(r => {
       const year = r.electionId.split('-')[0];
       const electionMeta = electionsMetadata?.find(e => e.city === city && e.year === year);
       const cityName = electionMeta ? electionMeta.cityName : city;
@@ -1357,6 +1428,8 @@
         </div>
       `;
     }).join('');
+
+    container.innerHTML = shiftCardHtml + pastCardsHtml;
   }
 
   // ---- Main Loader & Renderer ----
@@ -1465,16 +1538,27 @@
     pollData = polls;
     pollsterData = pollsters;
 
-    // Run analysis with scenario options
-    const scenarioOpts = getScenarioOptions();
+    if (!historicalDemographicsData) {
+      historicalDemographicsData = await loadJSON('data/history/historical-demographics.json');
+    }
+
+    // Run analysis with scenario options, fundamentals, and historical past results
+    const scenarioOpts = {
+      ...getScenarioOptions(),
+      historicalDemographics: historicalDemographicsData,
+      pastResults: pastResults
+    };
     analysisResult = ClearPollModel.analyze(pollData, pollsterData, scenarioOpts);
     console.log('[ClearPoll] Analysis complete:', analysisResult);
 
     // Render everything
     DOM.heroElectionName.textContent = analysisResult.electionName;
     DOM.heroUpdateTime.textContent = `最後更新：${new Date(analysisResult.analysisTimestamp).toLocaleString('zh-TW')}`;
+    const fundText = analysisResult.fundamentalsWeight > 0
+      ? `【雙支柱模型】因民調樣本精簡（${analysisResult.pollCount} 筆），已導入中選會歷屆選舉基本盤加權錨定 ${(analysisResult.fundamentalsWeight * 100).toFixed(0)}%，防範單一機構偏誤。`
+      : '';
     DOM.heroSummaryText.textContent =
-      `根據 ${analysisResult.pollCount} 筆民調加權分析，標準誤差 ±${analysisResult.standardError}%。`;
+      `根據 ${analysisResult.pollCount} 筆民調加權分析，標準誤差 ±${analysisResult.standardError}%。${fundText}`;
 
     renderPredictionSummaryTable(analysisResult, pastResults);
     renderPollTable(analysisResult);
@@ -1680,15 +1764,31 @@
 
     const cityData = demoResult.cities.find(c => c.id === cityId) || demoResult.cities[0];
     const cityNames = {
-      taipei: '臺北市',
+      taipei: '台北市',
       newtaipei: '新北市',
       taoyuan: '桃園市',
-      taichung: '臺中市',
-      tainan: '臺南市',
-      kaohsiung: '高雄市'
+      taichung: '台中市',
+      tainan: '台南市',
+      kaohsiung: '高雄市',
+      keelung: '基隆市',
+      hsinchucity: '新竹市',
+      hsinchucounty: '新竹縣',
+      miaoli: '苗栗縣',
+      changhua: '彰化縣',
+      nantou: '南投縣',
+      yunlin: '雲林縣',
+      chiayicity: '嘉義市',
+      chiayicounty: '嘉義縣',
+      pingtung: '屏東縣',
+      yilan: '宜蘭縣',
+      hualien: '花蓮縣',
+      taitung: '台東縣',
+      penghu: '澎湖縣',
+      kinmen: '金門縣',
+      lienchiang: '連江縣'
     };
 
-    const cName = cityNames[cityId] || '該市';
+    const cName = cityNames[cityId] || (electionsMetadata?.find(e => e.city === cityId)?.cityName) || '該選區';
 
     const fmtSign = (val) => val > 0 ? `+${val}` : `${val}`;
     const greenIdxText = `綠 ${fmtSign(cityData.index.green)}`;

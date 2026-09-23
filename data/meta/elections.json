@@ -898,6 +898,566 @@
         }
       ],
       "status": "upcoming"
+    },
+    {
+      "id": "2022-keelung-mayor",
+      "name": "2022 基隆市長選舉",
+      "type": "mayor",
+      "city": "keelung",
+      "cityName": "基隆市",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [
+        {
+          "id": "hsieh_k",
+          "name": "謝國樑",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        },
+        {
+          "id": "tsai_s",
+          "name": "蔡適應",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        },
+        {
+          "id": "chen_w",
+          "name": "陳薇仲",
+          "party": "OTHER",
+          "partyName": "時代力量",
+          "color": "#f59e0b",
+          "incumbent": false
+        }
+      ],
+      "status": "completed",
+      "metro": false,
+      "region": "north"
+    },
+    {
+      "id": "2022-hsinchucity-mayor",
+      "name": "2022 新竹市長選舉",
+      "type": "mayor",
+      "city": "hsinchucity",
+      "cityName": "新竹市",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [
+        {
+          "id": "kao_h",
+          "name": "高虹安",
+          "party": "TPP",
+          "partyName": "台灣民眾黨",
+          "color": "#28C8C8",
+          "incumbent": false
+        },
+        {
+          "id": "shen_h",
+          "name": "沈慧虹",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        },
+        {
+          "id": "lin_k",
+          "name": "林耕仁",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        }
+      ],
+      "status": "completed",
+      "metro": false,
+      "region": "north"
+    },
+    {
+      "id": "2022-hsinchucounty-mayor",
+      "name": "2022 新竹縣長選舉",
+      "type": "mayor",
+      "city": "hsinchucounty",
+      "cityName": "新竹縣",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [
+        {
+          "id": "yang_w",
+          "name": "楊文科",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": true
+        },
+        {
+          "id": "chou_c",
+          "name": "周江杰",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
+      ],
+      "status": "completed",
+      "metro": false,
+      "region": "north"
+    },
+    {
+      "id": "2022-miaoli-mayor",
+      "name": "2022 苗栗縣長選舉",
+      "type": "mayor",
+      "city": "miaoli",
+      "cityName": "苗栗縣",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [
+        {
+          "id": "chung_t",
+          "name": "鍾東錦",
+          "party": "IND",
+          "partyName": "無黨籍 (泛藍)",
+          "color": "#888888",
+          "incumbent": false
+        },
+        {
+          "id": "hsu_t",
+          "name": "徐定禎",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        },
+        {
+          "id": "sung_k",
+          "name": "宋國鼎",
+          "party": "OTHER",
+          "partyName": "時代力量",
+          "color": "#f59e0b",
+          "incumbent": false
+        },
+        {
+          "id": "hsieh_f",
+          "name": "謝福弘",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        }
+      ],
+      "status": "completed",
+      "metro": false,
+      "region": "central"
+    },
+    {
+      "id": "2022-changhua-mayor",
+      "name": "2022 彰化縣長選舉",
+      "type": "mayor",
+      "city": "changhua",
+      "cityName": "彰化縣",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [
+        {
+          "id": "wang_h",
+          "name": "王惠美",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": true
+        },
+        {
+          "id": "huang_h",
+          "name": "黃秀芳",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
+      ],
+      "status": "completed",
+      "metro": false,
+      "region": "central"
+    },
+    {
+      "id": "2022-nantou-mayor",
+      "name": "2022 南投縣長選舉",
+      "type": "mayor",
+      "city": "nantou",
+      "cityName": "南投縣",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [
+        {
+          "id": "hsu_s",
+          "name": "許淑華",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        },
+        {
+          "id": "tsai_p",
+          "name": "蔡培慧",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
+      ],
+      "status": "completed",
+      "metro": false,
+      "region": "central"
+    },
+    {
+      "id": "2022-yunlin-mayor",
+      "name": "2022 雲林縣長選舉",
+      "type": "mayor",
+      "city": "yunlin",
+      "cityName": "雲林縣",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [
+        {
+          "id": "chang_l",
+          "name": "張麗善",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": true
+        },
+        {
+          "id": "liu_c",
+          "name": "劉建國",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
+      ],
+      "status": "completed",
+      "metro": false,
+      "region": "central"
+    },
+    {
+      "id": "2022-chiayicity-mayor",
+      "name": "2022 嘉義市長選舉",
+      "type": "mayor",
+      "city": "chiayicity",
+      "cityName": "嘉義市",
+      "year": "2022",
+      "date": "2022-12-18",
+      "pollsFile": "",
+      "candidates": [
+        {
+          "id": "huang_m",
+          "name": "黃敏惠",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": true
+        },
+        {
+          "id": "lee_c",
+          "name": "李俊俋",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
+      ],
+      "status": "completed",
+      "metro": false,
+      "region": "south"
+    },
+    {
+      "id": "2022-chiayicounty-mayor",
+      "name": "2022 嘉義縣長選舉",
+      "type": "mayor",
+      "city": "chiayicounty",
+      "cityName": "嘉義縣",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [
+        {
+          "id": "weng_c",
+          "name": "翁章梁",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": true
+        },
+        {
+          "id": "wang_y",
+          "name": "王育敏",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        }
+      ],
+      "status": "completed",
+      "metro": false,
+      "region": "south"
+    },
+    {
+      "id": "2022-pingtung-mayor",
+      "name": "2022 屏東縣長選舉",
+      "type": "mayor",
+      "city": "pingtung",
+      "cityName": "屏東縣",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [
+        {
+          "id": "chou_c",
+          "name": "周春米",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        },
+        {
+          "id": "su_c",
+          "name": "蘇清泉",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        }
+      ],
+      "status": "completed",
+      "metro": false,
+      "region": "south"
+    },
+    {
+      "id": "2022-yilan-mayor",
+      "name": "2022 宜蘭縣長選舉",
+      "type": "mayor",
+      "city": "yilan",
+      "cityName": "宜蘭縣",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [
+        {
+          "id": "lin_t",
+          "name": "林姿妙",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": true
+        },
+        {
+          "id": "chiang_c",
+          "name": "江聰淵",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        },
+        {
+          "id": "chen_w",
+          "name": "陳琬惠",
+          "party": "TPP",
+          "partyName": "台灣民眾黨",
+          "color": "#28C8C8",
+          "incumbent": false
+        }
+      ],
+      "status": "completed",
+      "metro": false,
+      "region": "east"
+    },
+    {
+      "id": "2022-hualien-mayor",
+      "name": "2022 花蓮縣長選舉",
+      "type": "mayor",
+      "city": "hualien",
+      "cityName": "花蓮縣",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [
+        {
+          "id": "hsu_c",
+          "name": "徐榛蔚",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": true
+        },
+        {
+          "id": "kolas",
+          "name": "Kolas Yotaka",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
+      ],
+      "status": "completed",
+      "metro": false,
+      "region": "east"
+    },
+    {
+      "id": "2022-taitung-mayor",
+      "name": "2022 台東縣長選舉",
+      "type": "mayor",
+      "city": "taitung",
+      "cityName": "台東縣",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [
+        {
+          "id": "rao_c",
+          "name": "饒慶鈴",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": true
+        },
+        {
+          "id": "liu_c",
+          "name": "劉櫂豪",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
+      ],
+      "status": "completed",
+      "metro": false,
+      "region": "east"
+    },
+    {
+      "id": "2022-penghu-mayor",
+      "name": "2022 澎湖縣長選舉",
+      "type": "mayor",
+      "city": "penghu",
+      "cityName": "澎湖縣",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [
+        {
+          "id": "chen_k",
+          "name": "陳光復",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        },
+        {
+          "id": "lai_f",
+          "name": "賴峰偉",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": true
+        },
+        {
+          "id": "yeh_c",
+          "name": "葉竹林",
+          "party": "IND",
+          "partyName": "無黨籍",
+          "color": "#888888",
+          "incumbent": false
+        }
+      ],
+      "status": "completed",
+      "metro": false,
+      "region": "offshore"
+    },
+    {
+      "id": "2022-kinmen-mayor",
+      "name": "2022 金門縣長選舉",
+      "type": "mayor",
+      "city": "kinmen",
+      "cityName": "金門縣",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [
+        {
+          "id": "chen_f",
+          "name": "陳福海",
+          "party": "IND",
+          "partyName": "無黨籍",
+          "color": "#888888",
+          "incumbent": false
+        },
+        {
+          "id": "yang_c",
+          "name": "楊鎮浯",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": true
+        },
+        {
+          "id": "lee_y",
+          "name": "李應文",
+          "party": "IND",
+          "partyName": "無黨籍",
+          "color": "#888888",
+          "incumbent": false
+        }
+      ],
+      "status": "completed",
+      "metro": false,
+      "region": "offshore"
+    },
+    {
+      "id": "2022-lienchiang-mayor",
+      "name": "2022 連江縣長選舉",
+      "type": "mayor",
+      "city": "lienchiang",
+      "cityName": "連江縣",
+      "year": "2022",
+      "date": "2022-11-26",
+      "pollsFile": "",
+      "candidates": [
+        {
+          "id": "wang_c",
+          "name": "王忠銘",
+          "party": "KMT",
+          "partyName": "中國國民黨",
+          "color": "#000095",
+          "incumbent": false
+        },
+        {
+          "id": "tsao_e",
+          "name": "曹爾元",
+          "party": "KMT",
+          "partyName": "中國國民黨 (無黨報備)",
+          "color": "#000095",
+          "incumbent": false
+        },
+        {
+          "id": "lee_w",
+          "name": "李問",
+          "party": "DPP",
+          "partyName": "民主進步黨",
+          "color": "#1B9431",
+          "incumbent": false
+        }
+      ],
+      "status": "completed",
+      "metro": false,
+      "region": "offshore"
     }
   ]
 }

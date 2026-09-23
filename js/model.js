@@ -317,8 +317,77 @@ const ClearPollModel = {
       }
     }
 
+    // Step 4: Bayesian Fundamentals Blending
+    // When polls are sparse (N < 5), anchor with official CEC election fundamentals
+    let blendedShares = { ...voteShares };
+    let fundamentalsWeight = 0;
+    const fundamentals = scenarioOptions?.fundamentals;
+
+    if (fundamentals && scenarioOptions?.useFundamentals !== false) {
+      const N = polls.length;
+      if (typeof scenarioOptions?.fundamentalsWeight === 'number') {
+        fundamentalsWeight = Math.max(0, Math.min(1, scenarioOptions.fundamentalsWeight));
+      } else if (N < 5) {
+        // Dynamic Bayesian shrinkage: 1 poll -> 28%, 2 -> 21%, 3 -> 14%, 4 -> 7%, 5+ -> 0%
+        fundamentalsWeight = Math.round(0.35 * (1 - N / 5) * 100) / 100;
+      }
+
+      const activeCandidates = candidates.filter(c => candidateIds.includes(c.id));
+      if (fundamentalsWeight > 0 && activeCandidates.length > 0) {
+        // Map candidates to party fundamentals
+        const rawFundShares = {};
+        let fundTotal = 0;
+
+        for (const c of activeCandidates) {
+          const party = (c.party || '').toUpperCase();
+          let share = 0;
+          if (party === 'DPP') {
+            share = (activeCandidates.length === 2 && fundamentals.headToHead) ? fundamentals.headToHead.green : fundamentals.green;
+          } else if (party === 'KMT') {
+            share = (activeCandidates.length === 2 && fundamentals.headToHead) ? fundamentals.headToHead.blue : fundamentals.blue;
+          } else if (party === 'TPP') {
+            share = fundamentals.white || 15.0;
+          } else {
+            // Third party / Independent / Other
+            share = fundamentals.white ? (fundamentals.white * 0.5) : 10.0;
+          }
+          rawFundShares[c.id] = share;
+          fundTotal += share;
+        }
+
+        // Normalize rawFundShares to 100%
+        const normalizedFundShares = {};
+        for (const c of activeCandidates) {
+          normalizedFundShares[c.id] = fundTotal > 0 ? (rawFundShares[c.id] / fundTotal) * 100 : (100 / activeCandidates.length);
+        }
+
+        // Blend: (1 - w) * pollShare + w * fundShare
+        blendedShares = {};
+        let blendedSum = 0;
+        for (const c of activeCandidates) {
+          const pShare = voteShares[c.id] || 0;
+          const fShare = normalizedFundShares[c.id] || 0;
+          blendedShares[c.id] = Math.round(((1 - fundamentalsWeight) * pShare + fundamentalsWeight * fShare) * 10) / 10;
+          blendedSum += blendedShares[c.id];
+        }
+
+        // Re-normalize to 100%
+        if (blendedSum > 0) {
+          for (const c of activeCandidates) {
+            blendedShares[c.id] = Math.round((blendedShares[c.id] / blendedSum) * 1000) / 10;
+          }
+        }
+      }
+    }
+
     weightedPolls.sort((a, b) => b.weights.combined - a.weights.combined);
-    return { voteShares, weightedPolls, totalWeight };
+    return {
+      voteShares: blendedShares,
+      rawPollShares: voteShares,
+      weightedPolls,
+      totalWeight,
+      fundamentalsWeight
+    };
   },
 
   /**
@@ -554,9 +623,17 @@ const ClearPollModel = {
     const { candidates, polls, electionDate } = pollData;
     const pollsters = pollsterData.pollsters || [];
 
-    // Step 1: Calculate weighted average
-    const { voteShares, weightedPolls, totalWeight } = this.calcWeightedAverage(
-      polls, pollsters, electionDate, candidates, scenarioOptions
+    // Auto-inject fundamentals if historicalDemographics provided
+    let options = scenarioOptions ? { ...scenarioOptions } : {};
+    const cityId = pollData.city || (pollData.electionId ? pollData.electionId.split('-')[1] : null);
+
+    if (options.historicalDemographics && cityId && !options.fundamentals) {
+      options.fundamentals = this.getBayesianFundamentals(cityId, options.historicalDemographics);
+    }
+
+    // Step 1: Calculate weighted average (with Bayesian Fundamentals Blending)
+    const { voteShares, rawPollShares, weightedPolls, totalWeight, fundamentalsWeight } = this.calcWeightedAverage(
+      polls, pollsters, electionDate, candidates, options
     );
 
     // Step 2: Estimate standard error from poll variance
@@ -565,7 +642,7 @@ const ClearPollModel = {
 
     // Step 3: Run Monte Carlo simulation for 95% Confidence Intervals & probabilities
     const { winProbabilities: mcWinProbs, ci95 } = this.runMonteCarloSimulation(
-      polls, pollsters, electionDate, candidates, 3000, scenarioOptions
+      polls, pollsters, electionDate, candidates, 3000, options
     );
 
     // Dynamic win probability fallback blend
@@ -574,7 +651,7 @@ const ClearPollModel = {
       : this.calcWinProbability(voteShares, se);
 
     // Step 4: Generate prediction log
-    const predictionLog = this.generatePredictionLog(polls, pollsters, electionDate, candidates, scenarioOptions);
+    const predictionLog = this.generatePredictionLog(polls, pollsters, electionDate, candidates, options);
 
     // Step 5: Calculate "others" share
     const totalCandidateShare = Object.values(voteShares).reduce((a, b) => a + b, 0);
@@ -583,7 +660,13 @@ const ClearPollModel = {
       predictedVoteShares.others = Math.round((100 - totalCandidateShare) * 10) / 10;
     }
 
-    // Step 6: Generate AI Model Assessment
+    // Step 6: Calculate Partisan Shift Index if pastResults provided
+    let partisanShift = null;
+    if (options.pastResults && cityId) {
+      partisanShift = this.calculatePartisanShift(predictedVoteShares, cityId, options.pastResults, candidates);
+    }
+
+    // Step 7: Generate AI Model Assessment
     const aiAssessment = this.getAIElectionAssessment(pollData.electionId, pollData.city || pollData.cityName, {
       predictedVoteShares,
       winProbabilities,
@@ -598,6 +681,7 @@ const ClearPollModel = {
       electionDate: pollData.electionDate,
       candidates,
       predictedVoteShares,
+      rawPollShares,
       winProbabilities,
       ci95,
       standardError: Math.round(se * 100) / 100,
@@ -605,6 +689,9 @@ const ClearPollModel = {
       predictionLog,
       totalWeight: Math.round(totalWeight * 1000) / 1000,
       pollCount: polls.length,
+      fundamentals: options.fundamentals || null,
+      fundamentalsWeight: fundamentalsWeight || 0,
+      partisanShift,
       aiAssessment,
       analysisTimestamp: new Date().toISOString(),
     };
@@ -876,7 +963,12 @@ const ClearPollModel = {
   calculateDemographics(historicalData) {
     if (!historicalData || !historicalData.elections) return null;
 
-    const cities = ['taipei', 'newtaipei', 'taoyuan', 'taichung', 'tainan', 'kaohsiung'];
+    const cities = [
+      'taipei', 'newtaipei', 'taoyuan', 'taichung', 'tainan', 'kaohsiung',
+      'keelung', 'hsinchucity', 'hsinchucounty', 'miaoli', 'changhua', 'nantou',
+      'yunlin', 'chiayicity', 'chiayicounty', 'pingtung', 'yilan', 'hualien',
+      'taitung', 'penghu', 'kinmen', 'lienchiang'
+    ];
     const entities = ['national', ...cities];
     const resultsByEntity = {};
 
@@ -888,7 +980,7 @@ const ClearPollModel = {
 
       for (const elec of historicalData.elections) {
         const w = (elec.weightType || 0.3) * (elec.weightTime || 0.5);
-        const res = elec.results[ent];
+        const res = elec.results ? elec.results[ent] : null;
         if (res) {
           greenWeighted += (res.green || 0) * w;
           blueWeighted += (res.blue || 0) * w;
@@ -911,7 +1003,7 @@ const ClearPollModel = {
       }
     }
 
-    const national = resultsByEntity.national || { green: 47.19, blue: 37.07, white: 15.74 };
+    const national = resultsByEntity.national || { green: 43.59, blue: 38.90, white: 17.51 };
 
     const computedCities = cities.map(cityId => {
       const entData = resultsByEntity[cityId] || national;
@@ -920,7 +1012,9 @@ const ClearPollModel = {
       const whiteIdx = Math.round(entData.white - national.white);
 
       // Head to Head proportional reallocation
-      const h2hGreen = Math.round((entData.green / (entData.green + entData.blue)) * 10000) / 100;
+      const h2hGreen = (entData.green + entData.blue > 0)
+        ? Math.round((entData.green / (entData.green + entData.blue)) * 10000) / 100
+        : 50.0;
       const h2hBlue = Math.round((100 - h2hGreen) * 100) / 100;
 
       return {
@@ -931,7 +1025,9 @@ const ClearPollModel = {
       };
     });
 
-    const natH2hGreen = Math.round((national.green / (national.green + national.blue)) * 10000) / 100;
+    const natH2hGreen = (national.green + national.blue > 0)
+      ? Math.round((national.green / (national.green + national.blue)) * 10000) / 100
+      : 50.0;
     const natH2hBlue = Math.round((100 - natH2hGreen) * 100) / 100;
 
     return {
@@ -940,6 +1036,121 @@ const ClearPollModel = {
         headToHead: { green: natH2hGreen, blue: natH2hBlue }
       },
       cities: computedCities
+    };
+  },
+
+  /**
+   * Get Bayesian election fundamentals for a specific city/county.
+   * @param {string} cityId
+   * @param {Object} historicalData
+   * @returns {Object|null}
+   */
+  getBayesianFundamentals(cityId, historicalData) {
+    if (!historicalData || !cityId) return null;
+    const demoResult = this.calculateDemographics(historicalData);
+    if (!demoResult) return null;
+    const cityData = demoResult.cities.find(c => c.id === cityId);
+    if (!cityData) return null;
+
+    return {
+      cityId,
+      green: cityData.structure.green,
+      blue: cityData.structure.blue,
+      white: cityData.structure.white,
+      headToHead: cityData.headToHead,
+      index: cityData.index,
+      national: demoResult.national
+    };
+  },
+
+  /**
+   * Calculate Partisan Shift & Swing Index (民意板塊位移指數).
+   * Compares 2022 actual CEC election results with 2026 ClearPoll predicted shares.
+   * @param {Object} predictedVoteShares
+   * @param {string} cityId
+   * @param {Object} pastResults
+   * @param {Array} candidates
+   * @returns {Object|null}
+   */
+  calculatePartisanShift(predictedVoteShares, cityId, pastResults, candidates = []) {
+    if (!predictedVoteShares || !cityId || !pastResults || !pastResults.results) return null;
+
+    const past2022 = pastResults.results.find(r => r.electionId === `2022-${cityId}-mayor`);
+    if (!past2022) return null;
+
+    let pastGreen = 0;
+    let pastBlue = 0;
+    let pastOther = 0;
+    let pastWinner = null;
+
+    for (const c of past2022.candidates) {
+      const party = (c.party || '').toUpperCase();
+      if (party === 'DPP') pastGreen += c.voteShare;
+      else if (party === 'KMT') pastBlue += c.voteShare;
+      else pastOther += c.voteShare;
+
+      if (c.elected) pastWinner = c;
+    }
+
+    let predGreen = 0;
+    let predBlue = 0;
+    let predOther = 0;
+
+    for (const c of candidates) {
+      const share = predictedVoteShares[c.id] || 0;
+      const party = (c.party || '').toUpperCase();
+      if (party === 'DPP') predGreen += share;
+      else if (party === 'KMT') predBlue += share;
+      else predOther += share;
+    }
+    if (predictedVoteShares.others) {
+      predOther += predictedVoteShares.others;
+    }
+
+    const greenDelta = Math.round((predGreen - pastGreen) * 10) / 10;
+    const blueDelta = Math.round((predBlue - pastBlue) * 10) / 10;
+    const otherDelta = Math.round((predOther - pastOther) * 10) / 10;
+
+    // Net swing: (predBlue - predGreen) - (pastBlue - pastGreen)
+    const netBlueSwing = Math.round(((predBlue - predGreen) - (pastBlue - pastGreen)) * 10) / 10;
+
+    let direction = 'stable';
+    let summary = '';
+    if (Math.abs(netBlueSwing) < 2.0) {
+      direction = 'stable';
+      summary = `板塊結構大致持平（藍綠消長幅度小於 2%），選情呈現高度拉鋸狀態。`;
+    } else if (netBlueSwing > 0) {
+      direction = 'blue';
+      summary = `民意板塊較 2022 年向泛藍傾斜 +${netBlueSwing}%（藍營消長 ${blueDelta >= 0 ? '+' : ''}${blueDelta}%，綠營消長 ${greenDelta >= 0 ? '+' : ''}${greenDelta}%）。`;
+    } else {
+      direction = 'green';
+      summary = `民意板塊較 2022 年向泛綠回升 +${Math.abs(netBlueSwing)}%（綠營消長 ${greenDelta >= 0 ? '+' : ''}${greenDelta}%，藍營消長 ${blueDelta >= 0 ? '+' : ''}${blueDelta}%）。`;
+    }
+
+    return {
+      cityId,
+      past2022: {
+        date: past2022.date,
+        turnoutRate: past2022.turnoutRate,
+        totalVotes: past2022.totalVotes,
+        greenShare: Math.round(pastGreen * 10) / 10,
+        blueShare: Math.round(pastBlue * 10) / 10,
+        otherShare: Math.round(pastOther * 10) / 10,
+        winner: pastWinner ? `${pastWinner.name} (${pastWinner.party})` : '未知'
+      },
+      predicted2026: {
+        greenShare: Math.round(predGreen * 10) / 10,
+        blueShare: Math.round(predBlue * 10) / 10,
+        otherShare: Math.round(predOther * 10) / 10
+      },
+      shift: {
+        greenDelta,
+        blueDelta,
+        otherDelta,
+        netBlueSwing,
+        direction,
+        summary
+      }
     };
   },
 };

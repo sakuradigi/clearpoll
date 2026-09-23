@@ -6,31 +6,94 @@
       "turnoutRate": 58.68,
       "totalVotes": 1318733,
       "candidates": [
-        { "id": "chen", "name": "陳其邁", "party": "DPP", "votes": 766147, "voteShare": 58.10, "elected": true },
-        { "id": "ke", "name": "柯志恩", "party": "KMT", "votes": 529607, "voteShare": 40.16, "elected": false },
-        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 22979, "voteShare": 1.74, "elected": false }
+        {
+          "id": "chen",
+          "name": "陳其邁",
+          "party": "DPP",
+          "votes": 766147,
+          "voteShare": 58.1,
+          "elected": true
+        },
+        {
+          "id": "ke",
+          "name": "柯志恩",
+          "party": "KMT",
+          "votes": 529607,
+          "voteShare": 40.16,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 22979,
+          "voteShare": 1.74,
+          "elected": false
+        }
       ]
     },
     {
       "electionId": "2022-taipei-mayor",
       "date": "2022-11-26",
-      "turnoutRate": 67.70,
+      "turnoutRate": 67.7,
       "totalVotes": 1371269,
       "candidates": [
-        { "id": "chiang", "name": "蔣萬安", "party": "KMT", "votes": 575590, "voteShare": 42.29, "elected": true },
-        { "id": "chen_s", "name": "陳時中", "party": "DPP", "votes": 434558, "voteShare": 31.93, "elected": false },
-        { "id": "huang_s", "name": "黃珊珊", "party": "IND", "votes": 346013, "voteShare": 25.23, "elected": false },
-        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 15108, "voteShare": 1.10, "elected": false }
+        {
+          "id": "chiang",
+          "name": "蔣萬安",
+          "party": "KMT",
+          "votes": 575590,
+          "voteShare": 42.29,
+          "elected": true
+        },
+        {
+          "id": "chen_s",
+          "name": "陳時中",
+          "party": "DPP",
+          "votes": 434558,
+          "voteShare": 31.93,
+          "elected": false
+        },
+        {
+          "id": "huang_s",
+          "name": "黃珊珊",
+          "party": "IND",
+          "votes": 346013,
+          "voteShare": 25.23,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 15108,
+          "voteShare": 1.1,
+          "elected": false
+        }
       ]
     },
     {
       "electionId": "2022-newtaipei-mayor",
       "date": "2022-11-26",
-      "turnoutRate": 56.60,
+      "turnoutRate": 56.6,
       "totalVotes": 1846531,
       "candidates": [
-        { "id": "hou", "name": "侯友宜", "party": "KMT", "votes": 1152555, "voteShare": 62.42, "elected": true },
-        { "id": "lin_c", "name": "林佳龍", "party": "DPP", "votes": 693976, "voteShare": 37.58, "elected": false }
+        {
+          "id": "hou",
+          "name": "侯友宜",
+          "party": "KMT",
+          "votes": 1152555,
+          "voteShare": 62.42,
+          "elected": true
+        },
+        {
+          "id": "lin_c",
+          "name": "林佳龍",
+          "party": "DPP",
+          "votes": 693976,
+          "voteShare": 37.58,
+          "elected": false
+        }
       ]
     },
     {
@@ -39,10 +102,38 @@
       "turnoutRate": 59.46,
       "totalVotes": 1071763,
       "candidates": [
-        { "id": "chang", "name": "張善政", "party": "KMT", "votes": 557572, "voteShare": 52.02, "elected": true },
-        { "id": "cheng_y", "name": "鄭運鵬", "party": "DPP", "votes": 428983, "voteShare": 40.03, "elected": false },
-        { "id": "lai_h", "name": "賴香伶", "party": "TPP", "votes": 54926, "voteShare": 5.12, "elected": false },
-        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 30282, "voteShare": 2.83, "elected": false }
+        {
+          "id": "chang",
+          "name": "張善政",
+          "party": "KMT",
+          "votes": 557572,
+          "voteShare": 52.02,
+          "elected": true
+        },
+        {
+          "id": "cheng_y",
+          "name": "鄭運鵬",
+          "party": "DPP",
+          "votes": 428983,
+          "voteShare": 40.03,
+          "elected": false
+        },
+        {
+          "id": "lai_h",
+          "name": "賴香伶",
+          "party": "TPP",
+          "votes": 54926,
+          "voteShare": 5.12,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 30282,
+          "voteShare": 2.83,
+          "elected": false
+        }
       ]
     },
     {
@@ -51,9 +142,30 @@
       "turnoutRate": 65.02,
       "totalVotes": 1346471,
       "candidates": [
-        { "id": "lu", "name": "盧秀燕", "party": "KMT", "votes": 799107, "voteShare": 59.35, "elected": true },
-        { "id": "tsai", "name": "蔡其昌", "party": "DPP", "votes": 524224, "voteShare": 38.93, "elected": false },
-        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 23140, "voteShare": 1.72, "elected": false }
+        {
+          "id": "lu",
+          "name": "盧秀燕",
+          "party": "KMT",
+          "votes": 799107,
+          "voteShare": 59.35,
+          "elected": true
+        },
+        {
+          "id": "tsai",
+          "name": "蔡其昌",
+          "party": "DPP",
+          "votes": 524224,
+          "voteShare": 38.93,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 23140,
+          "voteShare": 1.72,
+          "elected": false
+        }
       ]
     },
     {
@@ -62,9 +174,582 @@
       "turnoutRate": 58.68,
       "totalVotes": 888684,
       "candidates": [
-        { "id": "huang_w", "name": "黃偉哲", "party": "DPP", "votes": 433684, "voteShare": 48.80, "elected": true },
-        { "id": "hsie", "name": "謝龍介", "party": "KMT", "votes": 387741, "voteShare": 43.63, "elected": false },
-        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 67259, "voteShare": 7.57, "elected": false }
+        {
+          "id": "huang_w",
+          "name": "黃偉哲",
+          "party": "DPP",
+          "votes": 433684,
+          "voteShare": 48.8,
+          "elected": true
+        },
+        {
+          "id": "hsie",
+          "name": "謝龍介",
+          "party": "KMT",
+          "votes": 387741,
+          "voteShare": 43.63,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 67259,
+          "voteShare": 7.57,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2022-keelung-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 60.16,
+      "totalVotes": 182893,
+      "candidates": [
+        {
+          "id": "hsieh_k",
+          "name": "謝國樑",
+          "party": "KMT",
+          "votes": 96784,
+          "voteShare": 52.92,
+          "elected": true
+        },
+        {
+          "id": "tsai_s",
+          "name": "蔡適應",
+          "party": "DPP",
+          "votes": 71354,
+          "voteShare": 39.01,
+          "elected": false
+        },
+        {
+          "id": "chen_w",
+          "name": "陳薇仲",
+          "party": "OTHER",
+          "votes": 12000,
+          "voteShare": 6.56,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 2755,
+          "voteShare": 1.51,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2022-hsinchucity-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 62.94,
+      "totalVotes": 217941,
+      "candidates": [
+        {
+          "id": "kao_h",
+          "name": "高虹安",
+          "party": "TPP",
+          "votes": 98121,
+          "voteShare": 45.02,
+          "elected": true
+        },
+        {
+          "id": "shen_h",
+          "name": "沈慧虹",
+          "party": "DPP",
+          "votes": 77764,
+          "voteShare": 35.68,
+          "elected": false
+        },
+        {
+          "id": "lin_k",
+          "name": "林耕仁",
+          "party": "KMT",
+          "votes": 39391,
+          "voteShare": 18.07,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 2665,
+          "voteShare": 1.23,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2022-hsinchucounty-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 58.98,
+      "totalVotes": 258305,
+      "candidates": [
+        {
+          "id": "yang_w",
+          "name": "楊文科",
+          "party": "KMT",
+          "votes": 163662,
+          "voteShare": 63.36,
+          "elected": true
+        },
+        {
+          "id": "chou_c",
+          "name": "周江杰",
+          "party": "DPP",
+          "votes": 83683,
+          "voteShare": 32.4,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 10960,
+          "voteShare": 4.24,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2022-miaoli-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 67.2,
+      "totalVotes": 292100,
+      "candidates": [
+        {
+          "id": "chung_t",
+          "name": "鍾東錦",
+          "party": "IND",
+          "votes": 124603,
+          "voteShare": 42.66,
+          "elected": true
+        },
+        {
+          "id": "hsu_t",
+          "name": "徐定禎",
+          "party": "DPP",
+          "votes": 91260,
+          "voteShare": 31.24,
+          "elected": false
+        },
+        {
+          "id": "sung_k",
+          "name": "宋國鼎",
+          "party": "OTHER",
+          "votes": 39347,
+          "voteShare": 13.47,
+          "elected": false
+        },
+        {
+          "id": "hsieh_f",
+          "name": "謝福弘",
+          "party": "KMT",
+          "votes": 32026,
+          "voteShare": 10.96,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 4864,
+          "voteShare": 1.67,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2022-changhua-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 65.26,
+      "totalVotes": 650424,
+      "candidates": [
+        {
+          "id": "wang_h",
+          "name": "王惠美",
+          "party": "KMT",
+          "votes": 369133,
+          "voteShare": 56.75,
+          "elected": true
+        },
+        {
+          "id": "huang_h",
+          "name": "黃秀芳",
+          "party": "DPP",
+          "votes": 272817,
+          "voteShare": 41.94,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 8474,
+          "voteShare": 1.3,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2022-nantou-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 69.08,
+      "totalVotes": 275499,
+      "candidates": [
+        {
+          "id": "hsu_s",
+          "name": "許淑華",
+          "party": "KMT",
+          "votes": 154256,
+          "voteShare": 55.99,
+          "elected": true
+        },
+        {
+          "id": "tsai_p",
+          "name": "蔡培慧",
+          "party": "DPP",
+          "votes": 117993,
+          "voteShare": 42.83,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 3250,
+          "voteShare": 1.18,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2022-yunlin-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 67.35,
+      "totalVotes": 366833,
+      "candidates": [
+        {
+          "id": "chang_l",
+          "name": "張麗善",
+          "party": "KMT",
+          "votes": 207519,
+          "voteShare": 56.57,
+          "elected": true
+        },
+        {
+          "id": "liu_c",
+          "name": "劉建國",
+          "party": "DPP",
+          "votes": 152620,
+          "voteShare": 41.6,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 6694,
+          "voteShare": 1.83,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2022-chiayicity-mayor",
+      "date": "2022-12-18",
+      "turnoutRate": 43.99,
+      "totalVotes": 93813,
+      "candidates": [
+        {
+          "id": "huang_m",
+          "name": "黃敏惠",
+          "party": "KMT",
+          "votes": 59874,
+          "voteShare": 63.82,
+          "elected": true
+        },
+        {
+          "id": "lee_c",
+          "name": "李俊俋",
+          "party": "DPP",
+          "votes": 32790,
+          "voteShare": 34.95,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 1149,
+          "voteShare": 1.23,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2022-chiayicounty-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 65.81,
+      "totalVotes": 273294,
+      "candidates": [
+        {
+          "id": "weng_c",
+          "name": "翁章梁",
+          "party": "DPP",
+          "votes": 171777,
+          "voteShare": 62.85,
+          "elected": true
+        },
+        {
+          "id": "wang_y",
+          "name": "王育敏",
+          "party": "KMT",
+          "votes": 101517,
+          "voteShare": 37.15,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2022-pingtung-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 67.11,
+      "totalVotes": 443153,
+      "candidates": [
+        {
+          "id": "chou_c",
+          "name": "周春米",
+          "party": "DPP",
+          "votes": 217537,
+          "voteShare": 49.27,
+          "elected": true
+        },
+        {
+          "id": "su_c",
+          "name": "蘇清泉",
+          "party": "KMT",
+          "votes": 206460,
+          "voteShare": 46.59,
+          "elected": false
+        },
+        {
+          "id": "zhan_z",
+          "name": "詹智鈞",
+          "party": "OTHER",
+          "votes": 19156,
+          "voteShare": 4.14,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2022-yilan-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 64.28,
+      "totalVotes": 235281,
+      "candidates": [
+        {
+          "id": "lin_t",
+          "name": "林姿妙",
+          "party": "KMT",
+          "votes": 119421,
+          "voteShare": 50.76,
+          "elected": true
+        },
+        {
+          "id": "chiang_c",
+          "name": "江聰淵",
+          "party": "DPP",
+          "votes": 96779,
+          "voteShare": 41.13,
+          "elected": false
+        },
+        {
+          "id": "chen_w",
+          "name": "陳琬惠",
+          "party": "TPP",
+          "votes": 16412,
+          "voteShare": 6.98,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 2669,
+          "voteShare": 1.13,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2022-hualien-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 57.56,
+      "totalVotes": 149307,
+      "candidates": [
+        {
+          "id": "hsu_c",
+          "name": "徐榛蔚",
+          "party": "KMT",
+          "votes": 96645,
+          "voteShare": 64.73,
+          "elected": true
+        },
+        {
+          "id": "kolas",
+          "name": "Kolas Yotaka",
+          "party": "DPP",
+          "votes": 47845,
+          "voteShare": 32.04,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 4817,
+          "voteShare": 3.23,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2022-taitung-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 64.79,
+      "totalVotes": 112148,
+      "candidates": [
+        {
+          "id": "rao_c",
+          "name": "饒慶鈴",
+          "party": "KMT",
+          "votes": 68661,
+          "voteShare": 61.22,
+          "elected": true
+        },
+        {
+          "id": "liu_c",
+          "name": "劉櫂豪",
+          "party": "DPP",
+          "votes": 41104,
+          "voteShare": 36.65,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 2383,
+          "voteShare": 2.13,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2022-penghu-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 58.9,
+      "totalVotes": 51242,
+      "candidates": [
+        {
+          "id": "chen_k",
+          "name": "陳光復",
+          "party": "DPP",
+          "votes": 18777,
+          "voteShare": 36.64,
+          "elected": true
+        },
+        {
+          "id": "lai_f",
+          "name": "賴峰偉",
+          "party": "KMT",
+          "votes": 17081,
+          "voteShare": 33.33,
+          "elected": false
+        },
+        {
+          "id": "yeh_c",
+          "name": "葉竹林",
+          "party": "IND",
+          "votes": 15384,
+          "voteShare": 30.03,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2022-kinmen-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 39.32,
+      "totalVotes": 47114,
+      "candidates": [
+        {
+          "id": "chen_f",
+          "name": "陳福海",
+          "party": "IND",
+          "votes": 23248,
+          "voteShare": 49.34,
+          "elected": true
+        },
+        {
+          "id": "yang_c",
+          "name": "楊鎮浯",
+          "party": "KMT",
+          "votes": 19340,
+          "voteShare": 41.05,
+          "elected": false
+        },
+        {
+          "id": "lee_y",
+          "name": "李應文",
+          "party": "IND",
+          "votes": 3459,
+          "voteShare": 7.34,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 1067,
+          "voteShare": 2.27,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2022-lienchiang-mayor",
+      "date": "2022-11-26",
+      "turnoutRate": 72.99,
+      "totalVotes": 8505,
+      "candidates": [
+        {
+          "id": "wang_c",
+          "name": "王忠銘",
+          "party": "KMT",
+          "votes": 4337,
+          "voteShare": 50.99,
+          "elected": true
+        },
+        {
+          "id": "tsao_e",
+          "name": "曹爾元",
+          "party": "KMT",
+          "votes": 3582,
+          "voteShare": 42.12,
+          "elected": false
+        },
+        {
+          "id": "lee_w",
+          "name": "李問",
+          "party": "DPP",
+          "votes": 586,
+          "voteShare": 6.89,
+          "elected": false
+        }
       ]
     },
     {
@@ -73,9 +758,30 @@
       "turnoutRate": 73.54,
       "totalVotes": 1656907,
       "candidates": [
-        { "id": "han", "name": "韓國瑜", "party": "KMT", "votes": 892545, "voteShare": 53.87, "elected": true },
-        { "id": "chen_c", "name": "陳其邁", "party": "DPP", "votes": 742239, "voteShare": 44.80, "elected": false },
-        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 22123, "voteShare": 1.33, "elected": false }
+        {
+          "id": "han",
+          "name": "韓國瑜",
+          "party": "KMT",
+          "votes": 892545,
+          "voteShare": 53.87,
+          "elected": true
+        },
+        {
+          "id": "chen_c",
+          "name": "陳其邁",
+          "party": "DPP",
+          "votes": 742239,
+          "voteShare": 44.8,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 22123,
+          "voteShare": 1.33,
+          "elected": false
+        }
       ]
     },
     {
@@ -84,20 +790,62 @@
       "turnoutRate": 65.95,
       "totalVotes": 1413870,
       "candidates": [
-        { "id": "ko", "name": "柯文哲", "party": "IND", "votes": 580663, "voteShare": 41.07, "elected": true },
-        { "id": "ting", "name": "丁守中", "party": "KMT", "votes": 577096, "voteShare": 40.82, "elected": false },
-        { "id": "yao", "name": "姚文智", "party": "DPP", "votes": 244342, "voteShare": 17.28, "elected": false },
-        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 11769, "voteShare": 0.83, "elected": false }
+        {
+          "id": "ko",
+          "name": "柯文哲",
+          "party": "IND",
+          "votes": 580663,
+          "voteShare": 41.07,
+          "elected": true
+        },
+        {
+          "id": "ting",
+          "name": "丁守中",
+          "party": "KMT",
+          "votes": 577096,
+          "voteShare": 40.82,
+          "elected": false
+        },
+        {
+          "id": "yao",
+          "name": "姚文智",
+          "party": "DPP",
+          "votes": 244342,
+          "voteShare": 17.28,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 11769,
+          "voteShare": 0.83,
+          "elected": false
+        }
       ]
     },
     {
       "electionId": "2018-newtaipei-mayor",
       "date": "2018-11-24",
-      "turnoutRate": 64.00,
+      "turnoutRate": 64.0,
       "totalVotes": 2038822,
       "candidates": [
-        { "id": "hou", "name": "侯友宜", "party": "KMT", "votes": 1165130, "voteShare": 57.15, "elected": true },
-        { "id": "su_t", "name": "蘇貞昌", "party": "DPP", "votes": 873692, "voteShare": 42.85, "elected": false }
+        {
+          "id": "hou",
+          "name": "侯友宜",
+          "party": "KMT",
+          "votes": 1165130,
+          "voteShare": 57.15,
+          "elected": true
+        },
+        {
+          "id": "su_t",
+          "name": "蘇貞昌",
+          "party": "DPP",
+          "votes": 873692,
+          "voteShare": 42.85,
+          "elected": false
+        }
       ]
     },
     {
@@ -106,10 +854,38 @@
       "turnoutRate": 60.63,
       "totalVotes": 1033349,
       "candidates": [
-        { "id": "cheng_w", "name": "鄭文燦", "party": "DPP", "votes": 552330, "voteShare": 53.46, "elected": true },
-        { "id": "chen_h", "name": "陳學聖", "party": "KMT", "votes": 407234, "voteShare": 39.42, "elected": false },
-        { "id": "yang", "name": "楊麗環", "party": "IND", "votes": 51518, "voteShare": 4.99, "elected": false },
-        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 22067, "voteShare": 2.13, "elected": false }
+        {
+          "id": "cheng_w",
+          "name": "鄭文燦",
+          "party": "DPP",
+          "votes": 552330,
+          "voteShare": 53.46,
+          "elected": true
+        },
+        {
+          "id": "chen_h",
+          "name": "陳學聖",
+          "party": "KMT",
+          "votes": 407234,
+          "voteShare": 39.42,
+          "elected": false
+        },
+        {
+          "id": "yang",
+          "name": "楊麗環",
+          "party": "IND",
+          "votes": 51518,
+          "voteShare": 4.99,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 22067,
+          "voteShare": 2.13,
+          "elected": false
+        }
       ]
     },
     {
@@ -118,9 +894,30 @@
       "turnoutRate": 67.46,
       "totalVotes": 1463770,
       "candidates": [
-        { "id": "lu", "name": "盧秀燕", "party": "KMT", "votes": 827996, "voteShare": 56.57, "elected": true },
-        { "id": "lin_c", "name": "林佳龍", "party": "DPP", "votes": 619855, "voteShare": 42.35, "elected": false },
-        { "id": "others", "name": "其他候選人", "party": "OTHER", "votes": 15919, "voteShare": 1.08, "elected": false }
+        {
+          "id": "lu",
+          "name": "盧秀燕",
+          "party": "KMT",
+          "votes": 827996,
+          "voteShare": 56.57,
+          "elected": true
+        },
+        {
+          "id": "lin_c",
+          "name": "林佳龍",
+          "party": "DPP",
+          "votes": 619855,
+          "voteShare": 42.35,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 15919,
+          "voteShare": 1.08,
+          "elected": false
+        }
       ]
     },
     {
@@ -129,12 +926,54 @@
       "turnoutRate": 64.01,
       "totalVotes": 966670,
       "candidates": [
-        { "id": "huang_w", "name": "黃偉哲", "party": "DPP", "votes": 367518, "voteShare": 38.02, "elected": true },
-        { "id": "kao", "name": "高思博", "party": "KMT", "votes": 312874, "voteShare": 32.37, "elected": false },
-        { "id": "chen_y", "name": "陳永和", "party": "IND", "votes": 117179, "voteShare": 12.12, "elected": false },
-        { "id": "lin", "name": "林義豐", "party": "IND", "votes": 84153, "voteShare": 8.71, "elected": false },
-        { "id": "hsu", "name": "許忠信", "party": "IND", "votes": 45168, "voteShare": 4.67, "elected": false },
-        { "id": "su", "name": "蘇煥智", "party": "IND", "votes": 39778, "voteShare": 4.11, "elected": false }
+        {
+          "id": "huang_w",
+          "name": "黃偉哲",
+          "party": "DPP",
+          "votes": 367518,
+          "voteShare": 38.02,
+          "elected": true
+        },
+        {
+          "id": "kao",
+          "name": "高思博",
+          "party": "KMT",
+          "votes": 312874,
+          "voteShare": 32.37,
+          "elected": false
+        },
+        {
+          "id": "chen_y",
+          "name": "陳永和",
+          "party": "IND",
+          "votes": 117179,
+          "voteShare": 12.12,
+          "elected": false
+        },
+        {
+          "id": "lin",
+          "name": "林義豐",
+          "party": "IND",
+          "votes": 84153,
+          "voteShare": 8.71,
+          "elected": false
+        },
+        {
+          "id": "hsu",
+          "name": "許忠信",
+          "party": "IND",
+          "votes": 45168,
+          "voteShare": 4.67,
+          "elected": false
+        },
+        {
+          "id": "su",
+          "name": "蘇煥智",
+          "party": "IND",
+          "votes": 39778,
+          "voteShare": 4.11,
+          "elected": false
+        }
       ]
     }
   ]

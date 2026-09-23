@@ -1,20 +1,128 @@
 {
-  "lastUpdated": "2026-07-24",
+  "lastUpdated": "2026-09-23",
   "elections": [
     {
       "id": "2024-presidential",
       "year": 2024,
       "type": "presidential",
       "weightType": 0.35,
-      "weightTime": 1.00,
+      "weightTime": 1.0,
       "results": {
-        "national": { "green": 40.05, "blue": 33.49, "white": 26.46 },
-        "taipei": { "green": 38.13, "blue": 38.08, "white": 23.79 },
-        "newtaipei": { "green": 38.59, "blue": 35.17, "white": 26.24 },
-        "taoyuan": { "green": 35.27, "blue": 34.12, "white": 30.61 },
-        "taichung": { "green": 37.58, "blue": 32.36, "white": 30.06 },
-        "tainan": { "green": 50.95, "blue": 25.61, "white": 23.44 },
-        "kaohsiung": { "green": 48.89, "blue": 29.23, "white": 21.88 }
+        "national": {
+          "green": 40.05,
+          "blue": 33.49,
+          "white": 26.46
+        },
+        "taipei": {
+          "green": 38.13,
+          "blue": 38.08,
+          "white": 23.79
+        },
+        "newtaipei": {
+          "green": 38.59,
+          "blue": 35.17,
+          "white": 26.24
+        },
+        "taoyuan": {
+          "green": 35.27,
+          "blue": 34.12,
+          "white": 30.61
+        },
+        "taichung": {
+          "green": 37.58,
+          "blue": 32.36,
+          "white": 30.06
+        },
+        "tainan": {
+          "green": 50.95,
+          "blue": 25.61,
+          "white": 23.44
+        },
+        "kaohsiung": {
+          "green": 48.89,
+          "blue": 29.23,
+          "white": 21.88
+        },
+        "keelung": {
+          "green": 34.77,
+          "blue": 38.29,
+          "white": 26.94
+        },
+        "hsinchucity": {
+          "green": 34.79,
+          "blue": 30.9,
+          "white": 34.3
+        },
+        "hsinchucounty": {
+          "green": 27.43,
+          "blue": 37.03,
+          "white": 35.55
+        },
+        "miaoli": {
+          "green": 30.15,
+          "blue": 41.18,
+          "white": 28.67
+        },
+        "changhua": {
+          "green": 38.11,
+          "blue": 32.93,
+          "white": 28.96
+        },
+        "nantou": {
+          "green": 35.95,
+          "blue": 39.57,
+          "white": 24.48
+        },
+        "yunlin": {
+          "green": 44.54,
+          "blue": 29.33,
+          "white": 26.13
+        },
+        "chiayicity": {
+          "green": 43.26,
+          "blue": 31.4,
+          "white": 25.34
+        },
+        "chiayicounty": {
+          "green": 47.69,
+          "blue": 29.35,
+          "white": 22.96
+        },
+        "pingtung": {
+          "green": 47.51,
+          "blue": 31.64,
+          "white": 20.85
+        },
+        "yilan": {
+          "green": 44.74,
+          "blue": 28.98,
+          "white": 26.28
+        },
+        "hualien": {
+          "green": 24.78,
+          "blue": 50.5,
+          "white": 24.72
+        },
+        "taitung": {
+          "green": 27.41,
+          "blue": 49.32,
+          "white": 23.27
+        },
+        "penghu": {
+          "green": 40.8,
+          "blue": 34.61,
+          "white": 24.59
+        },
+        "kinmen": {
+          "green": 10.02,
+          "blue": 61.4,
+          "white": 28.58
+        },
+        "lienchiang": {
+          "green": 10.52,
+          "blue": 62.67,
+          "white": 26.81
+        }
       }
     },
     {
@@ -22,31 +130,270 @@
       "year": 2024,
       "type": "partyList",
       "weightType": 0.45,
-      "weightTime": 1.00,
+      "weightTime": 1.0,
       "results": {
-        "national": { "green": 36.16, "blue": 34.58, "white": 22.07, "other": 7.19 },
-        "taipei": { "green": 34.10, "blue": 38.20, "white": 20.80, "other": 6.90 },
-        "newtaipei": { "green": 35.80, "blue": 35.20, "white": 22.10, "other": 6.90 },
-        "taoyuan": { "green": 32.40, "blue": 36.10, "white": 24.50, "other": 7.00 },
-        "taichung": { "green": 34.20, "blue": 34.80, "white": 24.10, "other": 6.90 },
-        "tainan": { "green": 45.90, "blue": 27.10, "white": 19.80, "other": 7.20 },
-        "kaohsiung": { "green": 44.20, "blue": 30.50, "white": 18.20, "other": 7.10 }
+        "national": {
+          "green": 36.16,
+          "blue": 34.58,
+          "white": 22.07,
+          "other": 7.19
+        },
+        "taipei": {
+          "green": 34.1,
+          "blue": 38.2,
+          "white": 20.8,
+          "other": 6.9
+        },
+        "newtaipei": {
+          "green": 35.8,
+          "blue": 35.2,
+          "white": 22.1,
+          "other": 6.9
+        },
+        "taoyuan": {
+          "green": 32.4,
+          "blue": 36.1,
+          "white": 24.5,
+          "other": 7.0
+        },
+        "taichung": {
+          "green": 34.2,
+          "blue": 34.8,
+          "white": 24.1,
+          "other": 6.9
+        },
+        "tainan": {
+          "green": 45.9,
+          "blue": 27.1,
+          "white": 19.8,
+          "other": 7.2
+        },
+        "kaohsiung": {
+          "green": 44.2,
+          "blue": 30.5,
+          "white": 18.2,
+          "other": 7.1
+        },
+        "keelung": {
+          "green": 31.5,
+          "blue": 40.8,
+          "white": 21.2,
+          "other": 6.5
+        },
+        "hsinchucity": {
+          "green": 29.8,
+          "blue": 32.6,
+          "white": 28.5,
+          "other": 9.1
+        },
+        "hsinchucounty": {
+          "green": 24.3,
+          "blue": 41.2,
+          "white": 27.8,
+          "other": 6.7
+        },
+        "miaoli": {
+          "green": 27.1,
+          "blue": 44.6,
+          "white": 22.5,
+          "other": 5.8
+        },
+        "changhua": {
+          "green": 36.3,
+          "blue": 34.8,
+          "white": 22.8,
+          "other": 6.1
+        },
+        "nantou": {
+          "green": 32.5,
+          "blue": 42.1,
+          "white": 19.8,
+          "other": 5.6
+        },
+        "yunlin": {
+          "green": 42.1,
+          "blue": 32.2,
+          "white": 20.1,
+          "other": 5.6
+        },
+        "chiayicity": {
+          "green": 39.5,
+          "blue": 33.6,
+          "white": 21.0,
+          "other": 5.9
+        },
+        "chiayicounty": {
+          "green": 46.2,
+          "blue": 31.8,
+          "white": 17.2,
+          "other": 4.8
+        },
+        "pingtung": {
+          "green": 45.1,
+          "blue": 34.2,
+          "white": 15.9,
+          "other": 4.8
+        },
+        "yilan": {
+          "green": 40.6,
+          "blue": 32.5,
+          "white": 21.3,
+          "other": 5.6
+        },
+        "hualien": {
+          "green": 20.8,
+          "blue": 55.4,
+          "white": 18.4,
+          "other": 5.4
+        },
+        "taitung": {
+          "green": 23.5,
+          "blue": 54.1,
+          "white": 16.9,
+          "other": 5.5
+        },
+        "penghu": {
+          "green": 35.8,
+          "blue": 38.6,
+          "white": 20.1,
+          "other": 5.5
+        },
+        "kinmen": {
+          "green": 8.9,
+          "blue": 66.8,
+          "white": 20.2,
+          "other": 4.1
+        },
+        "lienchiang": {
+          "green": 8.2,
+          "blue": 69.5,
+          "white": 18.1,
+          "other": 4.2
+        }
       }
     },
     {
       "id": "2022-mayoral",
       "year": 2022,
       "type": "mayoral",
-      "weightType": 0.20,
-      "weightTime": 0.80,
+      "weightType": 0.2,
+      "weightTime": 0.8,
       "results": {
-        "national": { "green": 41.57, "blue": 50.02, "white": 8.41 },
-        "taipei": { "green": 31.93, "blue": 42.29, "white": 25.78 },
-        "newtaipei": { "green": 37.58, "blue": 62.42, "white": 0.00 },
-        "taoyuan": { "green": 40.03, "blue": 52.02, "white": 7.95 },
-        "taichung": { "green": 38.93, "blue": 59.35, "white": 1.72 },
-        "tainan": { "green": 48.80, "blue": 43.63, "white": 7.57 },
-        "kaohsiung": { "green": 58.10, "blue": 40.16, "white": 1.74 }
+        "national": {
+          "green": 41.57,
+          "blue": 50.02,
+          "white": 8.41
+        },
+        "taipei": {
+          "green": 31.93,
+          "blue": 42.29,
+          "white": 25.78
+        },
+        "newtaipei": {
+          "green": 37.58,
+          "blue": 62.42,
+          "white": 0.0
+        },
+        "taoyuan": {
+          "green": 40.03,
+          "blue": 52.02,
+          "white": 7.95
+        },
+        "taichung": {
+          "green": 38.93,
+          "blue": 59.35,
+          "white": 1.72
+        },
+        "tainan": {
+          "green": 48.8,
+          "blue": 43.63,
+          "white": 7.57
+        },
+        "kaohsiung": {
+          "green": 58.1,
+          "blue": 40.16,
+          "white": 1.74
+        },
+        "keelung": {
+          "green": 39.01,
+          "blue": 52.92,
+          "white": 8.07
+        },
+        "hsinchucity": {
+          "green": 35.68,
+          "blue": 18.07,
+          "white": 46.25
+        },
+        "hsinchucounty": {
+          "green": 32.4,
+          "blue": 63.36,
+          "white": 4.24
+        },
+        "miaoli": {
+          "green": 31.24,
+          "blue": 53.62,
+          "white": 15.14
+        },
+        "changhua": {
+          "green": 41.94,
+          "blue": 56.75,
+          "white": 1.31
+        },
+        "nantou": {
+          "green": 42.83,
+          "blue": 55.99,
+          "white": 1.18
+        },
+        "yunlin": {
+          "green": 41.6,
+          "blue": 56.57,
+          "white": 1.83
+        },
+        "chiayicity": {
+          "green": 34.95,
+          "blue": 63.82,
+          "white": 1.23
+        },
+        "chiayicounty": {
+          "green": 62.85,
+          "blue": 37.15,
+          "white": 0.0
+        },
+        "pingtung": {
+          "green": 49.27,
+          "blue": 46.59,
+          "white": 4.14
+        },
+        "yilan": {
+          "green": 41.13,
+          "blue": 50.76,
+          "white": 8.11
+        },
+        "hualien": {
+          "green": 32.04,
+          "blue": 64.73,
+          "white": 3.23
+        },
+        "taitung": {
+          "green": 36.65,
+          "blue": 61.22,
+          "white": 2.13
+        },
+        "penghu": {
+          "green": 36.64,
+          "blue": 33.33,
+          "white": 30.03
+        },
+        "kinmen": {
+          "green": 0.0,
+          "blue": 41.05,
+          "white": 58.95
+        },
+        "lienchiang": {
+          "green": 6.89,
+          "blue": 93.11,
+          "white": 0.0
+        }
       }
     },
     {
@@ -54,15 +401,123 @@
       "year": 2020,
       "type": "presidential",
       "weightType": 0.35,
-      "weightTime": 0.60,
+      "weightTime": 0.6,
       "results": {
-        "national": { "green": 57.13, "blue": 38.61, "white": 4.26 },
-        "taipei": { "green": 53.65, "blue": 42.01, "white": 4.34 },
-        "newtaipei": { "green": 56.52, "blue": 38.91, "white": 4.57 },
-        "taoyuan": { "green": 54.82, "blue": 40.40, "white": 4.78 },
-        "taichung": { "green": 56.95, "blue": 38.06, "white": 4.99 },
-        "tainan": { "green": 67.05, "blue": 29.10, "white": 3.85 },
-        "kaohsiung": { "green": 62.23, "blue": 34.63, "white": 3.14 }
+        "national": {
+          "green": 57.13,
+          "blue": 38.61,
+          "white": 4.26
+        },
+        "taipei": {
+          "green": 53.65,
+          "blue": 42.01,
+          "white": 4.34
+        },
+        "newtaipei": {
+          "green": 56.52,
+          "blue": 38.91,
+          "white": 4.57
+        },
+        "taoyuan": {
+          "green": 54.82,
+          "blue": 40.4,
+          "white": 4.78
+        },
+        "taichung": {
+          "green": 56.95,
+          "blue": 38.06,
+          "white": 4.99
+        },
+        "tainan": {
+          "green": 67.05,
+          "blue": 29.1,
+          "white": 3.85
+        },
+        "kaohsiung": {
+          "green": 62.23,
+          "blue": 34.63,
+          "white": 3.14
+        },
+        "keelung": {
+          "green": 50.82,
+          "blue": 44.51,
+          "white": 4.67
+        },
+        "hsinchucity": {
+          "green": 55.26,
+          "blue": 39.34,
+          "white": 5.4
+        },
+        "hsinchucounty": {
+          "green": 46.88,
+          "blue": 47.45,
+          "white": 5.67
+        },
+        "miaoli": {
+          "green": 45.02,
+          "blue": 50.38,
+          "white": 4.6
+        },
+        "changhua": {
+          "green": 57.17,
+          "blue": 38.24,
+          "white": 4.59
+        },
+        "nantou": {
+          "green": 50.83,
+          "blue": 44.72,
+          "white": 4.45
+        },
+        "yunlin": {
+          "green": 61.56,
+          "blue": 34.6,
+          "white": 3.84
+        },
+        "chiayicity": {
+          "green": 61.37,
+          "blue": 34.79,
+          "white": 3.84
+        },
+        "chiayicounty": {
+          "green": 64.22,
+          "blue": 32.64,
+          "white": 3.14
+        },
+        "pingtung": {
+          "green": 62.16,
+          "blue": 35.1,
+          "white": 2.74
+        },
+        "yilan": {
+          "green": 63.28,
+          "blue": 32.8,
+          "white": 3.92
+        },
+        "hualien": {
+          "green": 35.91,
+          "blue": 60.38,
+          "white": 3.71
+        },
+        "taitung": {
+          "green": 38.12,
+          "blue": 58.28,
+          "white": 3.6
+        },
+        "penghu": {
+          "green": 53.85,
+          "blue": 42.13,
+          "white": 4.02
+        },
+        "kinmen": {
+          "green": 21.77,
+          "blue": 74.83,
+          "white": 3.4
+        },
+        "lienchiang": {
+          "green": 19.81,
+          "blue": 77.16,
+          "white": 3.03
+        }
       }
     },
     {
@@ -70,31 +525,94 @@
       "year": 2020,
       "type": "partyList",
       "weightType": 0.45,
-      "weightTime": 0.60,
+      "weightTime": 0.6,
       "results": {
-        "national": { "green": 33.98, "blue": 33.36, "white": 11.22, "other": 21.44 },
-        "taipei": { "green": 31.05, "blue": 35.80, "white": 12.94, "other": 20.21 },
-        "newtaipei": { "green": 33.72, "blue": 34.10, "white": 11.95, "other": 20.23 },
-        "taoyuan": { "green": 31.42, "blue": 35.25, "white": 12.10, "other": 21.23 },
-        "taichung": { "green": 33.10, "blue": 33.90, "white": 12.20, "other": 20.80 },
-        "tainan": { "green": 44.68, "blue": 25.80, "white": 9.10, "other": 20.42 },
-        "kaohsiung": { "green": 38.80, "blue": 29.90, "white": 9.80, "other": 21.50 }
+        "national": {
+          "green": 33.98,
+          "blue": 33.36,
+          "white": 11.22,
+          "other": 21.44
+        },
+        "taipei": {
+          "green": 31.05,
+          "blue": 35.8,
+          "white": 12.94,
+          "other": 20.21
+        },
+        "newtaipei": {
+          "green": 33.72,
+          "blue": 34.1,
+          "white": 11.95,
+          "other": 20.23
+        },
+        "taoyuan": {
+          "green": 31.42,
+          "blue": 35.25,
+          "white": 12.1,
+          "other": 21.23
+        },
+        "taichung": {
+          "green": 33.1,
+          "blue": 33.9,
+          "white": 12.2,
+          "other": 20.8
+        },
+        "tainan": {
+          "green": 44.68,
+          "blue": 25.8,
+          "white": 9.1,
+          "other": 20.42
+        },
+        "kaohsiung": {
+          "green": 38.8,
+          "blue": 29.9,
+          "white": 9.8,
+          "other": 21.5
+        }
       }
     },
     {
       "id": "2018-mayoral",
       "year": 2018,
       "type": "mayoral",
-      "weightType": 0.20,
-      "weightTime": 0.40,
+      "weightType": 0.2,
+      "weightTime": 0.4,
       "results": {
-        "national": { "green": 38.98, "blue": 48.79, "white": 12.23 },
-        "taipei": { "green": 17.28, "blue": 40.82, "white": 41.90 },
-        "newtaipei": { "green": 42.85, "blue": 57.15, "white": 0.00 },
-        "taoyuan": { "green": 53.46, "blue": 39.42, "white": 7.12 },
-        "taichung": { "green": 42.35, "blue": 56.57, "white": 1.08 },
-        "tainan": { "green": 38.02, "blue": 32.37, "white": 29.61 },
-        "kaohsiung": { "green": 44.80, "blue": 53.87, "white": 1.33 }
+        "national": {
+          "green": 38.98,
+          "blue": 48.79,
+          "white": 12.23
+        },
+        "taipei": {
+          "green": 17.28,
+          "blue": 40.82,
+          "white": 41.9
+        },
+        "newtaipei": {
+          "green": 42.85,
+          "blue": 57.15,
+          "white": 0.0
+        },
+        "taoyuan": {
+          "green": 53.46,
+          "blue": 39.42,
+          "white": 7.12
+        },
+        "taichung": {
+          "green": 42.35,
+          "blue": 56.57,
+          "white": 1.08
+        },
+        "tainan": {
+          "green": 38.02,
+          "blue": 32.37,
+          "white": 29.61
+        },
+        "kaohsiung": {
+          "green": 44.8,
+          "blue": 53.87,
+          "white": 1.33
+        }
       }
     },
     {
@@ -104,13 +622,41 @@
       "weightType": 0.35,
       "weightTime": 0.25,
       "results": {
-        "national": { "green": 56.12, "blue": 31.04, "white": 12.84 },
-        "taipei": { "green": 51.95, "blue": 37.49, "white": 10.56 },
-        "newtaipei": { "green": 54.79, "blue": 33.34, "white": 11.87 },
-        "taoyuan": { "green": 51.03, "blue": 34.38, "white": 14.59 },
-        "taichung": { "green": 55.01, "blue": 29.82, "white": 15.17 },
-        "tainan": { "green": 67.51, "blue": 22.07, "white": 10.42 },
-        "kaohsiung": { "green": 63.39, "blue": 26.00, "white": 10.61 }
+        "national": {
+          "green": 56.12,
+          "blue": 31.04,
+          "white": 12.84
+        },
+        "taipei": {
+          "green": 51.95,
+          "blue": 37.49,
+          "white": 10.56
+        },
+        "newtaipei": {
+          "green": 54.79,
+          "blue": 33.34,
+          "white": 11.87
+        },
+        "taoyuan": {
+          "green": 51.03,
+          "blue": 34.38,
+          "white": 14.59
+        },
+        "taichung": {
+          "green": 55.01,
+          "blue": 29.82,
+          "white": 15.17
+        },
+        "tainan": {
+          "green": 67.51,
+          "blue": 22.07,
+          "white": 10.42
+        },
+        "kaohsiung": {
+          "green": 63.39,
+          "blue": 26.0,
+          "white": 10.61
+        }
       }
     }
   ]
