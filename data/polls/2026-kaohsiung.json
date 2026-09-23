@@ -143,6 +143,20 @@
       "neutralResults": { "ke": 39.0, "lai": 39.2 },
       "undecided": 12.7,
       "source": "https://www.ettoday.net/"
+    },
+    {
+      "id": "kh2026-010",
+      "date": "2026-09-23",
+      "pollster": "tpoc",
+      "pollsterName": "TPOC台灣議題研究中心",
+      "sampleSize": 1200,
+      "method": "online",
+      "marginOfError": 2.83,
+      "results": { "lai": 37.8, "ke": 34.5 },
+      "neutralResults": { "lai": 33.5, "ke": 31.0 },
+      "undecided": 27.7,
+      "notes": "9/23 AI民意模擬預測發布，賴瑞隆37.8%領先柯志恩34.5%，看好度賴40.1%領先柯28.5%",
+      "source": "https://www.tpoc.com.tw/"
     }
   ]
 }

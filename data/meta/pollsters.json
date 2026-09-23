@@ -241,6 +241,17 @@
       "historicalAccuracy": 0.62,
       "methodology": "網路調查",
       "notes": "2026年新興網路調查機構"
+    },
+    {
+      "id": "tpoc",
+      "name": "TPOC台灣議題研究中心",
+      "fullName": "TPOC台灣議題研究中心（QuickseeK 快析輿情）",
+      "credibilityScore": 0.72,
+      "leanDirection": "neutral",
+      "leanMagnitude": 0.08,
+      "historicalAccuracy": 0.70,
+      "methodology": "AI民意模擬與大數據輿情推估",
+      "notes": "整合網路輿情聲量、社群情緒與AI演算法進行地方公職選情走勢推估"
     }
   ]
 }

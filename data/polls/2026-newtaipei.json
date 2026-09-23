@@ -174,6 +174,21 @@
       "neutralResults": { "li": 34.0, "su": 33.5 },
       "undecided": 23.8,
       "source": "http://www.my-formosa.com/"
+    },
+    {
+      "id": "nt2026-011",
+      "date": "2026-09-23",
+      "pollster": "zmedia",
+      "pollsterName": "震傳媒（委託山水民調執行）",
+      "commissioner": "震傳媒",
+      "sampleSize": 1076,
+      "method": "phone",
+      "marginOfError": 2.99,
+      "results": { "su": 38.2, "li": 37.1 },
+      "neutralResults": { "su": 32.5, "li": 32.6 },
+      "undecided": 22.1,
+      "notes": "9/20-21調查，蘇巧慧逆轉超車李四川1.1%，看好度李四川42.0%領先蘇巧慧36.8%",
+      "source": "https://www.zmedia.com.tw/"
     }
   ]
 }
