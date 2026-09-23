@@ -1315,16 +1315,118 @@
       return parts[1] === city;
     });
 
-    // Sort by year descending
-    cityResults.sort((a, b) => b.electionId.localeCompare(a.electionId));
-
     if (cityResults.length === 0) {
-      container.innerHTML = `<div class="card text-center" style="padding:40px; grid-column: 1/-1;">暫無此選區的歷史得票統計數據</div>`;
+      container.innerHTML = `<div class="card text-center" style="padding:40px;">暫無此選區的歷史得票統計數據</div>`;
       return;
     }
 
-    const partyColors = { 'DPP': '#1B9431', 'KMT': '#000095', 'TPP': '#28C8C8', 'IND': '#888888', 'OTHER': '#666666' };
-    const partyColorClasses = { 'DPP': 'dpp', 'KMT': 'kmt', 'TPP': 'tpp', 'IND': 'ind', 'OTHER': 'other' };
+    const cityMeta = electionsMetadata?.find(e => e.city === city);
+    const cityName = cityMeta ? cityMeta.cityName : city;
+
+    // Split elections by category
+    const mayorResults = cityResults.filter(r => r.type === 'mayor' || r.electionId.includes('-mayor'))
+      .sort((a, b) => b.electionId.localeCompare(a.electionId));
+    const presidentResults = cityResults.filter(r => r.type === 'president' || r.electionId.includes('-president'))
+      .sort((a, b) => b.electionId.localeCompare(a.electionId));
+    const partylistResults = cityResults.filter(r => r.type === 'partylist' || r.electionId.includes('-partylist'))
+      .sort((a, b) => b.electionId.localeCompare(a.electionId));
+
+    function getPartyVisual(c, electionType) {
+      let color = '#666666';
+      let className = 'other';
+      let partyLabel = c.party;
+
+      if (c.party === 'DPP') {
+        color = '#1B9431';
+        className = 'dpp';
+        partyLabel = '民進黨';
+      } else if (c.party === 'KMT') {
+        color = '#000095';
+        className = 'kmt';
+        partyLabel = '國民黨';
+      } else if (c.party === 'TPP') {
+        color = '#28C8C8';
+        className = 'tpp';
+        partyLabel = '民眾黨';
+      } else if (c.id === 'pfp' || (c.name && c.name.includes('親民')) || (c.name && c.name.includes('宋楚瑜'))) {
+        color = '#ea580c';
+        className = 'pfp';
+        partyLabel = '親民黨';
+      } else if (c.id === 'npp' || (c.name && c.name.includes('時代力量'))) {
+        color = '#f59e0b';
+        className = 'npp';
+        partyLabel = '時代力量';
+      } else if (c.party === 'IND') {
+        color = '#64748b';
+        className = 'ind';
+        partyLabel = '無黨籍';
+      }
+
+      return { color, className, partyLabel };
+    }
+
+    function renderCard(r, cardTitle, electionType) {
+      const barsHtml = r.candidates.map(c => {
+        const visual = getPartyVisual(c, electionType);
+        const color = visual.color;
+        const colorClass = visual.className;
+
+        let candidateTitle = c.name;
+        if (electionType === 'mayor') {
+          candidateTitle = `${c.name} (${visual.partyLabel || c.party})`;
+        } else if (electionType === 'president') {
+          const pLabel = (c.party === 'OTHER' && c.name.includes('宋楚瑜')) ? '親民黨' : (visual.partyLabel || c.party);
+          candidateTitle = `${c.name} (${pLabel})`;
+        } else {
+          // partylist: c.name is already the full party name (e.g. 民主進步黨, 時代力量)
+          candidateTitle = c.name;
+        }
+
+        let badgeHtml = '';
+        if (c.elected) {
+          if (electionType === 'partylist') {
+            badgeHtml = '<span class="label" style="font-size:0.75rem; margin-left:6px; background:#dcfce7; color:#15803d; border:1px solid #bbf7d0; padding:1px 6px; border-radius:4px; font-weight:600;" title="跨過5%門檻分配席次">🏆 獲分配席次</span>';
+          } else {
+            badgeHtml = '<span style="font-size:0.85rem; margin-left:4px;" title="當選">🏆</span>';
+          }
+        }
+
+        return `
+          <div class="vote-bar-container" style="margin-top: var(--space-sm);">
+            <div class="vote-bar-label" style="display:flex; justify-content:space-between; align-items:center; font-size:0.88rem; margin-bottom:4px;">
+              <span style="font-weight: 600; color: ${color}; display:inline-flex; align-items:center;">
+                ${candidateTitle}${badgeHtml}
+              </span>
+              <span class="number-medium" style="color: ${color}; font-weight:700; font-size:0.9rem;">
+                ${c.voteShare.toFixed(1)}% <span style="font-size:0.75rem; color:var(--color-text-tertiary); font-weight:normal;">(${c.votes.toLocaleString()} 票)</span>
+              </span>
+            </div>
+            <div class="vote-bar-track large" style="height:10px; background:var(--color-bg-secondary); border-radius:5px; overflow:hidden;">
+              <div class="vote-bar-fill ${colorClass} animate-bar" style="width: ${c.voteShare}%; background-color: ${color}; height:100%; border-radius:5px;"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="card historical-card" style="display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
+              <h3 style="font-weight:700; font-size:1.05rem; margin:0; color:var(--color-text-primary);">${cardTitle}</h3>
+              <span class="label" style="font-size:0.75rem; background: var(--color-bg-tertiary); padding:3px 8px; border-radius:4px; color:var(--color-text-secondary);">${r.date}</span>
+            </div>
+            <div class="card-body" style="padding:0;">
+              ${barsHtml}
+            </div>
+          </div>
+          <div style="border-top:1px dashed var(--color-border); margin-top:var(--space-md); padding-top:var(--space-xs);">
+            <p style="font-size: 0.78rem; color: var(--color-text-tertiary); margin:0;">
+              投票率：<strong>${r.turnoutRate ? r.turnoutRate.toFixed(2) + '%' : 'N/A'}</strong>・有效票：<strong>${r.totalVotes ? r.totalVotes.toLocaleString() + ' 票' : 'N/A'}</strong>
+            </p>
+          </div>
+        </div>
+      `;
+    }
 
     let shiftCardHtml = '';
     if (analysisResult && analysisResult.partisanShift && analysisResult.partisanShift.past2022) {
@@ -1339,7 +1441,7 @@
         : (shift.direction === 'green' ? `泛綠位移 +${Math.abs(shift.netBlueSwing)}%` : '板塊穩定五五波');
 
       shiftCardHtml = `
-        <div class="card" style="grid-column: 1 / -1; border-top: 4px solid ${swingBadgeColor}; margin-bottom: var(--space-md); box-shadow: var(--shadow-md);">
+        <div class="card" style="border-top: 4px solid ${swingBadgeColor}; margin-bottom: var(--space-md); box-shadow: var(--shadow-md);">
           <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
             <div style="display:flex; align-items:center; gap:8px;">
               <span style="font-size:1.3rem;">📊</span>
@@ -1391,45 +1493,69 @@
       `;
     }
 
-    const pastCardsHtml = cityResults.map(r => {
-      const year = r.electionId.split('-')[0];
-      const electionMeta = electionsMetadata?.find(e => e.city === city && e.year === year);
-      const cityName = electionMeta ? electionMeta.cityName : city;
-      
-      const barsHtml = r.candidates.map(c => {
-        const color = partyColors[c.party] || '#555555';
-        const colorClass = partyColorClasses[c.party] || 'other';
-        const electedBadge = c.elected ? '<span style="font-size:0.8rem; margin-left:4px;">🏆</span>' : '';
-        return `
-          <div class="vote-bar-container" style="margin-top: var(--space-sm);">
-            <div class="vote-bar-label" style="display:flex; justify-content:space-between; font-size:0.9rem;">
-              <span style="font-weight: 600; color: ${color};">${c.name} (${c.party})${electedBadge}</span>
-              <span class="number-medium" style="color: ${color}; font-weight:700;">實際 ${c.voteShare.toFixed(1)}% (${c.votes.toLocaleString()} 票)</span>
-            </div>
-            <div class="vote-bar-track large">
-              <div class="vote-bar-fill ${colorClass} animate-bar" style="width: ${c.voteShare}%; background-color: ${color};"></div>
-            </div>
-          </div>
-        `;
+    let groupsHtml = '';
+
+    // Group 1: 歷屆縣市長選舉 (2022、2018)
+    if (mayorResults.length > 0) {
+      const mayorCards = mayorResults.map(r => {
+        const year = r.electionId.split('-')[0];
+        return renderCard(r, `${year} ${cityName}長選舉`, 'mayor');
       }).join('');
 
-      return `
-        <div class="card">
-          <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
-            <h3 style="font-weight:700; font-size:1.1rem; margin:0;">${year} ${cityName}長選舉</h3>
-            <span class="label" style="font-size:0.75rem; background: var(--color-bg-tertiary); padding:4px 8px; border-radius:4px;">${r.date}</span>
+      groupsHtml += `
+        <div class="historical-group">
+          <div class="historical-group-header">
+            <h4 class="historical-group-title"><span class="icon">🏛️</span> 歷屆縣市長選舉得票</h4>
+            <span class="historical-group-desc">地方首長選舉真實開票紀錄（2022、2018）</span>
           </div>
-          <div class="card-body" style="padding:0;">
-            ${barsHtml}
-            <p class="mt-md" style="font-size: 0.8rem; color: var(--color-text-tertiary); margin-top: var(--space-md); margin-bottom:0;">
-              投票率：${r.turnoutRate.toFixed(2)}%・總有效票：${r.totalVotes.toLocaleString()} 票
-            </p>
+          <div class="historical-pair-grid">
+            ${mayorCards}
           </div>
         </div>
       `;
-    }).join('');
+    }
 
-    container.innerHTML = shiftCardHtml + pastCardsHtml;
+    // Group 2: 歷屆總統大選得票 (2020、2016)
+    if (presidentResults.length > 0) {
+      const presCards = presidentResults.map(r => {
+        const year = r.electionId.split('-')[0];
+        return renderCard(r, `${year} 中華民國總統大選 (${cityName})`, 'president');
+      }).join('');
+
+      groupsHtml += `
+        <div class="historical-group">
+          <div class="historical-group-header">
+            <h4 class="historical-group-title"><span class="icon">🗳️</span> 歷屆總統大選得票分佈</h4>
+            <span class="historical-group-desc">中央大選 ${cityName} 得票對照（藍綠全國大盤指標）</span>
+          </div>
+          <div class="historical-pair-grid">
+            ${presCards}
+          </div>
+        </div>
+      `;
+    }
+
+    // Group 3: 歷屆立委不分區政黨票 (2020、2016)
+    if (partylistResults.length > 0) {
+      const partyCards = partylistResults.map(r => {
+        const year = r.electionId.split('-')[0];
+        return renderCard(r, `${year} 立法委員不分區政黨票 (${cityName})`, 'partylist');
+      }).join('');
+
+      groupsHtml += `
+        <div class="historical-group">
+          <div class="historical-group-header">
+            <h4 class="historical-group-title"><span class="icon">🎫</span> 歷屆立委不分區政黨票</h4>
+            <span class="historical-group-desc">${cityName} 各政黨政黨票得票率（政黨核心基本盤指標）</span>
+          </div>
+          <div class="historical-pair-grid">
+            ${partyCards}
+          </div>
+        </div>
+      `;
+    }
+
+    container.innerHTML = shiftCardHtml + groupsHtml;
   }
 
   // ---- Main Loader & Renderer ----

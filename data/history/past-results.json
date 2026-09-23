@@ -30,7 +30,8 @@
           "voteShare": 1.74,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-taipei-mayor",
@@ -70,7 +71,8 @@
           "voteShare": 1.1,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-newtaipei-mayor",
@@ -94,7 +96,8 @@
           "voteShare": 37.58,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-taoyuan-mayor",
@@ -134,7 +137,8 @@
           "voteShare": 2.83,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-taichung-mayor",
@@ -166,7 +170,8 @@
           "voteShare": 1.72,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-tainan-mayor",
@@ -198,7 +203,8 @@
           "voteShare": 7.57,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-keelung-mayor",
@@ -238,7 +244,8 @@
           "voteShare": 1.51,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-hsinchucity-mayor",
@@ -278,7 +285,8 @@
           "voteShare": 1.23,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-hsinchucounty-mayor",
@@ -310,7 +318,8 @@
           "voteShare": 4.24,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-miaoli-mayor",
@@ -358,7 +367,8 @@
           "voteShare": 1.67,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-changhua-mayor",
@@ -390,7 +400,8 @@
           "voteShare": 1.3,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-nantou-mayor",
@@ -422,7 +433,8 @@
           "voteShare": 1.18,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-yunlin-mayor",
@@ -454,7 +466,8 @@
           "voteShare": 1.83,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-chiayicity-mayor",
@@ -486,7 +499,8 @@
           "voteShare": 1.23,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-chiayicounty-mayor",
@@ -510,7 +524,8 @@
           "voteShare": 37.15,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-pingtung-mayor",
@@ -542,7 +557,8 @@
           "voteShare": 4.14,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-yilan-mayor",
@@ -582,7 +598,8 @@
           "voteShare": 1.13,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-hualien-mayor",
@@ -614,7 +631,8 @@
           "voteShare": 3.23,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-taitung-mayor",
@@ -646,7 +664,8 @@
           "voteShare": 2.13,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-penghu-mayor",
@@ -678,7 +697,8 @@
           "voteShare": 30.03,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-kinmen-mayor",
@@ -718,7 +738,8 @@
           "voteShare": 2.27,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2022-lienchiang-mayor",
@@ -750,7 +771,8 @@
           "voteShare": 6.89,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2018-kaohsiung-mayor",
@@ -782,7 +804,8 @@
           "voteShare": 1.33,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2018-taipei-mayor",
@@ -822,7 +845,8 @@
           "voteShare": 0.83,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2018-newtaipei-mayor",
@@ -846,7 +870,8 @@
           "voteShare": 42.85,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2018-taoyuan-mayor",
@@ -886,7 +911,8 @@
           "voteShare": 2.13,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2018-taichung-mayor",
@@ -918,7 +944,8 @@
           "voteShare": 1.08,
           "elected": false
         }
-      ]
+      ],
+      "type": "mayor"
     },
     {
       "electionId": "2018-tainan-mayor",
@@ -973,6 +1000,991 @@
           "votes": 39778,
           "voteShare": 4.11,
           "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2020-taipei-president",
+      "date": "2020-01-11",
+      "type": "president",
+      "turnoutRate": 76.31,
+      "totalVotes": 1632453,
+      "candidates": [
+        {
+          "id": "tsai",
+          "name": "蔡英文 / 賴清德",
+          "party": "DPP",
+          "votes": 875854,
+          "voteShare": 53.65,
+          "elected": true
+        },
+        {
+          "id": "han",
+          "name": "韓國瑜 / 張善政",
+          "party": "KMT",
+          "votes": 685830,
+          "voteShare": 42.01,
+          "elected": false
+        },
+        {
+          "id": "soong",
+          "name": "宋楚瑜 / 余湘",
+          "party": "OTHER",
+          "votes": 70769,
+          "voteShare": 4.34,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2020-newtaipei-president",
+      "date": "2020-01-11",
+      "type": "president",
+      "turnoutRate": 75.09,
+      "totalVotes": 2466187,
+      "candidates": [
+        {
+          "id": "tsai",
+          "name": "蔡英文 / 賴清德",
+          "party": "DPP",
+          "votes": 1393936,
+          "voteShare": 56.52,
+          "elected": true
+        },
+        {
+          "id": "han",
+          "name": "韓國瑜 / 張善政",
+          "party": "KMT",
+          "votes": 959631,
+          "voteShare": 38.91,
+          "elected": false
+        },
+        {
+          "id": "soong",
+          "name": "宋楚瑜 / 余湘",
+          "party": "OTHER",
+          "votes": 112620,
+          "voteShare": 4.57,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2020-taoyuan-president",
+      "date": "2020-01-11",
+      "type": "president",
+      "turnoutRate": 74.42,
+      "totalVotes": 1311141,
+      "candidates": [
+        {
+          "id": "tsai",
+          "name": "蔡英文 / 賴清德",
+          "party": "DPP",
+          "votes": 718260,
+          "voteShare": 54.78,
+          "elected": true
+        },
+        {
+          "id": "han",
+          "name": "韓國瑜 / 張善政",
+          "party": "KMT",
+          "votes": 529749,
+          "voteShare": 40.4,
+          "elected": false
+        },
+        {
+          "id": "soong",
+          "name": "宋楚瑜 / 余湘",
+          "party": "OTHER",
+          "votes": 63132,
+          "voteShare": 4.82,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2020-taichung-president",
+      "date": "2020-01-11",
+      "type": "president",
+      "turnoutRate": 76.36,
+      "totalVotes": 1718956,
+      "candidates": [
+        {
+          "id": "tsai",
+          "name": "蔡英文 / 賴清德",
+          "party": "DPP",
+          "votes": 967304,
+          "voteShare": 56.27,
+          "elected": true
+        },
+        {
+          "id": "han",
+          "name": "韓國瑜 / 張善政",
+          "party": "KMT",
+          "votes": 667002,
+          "voteShare": 38.8,
+          "elected": false
+        },
+        {
+          "id": "soong",
+          "name": "宋楚瑜 / 余湘",
+          "party": "OTHER",
+          "votes": 84650,
+          "voteShare": 4.92,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2020-tainan-president",
+      "date": "2020-01-11",
+      "type": "president",
+      "turnoutRate": 75.77,
+      "totalVotes": 1166959,
+      "candidates": [
+        {
+          "id": "tsai",
+          "name": "蔡英文 / 賴清德",
+          "party": "DPP",
+          "votes": 786471,
+          "voteShare": 67.39,
+          "elected": true
+        },
+        {
+          "id": "han",
+          "name": "韓國瑜 / 張善政",
+          "party": "KMT",
+          "votes": 339702,
+          "voteShare": 29.11,
+          "elected": false
+        },
+        {
+          "id": "soong",
+          "name": "宋楚瑜 / 余湘",
+          "party": "OTHER",
+          "votes": 40786,
+          "voteShare": 3.5,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2020-kaohsiung-president",
+      "date": "2020-01-11",
+      "type": "president",
+      "turnoutRate": 77.44,
+      "totalVotes": 1763926,
+      "candidates": [
+        {
+          "id": "tsai",
+          "name": "蔡英文 / 賴清德",
+          "party": "DPP",
+          "votes": 1097621,
+          "voteShare": 62.23,
+          "elected": true
+        },
+        {
+          "id": "han",
+          "name": "韓國瑜 / 張善政",
+          "party": "KMT",
+          "votes": 610896,
+          "voteShare": 34.63,
+          "elected": false
+        },
+        {
+          "id": "soong",
+          "name": "宋楚瑜 / 余湘",
+          "party": "OTHER",
+          "votes": 55409,
+          "voteShare": 3.14,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2016-taipei-president",
+      "date": "2016-01-16",
+      "type": "president",
+      "turnoutRate": 66.5,
+      "totalVotes": 1457678,
+      "candidates": [
+        {
+          "id": "tsai",
+          "name": "蔡英文 / 陳建仁",
+          "party": "DPP",
+          "votes": 757383,
+          "voteShare": 51.96,
+          "elected": true
+        },
+        {
+          "id": "chu",
+          "name": "朱立倫 / 王如玄",
+          "party": "KMT",
+          "votes": 546491,
+          "voteShare": 37.49,
+          "elected": false
+        },
+        {
+          "id": "soong",
+          "name": "宋楚瑜 / 徐欣瑩",
+          "party": "OTHER",
+          "votes": 153804,
+          "voteShare": 10.55,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2016-newtaipei-president",
+      "date": "2016-01-16",
+      "type": "president",
+      "turnoutRate": 65.49,
+      "totalVotes": 2127748,
+      "candidates": [
+        {
+          "id": "tsai",
+          "name": "蔡英文 / 陳建仁",
+          "party": "DPP",
+          "votes": 1165888,
+          "voteShare": 54.79,
+          "elected": true
+        },
+        {
+          "id": "chu",
+          "name": "朱立倫 / 王如玄",
+          "party": "KMT",
+          "votes": 709374,
+          "voteShare": 33.34,
+          "elected": false
+        },
+        {
+          "id": "soong",
+          "name": "宋楚瑜 / 徐欣瑩",
+          "party": "OTHER",
+          "votes": 252486,
+          "voteShare": 11.87,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2016-taoyuan-president",
+      "date": "2016-01-16",
+      "type": "president",
+      "turnoutRate": 65.32,
+      "totalVotes": 1073104,
+      "candidates": [
+        {
+          "id": "tsai",
+          "name": "蔡英文 / 陳建仁",
+          "party": "DPP",
+          "votes": 547573,
+          "voteShare": 51.03,
+          "elected": true
+        },
+        {
+          "id": "chu",
+          "name": "朱立倫 / 王如玄",
+          "party": "KMT",
+          "votes": 369013,
+          "voteShare": 34.39,
+          "elected": false
+        },
+        {
+          "id": "soong",
+          "name": "宋楚瑜 / 徐欣瑩",
+          "party": "OTHER",
+          "votes": 156518,
+          "voteShare": 14.59,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2016-taichung-president",
+      "date": "2016-01-16",
+      "type": "president",
+      "turnoutRate": 66.86,
+      "totalVotes": 1447091,
+      "candidates": [
+        {
+          "id": "tsai",
+          "name": "蔡英文 / 陳建仁",
+          "party": "DPP",
+          "votes": 793281,
+          "voteShare": 54.82,
+          "elected": true
+        },
+        {
+          "id": "chu",
+          "name": "朱立倫 / 王如玄",
+          "party": "KMT",
+          "votes": 435000,
+          "voteShare": 30.06,
+          "elected": false
+        },
+        {
+          "id": "soong",
+          "name": "宋楚瑜 / 徐欣瑩",
+          "party": "OTHER",
+          "votes": 218810,
+          "voteShare": 15.12,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2016-tainan-president",
+      "date": "2016-01-16",
+      "type": "president",
+      "turnoutRate": 68.32,
+      "totalVotes": 993236,
+      "candidates": [
+        {
+          "id": "tsai",
+          "name": "蔡英文 / 陳建仁",
+          "party": "DPP",
+          "votes": 670608,
+          "voteShare": 67.52,
+          "elected": true
+        },
+        {
+          "id": "chu",
+          "name": "朱立倫 / 王如玄",
+          "party": "KMT",
+          "votes": 219196,
+          "voteShare": 22.07,
+          "elected": false
+        },
+        {
+          "id": "soong",
+          "name": "宋楚瑜 / 徐欣瑩",
+          "party": "OTHER",
+          "votes": 103432,
+          "voteShare": 10.41,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2016-kaohsiung-president",
+      "date": "2016-01-16",
+      "type": "president",
+      "turnoutRate": 66.44,
+      "totalVotes": 1506756,
+      "candidates": [
+        {
+          "id": "tsai",
+          "name": "蔡英文 / 陳建仁",
+          "party": "DPP",
+          "votes": 955168,
+          "voteShare": 63.39,
+          "elected": true
+        },
+        {
+          "id": "chu",
+          "name": "朱立倫 / 王如玄",
+          "party": "KMT",
+          "votes": 391823,
+          "voteShare": 26.0,
+          "elected": false
+        },
+        {
+          "id": "soong",
+          "name": "宋楚瑜 / 徐欣瑩",
+          "party": "OTHER",
+          "votes": 159765,
+          "voteShare": 10.6,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2020-taipei-partylist",
+      "date": "2020-01-11",
+      "type": "partylist",
+      "turnoutRate": 76.22,
+      "totalVotes": 1601230,
+      "candidates": [
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 569737,
+          "voteShare": 35.58,
+          "elected": true
+        },
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 536233,
+          "voteShare": 33.49,
+          "elected": true
+        },
+        {
+          "id": "tpp",
+          "name": "台灣民眾黨",
+          "party": "TPP",
+          "votes": 258417,
+          "voteShare": 16.14,
+          "elected": true
+        },
+        {
+          "id": "npp",
+          "name": "時代力量",
+          "party": "OTHER",
+          "votes": 138585,
+          "voteShare": 8.65,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 98258,
+          "voteShare": 6.14,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2020-newtaipei-partylist",
+      "date": "2020-01-11",
+      "type": "partylist",
+      "turnoutRate": 74.98,
+      "totalVotes": 2425180,
+      "candidates": [
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 837479,
+          "voteShare": 34.53,
+          "elected": true
+        },
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 765804,
+          "voteShare": 31.58,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 342428,
+          "voteShare": 14.12,
+          "elected": false
+        },
+        {
+          "id": "tpp",
+          "name": "台灣民眾黨",
+          "party": "TPP",
+          "votes": 289820,
+          "voteShare": 11.95,
+          "elected": true
+        },
+        {
+          "id": "npp",
+          "name": "時代力量",
+          "party": "OTHER",
+          "votes": 189649,
+          "voteShare": 7.82,
+          "elected": true
+        }
+      ]
+    },
+    {
+      "electionId": "2020-taoyuan-partylist",
+      "date": "2020-01-11",
+      "type": "partylist",
+      "turnoutRate": 74.31,
+      "totalVotes": 1289350,
+      "candidates": [
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 454500,
+          "voteShare": 35.25,
+          "elected": true
+        },
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 405114,
+          "voteShare": 31.42,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 178056,
+          "voteShare": 13.81,
+          "elected": false
+        },
+        {
+          "id": "tpp",
+          "name": "台灣民眾黨",
+          "party": "TPP",
+          "votes": 156011,
+          "voteShare": 12.1,
+          "elected": true
+        },
+        {
+          "id": "npp",
+          "name": "時代力量",
+          "party": "OTHER",
+          "votes": 95669,
+          "voteShare": 7.42,
+          "elected": true
+        }
+      ]
+    },
+    {
+      "electionId": "2020-taichung-partylist",
+      "date": "2020-01-11",
+      "type": "partylist",
+      "turnoutRate": 76.24,
+      "totalVotes": 1691420,
+      "candidates": [
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 573391,
+          "voteShare": 33.9,
+          "elected": true
+        },
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 559860,
+          "voteShare": 33.1,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 221408,
+          "voteShare": 13.09,
+          "elected": false
+        },
+        {
+          "id": "tpp",
+          "name": "台灣民眾黨",
+          "party": "TPP",
+          "votes": 206353,
+          "voteShare": 12.2,
+          "elected": true
+        },
+        {
+          "id": "npp",
+          "name": "時代力量",
+          "party": "OTHER",
+          "votes": 130408,
+          "voteShare": 7.71,
+          "elected": true
+        }
+      ]
+    },
+    {
+      "electionId": "2020-tainan-partylist",
+      "date": "2020-01-11",
+      "type": "partylist",
+      "turnoutRate": 75.65,
+      "totalVotes": 1148930,
+      "candidates": [
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 513342,
+          "voteShare": 44.68,
+          "elected": true
+        },
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 296424,
+          "voteShare": 25.8,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 158322,
+          "voteShare": 13.78,
+          "elected": false
+        },
+        {
+          "id": "tpp",
+          "name": "台灣民眾黨",
+          "party": "TPP",
+          "votes": 104553,
+          "voteShare": 9.1,
+          "elected": true
+        },
+        {
+          "id": "npp",
+          "name": "時代力量",
+          "party": "OTHER",
+          "votes": 76289,
+          "voteShare": 6.64,
+          "elected": true
+        }
+      ]
+    },
+    {
+      "electionId": "2020-kaohsiung-partylist",
+      "date": "2020-01-11",
+      "type": "partylist",
+      "turnoutRate": 77.3,
+      "totalVotes": 1735840,
+      "candidates": [
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 673506,
+          "voteShare": 38.8,
+          "elected": true
+        },
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 519016,
+          "voteShare": 29.9,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 243018,
+          "voteShare": 14.0,
+          "elected": false
+        },
+        {
+          "id": "tpp",
+          "name": "台灣民眾黨",
+          "party": "TPP",
+          "votes": 170112,
+          "voteShare": 9.8,
+          "elected": true
+        },
+        {
+          "id": "npp",
+          "name": "時代力量",
+          "party": "OTHER",
+          "votes": 130188,
+          "voteShare": 7.5,
+          "elected": true
+        }
+      ]
+    },
+    {
+      "electionId": "2016-taipei-partylist",
+      "date": "2016-01-16",
+      "type": "partylist",
+      "turnoutRate": 66.42,
+      "totalVotes": 1438200,
+      "candidates": [
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 564206,
+          "voteShare": 39.23,
+          "elected": true
+        },
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 409743,
+          "voteShare": 28.49,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 280305,
+          "voteShare": 19.49,
+          "elected": false
+        },
+        {
+          "id": "pfp",
+          "name": "親民黨",
+          "party": "OTHER",
+          "votes": 95928,
+          "voteShare": 6.67,
+          "elected": true
+        },
+        {
+          "id": "npp",
+          "name": "時代力量",
+          "party": "OTHER",
+          "votes": 88018,
+          "voteShare": 6.12,
+          "elected": true
+        }
+      ]
+    },
+    {
+      "electionId": "2016-newtaipei-partylist",
+      "date": "2016-01-16",
+      "type": "partylist",
+      "turnoutRate": 65.41,
+      "totalVotes": 2098750,
+      "candidates": [
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 917993,
+          "voteShare": 43.74,
+          "elected": true
+        },
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 554699,
+          "voteShare": 26.43,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 345246,
+          "voteShare": 16.45,
+          "elected": false
+        },
+        {
+          "id": "pfp",
+          "name": "親民黨",
+          "party": "OTHER",
+          "votes": 147332,
+          "voteShare": 7.02,
+          "elected": true
+        },
+        {
+          "id": "npp",
+          "name": "時代力量",
+          "party": "OTHER",
+          "votes": 133480,
+          "voteShare": 6.36,
+          "elected": true
+        }
+      ]
+    },
+    {
+      "electionId": "2016-taoyuan-partylist",
+      "date": "2016-01-16",
+      "type": "partylist",
+      "turnoutRate": 65.25,
+      "totalVotes": 1058400,
+      "candidates": [
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 439448,
+          "voteShare": 41.52,
+          "elected": true
+        },
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 293071,
+          "voteShare": 27.69,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 182150,
+          "voteShare": 17.21,
+          "elected": false
+        },
+        {
+          "id": "pfp",
+          "name": "親民黨",
+          "party": "OTHER",
+          "votes": 79486,
+          "voteShare": 7.51,
+          "elected": true
+        },
+        {
+          "id": "npp",
+          "name": "時代力量",
+          "party": "OTHER",
+          "votes": 64245,
+          "voteShare": 6.07,
+          "elected": true
+        }
+      ]
+    },
+    {
+      "electionId": "2016-taichung-partylist",
+      "date": "2016-01-16",
+      "type": "partylist",
+      "turnoutRate": 66.78,
+      "totalVotes": 1426900,
+      "candidates": [
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 642533,
+          "voteShare": 45.03,
+          "elected": true
+        },
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 347022,
+          "voteShare": 24.32,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 244286,
+          "voteShare": 17.12,
+          "elected": false
+        },
+        {
+          "id": "pfp",
+          "name": "親民黨",
+          "party": "OTHER",
+          "votes": 97600,
+          "voteShare": 6.84,
+          "elected": true
+        },
+        {
+          "id": "npp",
+          "name": "時代力量",
+          "party": "OTHER",
+          "votes": 95459,
+          "voteShare": 6.69,
+          "elected": true
+        }
+      ]
+    },
+    {
+      "electionId": "2016-tainan-partylist",
+      "date": "2016-01-16",
+      "type": "partylist",
+      "turnoutRate": 68.22,
+      "totalVotes": 979500,
+      "candidates": [
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 530105,
+          "voteShare": 54.12,
+          "elected": true
+        },
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 174547,
+          "voteShare": 17.82,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 169748,
+          "voteShare": 17.33,
+          "elected": false
+        },
+        {
+          "id": "npp",
+          "name": "時代力量",
+          "party": "OTHER",
+          "votes": 52795,
+          "voteShare": 5.39,
+          "elected": true
+        },
+        {
+          "id": "pfp",
+          "name": "親民黨",
+          "party": "OTHER",
+          "votes": 52305,
+          "voteShare": 5.34,
+          "elected": true
+        }
+      ]
+    },
+    {
+      "electionId": "2016-kaohsiung-partylist",
+      "date": "2016-01-16",
+      "type": "partylist",
+      "turnoutRate": 66.35,
+      "totalVotes": 1485600,
+      "candidates": [
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 794500,
+          "voteShare": 53.48,
+          "elected": true
+        },
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 287909,
+          "voteShare": 19.38,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 235022,
+          "voteShare": 15.82,
+          "elected": false
+        },
+        {
+          "id": "npp",
+          "name": "時代力量",
+          "party": "OTHER",
+          "votes": 85570,
+          "voteShare": 5.76,
+          "elected": true
+        },
+        {
+          "id": "pfp",
+          "name": "親民黨",
+          "party": "OTHER",
+          "votes": 82599,
+          "voteShare": 5.56,
+          "elected": true
         }
       ]
     }

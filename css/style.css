@@ -2200,3 +2200,71 @@ p {
   border-color: transparent;
   box-shadow: var(--shadow-sm);
 }
+
+/* ============================================
+   Historical Comparison (2+2+2 Layout)
+   ============================================ */
+.historical-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.historical-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.historical-group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: var(--space-xs);
+}
+
+.historical-group-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.historical-group-desc {
+  font-size: 0.85rem;
+  color: var(--color-text-tertiary);
+  font-weight: 500;
+}
+
+.historical-pair-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+@media (max-width: 768px) {
+  .historical-pair-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.historical-card {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.historical-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Additional party color styling for vote bars */
+.vote-bar-fill.pfp { background: #ea580c; }
+.vote-bar-fill.npp { background: #f59e0b; }
+.vote-bar-fill.ind { background: #64748b; }
+
