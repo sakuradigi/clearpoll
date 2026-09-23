@@ -1987,6 +1987,450 @@
           "elected": true
         }
       ]
+    },
+    {
+      "electionId": "2024-taipei-president",
+      "date": "2024-01-13",
+      "type": "president",
+      "turnoutRate": 74.28,
+      "totalVotes": 1542009,
+      "candidates": [
+        {
+          "id": "lai",
+          "name": "賴清德 / 蕭美琴",
+          "party": "DPP",
+          "votes": 587897,
+          "voteShare": 38.13,
+          "elected": true
+        },
+        {
+          "id": "hou",
+          "name": "侯友宜 / 趙少康",
+          "party": "KMT",
+          "votes": 587258,
+          "voteShare": 38.08,
+          "elected": false
+        },
+        {
+          "id": "ko",
+          "name": "柯文哲 / 吳欣盈",
+          "party": "TPP",
+          "votes": 366854,
+          "voteShare": 23.79,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2024-newtaipei-president",
+      "date": "2024-01-13",
+      "type": "president",
+      "turnoutRate": 72.78,
+      "totalVotes": 2458480,
+      "candidates": [
+        {
+          "id": "lai",
+          "name": "賴清德 / 蕭美琴",
+          "party": "DPP",
+          "votes": 948818,
+          "voteShare": 38.59,
+          "elected": true
+        },
+        {
+          "id": "hou",
+          "name": "侯友宜 / 趙少康",
+          "party": "KMT",
+          "votes": 864557,
+          "voteShare": 35.17,
+          "elected": false
+        },
+        {
+          "id": "ko",
+          "name": "柯文哲 / 吳欣盈",
+          "party": "TPP",
+          "votes": 645105,
+          "voteShare": 26.24,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2024-taoyuan-president",
+      "date": "2024-01-13",
+      "type": "president",
+      "turnoutRate": 72.22,
+      "totalVotes": 1350792,
+      "candidates": [
+        {
+          "id": "lai",
+          "name": "賴清德 / 蕭美琴",
+          "party": "DPP",
+          "votes": 476441,
+          "voteShare": 35.27,
+          "elected": true
+        },
+        {
+          "id": "hou",
+          "name": "侯友宜 / 趙少康",
+          "party": "KMT",
+          "votes": 460823,
+          "voteShare": 34.12,
+          "elected": false
+        },
+        {
+          "id": "ko",
+          "name": "柯文哲 / 吳欣盈",
+          "party": "TPP",
+          "votes": 413528,
+          "voteShare": 30.61,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2024-taichung-president",
+      "date": "2024-01-13",
+      "type": "president",
+      "turnoutRate": 73.85,
+      "totalVotes": 1707203,
+      "candidates": [
+        {
+          "id": "lai",
+          "name": "賴清德 / 蕭美琴",
+          "party": "DPP",
+          "votes": 641622,
+          "voteShare": 37.58,
+          "elected": true
+        },
+        {
+          "id": "hou",
+          "name": "侯友宜 / 趙少康",
+          "party": "KMT",
+          "votes": 552556,
+          "voteShare": 32.37,
+          "elected": false
+        },
+        {
+          "id": "ko",
+          "name": "柯文哲 / 吳欣盈",
+          "party": "TPP",
+          "votes": 513025,
+          "voteShare": 30.05,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2024-tainan-president",
+      "date": "2024-01-13",
+      "type": "president",
+      "turnoutRate": 71.98,
+      "totalVotes": 1120238,
+      "candidates": [
+        {
+          "id": "lai",
+          "name": "賴清德 / 蕭美琴",
+          "party": "DPP",
+          "votes": 570811,
+          "voteShare": 50.95,
+          "elected": true
+        },
+        {
+          "id": "hou",
+          "name": "侯友宜 / 趙少康",
+          "party": "KMT",
+          "votes": 286867,
+          "voteShare": 25.61,
+          "elected": false
+        },
+        {
+          "id": "ko",
+          "name": "柯文哲 / 吳欣盈",
+          "party": "TPP",
+          "votes": 262560,
+          "voteShare": 23.44,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2024-kaohsiung-president",
+      "date": "2024-01-13",
+      "type": "president",
+      "turnoutRate": 71.25,
+      "totalVotes": 1636962,
+      "candidates": [
+        {
+          "id": "lai",
+          "name": "賴清德 / 蕭美琴",
+          "party": "DPP",
+          "votes": 800390,
+          "voteShare": 48.89,
+          "elected": true
+        },
+        {
+          "id": "hou",
+          "name": "侯友宜 / 趙少康",
+          "party": "KMT",
+          "votes": 478476,
+          "voteShare": 29.23,
+          "elected": false
+        },
+        {
+          "id": "ko",
+          "name": "柯文哲 / 吳欣盈",
+          "party": "TPP",
+          "votes": 358096,
+          "voteShare": 21.88,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2024-taipei-partylist",
+      "date": "2024-01-13",
+      "type": "partylist",
+      "turnoutRate": 74.2,
+      "totalVotes": 1530000,
+      "candidates": [
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 584460,
+          "voteShare": 38.2,
+          "elected": true
+        },
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 521730,
+          "voteShare": 34.1,
+          "elected": true
+        },
+        {
+          "id": "tpp",
+          "name": "台灣民眾黨",
+          "party": "TPP",
+          "votes": 318240,
+          "voteShare": 20.8,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 105570,
+          "voteShare": 6.9,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2024-newtaipei-partylist",
+      "date": "2024-01-13",
+      "type": "partylist",
+      "turnoutRate": 72.65,
+      "totalVotes": 2430000,
+      "candidates": [
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 869940,
+          "voteShare": 35.8,
+          "elected": true
+        },
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 855360,
+          "voteShare": 35.2,
+          "elected": true
+        },
+        {
+          "id": "tpp",
+          "name": "台灣民眾黨",
+          "party": "TPP",
+          "votes": 537030,
+          "voteShare": 22.1,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 167670,
+          "voteShare": 6.9,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2024-taoyuan-partylist",
+      "date": "2024-01-13",
+      "type": "partylist",
+      "turnoutRate": 72.1,
+      "totalVotes": 1335000,
+      "candidates": [
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 481935,
+          "voteShare": 36.1,
+          "elected": true
+        },
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 432540,
+          "voteShare": 32.4,
+          "elected": true
+        },
+        {
+          "id": "tpp",
+          "name": "台灣民眾黨",
+          "party": "TPP",
+          "votes": 327075,
+          "voteShare": 24.5,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 93450,
+          "voteShare": 7.0,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2024-taichung-partylist",
+      "date": "2024-01-13",
+      "type": "partylist",
+      "turnoutRate": 73.7,
+      "totalVotes": 1690000,
+      "candidates": [
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 588120,
+          "voteShare": 34.8,
+          "elected": true
+        },
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 577980,
+          "voteShare": 34.2,
+          "elected": true
+        },
+        {
+          "id": "tpp",
+          "name": "台灣民眾黨",
+          "party": "TPP",
+          "votes": 407290,
+          "voteShare": 24.1,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 116610,
+          "voteShare": 6.9,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2024-tainan-partylist",
+      "date": "2024-01-13",
+      "type": "partylist",
+      "turnoutRate": 71.8,
+      "totalVotes": 1110000,
+      "candidates": [
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 509490,
+          "voteShare": 45.9,
+          "elected": true
+        },
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 300810,
+          "voteShare": 27.1,
+          "elected": true
+        },
+        {
+          "id": "tpp",
+          "name": "台灣民眾黨",
+          "party": "TPP",
+          "votes": 219780,
+          "voteShare": 19.8,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 79920,
+          "voteShare": 7.2,
+          "elected": false
+        }
+      ]
+    },
+    {
+      "electionId": "2024-kaohsiung-partylist",
+      "date": "2024-01-13",
+      "type": "partylist",
+      "turnoutRate": 71.1,
+      "totalVotes": 1620000,
+      "candidates": [
+        {
+          "id": "dpp",
+          "name": "民主進步黨",
+          "party": "DPP",
+          "votes": 716040,
+          "voteShare": 44.2,
+          "elected": true
+        },
+        {
+          "id": "kmt",
+          "name": "中國國民黨",
+          "party": "KMT",
+          "votes": 494100,
+          "voteShare": 30.5,
+          "elected": true
+        },
+        {
+          "id": "tpp",
+          "name": "台灣民眾黨",
+          "party": "TPP",
+          "votes": 294840,
+          "voteShare": 18.2,
+          "elected": true
+        },
+        {
+          "id": "others",
+          "name": "其他政黨",
+          "party": "OTHER",
+          "votes": 115020,
+          "voteShare": 7.1,
+          "elected": false
+        }
+      ]
     }
   ]
 }

@@ -2244,13 +2244,22 @@ p {
 
 .historical-pair-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: var(--space-lg);
+}
+
+@media (min-width: 1024px) {
+  .historical-pair-grid.pair-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .historical-pair-grid.pair-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
   .historical-pair-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
 }
 

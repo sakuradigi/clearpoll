@@ -15,6 +15,7 @@
   let selectedYear = '2026';
   let currentElectionId = '2026-taipei-mayor';
   let activeTab = 'dashboard'; // 'dashboard' | 'detail' | 'methodology'
+  let historicalRangeMode = 'all'; // 'all' (2016-2024) | 'recent' (2+2+2: 2020-2024)
   
   let electionsMetadata = null;
   let analysisResult = null;
@@ -1323,13 +1324,18 @@
     const cityMeta = electionsMetadata?.find(e => e.city === city);
     const cityName = cityMeta ? cityMeta.cityName : city;
 
-    // Split elections by category
-    const mayorResults = cityResults.filter(r => r.type === 'mayor' || r.electionId.includes('-mayor'))
+    // Split elections by category and sort descending by year
+    const allMayorResults = cityResults.filter(r => r.type === 'mayor' || r.electionId.includes('-mayor'))
       .sort((a, b) => b.electionId.localeCompare(a.electionId));
-    const presidentResults = cityResults.filter(r => r.type === 'president' || r.electionId.includes('-president'))
+    const allPresidentResults = cityResults.filter(r => r.type === 'president' || r.electionId.includes('-president'))
       .sort((a, b) => b.electionId.localeCompare(a.electionId));
-    const partylistResults = cityResults.filter(r => r.type === 'partylist' || r.electionId.includes('-partylist'))
+    const allPartylistResults = cityResults.filter(r => r.type === 'partylist' || r.electionId.includes('-partylist'))
       .sort((a, b) => b.electionId.localeCompare(a.electionId));
+
+    // Slice based on historicalRangeMode ('recent' keeps top 2, 'all' keeps all)
+    const mayorResults = historicalRangeMode === 'recent' ? allMayorResults.slice(0, 2) : allMayorResults;
+    const presidentResults = historicalRangeMode === 'recent' ? allPresidentResults.slice(0, 2) : allPresidentResults;
+    const partylistResults = historicalRangeMode === 'recent' ? allPartylistResults.slice(0, 2) : allPartylistResults;
 
     function getPartyVisual(c, electionType) {
       let color = '#666666';
@@ -1493,69 +1499,101 @@
       `;
     }
 
+    // Interactive filter toggle bar
+    const filterBarHtml = `
+      <div class="historical-filter-bar" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:var(--space-md); background:var(--color-bg-secondary); padding:10px 16px; border-radius:12px; border:1px solid var(--color-border);">
+        <div style="font-size:0.85rem; color:var(--color-text-secondary); font-weight:600; display:flex; align-items:center; gap:6px;">
+          <span>🗳️ 歷屆選舉資料範圍</span>
+          <span style="font-size:0.75rem; color:var(--color-text-tertiary); font-weight:normal;">（已收錄 2024、2020、2016 總統與政黨票及市長開票）</span>
+        </div>
+        <div style="display:inline-flex; background:var(--color-surface); padding:3px; border-radius:20px; border:1px solid var(--color-border); box-shadow:var(--shadow-sm);">
+          <button type="button" class="hist-range-btn ${historicalRangeMode === 'all' ? 'active' : ''}" data-range="all" style="border:none; background:${historicalRangeMode === 'all' ? 'var(--gradient-accent)' : 'transparent'}; color:${historicalRangeMode === 'all' ? '#fff' : 'var(--color-text-secondary)'}; font-size:0.8rem; font-weight:700; padding:5px 14px; border-radius:16px; cursor:pointer; transition:all var(--transition-fast);">
+            📜 完整歷屆 (2016 ~ 2024)
+          </button>
+          <button type="button" class="hist-range-btn ${historicalRangeMode === 'recent' ? 'active' : ''}" data-range="recent" style="border:none; background:${historicalRangeMode === 'recent' ? 'var(--gradient-accent)' : 'transparent'}; color:${historicalRangeMode === 'recent' ? '#fff' : 'var(--color-text-secondary)'}; font-size:0.8rem; font-weight:700; padding:5px 14px; border-radius:16px; cursor:pointer; transition:all var(--transition-fast);">
+            🔥 精選近兩屆 (2+2+2)
+          </button>
+        </div>
+      </div>
+    `;
+
     let groupsHtml = '';
 
-    // Group 1: 歷屆縣市長選舉 (2022、2018)
+    // Group 1: 歷屆縣市長選舉
     if (mayorResults.length > 0) {
       const mayorCards = mayorResults.map(r => {
         const year = r.electionId.split('-')[0];
         return renderCard(r, `${year} ${cityName}長選舉`, 'mayor');
       }).join('');
+      const mayorYears = mayorResults.map(r => r.electionId.split('-')[0]).join('、');
 
       groupsHtml += `
         <div class="historical-group">
           <div class="historical-group-header">
             <h4 class="historical-group-title"><span class="icon">🏛️</span> 歷屆縣市長選舉得票</h4>
-            <span class="historical-group-desc">地方首長選舉真實開票紀錄（2022、2018）</span>
+            <span class="historical-group-desc">地方首長選舉真實開票紀錄（${mayorYears}）</span>
           </div>
-          <div class="historical-pair-grid">
+          <div class="historical-pair-grid pair-${mayorResults.length}">
             ${mayorCards}
           </div>
         </div>
       `;
     }
 
-    // Group 2: 歷屆總統大選得票 (2020、2016)
+    // Group 2: 歷屆總統大選得票
     if (presidentResults.length > 0) {
       const presCards = presidentResults.map(r => {
         const year = r.electionId.split('-')[0];
         return renderCard(r, `${year} 中華民國總統大選 (${cityName})`, 'president');
       }).join('');
+      const presYears = presidentResults.map(r => r.electionId.split('-')[0]).join('、');
 
       groupsHtml += `
         <div class="historical-group">
           <div class="historical-group-header">
             <h4 class="historical-group-title"><span class="icon">🗳️</span> 歷屆總統大選得票分佈</h4>
-            <span class="historical-group-desc">中央大選 ${cityName} 得票對照（藍綠全國大盤指標）</span>
+            <span class="historical-group-desc">中央大選 ${cityName} 得票對照（${presYears} 藍綠白國家大盤指標）</span>
           </div>
-          <div class="historical-pair-grid">
+          <div class="historical-pair-grid pair-${presidentResults.length}">
             ${presCards}
           </div>
         </div>
       `;
     }
 
-    // Group 3: 歷屆立委不分區政黨票 (2020、2016)
+    // Group 3: 歷屆立委不分區政黨票
     if (partylistResults.length > 0) {
       const partyCards = partylistResults.map(r => {
         const year = r.electionId.split('-')[0];
         return renderCard(r, `${year} 立法委員不分區政黨票 (${cityName})`, 'partylist');
       }).join('');
+      const partyYears = partylistResults.map(r => r.electionId.split('-')[0]).join('、');
 
       groupsHtml += `
         <div class="historical-group">
           <div class="historical-group-header">
             <h4 class="historical-group-title"><span class="icon">🎫</span> 歷屆立委不分區政黨票</h4>
-            <span class="historical-group-desc">${cityName} 各政黨政黨票得票率（政黨核心基本盤指標）</span>
+            <span class="historical-group-desc">${cityName} 各政黨政黨票得票率（${partyYears} 政黨核心基本盤指標）</span>
           </div>
-          <div class="historical-pair-grid">
+          <div class="historical-pair-grid pair-${partylistResults.length}">
             ${partyCards}
           </div>
         </div>
       `;
     }
 
-    container.innerHTML = shiftCardHtml + groupsHtml;
+    container.innerHTML = filterBarHtml + shiftCardHtml + groupsHtml;
+
+    // Attach range button click listeners
+    container.querySelectorAll('.hist-range-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const mode = e.currentTarget.dataset.range;
+        if (mode && mode !== historicalRangeMode) {
+          historicalRangeMode = mode;
+          renderHistoricalComparison(city, pastResults);
+        }
+      });
+    });
   }
 
   // ---- Main Loader & Renderer ----
