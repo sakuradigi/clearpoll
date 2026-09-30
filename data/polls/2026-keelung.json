@@ -76,6 +76,26 @@
       },
       "undecided": 24.7,
       "source": "https://www.mnews.tw/"
+    },
+    {
+      "id": "kl2026-005",
+      "date": "2026-09-24",
+      "pollster": "shanshui",
+      "pollsterName": "山水民調（芋傳媒委託）",
+      "sampleSize": 1075,
+      "method": "phone",
+      "marginOfError": 2.99,
+      "results": {
+        "hsieh": 38.0,
+        "tung": 34.2
+      },
+      "neutralResults": {
+        "hsieh": 31.0,
+        "tung": 31.5
+      },
+      "undecided": 27.8,
+      "notes": "9/20-21調查，山水民調執行。謝國樑38.0%領先童子瑋34.2%（差距3.8%），一定會投票族群童子瑋反超1.5%",
+      "source": "https://taronews.tw/"
     }
   ]
 }
