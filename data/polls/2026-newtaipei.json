@@ -189,6 +189,21 @@
       "undecided": 22.1,
       "notes": "9/20-21調查，蘇巧慧逆轉超車李四川1.1%，看好度李四川42.0%領先蘇巧慧36.8%",
       "source": "https://www.zmedia.com.tw/"
+    },
+    {
+      "id": "nt2026-012",
+      "date": "2026-10-02",
+      "pollster": "shanshui",
+      "pollsterName": "山水民調（民進黨新北市議會黨團委託）",
+      "commissioner": "民進黨新北市議會黨團",
+      "sampleSize": 1226,
+      "method": "phone",
+      "marginOfError": 2.80,
+      "results": { "su": 39.1, "li": 34.5 },
+      "neutralResults": { "su": 33.0, "li": 30.5 },
+      "undecided": 26.4,
+      "notes": "9/30-10/1調查，山水民調執行。蘇巧慧39.1%領先李四川34.5%（差距4.6%），一定會投票族群蘇巧慧48.7%領先李四川39.3%（差距9.4%），看好度蘇37.7%勝李36.7%",
+      "source": "https://www.cna.com.tw/"
     }
   ]
 }
