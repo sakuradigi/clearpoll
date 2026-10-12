@@ -9,8 +9,14 @@
       "sampleSize": 1050,
       "method": "phone",
       "marginOfError": 2.95,
-      "results": { "li": 48.0, "su": 33.0 },
-      "neutralResults": { "li": 39.0, "su": 26.0 },
+      "results": {
+        "li": 48.0,
+        "su": 33.0
+      },
+      "neutralResults": {
+        "li": 39.0,
+        "su": 26.0
+      },
       "undecided": 19.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -22,8 +28,14 @@
       "sampleSize": 1070,
       "method": "phone",
       "marginOfError": 3.0,
-      "results": { "li": 35.5, "su": 34.5 },
-      "neutralResults": { "li": 28.0, "su": 27.0 },
+      "results": {
+        "li": 35.5,
+        "su": 34.5
+      },
+      "neutralResults": {
+        "li": 28.0,
+        "su": 27.0
+      },
       "undecided": 30.0,
       "source": "https://www.my-formosa.com/"
     },
@@ -36,8 +48,14 @@
       "sampleSize": 1070,
       "method": "phone",
       "marginOfError": 3.0,
-      "results": { "li": 39.6, "su": 34.8 },
-      "neutralResults": { "li": 32.0, "su": 28.0 },
+      "results": {
+        "li": 39.6,
+        "su": 34.8
+      },
+      "neutralResults": {
+        "li": 32.0,
+        "su": 28.0
+      },
       "undecided": 25.6,
       "source": "https://www.zmedia.com.tw/"
     },
@@ -49,8 +67,14 @@
       "sampleSize": 1142,
       "method": "online",
       "marginOfError": 2.9,
-      "results": { "li": 42.5, "su": 41.7 },
-      "neutralResults": { "li": 35.0, "su": 34.0 },
+      "results": {
+        "li": 42.5,
+        "su": 41.7
+      },
+      "neutralResults": {
+        "li": 35.0,
+        "su": 34.0
+      },
       "undecided": 15.8,
       "source": "https://www.ettoday.net/"
     },
@@ -62,8 +86,14 @@
       "sampleSize": 1083,
       "method": "phone",
       "marginOfError": 2.97,
-      "results": { "li": 40.0, "su": 40.2 },
-      "neutralResults": { "li": 33.0, "su": 34.0 },
+      "results": {
+        "li": 40.0,
+        "su": 40.2
+      },
+      "neutralResults": {
+        "li": 33.0,
+        "su": 34.0
+      },
       "undecided": 19.8,
       "source": "http://www.braintrust.tw/"
     },
@@ -76,8 +106,14 @@
       "sampleSize": 1766,
       "method": "online",
       "marginOfError": 2.3,
-      "results": { "li": 50.85, "su": 44.06 },
-      "neutralResults": { "li": 54.81, "su": 33.21 },
+      "results": {
+        "li": 50.85,
+        "su": 44.06
+      },
+      "neutralResults": {
+        "li": 54.81,
+        "su": 33.21
+      },
       "undecided": 5.09,
       "source": "https://www.ftnn.com.tw/"
     },
@@ -90,8 +126,14 @@
       "sampleSize": 1050,
       "method": "phone",
       "marginOfError": 3.0,
-      "results": { "li": 43.7, "su": 36.8 },
-      "neutralResults": { "li": 36.0, "su": 30.0 },
+      "results": {
+        "li": 43.7,
+        "su": 36.8
+      },
+      "neutralResults": {
+        "li": 36.0,
+        "su": 30.0
+      },
       "undecided": 19.5,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -103,8 +145,14 @@
       "sampleSize": 1213,
       "method": "online",
       "marginOfError": 2.8,
-      "results": { "li": 39.3, "su": 37.3 },
-      "neutralResults": { "li": 34.0, "su": 32.0 },
+      "results": {
+        "li": 39.3,
+        "su": 37.3
+      },
+      "neutralResults": {
+        "li": 34.0,
+        "su": 32.0
+      },
       "undecided": 23.4,
       "source": "https://www.ettoday.net/"
     },
@@ -116,8 +164,14 @@
       "sampleSize": 1070,
       "method": "phone",
       "marginOfError": 3.0,
-      "results": { "li": 32.2, "su": 37.8 },
-      "neutralResults": { "li": 25.0, "su": 32.0 },
+      "results": {
+        "li": 32.2,
+        "su": 37.8
+      },
+      "neutralResults": {
+        "li": 25.0,
+        "su": 32.0
+      },
       "undecided": 30.0,
       "source": "https://www.eranews.com.tw/"
     },
@@ -130,8 +184,14 @@
       "sampleSize": 1071,
       "method": "phone",
       "marginOfError": 3.0,
-      "results": { "su": 35.2, "li": 34.7 },
-      "neutralResults": { "su": 30.0, "li": 29.0 },
+      "results": {
+        "su": 35.2,
+        "li": 34.7
+      },
+      "neutralResults": {
+        "su": 30.0,
+        "li": 29.0
+      },
       "undecided": 30.1,
       "source": "https://www.cmmedia.com.tw/"
     },
@@ -144,8 +204,14 @@
       "sampleSize": 1224,
       "method": "phone",
       "marginOfError": 2.8,
-      "results": { "li": 39.8, "su": 33.1 },
-      "neutralResults": { "li": 33.0, "su": 27.0 },
+      "results": {
+        "li": 39.8,
+        "su": 33.1
+      },
+      "neutralResults": {
+        "li": 33.0,
+        "su": 27.0
+      },
       "undecided": 27.1,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -157,8 +223,14 @@
       "sampleSize": 1205,
       "method": "phone+cell",
       "marginOfError": 2.82,
-      "results": { "li": 38.6, "su": 37.8 },
-      "neutralResults": { "li": 33.5, "su": 33.0 },
+      "results": {
+        "li": 38.6,
+        "su": 37.8
+      },
+      "neutralResults": {
+        "li": 33.5,
+        "su": 33.0
+      },
       "undecided": 23.6,
       "source": "https://cnews.com.tw/"
     },
@@ -170,8 +242,14 @@
       "sampleSize": 1078,
       "method": "phone",
       "marginOfError": 2.98,
-      "results": { "li": 38.2, "su": 38.0 },
-      "neutralResults": { "li": 34.0, "su": 33.5 },
+      "results": {
+        "li": 38.2,
+        "su": 38.0
+      },
+      "neutralResults": {
+        "li": 34.0,
+        "su": 33.5
+      },
       "undecided": 23.8,
       "source": "http://www.my-formosa.com/"
     },
@@ -184,8 +262,14 @@
       "sampleSize": 1076,
       "method": "phone",
       "marginOfError": 2.99,
-      "results": { "su": 38.2, "li": 37.1 },
-      "neutralResults": { "su": 32.5, "li": 32.6 },
+      "results": {
+        "su": 38.2,
+        "li": 37.1
+      },
+      "neutralResults": {
+        "su": 32.5,
+        "li": 32.6
+      },
       "undecided": 22.1,
       "notes": "9/20-21調查，蘇巧慧逆轉超車李四川1.1%，看好度李四川42.0%領先蘇巧慧36.8%",
       "source": "https://www.zmedia.com.tw/"
@@ -198,12 +282,39 @@
       "commissioner": "民進黨新北市議會黨團",
       "sampleSize": 1226,
       "method": "phone",
-      "marginOfError": 2.80,
-      "results": { "su": 39.1, "li": 34.5 },
-      "neutralResults": { "su": 33.0, "li": 30.5 },
+      "marginOfError": 2.8,
+      "results": {
+        "su": 39.1,
+        "li": 34.5
+      },
+      "neutralResults": {
+        "su": 33.0,
+        "li": 30.5
+      },
       "undecided": 26.4,
       "notes": "9/30-10/1調查，山水民調執行。蘇巧慧39.1%領先李四川34.5%（差距4.6%），一定會投票族群蘇巧慧48.7%領先李四川39.3%（差距9.4%），看好度蘇37.7%勝李36.7%",
       "source": "https://www.cna.com.tw/"
+    },
+    {
+      "id": "nt2026-013",
+      "date": "2026-10-07",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS民調中心（國民黨新北市議會黨團委託）",
+      "commissioner": "國民黨新北市議會黨團智庫",
+      "sampleSize": 1210,
+      "method": "phone",
+      "marginOfError": 2.80,
+      "results": {
+        "li": 42.6,
+        "su": 35.9
+      },
+      "neutralResults": {
+        "li": 33.9,
+        "su": 21.6
+      },
+      "undecided": 21.5,
+      "notes": "9/29-10/3調查，TVBS執行。李四川42.6%領先蘇巧慧35.9%（差距6.7%），中間選民李四川領先12.3%，三重新莊李45.4%領先蘇34.6%，板橋蘇43.4%領先李41.0%",
+      "source": "https://news.tvbs.com.tw/politics/"
     }
   ]
 }

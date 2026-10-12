@@ -9,8 +9,14 @@
       "sampleSize": 1012,
       "method": "phone",
       "marginOfError": 3.08,
-      "results": { "chiang": 54.0, "shen": 28.0 },
-      "neutralResults": { "chiang": 45.0, "shen": 22.0 },
+      "results": {
+        "chiang": 54.0,
+        "shen": 28.0
+      },
+      "neutralResults": {
+        "chiang": 45.0,
+        "shen": 22.0
+      },
       "undecided": 18.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -22,8 +28,14 @@
       "sampleSize": 1078,
       "method": "phone",
       "marginOfError": 2.98,
-      "results": { "chiang": 52.9, "shen": 29.7 },
-      "neutralResults": { "chiang": 42.0, "shen": 24.0 },
+      "results": {
+        "chiang": 52.9,
+        "shen": 29.7
+      },
+      "neutralResults": {
+        "chiang": 42.0,
+        "shen": 24.0
+      },
       "undecided": 17.4,
       "source": "http://www.braintrust.tw/"
     },
@@ -35,8 +47,14 @@
       "sampleSize": 1105,
       "method": "phone",
       "marginOfError": 2.95,
-      "results": { "chiang": 58.0, "shen": 30.0 },
-      "neutralResults": { "chiang": 48.0, "shen": 23.0 },
+      "results": {
+        "chiang": 58.0,
+        "shen": 30.0
+      },
+      "neutralResults": {
+        "chiang": 48.0,
+        "shen": 23.0
+      },
       "undecided": 12.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -49,8 +67,14 @@
       "sampleSize": 1074,
       "method": "phone",
       "marginOfError": 2.99,
-      "results": { "chiang": 55.2, "shen": 27.5 },
-      "neutralResults": { "chiang": 47.0, "shen": 10.2 },
+      "results": {
+        "chiang": 55.2,
+        "shen": 27.5
+      },
+      "neutralResults": {
+        "chiang": 47.0,
+        "shen": 10.2
+      },
       "undecided": 17.3,
       "source": "https://www.zmedia.com.tw/"
     },
@@ -62,8 +86,14 @@
       "sampleSize": 1180,
       "method": "phone",
       "marginOfError": 2.85,
-      "results": { "chiang": 53.8, "shen": 27.5 },
-      "neutralResults": { "chiang": 48.5, "shen": 23.0 },
+      "results": {
+        "chiang": 53.8,
+        "shen": 27.5
+      },
+      "neutralResults": {
+        "chiang": 48.5,
+        "shen": 23.0
+      },
       "undecided": 18.7,
       "source": "https://www.ettoday.net/"
     },
@@ -75,8 +105,14 @@
       "sampleSize": 1088,
       "method": "phone",
       "marginOfError": 2.97,
-      "results": { "chiang": 52.6, "shen": 28.4 },
-      "neutralResults": { "chiang": 45.0, "shen": 27.5 },
+      "results": {
+        "chiang": 52.6,
+        "shen": 28.4
+      },
+      "neutralResults": {
+        "chiang": 45.0,
+        "shen": 27.5
+      },
       "undecided": 19.0,
       "source": "https://udn.com/"
     },
@@ -89,10 +125,36 @@
       "sampleSize": 1076,
       "method": "phone+cell",
       "marginOfError": 3.0,
-      "results": { "chiang": 41.7, "shen": 40.5 },
-      "neutralResults": { "chiang": 37.5, "shen": 36.5 },
+      "results": {
+        "chiang": 41.7,
+        "shen": 40.5
+      },
+      "neutralResults": {
+        "chiang": 37.5,
+        "shen": 36.5
+      },
       "undecided": 17.8,
       "source": "https://www.ettoday.net/"
+    },
+    {
+      "id": "tp2026-009",
+      "date": "2026-10-08",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS民調中心",
+      "sampleSize": 1120,
+      "method": "phone+cell",
+      "marginOfError": 2.90,
+      "results": {
+        "chiang": 49.0,
+        "shen": 41.0
+      },
+      "neutralResults": {
+        "chiang": 40.0,
+        "shen": 36.0
+      },
+      "undecided": 10.0,
+      "notes": "10/3、10/5-7調查，TVBS執行市話隨機抽樣。蔣萬安49%領先沈伯洋41%（差距8%），未決定11%。沈伯洋在20-29歲以52%領先蔣萬安44%；2022年投黃珊珊者53%轉向沈伯洋、39%轉向蔣萬安；中立選民蔣40%領先沈36%",
+      "source": "https://www.tvbs.com.tw/poll-center"
     }
   ]
 }

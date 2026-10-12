@@ -219,6 +219,17 @@
       "historicalAccuracy": 0.70,
       "methodology": "CATI電腦輔助電話訪問",
       "notes": "長期委託或自製各縣市大選調查"
+    },
+    {
+      "id": "evidence",
+      "name": "循證民調",
+      "fullName": "循證民意調查有限公司",
+      "credibilityScore": 0.72,
+      "leanDirection": "neutral",
+      "leanMagnitude": 0.08,
+      "historicalAccuracy": 0.70,
+      "methodology": "CATI電腦輔助市內電話訪問",
+      "notes": "具備學術研究背景顧問，長期執行地方公共政策與選情電話民意調查"
     }
   ]
 }

@@ -9,8 +9,14 @@
       "sampleSize": 1000,
       "method": "phone",
       "marginOfError": 3.1,
-      "results": { "chiang_k": 51.0, "ho": 32.4 },
-      "neutralResults": { "chiang_k": 42.0, "ho": 27.0 },
+      "results": {
+        "chiang_k": 51.0,
+        "ho": 32.4
+      },
+      "neutralResults": {
+        "chiang_k": 42.0,
+        "ho": 27.0
+      },
       "undecided": 16.6,
       "source": "https://www.ettoday.net/"
     },
@@ -22,8 +28,14 @@
       "sampleSize": 1020,
       "method": "phone",
       "marginOfError": 3.07,
-      "results": { "chiang_k": 54.0, "ho": 28.0 },
-      "neutralResults": { "chiang_k": 45.0, "ho": 23.0 },
+      "results": {
+        "chiang_k": 54.0,
+        "ho": 28.0
+      },
+      "neutralResults": {
+        "chiang_k": 45.0,
+        "ho": 23.0
+      },
       "undecided": 18.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -35,8 +47,14 @@
       "sampleSize": 1068,
       "method": "phone",
       "marginOfError": 3.0,
-      "results": { "chiang_k": 40.6, "ho": 24.4 },
-      "neutralResults": { "chiang_k": 34.0, "ho": 20.0 },
+      "results": {
+        "chiang_k": 40.6,
+        "ho": 24.4
+      },
+      "neutralResults": {
+        "chiang_k": 34.0,
+        "ho": 20.0
+      },
       "undecided": 35.0,
       "source": "https://cnews.com.tw/"
     },
@@ -48,8 +66,14 @@
       "sampleSize": 1110,
       "method": "phone",
       "marginOfError": 2.94,
-      "results": { "chiang_k": 52.0, "ho": 31.0 },
-      "neutralResults": { "chiang_k": 43.0, "ho": 25.0 },
+      "results": {
+        "chiang_k": 52.0,
+        "ho": 31.0
+      },
+      "neutralResults": {
+        "chiang_k": 43.0,
+        "ho": 25.0
+      },
       "undecided": 17.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -61,8 +85,14 @@
       "sampleSize": 1075,
       "method": "phone",
       "marginOfError": 2.98,
-      "results": { "chiang_k": 49.5, "ho": 33.5 },
-      "neutralResults": { "chiang_k": 41.0, "ho": 27.0 },
+      "results": {
+        "chiang_k": 49.5,
+        "ho": 33.5
+      },
+      "neutralResults": {
+        "chiang_k": 41.0,
+        "ho": 27.0
+      },
       "undecided": 17.0,
       "source": "https://www.my-formosa.com/"
     },
@@ -74,8 +104,14 @@
       "sampleSize": 1077,
       "method": "phone",
       "marginOfError": 3.0,
-      "results": { "chiang_k": 38.2, "ho": 24.1 },
-      "neutralResults": { "chiang_k": 32.0, "ho": 20.0 },
+      "results": {
+        "chiang_k": 38.2,
+        "ho": 24.1
+      },
+      "neutralResults": {
+        "chiang_k": 32.0,
+        "ho": 20.0
+      },
       "undecided": 37.7,
       "source": "https://cnews.com.tw/"
     },
@@ -87,8 +123,14 @@
       "sampleSize": 1159,
       "method": "phone",
       "marginOfError": 2.88,
-      "results": { "chiang_k": 42.8, "ho": 36.1 },
-      "neutralResults": { "chiang_k": 36.0, "ho": 30.0 },
+      "results": {
+        "chiang_k": 42.8,
+        "ho": 36.1
+      },
+      "neutralResults": {
+        "chiang_k": 36.0,
+        "ho": 30.0
+      },
       "undecided": 21.1,
       "source": "http://www.braintrust.tw/"
     },
@@ -100,8 +142,14 @@
       "sampleSize": 1102,
       "method": "phone",
       "marginOfError": 2.95,
-      "results": { "chiang_k": 47.8, "ho": 32.5 },
-      "neutralResults": { "chiang_k": 42.0, "ho": 28.5 },
+      "results": {
+        "chiang_k": 47.8,
+        "ho": 32.5
+      },
+      "neutralResults": {
+        "chiang_k": 42.0,
+        "ho": 28.5
+      },
       "undecided": 19.7,
       "source": "https://udn.com/"
     },
@@ -114,10 +162,37 @@
       "sampleSize": 1085,
       "method": "phone",
       "marginOfError": 2.98,
-      "results": { "chiang_k": 45.1, "ho": 32.5 },
-      "neutralResults": { "chiang_k": 39.5, "ho": 31.0 },
+      "results": {
+        "chiang_k": 45.1,
+        "ho": 32.5
+      },
+      "neutralResults": {
+        "chiang_k": 39.5,
+        "ho": 31.0
+      },
       "undecided": 22.4,
       "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "tc2026-010",
+      "date": "2026-10-12",
+      "pollster": "evidence",
+      "pollsterName": "循證民調（台中市信賴台灣之友會委託）",
+      "commissioner": "台中市信賴台灣之友會",
+      "sampleSize": 1071,
+      "method": "phone",
+      "marginOfError": 2.99,
+      "results": {
+        "chiang_k": 34.3,
+        "ho": 32.4
+      },
+      "neutralResults": {
+        "chiang_k": 28.5,
+        "ho": 27.2
+      },
+      "undecided": 33.3,
+      "notes": "10/5-6調查，循證民調執行市話調查。江啟臣34.3%微幅領先何欣純32.4%（差距1.9%，誤差範圍內五五波），洪麗華1.1%，尚未決定32.2%。何欣純在北屯、北區逆轉領先，39歲以下青年族群何欣純具優勢，看好度江啟臣48.6%勝何欣純20.1%",
+      "source": "https://udn.com/news/story/124234/"
     }
   ]
 }
