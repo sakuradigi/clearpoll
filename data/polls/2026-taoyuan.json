@@ -65,6 +65,20 @@
       "neutralResults": { "chang": 50.0, "huang": 21.0 },
       "undecided": 20.4,
       "source": "https://news.tvbs.com.tw/"
+    },
+    {
+      "id": "ty2026-005",
+      "date": "2026-09-22",
+      "pollster": "asia-pacific",
+      "pollsterName": "新台灣國策智庫",
+      "sampleSize": 1072,
+      "method": "phone",
+      "marginOfError": 2.99,
+      "results": { "chang": 47.0, "huang": 25.9 },
+      "neutralResults": { "chang": 41.0, "huang": 21.5 },
+      "undecided": 27.1,
+      "notes": "9月下旬調查，張善政支持度47.0%領先黃世杰25.9%，施政滿意度58.2%，看好度64.0%",
+      "source": "https://www.setn.com/"
     }
   ]
 }

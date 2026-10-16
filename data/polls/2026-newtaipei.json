@@ -315,6 +315,48 @@
       "undecided": 21.5,
       "notes": "9/29-10/3調查，TVBS執行。李四川42.6%領先蘇巧慧35.9%（差距6.7%），中間選民李四川領先12.3%，三重新莊李45.4%領先蘇34.6%，板橋蘇43.4%領先李41.0%",
       "source": "https://news.tvbs.com.tw/politics/"
+    },
+    {
+      "id": "nt2026-014",
+      "date": "2026-10-13",
+      "pollster": "beacon",
+      "pollsterName": "信民協會（戴立安規劃／畢肯執行）",
+      "commissioner": "台北市信民兩岸研究協會",
+      "sampleSize": 1073,
+      "method": "phone+cell",
+      "marginOfError": 3.00,
+      "results": {
+        "su": 43.1,
+        "li": 30.0
+      },
+      "neutralResults": {
+        "su": 36.5,
+        "li": 28.0
+      },
+      "undecided": 25.4,
+      "notes": "10/6-8調查，市話750+手機323雙底冊。蘇巧慧43.1%大幅領先李四川30.0%（差距13.1%），蘇輝湟1.5%，不表態15.8%，呈現剪刀口走勢引發政壇熱議",
+      "source": "https://www.storm.mg/"
+    },
+    {
+      "id": "nt2026-015",
+      "date": "2026-10-15",
+      "pollster": "junews",
+      "pollsterName": "鉅聞天下新聞網（皮爾森數據執行）",
+      "commissioner": "鉅聞天下新聞網",
+      "sampleSize": 1066,
+      "method": "online",
+      "marginOfError": 3.00,
+      "results": {
+        "li": 45.74,
+        "su": 45.18
+      },
+      "neutralResults": {
+        "li": 41.2,
+        "su": 40.8
+      },
+      "undecided": 9.08,
+      "notes": "9/28-10/3調查，皮爾森數據執行分層隨機抽樣加權。李四川45.74%與蘇巧慧45.18%差距僅0.56%，較7月調查李四川下滑逾5個百分點，雙方呈現五五波平盤",
+      "source": "https://www.setn.com/"
     }
   ]
 }

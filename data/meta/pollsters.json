@@ -230,6 +230,17 @@
       "historicalAccuracy": 0.70,
       "methodology": "CATI電腦輔助市內電話訪問",
       "notes": "具備學術研究背景顧問，長期執行地方公共政策與選情電話民意調查"
+    },
+    {
+      "id": "trend",
+      "name": "趨勢民調",
+      "fullName": "趨勢民意調查股份有限公司",
+      "credibilityScore": 0.74,
+      "leanDirection": "neutral",
+      "leanMagnitude": 0.08,
+      "historicalAccuracy": 0.72,
+      "methodology": "CATI電腦輔助電話訪問",
+      "notes": "國內專業民意調查機構，常接受各政黨、智庫與媒體委託執行縣市長選舉調查"
     }
   ]
 }

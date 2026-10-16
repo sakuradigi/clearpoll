@@ -96,6 +96,27 @@
       "undecided": 27.8,
       "notes": "9/20-21調查，山水民調執行。謝國樑38.0%領先童子瑋34.2%（差距3.8%），一定會投票族群童子瑋反超1.5%",
       "source": "https://taronews.tw/"
+    },
+    {
+      "id": "kl2026-006",
+      "date": "2026-10-15",
+      "pollster": "trend",
+      "pollsterName": "趨勢民調（國民黨基隆市黨部委託）",
+      "commissioner": "中國國民黨基隆市黨部",
+      "sampleSize": 1070,
+      "method": "phone",
+      "marginOfError": 3.00,
+      "results": {
+        "hsieh": 42.9,
+        "tung": 38.3
+      },
+      "neutralResults": {
+        "hsieh": 36.5,
+        "tung": 33.0
+      },
+      "undecided": 18.8,
+      "notes": "10/7-9調查，趨勢民調執行。謝國樑42.9%領先童子瑋38.3%（差距4.6%），看好度謝國樑50.4%領先童子瑋34.3%",
+      "source": "https://udn.com/"
     }
   ]
 }
