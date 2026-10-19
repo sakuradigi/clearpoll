@@ -2121,38 +2121,52 @@
     const fmtSign = (val) => val > 0 ? `+${val}` : `${val}`;
     const greenIdxText = `綠 ${fmtSign(cityData.index.green)}`;
     const blueIdxText = `藍 ${fmtSign(cityData.index.blue)}`;
-    const whiteIdxText = `白 ${fmtSign(cityData.index.white)}`;
+    const whiteIdxText = `游離/其他 ${fmtSign(cityData.index.white)}`;
 
     const gPct = cityData.structure.green.toFixed(1);
     const bPct = cityData.structure.blue.toFixed(1);
     const wPct = cityData.structure.white.toFixed(1);
+    const tppCorePct = (cityData.structure.tppCore ?? (cityData.structure.white * 0.5)).toFixed(1);
+    const swingPct = (cityData.structure.swingIndependent ?? (cityData.structure.white * 0.5)).toFixed(1);
 
     const h2hGPct = cityData.headToHead.green.toFixed(1);
     const h2hBPct = cityData.headToHead.blue.toFixed(1);
+
+    let thirdPartyBarLabel = '';
+    if (parseFloat(wPct) >= 13.0) {
+      thirdPartyBarLabel = `中間/第三勢力 ${wPct}%`;
+    } else if (parseFloat(wPct) >= 7.5) {
+      thirdPartyBarLabel = `游離/其他 ${wPct}%`;
+    }
 
     container.innerHTML = `
       <div class="demo-header-bar">
         <div class="demo-title">【${cName}】當前選民結構與政治基本盤推估 (CDPSM 模型)</div>
         <div class="demo-index-tags">
-          <span class="demo-tag green">2026投票指數：${greenIdxText}</span>
+          <span class="demo-tag green">2026板塊指數：${greenIdxText}</span>
           <span class="demo-tag blue">${blueIdxText}</span>
           <span class="demo-tag white">${whiteIdxText}</span>
         </div>
       </div>
 
-      <div style="font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: 8px; font-weight: 600;">
-        三腳督基本盤分佈 (泛綠 ${gPct}% | 泛藍 ${bPct}% | 民眾黨/第三勢力 ${wPct}%)
+      <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;">
+        <div style="font-size: 0.85rem; color: var(--color-text-secondary); font-weight: 600;">
+          選民基本盤結構推估 (泛綠基本盤 ${gPct}% ｜ 泛藍基本盤 ${bPct}% ｜ 中間與第三勢力 ${wPct}%)
+        </div>
+        <div style="font-size: 0.76rem; color: var(--color-text-tertiary); font-weight: 500;">
+          💡 中間與第三勢力拆解：白營核心約 <b>${tppCorePct}%</b> ＋ 游離/無黨選民約 <b>${swingPct}%</b>
+        </div>
       </div>
 
       <div class="demo-stack-bar">
-        <div class="demo-stack-seg" style="width: ${gPct}%; background-color: #10b981;" title="泛綠 ${gPct}%">
-          ${gPct > 10 ? `泛綠 ${gPct}%` : ''}
+        <div class="demo-stack-seg" style="width: ${gPct}%; background-color: #10b981;" title="泛綠基本盤 ${gPct}%">
+          ${parseFloat(gPct) > 10 ? `泛綠 ${gPct}%` : ''}
         </div>
-        <div class="demo-stack-seg" style="width: ${bPct}%; background-color: #3b82f6;" title="泛藍 ${bPct}%">
-          ${bPct > 10 ? `泛藍 ${bPct}%` : ''}
+        <div class="demo-stack-seg" style="width: ${bPct}%; background-color: #3b82f6;" title="泛藍基本盤 ${bPct}%">
+          ${parseFloat(bPct) > 10 ? `泛藍 ${bPct}%` : ''}
         </div>
-        <div class="demo-stack-seg" style="width: ${wPct}%; background-color: #f59e0b;" title="民眾黨 ${wPct}%">
-          ${wPct > 10 ? `民眾黨 ${wPct}%` : ''}
+        <div class="demo-stack-seg" style="width: ${wPct}%; background-color: #f59e0b;" title="中間與第三勢力 ${wPct}%（含白營核心約 ${tppCorePct}% + 游離/無黨約 ${swingPct}%）">
+          ${thirdPartyBarLabel}
         </div>
       </div>
 

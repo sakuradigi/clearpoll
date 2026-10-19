@@ -1298,14 +1298,48 @@ const ClearPollModel = {
       let blueWeighted = 0;
       let whiteWeighted = 0;
       let totalW = 0;
+      let partyList2024White = 18.0;
 
       for (const elec of historicalData.elections) {
-        const w = (elec.weightType || 0.3) * (elec.weightTime || 0.5);
+        // 2026 Local Executive Structural Calibration:
+        // Boost local mayoral elections (0.48) and dampen 2024 3-way presidential peak anomaly (0.25)
+        let wType = elec.weightType || 0.3;
+        if (elec.type === 'mayoral') {
+          wType = 0.48;
+        } else if (elec.id === '2024-presidential') {
+          wType = 0.25;
+        } else if (elec.type === 'partyList') {
+          wType = 0.32;
+        }
+        const w = wType * (elec.weightTime || 0.5);
         const res = elec.results ? elec.results[ent] : null;
         if (res) {
-          greenWeighted += (res.green || 0) * w;
-          blueWeighted += (res.blue || 0) * w;
-          whiteWeighted += (res.white || 0) * w;
+          let g = res.green || 0;
+          let b = res.blue || 0;
+          let wh = res.white || 0;
+          const oth = res.other || 0;
+
+          if (elec.id === '2024-partylist' && res.white != null) {
+            partyList2024White = res.white;
+          }
+
+          // Post-2024 TPP Deflation & Single-Member Executive Re-anchoring:
+          // 35% of the Jan 2024 white peak reverts to local blue/green structure in mayoral races,
+          // while minor parties (other) contribute to the non-major swing/third-party pool.
+          if (elec.year === 2024) {
+            const revert = wh * 0.35;
+            const gbSum = g + b;
+            const gRatio = gbSum > 0 ? g / gbSum : 0.5;
+            g += revert * gRatio;
+            b += revert * (1 - gRatio);
+            wh = wh * 0.65 + oth * 0.35;
+          } else {
+            wh = wh + oth * 0.25;
+          }
+
+          greenWeighted += g * w;
+          blueWeighted += b * w;
+          whiteWeighted += wh * w;
           totalW += w;
         }
       }
@@ -1316,15 +1350,26 @@ const ClearPollModel = {
         const w = whiteWeighted / totalW;
         const sum = g + b + w;
 
+        const greenPct = Math.round((g / sum) * 10000) / 100;
+        const bluePct = Math.round((b / sum) * 10000) / 100;
+        const whitePct = Math.round((w / sum) * 10000) / 100;
+
+        // Decompose non-blue/non-green pool into estimated 2026 TPP core vs. independent/swing voters
+        const rawTppCore = partyList2024White * (ent === 'hsinchucity' ? 0.42 : 0.30);
+        const tppCore = Math.round(Math.min(whitePct * 0.72, rawTppCore) * 10) / 10;
+        const swingIndependent = Math.round(Math.max(0, whitePct - tppCore) * 10) / 10;
+
         resultsByEntity[ent] = {
-          green: Math.round((g / sum) * 10000) / 100,
-          blue: Math.round((b / sum) * 10000) / 100,
-          white: Math.round((w / sum) * 10000) / 100,
+          green: greenPct,
+          blue: bluePct,
+          white: whitePct,
+          tppCore,
+          swingIndependent,
         };
       }
     }
 
-    const national = resultsByEntity.national || { green: 43.59, blue: 38.90, white: 17.51 };
+    const national = resultsByEntity.national || { green: 44.70, blue: 42.45, white: 12.85, tppCore: 6.6, swingIndependent: 6.3 };
 
     const computedCities = cities.map(cityId => {
       const entData = resultsByEntity[cityId] || national;
@@ -1341,7 +1386,13 @@ const ClearPollModel = {
       return {
         id: cityId,
         index: { green: greenIdx, blue: blueIdx, white: whiteIdx },
-        structure: { green: entData.green, blue: entData.blue, white: entData.white },
+        structure: {
+          green: entData.green,
+          blue: entData.blue,
+          white: entData.white,
+          tppCore: entData.tppCore,
+          swingIndependent: entData.swingIndependent
+        },
         headToHead: { green: h2hGreen, blue: h2hBlue }
       };
     });
