@@ -629,20 +629,24 @@
     if (eventBar) {
       if (events && events.length > 0) {
         const typeColorMap = {
-          debate: { bg: 'rgba(139, 92, 246, 0.14)', border: 'rgba(139, 92, 246, 0.45)', text: '#7c3aed', icon: '🎙️' },
-          milestone: { bg: 'rgba(59, 130, 246, 0.12)', border: 'rgba(59, 130, 246, 0.4)', text: '#2563eb', icon: '📌' },
-          election: { bg: 'rgba(239, 68, 68, 0.14)', border: 'rgba(239, 68, 68, 0.45)', text: '#dc2626', icon: '🗳️' },
+          debate: { bg: 'rgba(239, 68, 68, 0.12)', border: 'rgba(239, 68, 68, 0.45)', text: '#dc2626', icon: '🎙️' },
+          crossover: { bg: 'rgba(139, 92, 246, 0.14)', border: 'rgba(139, 92, 246, 0.45)', text: '#7c3aed', icon: '⚡' },
+          poll_shift: { bg: 'rgba(245, 158, 11, 0.14)', border: 'rgba(245, 158, 11, 0.45)', text: '#d97706', icon: '📊' },
+          campaign: { bg: 'rgba(16, 185, 129, 0.14)', border: 'rgba(16, 185, 129, 0.45)', text: '#059669', icon: '🚩' },
+          nomination: { bg: 'rgba(59, 130, 246, 0.12)', border: 'rgba(59, 130, 246, 0.4)', text: '#2563eb', icon: '📌' },
         };
-        eventBar.innerHTML = `<span style="font-size: 0.78rem; font-weight: 700; color: var(--color-text-secondary); margin-right: 4px;">📅 選戰關鍵節點與辯論標記：</span>` +
+        eventBar.innerHTML = `<span style="font-size: 0.78rem; font-weight: 700; color: var(--color-text-secondary); margin-right: 4px; white-space: nowrap;">📅 選戰關鍵節點與辯論標記：</span>` +
           events.map(ev => {
-            const st = typeColorMap[ev.type] || typeColorMap.milestone;
-            return `<span title="${ev.description || ev.label} (${ev.date})" style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; background: ${st.bg}; border: 1px solid ${st.border}; color: ${st.text}; cursor: help;">
+            const st = typeColorMap[ev.category || ev.type] || typeColorMap.nomination;
+            return `<span title="${ev.description || ev.label} (${ev.date})" style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; background: ${st.bg}; border: 1px solid ${st.border}; color: ${st.text}; cursor: help; white-space: nowrap;">
               <span>${st.icon}</span>
               <span>${ev.date.slice(5)} ${ev.label}</span>
             </span>`;
           }).join('');
+        eventBar.classList.remove('hidden');
         eventBar.style.display = 'flex';
       } else {
+        eventBar.classList.add('hidden');
         eventBar.style.display = 'none';
       }
     }
@@ -1807,6 +1811,7 @@
     if (!banner) return;
 
     if (!result || !result.scenarioActive || !result.baselineComparison) {
+      banner.classList.add('hidden');
       banner.style.display = 'none';
       banner.innerHTML = '';
       return;
@@ -1841,6 +1846,7 @@
         ${itemsHtml}
       </div>
     `;
+    banner.classList.remove('hidden');
     banner.style.display = 'block';
   }
 

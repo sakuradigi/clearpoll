@@ -833,48 +833,50 @@ const ClearPollModel = {
     const cityEvents = {
       taipei: [
         { date: '2026-05-20', label: '民進黨徵召沈伯洋', category: 'nomination', color: '#10B981', description: '民進黨正式徵召沈伯洋參選台北市長，開啟雙雄對決' },
-        { date: '2026-09-25', label: '信民協會民調差1.2%', category: 'poll_shift', color: '#F59E0B', description: '戴立安信民協會雙底冊調查蔣41.7% vs 沈40.5%首度進入誤差範圍' },
-        { date: '2026-10-08', label: 'TVBS白營票53%轉沈', category: 'crossover', color: '#8B5CF6', description: 'TVBS調查20-29歲青年與2022黃珊珊選票逾半轉向沈伯洋' },
+        { date: '2026-09-22', label: '信民協會民調差1.2%', category: 'poll_shift', color: '#F59E0B', description: '9/22信民協會（戴立安）雙底冊調查蔣41.7% vs 沈40.5%首度進入誤差範圍' },
+        { date: '2026-10-08', label: 'TVBS白營票53%轉沈', category: 'crossover', color: '#8B5CF6', description: '10/8 TVBS調查20-29歲青年與2022黃珊珊選票逾半轉向沈伯洋' },
         { date: '2026-10-16', label: '八大媒體聯邀電視辯論', category: 'debate', color: '#EF4444', description: '八家主流媒體聯名向蔣萬安、沈伯洋發出首場交叉詰問電視辯論邀約' }
       ],
       newtaipei: [
-        { date: '2026-05-29', label: '國民黨徵召李四川', category: 'nomination', color: '#2563EB', description: '國民黨正式徵召李四川出戰新北市長，蘇巧慧迎戰' },
-        { date: '2026-08-24', label: '藍白整合同台造勢', category: 'campaign', color: '#6366F1', description: '新北市藍白基層合流議題發酵，選戰進入組織動員期' },
-        { date: '2026-10-13', label: '信民民調蘇+13.1%逆轉', category: 'crossover', color: '#10B981', description: '信民協會雙底冊調查蘇巧慧43.1%大勝李四川30.0%，綠營首度黃金交叉' },
-        { date: '2026-10-15', label: '皮爾森調查藍綠平盤', category: 'poll_shift', color: '#F59E0B', description: '鉅聞天下皮爾森調查李45.74% vs 蘇45.18%差距僅0.56%' }
+        { date: '2026-05-29', label: '國民黨徵召李四川', category: 'nomination', color: '#2563EB', description: '國民黨正式徵召李四川出戰新北市長，與蘇巧慧正面對決' },
+        { date: '2026-09-23', label: '震傳媒蘇首超車+1.1%', category: 'crossover', color: '#10B981', description: '9/23震傳媒民調蘇巧慧首度微幅超車李四川1.1%，拉開黃金交叉序幕' },
+        { date: '2026-10-13', label: '信民民調蘇+13.1%逆轉', category: 'crossover', color: '#10B981', description: '10/13信民協會雙底冊調查蘇巧慧43.1%大勝李四川30.0%' },
+        { date: '2026-10-15', label: '皮爾森調查藍綠平盤', category: 'poll_shift', color: '#F59E0B', description: '10/15鉅聞天下皮爾森調查李45.74% vs 蘇45.18%差距僅0.56%' }
       ],
       kaohsiung: [
-        { date: '2026-04-15', label: '賴瑞隆初選勝出整合', category: 'nomination', color: '#10B981', description: '民進黨高雄初選由賴瑞隆勝出，陳其邁全力輔選完成整合' },
-        { date: '2026-09-18', label: 'ETtoday藍綠戰平0.3%', category: 'poll_shift', color: '#F59E0B', description: 'ETtoday民調柯志恩43.8% vs 賴瑞隆43.5%差距僅0.3%' },
-        { date: '2026-10-24', label: '陳其邁站台賴競總成立', category: 'campaign', color: '#10B981', description: '市長陳其邁親赴賴瑞隆競選總部成立大會交棒催票' },
-        { date: '2026-10-30', label: '首場市長電視辯論會', category: 'debate', color: '#EF4444', description: '賴瑞隆與柯志恩首場高雄市長電視辯論會正式登場' }
+        { date: '2026-06-02', label: '藍綠對決民調起跑', category: 'nomination', color: '#10B981', description: '民進黨由賴瑞隆出戰對決國民黨柯志恩，陳其邁全力輔選整合' },
+        { date: '2026-09-18', label: 'ETtoday藍綠戰平0.3%', category: 'poll_shift', color: '#F59E0B', description: '9/18 ETtoday民調柯志恩43.8% vs 賴瑞隆43.5%差距僅0.3%' },
+        { date: '2026-10-17', label: '陳其邁站台賴競總成立', category: 'campaign', color: '#10B981', description: '10月17日市長陳其邁親赴賴瑞隆競選總部成立大會交棒催票' },
+        { date: '2026-10-30', label: '首場市長電視辯論會', category: 'debate', color: '#EF4444', description: '10月30日賴瑞隆與柯志恩首場高雄市長電視辯論會登場' }
       ],
       taichung: [
-        { date: '2026-04-22', label: '江啟臣對決何欣純定局', category: 'nomination', color: '#2563EB', description: '藍綠完成台中市長提名布局，江啟臣對決何欣純' },
-        { date: '2026-09-15', label: 'TVBS江領先12.6%', category: 'campaign', color: '#2563EB', description: 'TVBS調查江啟臣45.1%領先何欣純32.5%' },
-        { date: '2026-10-12', label: '循證民調差距縮至1.9%', category: 'poll_shift', color: '#10B981', description: '循證民調江34.3% vs 何32.4%進入誤差範圍，北屯北區綠營突圍' },
-        { date: '2026-10-17', label: '世新大學江穩住+11.1%', category: 'poll_shift', color: '#2563EB', description: '世新大學民調江啟臣39.8% vs 何欣純28.7%，藍綠機構拉鋸白熱化' }
+        { date: '2026-05-15', label: '江啟臣對決何欣純定局', category: 'nomination', color: '#2563EB', description: '藍綠完成台中市長提名布局，江啟臣對決何欣純' },
+        { date: '2026-09-15', label: 'TVBS江領先12.6%', category: 'poll_shift', color: '#2563EB', description: '9/15 TVBS調查江啟臣45.1%領先何欣純32.5%' },
+        { date: '2026-10-12', label: '循證民調差距縮至1.9%', category: 'crossover', color: '#10B981', description: '10/12循證民調江34.3% vs 何32.4%進入誤差範圍，北屯北區綠營突圍' },
+        { date: '2026-10-17', label: '世新大學江穩住+11.1%', category: 'poll_shift', color: '#2563EB', description: '10/17世新大學民調江啟臣39.8% vs 何欣純28.7%，藍綠機構拉鋸白熱化' }
       ],
       tainan: [
-        { date: '2026-04-29', label: '陳亭妃勝出黃偉哲掌舵', category: 'nomination', color: '#10B981', description: '陳亭妃代表民進黨出戰，市長黃偉哲親任競總主委' },
-        { date: '2026-08-12', label: '謝龍介拋只做四年政見', category: 'campaign', color: '#2563EB', description: '謝龍介主打只做四年與藍白合作訴求' }
+        { date: '2026-04-25', label: '陳亭妃出線黃偉哲掌舵', category: 'nomination', color: '#10B981', description: '陳亭妃代表民進黨出戰，市長黃偉哲親任競總主委' },
+        { date: '2026-09-08', label: '菱傳媒陳亭妃穩居領先', category: 'poll_shift', color: '#10B981', description: '9/8菱傳媒調查陳亭妃維持穩定領先優勢' }
       ],
       taoyuan: [
-        { date: '2026-06-10', label: '民進黨徵召黃世杰', category: 'nomination', color: '#10B981', description: '民進黨徵召前法務部政次黃世杰挑戰現任市長張善政' },
-        { date: '2026-09-22', label: '張善政施政滿意度58.2%', category: 'poll_shift', color: '#2563EB', description: '新台灣國策智庫調查張善政47.0%大幅領先黃世杰25.9%' }
+        { date: '2026-05-18', label: '民進黨徵召黃世杰', category: 'nomination', color: '#10B981', description: '民進黨徵召前法務部政次黃世杰挑戰現任市長張善政' },
+        { date: '2026-09-22', label: '張善政施政滿意度58.2%', category: 'poll_shift', color: '#2563EB', description: '9/22新台灣國策智庫調查張善政47.0%大幅領先黃世杰25.9%' }
       ],
       keelung: [
-        { date: '2026-06-15', label: '議長童子瑋挑戰謝國樑', category: 'nomination', color: '#10B981', description: '民進黨徵召基隆市議長童子瑋對決現任市長謝國樑' },
-        { date: '2026-09-24', label: '山水民調一定投票童反超', category: 'poll_shift', color: '#F59E0B', description: '山水民調謝38.0% vs 童34.2%，一定投票族群童子瑋反超1.5%' },
-        { date: '2026-10-15', label: '趨勢民調差距拉鋸4.6%', category: 'poll_shift', color: '#2563EB', description: '趨勢民調謝國樑42.9%領先童子瑋38.3%，選情緊咬' }
+        { date: '2026-07-22', label: '議長童子瑋挑戰謝國樑', category: 'nomination', color: '#10B981', description: '民進黨徵召基隆市議長童子瑋對決現任市長謝國樑' },
+        { date: '2026-09-24', label: '山水民調一定投票童反超', category: 'crossover', color: '#F59E0B', description: '9/24山水民調謝38.0% vs 童34.2%，一定投票族群童子瑋反超1.5%' },
+        { date: '2026-10-15', label: '趨勢民調差距拉鋸4.6%', category: 'poll_shift', color: '#2563EB', description: '10/15趨勢民調謝國樑42.9%領先童子瑋38.3%，選情緊咬' }
       ],
       hsinchucounty: [
         { date: '2026-05-18', label: '徐欣瑩對決竹北鄭朝方', category: 'nomination', color: '#2563EB', description: '國民黨徐欣瑩對決竹北市長鄭朝方' },
-        { date: '2026-09-21', label: '年代民調鄭朝方+6.4%逆轉', category: 'crossover', color: '#10B981', description: '年代民調鄭朝方35.1%首度逆轉超車徐欣瑩28.7%，實現黃金交叉' }
+        { date: '2026-09-09', label: 'TVBS徐欣瑩領先3.2%', category: 'poll_shift', color: '#2563EB', description: '9/9 TVBS調查徐欣瑩39.8%微幅領先鄭朝方36.6%' },
+        { date: '2026-09-21', label: '年代民調鄭朝方+6.4%逆轉', category: 'crossover', color: '#10B981', description: '9/21年代民調鄭朝方35.1%首度逆轉超車徐欣瑩28.7%，實現黃金交叉' }
       ],
       changhua: [
-        { date: '2026-07-15', label: '邱建富退黨形成三腳督', category: 'nomination', color: '#F59E0B', description: '前彰化市長邱建富退黨參選，與陳素月、魏平政形成三腳督' },
-        { date: '2026-10-19', label: '聯合報陳素月32%倍數領先', category: 'poll_shift', color: '#10B981', description: '聯合報民調陳素月32%穩居第一、魏平政16%、邱建富10%' }
+        { date: '2026-07-25', label: '邱建富參選形成三腳督', category: 'nomination', color: '#F59E0B', description: '前彰化市長邱建富投入選戰，與陳素月、魏平政形成三腳督' },
+        { date: '2026-09-18', label: '鏡新聞陳素月領先14.7%', category: 'poll_shift', color: '#10B981', description: '9/18鏡新聞調查陳素月37.2% vs 魏平政22.5% vs 邱建富13.0%' },
+        { date: '2026-10-19', label: '聯合報陳素月32%倍數領先', category: 'poll_shift', color: '#10B981', description: '10/19聯合報民調陳素月32%穩居第一、魏平政16%、邱建富10%' }
       ]
     };
 

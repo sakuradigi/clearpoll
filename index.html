@@ -333,49 +333,63 @@
             自由調控中間/未表態選民流向、機構效應校正、<b>2022 上屆實際得票回溯加權</b>與<b>高未表態先驗錨定分配</b>，即時對比不同統計假設下的預測得票率與蒙地卡羅勝率。
           </p>
 
-          <div class="sim-controls-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+          <div class="sim-controls-grid">
             <div class="sim-control-item">
               <div class="sim-control-label">
-                <span>未表態選民歸向偏向 (Undecided Lean)</span>
+                <div class="sim-title-group">
+                  <span class="sim-title-main">未表態選民歸向偏向</span>
+                  <span class="sim-title-sub">Undecided Voter Lean</span>
+                </div>
                 <span class="sim-val-badge" id="simUndecidedLeanVal">50/50 中立等比</span>
               </div>
-              <input type="range" class="sim-slider" id="simUndecidedLean" min="-0.5" max="0.5" step="0.05" value="0">
-              <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--color-text-tertiary);">
-                <span>← 偏藍/野 (+3%)</span>
-                <span>中立</span>
-                <span>偏綠/執 (+3%) →</span>
+              <div>
+                <input type="range" class="sim-slider" id="simUndecidedLean" min="-0.5" max="0.5" step="0.05" value="0">
+                <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--color-text-tertiary); margin-top: 2px;">
+                  <span>← 偏藍/野 (+3%)</span>
+                  <span>中立</span>
+                  <span>偏綠/執 (+3%) →</span>
+                </div>
               </div>
             </div>
 
-            <div class="sim-control-item" style="justify-content: center;">
-              <div class="sim-control-label" style="margin-bottom: 8px;">
-                <span>機構效應偏差校正 (House Effect)</span>
+            <div class="sim-control-item">
+              <div class="sim-control-label">
+                <div class="sim-title-group">
+                  <span class="sim-title-main">機構效應偏差校正</span>
+                  <span class="sim-title-sub">House Effect Calibration</span>
+                </div>
                 <span class="sim-val-badge" id="simBiasVal" style="background: var(--color-accent-green);">已啟動</span>
               </div>
-              <label style="display: flex; align-items: center; gap: 8px; font-size: 0.86rem; cursor: pointer;">
-                <input type="checkbox" id="simApplyBias" checked style="width: 18px; height: 18px; accent-color: var(--color-accent-blue);">
+              <label class="sim-checkbox-label">
+                <input type="checkbox" id="simApplyBias" checked style="accent-color: var(--color-accent-blue);">
                 <span>自動抵消藍綠媒體與中立子樣本之機構偏誤</span>
               </label>
             </div>
 
-            <div class="sim-control-item" style="justify-content: center;">
-              <div class="sim-control-label" style="margin-bottom: 8px;">
-                <span>高未表態先驗錨定 (Prior Undecided)</span>
-                <span class="sim-val-badge" id="simPriorVal" style="background: var(--color-accent-green);">70%中立+30%基本盤</span>
+            <div class="sim-control-item">
+              <div class="sim-control-label">
+                <div class="sim-title-group">
+                  <span class="sim-title-main">高未表態先驗錨定</span>
+                  <span class="sim-title-sub">Prior-Anchored Undecided</span>
+                </div>
+                <span class="sim-val-badge" id="simPriorVal" style="background: var(--color-accent-green);">70/30 先驗錨定</span>
               </div>
-              <label style="display: flex; align-items: center; gap: 8px; font-size: 0.86rem; cursor: pointer;">
-                <input type="checkbox" id="simPriorUndecided" checked style="width: 18px; height: 18px; accent-color: var(--color-accent-blue);">
+              <label class="sim-checkbox-label">
+                <input type="checkbox" id="simPriorUndecided" checked style="accent-color: var(--color-accent-blue);">
                 <span>防範高未決定率選區等比例放大領先者差距</span>
               </label>
             </div>
 
-            <div class="sim-control-item" style="justify-content: center; border: 1px dashed rgba(99, 102, 241, 0.45); background: rgba(99, 102, 241, 0.04); padding: 10px 12px; border-radius: var(--radius-md);">
-              <div class="sim-control-label" style="margin-bottom: 8px;">
-                <span>🗳️ 2022 上屆得票回溯加權 (Recall Raking)</span>
+            <div class="sim-control-item sim-control-highlight">
+              <div class="sim-control-label">
+                <div class="sim-title-group">
+                  <span class="sim-title-main">🗳️ 2022 上屆得票回溯加權</span>
+                  <span class="sim-title-sub">2022 CEC Recall-Vote Raking</span>
+                </div>
                 <span class="sim-val-badge" id="simRecallVal" style="background: var(--color-text-tertiary);">標準模式</span>
               </div>
-              <label style="display: flex; align-items: center; gap: 8px; font-size: 0.86rem; cursor: pointer;">
-                <input type="checkbox" id="simRecallRaking" style="width: 18px; height: 18px; accent-color: #6366F1;">
+              <label class="sim-checkbox-label">
+                <input type="checkbox" id="simRecallRaking" style="accent-color: #6366F1;">
                 <span>依 2022 中選會實際得票與轉移矩陣回溯校準</span>
               </label>
             </div>
