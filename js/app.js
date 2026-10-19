@@ -685,10 +685,12 @@
       `;
     }
 
-    if (!electionsMetadata || !pollsterData) {
-      const [electionsData, pollsterD] = await Promise.all([
-        loadJSON('data/meta/elections.json'),
-        loadJSON('data/meta/pollsters.json')
+    if (!electionsMetadata || !pollsterData || !pastResultsData || !historicalDemographicsData) {
+      const [electionsData, pollsterD, pastResults, histDemo] = await Promise.all([
+        electionsMetadata ? Promise.resolve({ elections: electionsMetadata }) : loadJSON('data/meta/elections.json'),
+        pollsterData ? Promise.resolve(pollsterData) : loadJSON('data/meta/pollsters.json'),
+        pastResultsData ? Promise.resolve(pastResultsData) : loadJSON('data/history/past-results.json'),
+        historicalDemographicsData ? Promise.resolve(historicalDemographicsData) : loadJSON('data/history/historical-demographics.json')
       ]);
       if (!electionsData || !pollsterD) {
         if (DOM.sixMetrosGrid) DOM.sixMetrosGrid.innerHTML = `<div class="card text-center" style="grid-column:1/-1;">資料載入失敗</div>`;
@@ -696,6 +698,8 @@
       }
       electionsMetadata = electionsData.elections;
       pollsterData = pollsterD;
+      pastResultsData = pastResults;
+      historicalDemographicsData = histDemo;
     }
 
     const metroCityOrder = ['taipei', 'newtaipei', 'taoyuan', 'taichung', 'tainan', 'kaohsiung'];

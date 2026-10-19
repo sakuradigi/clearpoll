@@ -241,6 +241,17 @@
       "historicalAccuracy": 0.72,
       "methodology": "CATI電腦輔助電話訪問",
       "notes": "國內專業民意調查機構，常接受各政黨、智庫與媒體委託執行縣市長選舉調查"
+    },
+    {
+      "id": "shihhsin",
+      "name": "世新大學",
+      "fullName": "世新大學知識經濟發展研究院民意調查研究中心",
+      "credibilityScore": 0.8,
+      "leanDirection": "neutral",
+      "leanMagnitude": 0.06,
+      "historicalAccuracy": 0.78,
+      "methodology": "CATI電腦輔助電話訪問",
+      "notes": "國內老牌大學學術民調中心，長期接受政府機關、政黨與媒體委託執行大型電訪，抽樣與加權嚴謹"
     }
   ]
 }

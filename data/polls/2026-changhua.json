@@ -25,7 +25,7 @@
     {
       "id": "ch2026-002",
       "date": "2026-07-25",
-      "pollster": "keypo",
+      "pollster": "focus",
       "pollsterName": "關鍵調查",
       "sampleSize": 1072,
       "method": "phone",
@@ -105,6 +105,28 @@
       },
       "undecided": 27.3,
       "source": "https://news.mnews.tw/"
+    },
+    {
+      "id": "ch2026-006",
+      "date": "2026-10-19",
+      "pollster": "udn",
+      "pollsterName": "聯合報系民意調查中心",
+      "sampleSize": 1003,
+      "method": "phone",
+      "marginOfError": 3.1,
+      "results": {
+        "chen_s_y": 32.0,
+        "wei_p_c": 16.0,
+        "chiu_c_f": 10.0
+      },
+      "neutralResults": {
+        "chen_s_y": 27.5,
+        "wei_p_c": 14.5,
+        "chiu_c_f": 9.5
+      },
+      "undecided": 42.0,
+      "notes": "10/13-15調查，聯合報系民調中心執行CATI電話調查（N=1003，誤差±3.1%）。四人參選下陳素月32%穩居第一，魏平政16%居次，邱建富10%，陳重嘉0.3%，未決定42%。看好度陳素月36%、魏平政12%、邱建富9%",
+      "source": "https://udn.com/news/story/124234/"
     }
   ]
 }
