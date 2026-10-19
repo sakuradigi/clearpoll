@@ -2132,11 +2132,19 @@
     const h2hGPct = cityData.headToHead.green.toFixed(1);
     const h2hBPct = cityData.headToHead.blue.toFixed(1);
 
+    const gNum = parseFloat(gPct);
+    const bNum = parseFloat(bPct);
+    const wNum = parseFloat(wPct);
+
+    const greenBarLabel = gNum >= 12.0 ? `泛綠 ${gPct}%` : (gNum >= 5.5 ? `${gPct}%` : '');
+    const blueBarLabel = bNum >= 12.0 ? `泛藍 ${bPct}%` : (bNum >= 5.5 ? `${bPct}%` : '');
     let thirdPartyBarLabel = '';
-    if (parseFloat(wPct) >= 13.0) {
+    if (wNum >= 16.0) {
       thirdPartyBarLabel = `中間/第三勢力 ${wPct}%`;
-    } else if (parseFloat(wPct) >= 7.5) {
-      thirdPartyBarLabel = `游離/其他 ${wPct}%`;
+    } else if (wNum >= 11.5) {
+      thirdPartyBarLabel = `游離 ${wPct}%`;
+    } else if (wNum >= 5.5) {
+      thirdPartyBarLabel = `${wPct}%`;
     }
 
     container.innerHTML = `
@@ -2160,10 +2168,10 @@
 
       <div class="demo-stack-bar">
         <div class="demo-stack-seg" style="width: ${gPct}%; background-color: #10b981;" title="泛綠基本盤 ${gPct}%">
-          ${parseFloat(gPct) > 10 ? `泛綠 ${gPct}%` : ''}
+          ${greenBarLabel}
         </div>
         <div class="demo-stack-seg" style="width: ${bPct}%; background-color: #3b82f6;" title="泛藍基本盤 ${bPct}%">
-          ${parseFloat(bPct) > 10 ? `泛藍 ${bPct}%` : ''}
+          ${blueBarLabel}
         </div>
         <div class="demo-stack-seg" style="width: ${wPct}%; background-color: #f59e0b;" title="中間與第三勢力 ${wPct}%（含白營核心約 ${tppCorePct}% + 游離/無黨約 ${swingPct}%）">
           ${thirdPartyBarLabel}
