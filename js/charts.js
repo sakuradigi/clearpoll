@@ -41,13 +41,82 @@ const ClearPollCharts = {
   },
 
   /**
+   * Create a lightweight inline Chart.js plugin that renders vertical campaign/debate event markers.
+   * @param {Array} events - [{ date, label, category, color, description }]
+   * @returns {Object} Chart.js plugin object
+   */
+  _createEventAnnotationPlugin(events = []) {
+    return {
+      id: 'clearPollEventAnnotations',
+      afterDatasetsDraw(chart) {
+        if (!events || events.length === 0) return;
+        const { ctx, chartArea, scales } = chart;
+        const xScale = scales.x;
+        if (!xScale || !chartArea) return;
+
+        ctx.save();
+        events.forEach((ev, idx) => {
+          const ts = new Date(ev.date).getTime();
+          if (isNaN(ts)) return;
+          const x = xScale.getPixelForValue(ts);
+          if (x == null || x < chartArea.left - 4 || x > chartArea.right + 4) return;
+
+          const clampedX = Math.min(Math.max(x, chartArea.left + 2), chartArea.right - 2);
+          const color = ev.color || '#6366F1';
+
+          // Vertical dashed event line
+          ctx.beginPath();
+          ctx.setLineDash([4, 4]);
+          ctx.lineWidth = 1.5;
+          ctx.strokeStyle = color;
+          ctx.moveTo(clampedX, chartArea.top + 4);
+          ctx.lineTo(clampedX, chartArea.bottom);
+          ctx.stroke();
+
+          // Staggered pill label at top of chart
+          ctx.setLineDash([]);
+          const text = ev.label || ev.date;
+          ctx.font = "600 10.5px 'Inter', 'Noto Sans TC', sans-serif";
+          const textWidth = ctx.measureText(text).width;
+          const padX = 6;
+          const pillW = textWidth + padX * 2;
+          const pillH = 18;
+          const rowOffset = (idx % 2) * 21;
+          const pillY = chartArea.top + 6 + rowOffset;
+          let pillX = clampedX - pillW / 2;
+          if (pillX < chartArea.left + 2) pillX = chartArea.left + 2;
+          if (pillX + pillW > chartArea.right - 2) pillX = chartArea.right - pillW - 2;
+
+          // Pill background
+          ctx.fillStyle = color;
+          ctx.beginPath();
+          if (typeof ctx.roundRect === 'function') {
+            ctx.roundRect(pillX, pillY, pillW, pillH, 4);
+          } else {
+            ctx.rect(pillX, pillY, pillW, pillH);
+          }
+          ctx.fill();
+
+          // Pill text
+          ctx.fillStyle = '#FFFFFF';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(text, pillX + pillW / 2, pillY + pillH / 2 + 0.5);
+        });
+        ctx.restore();
+      }
+    };
+  },
+
+  /**
    * Render poll trend scatter chart — shows individual poll results over time
-   * with a moving average trend line overlay.
+   * with a moving average trend line overlay and campaign event annotations.
    * @param {string} canvasId - Canvas element ID
    * @param {Array} polls - Weighted polls array (from model)
    * @param {Array} candidates - Candidate objects with id, name, color
+   * @param {Array} events - Campaign & debate milestone objects
    */
-  renderPollTrendChart(canvasId, polls, candidates) {
+  renderPollTrendChart(canvasId, polls, candidates, events = []) {
     this._destroyIfExists(canvasId);
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
@@ -56,6 +125,13 @@ const ClearPollCharts = {
 
     // Sort polls by date
     const sortedPolls = [...polls].sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    // Compute x-axis bounds so upcoming events (e.g., 10/30 televised debate) are visible
+    const allDates = [
+      ...sortedPolls.map(p => p.date),
+      ...(events || []).map(ev => ev.date)
+    ].filter(Boolean).sort();
+    const maxDateStr = allDates[allDates.length - 1];
 
     // Create datasets — one scatter set + one trend line per candidate
     const datasets = [];
@@ -107,6 +183,7 @@ const ClearPollCharts = {
     this._instances[canvasId] = new Chart(ctx, {
       type: 'scatter',
       data: { datasets },
+      plugins: [this._createEventAnnotationPlugin(events)],
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -157,6 +234,7 @@ const ClearPollCharts = {
         scales: {
           x: {
             type: 'time',
+            suggestedMax: maxDateStr,
             time: {
               unit: 'week',
               displayFormats: { week: 'MM/dd', month: 'yyyy/MM' },
@@ -223,14 +301,20 @@ const ClearPollCharts = {
    * @param {string} canvasId - Canvas element ID
    * @param {Array} predictionLog - Array of prediction snapshots
    * @param {Array} candidates - Candidate objects
+   * @param {Array} events - Campaign & debate milestone objects
    */
-  renderWinProbChart(canvasId, predictionLog, candidates) {
+  renderWinProbChart(canvasId, predictionLog, candidates, events = []) {
     this._destroyIfExists(canvasId);
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
 
     const defaults = this._getDefaults();
     const labels = predictionLog.map(p => p.date);
+    const allDates = [
+      ...labels,
+      ...(events || []).map(ev => ev.date)
+    ].filter(Boolean).sort();
+    const maxDateStr = allDates[allDates.length - 1];
 
     const datasets = candidates.map(candidate => ({
       label: candidate.name,
@@ -254,6 +338,7 @@ const ClearPollCharts = {
     this._instances[canvasId] = new Chart(ctx, {
       type: 'line',
       data: { labels, datasets },
+      plugins: [this._createEventAnnotationPlugin(events)],
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -290,6 +375,7 @@ const ClearPollCharts = {
         scales: {
           x: {
             type: 'time',
+            suggestedMax: maxDateStr,
             time: {
               unit: 'week',
               displayFormats: { week: 'MM/dd', month: 'yyyy/MM' },

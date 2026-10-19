@@ -160,22 +160,166 @@ const ClearPollModel = {
   },
 
   /**
+   * 2022 CEC Actual Vote Structure Recall-Vote Raking (上屆實際得票結構回溯加權).
+   * Corrects partisan non-response / winner-recall bias using 2022 CEC actual vote shares
+   * and empirical cross-tab transition matrices when available.
+   * @param {Object} poll - Poll object
+   * @param {Object} adjustedResults - { candidateId: support% }
+   * @param {Array} candidates - Candidate array
+   * @param {Object} options - Scenario options containing pastResults, cityId, fundamentals
+   * @returns {Object} recall-raked support results
+   */
+  applyRecallVoteRaking(poll, adjustedResults, candidates = [], options = null) {
+    if (!options?.applyRecallRaking) return adjustedResults;
+
+    const candidateIds = Object.keys(adjustedResults);
+    if (candidateIds.length < 2) return adjustedResults;
+
+    // Case 1: Poll has explicit 2022 recall transition cross-tab (e.g. Taipei TVBS tp2026-009)
+    if (poll.recallCrossTab) {
+      const raked = {};
+      candidateIds.forEach(cid => { raked[cid] = 0; });
+      for (const group of Object.values(poll.recallCrossTab)) {
+        const w = (group.share2022 || 0) / 100;
+        for (const cid of candidateIds) {
+          if (group[cid] != null) {
+            raked[cid] += w * group[cid];
+          }
+        }
+      }
+      const rakedSum = Object.values(raked).reduce((a, b) => a + b, 0);
+      if (rakedSum > 0) {
+        return raked;
+      }
+    }
+
+    // Case 2: Reconstruct 2022 CEC structural raking from official 2022 election results + neutral transfer
+    const cityId = options.cityId;
+    const past2022 = options.pastResults?.results?.find(r => r.electionId === `2022-${cityId}-mayor`);
+    if (!past2022 || !past2022.candidates) return adjustedResults;
+
+    let pastKmt = 0;
+    let pastDpp = 0;
+    let pastOther = 0;
+    for (const c of past2022.candidates) {
+      const p = (c.party || '').toUpperCase();
+      if (p === 'KMT') pastKmt += c.voteShare;
+      else if (p === 'DPP') pastDpp += c.voteShare;
+      else pastOther += c.voteShare;
+    }
+
+    // Estimate neutral / third-party transfer split from poll's neutralResults
+    const neutralSrc = poll.neutralResults || adjustedResults;
+    const neutralTotal = candidateIds.reduce((s, cid) => s + (neutralSrc[cid] || 0), 0) || 1;
+    const neutralRatios = {};
+    for (const cid of candidateIds) {
+      neutralRatios[cid] = (neutralSrc[cid] || 0) / neutralTotal;
+    }
+
+    // Construct 2022 CEC recall-implied baseline for each candidate
+    const cecTarget = {};
+    const totalAdj = Object.values(adjustedResults).reduce((a, b) => a + b, 0) || 80;
+    for (const c of candidates) {
+      if (!candidateIds.includes(c.id)) continue;
+      const party = (c.party || '').toUpperCase();
+      let base2022 = 0;
+      if (party === 'KMT') {
+        // 85% base retention + neutral share of 2022 third-party/non-voter pool
+        base2022 = pastKmt * 0.85 + (pastOther + 15.0) * neutralRatios[c.id];
+      } else if (party === 'DPP') {
+        // 90% base retention + neutral share of 2022 third-party/non-voter pool
+        base2022 = pastDpp * 0.90 + (pastOther + 15.0) * neutralRatios[c.id];
+      } else {
+        base2022 = pastOther * 0.70 + 15.0 * neutralRatios[c.id];
+      }
+      cecTarget[c.id] = base2022;
+    }
+
+    const cecSum = Object.values(cecTarget).reduce((a, b) => a + b, 0) || 1;
+    const rakedResults = {};
+    // Blend 65% empirical poll with 35% 2022 CEC raked structure
+    const rakeAlpha = 0.35;
+    for (const cid of candidateIds) {
+      const scaledCec = (cecTarget[cid] / cecSum) * totalAdj;
+      rakedResults[cid] = adjustedResults[cid] * (1 - rakeAlpha) + scaledCec * rakeAlpha;
+    }
+
+    return rakedResults;
+  },
+
+  /**
    * Convert adjusted support percentages to projected vote share
-   * with optional undecided voter lean parameter.
+   * with Prior-Anchored Undecided Allocation and optional undecided voter lean parameter.
    * @param {Object} adjustedResults - { candidateId: support% }
    * @param {Array} candidates - Candidate metadata array
    * @param {number} undecidedLean - User scenario slider (-1.0 to 1.0)
+   * @param {Object} conversionOptions - { poll, fundamentals, usePriorUndecided }
    * @returns {Object} projected vote shares summing to 100%
    */
-  convertToVoteShare(adjustedResults, candidates = [], undecidedLean = 0) {
+  convertToVoteShare(adjustedResults, candidates = [], undecidedLean = 0, conversionOptions = null) {
     const totalSupport = Object.values(adjustedResults).reduce((a, b) => a + b, 0);
 
     if (totalSupport <= 0) return adjustedResults;
 
+    const candidateIds = Object.keys(adjustedResults);
+    const usePriorUndecided = conversionOptions?.usePriorUndecided !== false;
+    const poll = conversionOptions?.poll;
+    const fundamentals = conversionOptions?.fundamentals;
+
+    // Effective undecided percentage in this poll
+    const rawUndecided = (poll && typeof poll.undecided === 'number')
+      ? poll.undecided
+      : Math.max(0, 100 - totalSupport);
+    const effectiveUndecided = Math.min(48, Math.max(0, rawUndecided));
+    const decidedPool = 100 - effectiveUndecided;
+
+    // Neutral momentum share ratios for undecided allocation
+    const neutralSrc = (poll && poll.neutralResults) ? poll.neutralResults : adjustedResults;
+    const neutralSum = candidateIds.reduce((s, cid) => s + (neutralSrc[cid] || 0), 0) || totalSupport;
+
+    // Structural prior share ratios (50% competitive equal split + 50% local CDPSM fundamental)
+    const priorRatios = {};
+    const equalShare = 1 / (candidateIds.length || 1);
+    let fundSum = 0;
+    const rawFund = {};
+    for (const cid of candidateIds) {
+      const cand = candidates.find(c => c.id === cid);
+      const party = (cand?.party || '').toUpperCase();
+      let fVal = equalShare * 100;
+      if (fundamentals) {
+        if (party === 'DPP') {
+          fVal = (candidateIds.length === 2 && fundamentals.headToHead) ? fundamentals.headToHead.green : (fundamentals.green || 40);
+        } else if (party === 'KMT') {
+          fVal = (candidateIds.length === 2 && fundamentals.headToHead) ? fundamentals.headToHead.blue : (fundamentals.blue || 40);
+        } else if (party === 'TPP') {
+          fVal = fundamentals.white || 15;
+        } else {
+          fVal = (fundamentals.white || 20) * 0.6;
+        }
+      }
+      rawFund[cid] = fVal;
+      fundSum += fVal;
+    }
+    for (const cid of candidateIds) {
+      const normFund = fundSum > 0 ? (rawFund[cid] / fundSum) : equalShare;
+      priorRatios[cid] = 0.5 * equalShare + 0.5 * normFund;
+    }
+
     const voteShares = {};
 
     for (const [cid, support] of Object.entries(adjustedResults)) {
-      let baseShare = (support / totalSupport) * 100;
+      let baseShare;
+      if (usePriorUndecided && effectiveUndecided > 5) {
+        // Prior-Anchored Undecided Allocation:
+        // Decided pool allocated by adjusted support; Undecided pool allocated 70% by neutral momentum + 30% by structural prior
+        const decidedComponent = (support / totalSupport) * decidedPool;
+        const neutralRatio = (neutralSrc[cid] != null ? neutralSrc[cid] : support) / neutralSum;
+        const undecidedComponent = effectiveUndecided * (0.70 * neutralRatio + 0.30 * priorRatios[cid]);
+        baseShare = decidedComponent + undecidedComponent;
+      } else {
+        // Traditional 100% Proportional Allocation
+        baseShare = (support / totalSupport) * 100;
+      }
 
       // Apply scenario undecided voter lean adjustment if specified
       if (undecidedLean !== 0 && candidates.length > 0) {
@@ -227,6 +371,7 @@ const ClearPollModel = {
 
     const applyBias = scenarioOptions?.applyBiasCorrection !== false;
     const undecidedLean = scenarioOptions?.undecidedLean || 0;
+    const usePriorUndecided = scenarioOptions?.usePriorUndecided !== false;
     const halfLifeDays = this.calcAdaptiveHalfLife(electionDate, referenceDate);
 
     // Compute same-pollster repeat-wave rank (newest wave = 0, 2nd newest = 1, etc.)
@@ -254,9 +399,14 @@ const ClearPollModel = {
       const repeatDecayW = Math.pow(0.80, repeatRanks[idx]);
       const rawCombined = recencyW * sampleW * credibilityW * repeatDecayW;
 
-      // Adjust for neutral voters & pollster bias
-      const adjusted = this.adjustForNeutralVoters(poll, pollsters, candidates, 0.5, applyBias);
-      const voteShares = this.convertToVoteShare(adjusted, candidates, undecidedLean);
+      // Adjust for neutral voters, pollster bias & optional 2022 CEC Recall-Vote Raking
+      const neutralAdjusted = this.adjustForNeutralVoters(poll, pollsters, candidates, 0.5, applyBias);
+      const adjusted = this.applyRecallVoteRaking(poll, neutralAdjusted, candidates, scenarioOptions);
+      const voteShares = this.convertToVoteShare(adjusted, candidates, undecidedLean, {
+        poll,
+        fundamentals: scenarioOptions?.fundamentals,
+        usePriorUndecided
+      });
 
       intermediatePolls.push({
         poll,
@@ -319,6 +469,7 @@ const ClearPollModel = {
 
       weightedPolls.push({
         ...item.poll,
+        recallRaked: Boolean(scenarioOptions?.applyRecallRaking),
         weights: {
           recency: item.recencyW,
           sample: item.sampleW,
@@ -461,7 +612,7 @@ const ClearPollModel = {
     // Correlated election-day systemic error floor (turnout differential + late undecided break)
     const systemicSigma = Math.hypot(divergenceSE * 0.55, 2.0);
 
-    const seedKey = `${electionDate}-${polls.length}-${polls[polls.length - 1]?.id || ''}-${scenarioOptions?.undecidedLean || 0}-${scenarioOptions?.applyBiasCorrection !== false}-${scenarioOptions?.fundamentalsWeight ?? 'auto'}`;
+    const seedKey = `${electionDate}-${polls.length}-${polls[polls.length - 1]?.id || ''}-${scenarioOptions?.undecidedLean || 0}-${scenarioOptions?.applyBiasCorrection !== false}-${scenarioOptions?.applyRecallRaking === true}-${scenarioOptions?.usePriorUndecided !== false}-${scenarioOptions?.fundamentalsWeight ?? 'auto'}`;
     const rand = this._createSeededRandom(seedKey);
     const boxMuller = () => {
       const u1 = rand() || 0.0001;
@@ -673,6 +824,67 @@ const ClearPollModel = {
   },
 
   /**
+   * Get major campaign & televised debate milestones for Chart.js Event Annotation Layer.
+   * @param {string} cityId
+   * @returns {Array} [{ date, label, category, color, description }]
+   */
+  getElectionEvents(cityId) {
+    const c = (cityId || '').toLowerCase();
+    const cityEvents = {
+      taipei: [
+        { date: '2026-05-20', label: '民進黨徵召沈伯洋', category: 'nomination', color: '#10B981', description: '民進黨正式徵召沈伯洋參選台北市長，開啟雙雄對決' },
+        { date: '2026-09-25', label: '信民協會民調差1.2%', category: 'poll_shift', color: '#F59E0B', description: '戴立安信民協會雙底冊調查蔣41.7% vs 沈40.5%首度進入誤差範圍' },
+        { date: '2026-10-08', label: 'TVBS白營票53%轉沈', category: 'crossover', color: '#8B5CF6', description: 'TVBS調查20-29歲青年與2022黃珊珊選票逾半轉向沈伯洋' },
+        { date: '2026-10-16', label: '八大媒體聯邀電視辯論', category: 'debate', color: '#EF4444', description: '八家主流媒體聯名向蔣萬安、沈伯洋發出首場交叉詰問電視辯論邀約' }
+      ],
+      newtaipei: [
+        { date: '2026-05-29', label: '國民黨徵召李四川', category: 'nomination', color: '#2563EB', description: '國民黨正式徵召李四川出戰新北市長，蘇巧慧迎戰' },
+        { date: '2026-08-24', label: '藍白整合同台造勢', category: 'campaign', color: '#6366F1', description: '新北市藍白基層合流議題發酵，選戰進入組織動員期' },
+        { date: '2026-10-13', label: '信民民調蘇+13.1%逆轉', category: 'crossover', color: '#10B981', description: '信民協會雙底冊調查蘇巧慧43.1%大勝李四川30.0%，綠營首度黃金交叉' },
+        { date: '2026-10-15', label: '皮爾森調查藍綠平盤', category: 'poll_shift', color: '#F59E0B', description: '鉅聞天下皮爾森調查李45.74% vs 蘇45.18%差距僅0.56%' }
+      ],
+      kaohsiung: [
+        { date: '2026-04-15', label: '賴瑞隆初選勝出整合', category: 'nomination', color: '#10B981', description: '民進黨高雄初選由賴瑞隆勝出，陳其邁全力輔選完成整合' },
+        { date: '2026-09-18', label: 'ETtoday藍綠戰平0.3%', category: 'poll_shift', color: '#F59E0B', description: 'ETtoday民調柯志恩43.8% vs 賴瑞隆43.5%差距僅0.3%' },
+        { date: '2026-10-24', label: '陳其邁站台賴競總成立', category: 'campaign', color: '#10B981', description: '市長陳其邁親赴賴瑞隆競選總部成立大會交棒催票' },
+        { date: '2026-10-30', label: '首場市長電視辯論會', category: 'debate', color: '#EF4444', description: '賴瑞隆與柯志恩首場高雄市長電視辯論會正式登場' }
+      ],
+      taichung: [
+        { date: '2026-04-22', label: '江啟臣對決何欣純定局', category: 'nomination', color: '#2563EB', description: '藍綠完成台中市長提名布局，江啟臣對決何欣純' },
+        { date: '2026-09-15', label: 'TVBS江領先12.6%', category: 'campaign', color: '#2563EB', description: 'TVBS調查江啟臣45.1%領先何欣純32.5%' },
+        { date: '2026-10-12', label: '循證民調差距縮至1.9%', category: 'poll_shift', color: '#10B981', description: '循證民調江34.3% vs 何32.4%進入誤差範圍，北屯北區綠營突圍' },
+        { date: '2026-10-17', label: '世新大學江穩住+11.1%', category: 'poll_shift', color: '#2563EB', description: '世新大學民調江啟臣39.8% vs 何欣純28.7%，藍綠機構拉鋸白熱化' }
+      ],
+      tainan: [
+        { date: '2026-04-29', label: '陳亭妃勝出黃偉哲掌舵', category: 'nomination', color: '#10B981', description: '陳亭妃代表民進黨出戰，市長黃偉哲親任競總主委' },
+        { date: '2026-08-12', label: '謝龍介拋只做四年政見', category: 'campaign', color: '#2563EB', description: '謝龍介主打只做四年與藍白合作訴求' }
+      ],
+      taoyuan: [
+        { date: '2026-06-10', label: '民進黨徵召黃世杰', category: 'nomination', color: '#10B981', description: '民進黨徵召前法務部政次黃世杰挑戰現任市長張善政' },
+        { date: '2026-09-22', label: '張善政施政滿意度58.2%', category: 'poll_shift', color: '#2563EB', description: '新台灣國策智庫調查張善政47.0%大幅領先黃世杰25.9%' }
+      ],
+      keelung: [
+        { date: '2026-06-15', label: '議長童子瑋挑戰謝國樑', category: 'nomination', color: '#10B981', description: '民進黨徵召基隆市議長童子瑋對決現任市長謝國樑' },
+        { date: '2026-09-24', label: '山水民調一定投票童反超', category: 'poll_shift', color: '#F59E0B', description: '山水民調謝38.0% vs 童34.2%，一定投票族群童子瑋反超1.5%' },
+        { date: '2026-10-15', label: '趨勢民調差距拉鋸4.6%', category: 'poll_shift', color: '#2563EB', description: '趨勢民調謝國樑42.9%領先童子瑋38.3%，選情緊咬' }
+      ],
+      hsinchucounty: [
+        { date: '2026-05-18', label: '徐欣瑩對決竹北鄭朝方', category: 'nomination', color: '#2563EB', description: '國民黨徐欣瑩對決竹北市長鄭朝方' },
+        { date: '2026-09-21', label: '年代民調鄭朝方+6.4%逆轉', category: 'crossover', color: '#10B981', description: '年代民調鄭朝方35.1%首度逆轉超車徐欣瑩28.7%，實現黃金交叉' }
+      ],
+      changhua: [
+        { date: '2026-07-15', label: '邱建富退黨形成三腳督', category: 'nomination', color: '#F59E0B', description: '前彰化市長邱建富退黨參選，與陳素月、魏平政形成三腳督' },
+        { date: '2026-10-19', label: '聯合報陳素月32%倍數領先', category: 'poll_shift', color: '#10B981', description: '聯合報民調陳素月32%穩居第一、魏平政16%、邱建富10%' }
+      ]
+    };
+
+    return cityEvents[c] || [
+      { date: '2026-06-01', label: '各陣營完成提名布局', category: 'nomination', color: '#6366F1', description: '藍綠白各陣營完成地方首長提名與基層整合' },
+      { date: '2026-09-01', label: '競選總部成立動員潮', category: 'campaign', color: '#F59E0B', description: '選戰進入百日衝刺，各陣營陸續成立競選總部' }
+    ];
+  },
+
+  /**
    * Main entry point: run full analysis.
    * @param {Object} pollData - Poll data JSON
    * @param {Object} pollsterData - Pollster data JSON
@@ -683,9 +895,10 @@ const ClearPollModel = {
     const { candidates, polls, electionDate } = pollData;
     const pollsters = pollsterData.pollsters || [];
 
-    // Auto-inject fundamentals if historicalDemographics provided
+    // Auto-inject fundamentals and cityId if historicalDemographics provided
     let options = scenarioOptions ? { ...scenarioOptions } : {};
     const cityId = pollData.city || (pollData.electionId ? pollData.electionId.split('-')[1] : null);
+    options.cityId = cityId;
 
     if (options.historicalDemographics && cityId && !options.fundamentals) {
       options.fundamentals = this.getBayesianFundamentals(cityId, options.historicalDemographics);
@@ -695,6 +908,26 @@ const ClearPollModel = {
     const { voteShares, rawPollShares, weightedPolls, totalWeight, fundamentalsWeight } = this.calcWeightedAverage(
       polls, pollsters, electionDate, candidates, options
     );
+
+    // Compute default baseline shares (without Recall Raking) when Recall Raking or custom scenario is active
+    let baselineComparison = null;
+    if (options.applyRecallRaking || options.usePriorUndecided === false || (options.undecidedLean && options.undecidedLean !== 0) || options.applyBiasCorrection === false) {
+      const defaultOpts = {
+        ...options,
+        undecidedLean: 0,
+        applyBiasCorrection: true,
+        applyRecallRaking: false,
+        usePriorUndecided: true
+      };
+      const baseRes = this.calcWeightedAverage(polls, pollsters, electionDate, candidates, defaultOpts);
+      baselineComparison = {
+        defaultShares: baseRes.voteShares,
+        deltas: {}
+      };
+      for (const c of candidates) {
+        baselineComparison.deltas[c.id] = Math.round(((voteShares[c.id] || 0) - (baseRes.voteShares[c.id] || 0)) * 10) / 10;
+      }
+    }
 
     // Step 2: Estimate standard error from poll variance
     const leaderId = Object.entries(voteShares).sort(([, a], [, b]) => b - a)[0]?.[0];
@@ -726,7 +959,7 @@ const ClearPollModel = {
       partisanShift = this.calculatePartisanShift(predictedVoteShares, cityId, options.pastResults, candidates);
     }
 
-    // Step 7: Generate AI Model Assessment
+    // Step 7: Generate AI Model Assessment & Campaign Events
     const aiAssessment = this.getAIElectionAssessment(pollData.electionId, pollData.city || pollData.cityName, {
       predictedVoteShares,
       winProbabilities,
@@ -734,6 +967,7 @@ const ClearPollModel = {
       se,
       weightedPolls
     });
+    const events = this.getElectionEvents(cityId);
 
     return {
       electionId: pollData.electionId,
@@ -753,6 +987,9 @@ const ClearPollModel = {
       fundamentalsWeight: fundamentalsWeight || 0,
       partisanShift,
       aiAssessment,
+      events,
+      baselineComparison,
+      scenarioActive: Boolean(baselineComparison),
       analysisTimestamp: new Date().toISOString(),
     };
   },
@@ -787,8 +1024,8 @@ const ClearPollModel = {
 
     const assessments = {
       newtaipei: {
-        shortBrief: '全台白熱化第一級戰區，綠營首度黃金交叉！蘇巧慧與李四川預估得票率為 50.7% vs 49.3%（差距 1.4%）。10月13日信民協會（戴立安）民調蘇巧慧 43.1% 大勝李四川 30.0%（差 13.1%），10月15日鉅聞天下（皮爾森）李 45.74% vs 蘇 45.18% 幾近戰平，模型推算蘇巧慧勝率以 58.3% vs 41.7% 逆轉領跑！',
-        detailedBrief: '新北市選情出現歷史性轉折。10月13日台北市信民兩岸研究協會公布由戴立安規劃、畢肯執行之最新雙底冊調查，蘇巧慧以 43.1% 大幅領先李四川 30.0%（差距達 13.1 個百分點，呈現剪刀口走勢）；10月15日鉅聞天下委託皮爾森數據調查亦顯示李四川 45.74% 與蘇巧慧 45.18% 差距縮小至僅 0.56%，較7月李下滑逾5%。加計10月初山水民調蘇領先 4.6% 與 TVBS 李領先 6.7%，模型在時間自適應衰減與同機構去重加權下，蘇巧慧預估得票率以 50.7% vs 49.3%（勝率 58.3% vs 41.7%）維持黃金交叉微幅領先！',
+        shortBrief: '全台白熱化第一級戰區，綠營維持黃金交叉！蘇巧慧與李四川預估得票率為 50.5% vs 49.5%（差距 1.0%）。10月13日信民協會（戴立安）民調蘇巧慧 43.1% 大勝李四川 30.0%（差 13.1%），10月15日鉅聞天下（皮爾森）李 45.74% vs 蘇 45.18% 幾近戰平，模型推算蘇巧慧微幅逆轉領跑！',
+        detailedBrief: '新北市選情出現歷史性轉折。10月13日台北市信民兩岸研究協會公布由戴立安規劃、畢肯執行之最新雙底冊調查，蘇巧慧以 43.1% 大幅領先李四川 30.0%（差距達 13.1 個百分點，呈現剪刀口走勢）；10月15日鉅聞天下委託皮爾森數據調查亦顯示李四川 45.74% 與蘇巧慧 45.18% 差距縮小至僅 0.56%，較7月李下滑逾5%。加計10月初山水民調蘇領先 4.6% 與 TVBS 李領先 6.7%，模型在導入先驗錨定未表態分配與同機構去重加權後，蘇巧慧預估得票率以 50.5% vs 49.5% 維持黃金交叉微幅領先（若於沙盒開啟 2022 實際得票回溯加權，則為李四川 52.3% vs 蘇巧慧 47.7%）！',
         factors: [
           '核心勝負手：手機青年與跨區「洋流」外溢效應 vs 泛藍三重新莊與中和永和組織基本盤',
           '基本盤結構：新北歷史藍綠 51:49 均勢盤，蘇巧慧近期女性與青年支持度顯著攀升',
@@ -797,8 +1034,8 @@ const ClearPollModel = {
         confidence: '五五波拉鋸 (綠微幅逆轉)'
       },
       kaohsiung: {
-        shortBrief: '綠營賴瑞隆維持領先但戰況驟然升溫，預估得票率約 51.8% vs 48.2%（差距 3.6%，勝率 73.3% vs 26.7%）。ETtoday 民調柯志恩 43.8% vs 賴瑞隆 43.5% 首度戰平，首場電視辯論敲定10月30日登場，雙方在鳳山、岡山正面對決。',
-        detailedBrief: '高雄市選情由民進黨參選人賴瑞隆維持微幅優勢，但選局張力顯著升高。ETtoday 民調雲調查顯示柯志恩 43.8% 與賴瑞隆 43.5% 差距僅 0.3%，但看好度賴瑞隆仍領先 9.4%。雙方首場電視辯論會已正式敲定於 10 月 30 日舉行，陳其邁市長亦親自出席賴瑞隆競總成立大會全力輔選。模型預估賴瑞隆以 51.8% vs 48.2%（勝率 73.3% vs 26.7%）保有勝勢，但柯志恩追擊氣勢強勁。',
+        shortBrief: '綠營賴瑞隆維持領先但戰況驟然升溫，預估得票率約 51.6% vs 48.4%（差距 3.2%）。ETtoday 民調柯志恩 43.8% vs 賴瑞隆 43.5% 首度戰平，首場電視辯論敲定10月30日登場，雙方在鳳山、岡山正面對決。',
+        detailedBrief: '高雄市選情由民進黨參選人賴瑞隆維持微幅優勢，但選局張力顯著升高。ETtoday 民調雲調查顯示柯志恩 43.8% 與賴瑞隆 43.5% 差距僅 0.3%，但看好度賴瑞隆仍領先 9.4%。雙方首場電視辯論會已正式敲定於 10 月 30 日舉行，陳其邁市長亦親自出席賴瑞隆競總成立大會全力輔選。模型在先驗錨定未表態分配下預估賴瑞隆以 51.6% vs 48.4%（若開啟 2022 實際得票回溯加權則為 53.8% vs 46.2%）保有勝勢，但柯志恩追擊氣勢強勁。',
         factors: [
           '核心勝負手：10月30日首場電視辯論會表現與原縣區組織動員',
           '基本盤結構：高雄歷史基本盤綠大於藍，陳其邁執政紅利雄厚',
@@ -807,8 +1044,8 @@ const ClearPollModel = {
         confidence: '機會略高 (拉鋸升溫)'
       },
       taichung: {
-        shortBrief: '藍營江啟臣維持穩定領先，預估得票率約 56.1% vs 43.9%（差距 12.2%，勝率 98.2%）。10月17日世新大學最新民調江啟臣 39.8% 領先何欣純 28.7%（差 11.1%），與10月12日循證民調（34.3% vs 32.4%）形成機構拉鋸，江啟臣重穩陣腳。',
-        detailedBrief: '台中市選情在十月中旬呈現激烈機構攻防。10月12日台中市信賴台灣之友會公布委託循證民調結果，江啟臣 34.3% 僅微幅領先何欣純 32.4%（差距 1.9%）；隨後於 10月17日台中市議會國民黨團公布委託世新大學民調中心執行之最新電話調查（N=1,070），江啟臣以 39.8% 領先何欣純 28.7%（差距 11.1 個百分點，看好度江 39.6% vs 何 23.3%）。綜合兩波十月中旬科學民調後，模型預估江啟臣得票率為 56.1% vs 何欣純 43.9%（勝率 98.2%），江啟臣穩住領先基本盤，但何欣純在北屯北區與青年族群仍具突圍動能。',
+        shortBrief: '藍營江啟臣維持穩定領先，預估得票率約 55.5% vs 44.5%（差距 11.0%）。10月17日世新大學最新民調江啟臣 39.8% 領先何欣純 28.7%（差 11.1%、未表態 31.5%），與10月12日循證民調（34.3% vs 32.4%）形成機構拉鋸，江啟臣重穩陣腳。',
+        detailedBrief: '台中市選情在十月中旬呈現激烈機構攻防。10月12日台中市信賴台灣之友會公布委託循證民調結果，江啟臣 34.3% 僅微幅領先何欣純 32.4%（差距 1.9%）；隨後於 10月17日台中市議會國民黨團公布委託世新大學民調中心執行之最新電話調查（N=1,070），江啟臣以 39.8% 領先何欣純 28.7%（差距 11.1 個百分點，看好度江 39.6% vs 何 23.3%，未表態 31.5%）。模型導入高未表態率「先驗錨定分配（70% 中立動能 + 30% 結構先驗）」後，預估江啟臣得票率為 55.5% vs 何欣純 44.5%（傳統 100% 等比分配為 56.1% vs 43.9%），江啟臣穩住領先基本盤，但何欣純在北屯北區與青年族群仍具突圍動能。',
         factors: [
           '核心勝負手：盧秀燕本命區(北屯北區)攻防與31.5%未表態選民最終流向',
           '基本盤結構：台中搖擺性顯現，看好度江啟臣(39.6%~48.6%)仍明顯領先',
@@ -817,8 +1054,8 @@ const ClearPollModel = {
         confidence: '穩固領先 (機會極高)'
       },
       taipei: {
-        shortBrief: '蔣萬安維持領先但差距顯著收斂，預估得票率約 57.0% vs 43.0%（差距 14.0%，勝率 97.2% vs 2.8%）。10月8日 TVBS 調查蔣萬安 49% 領先沈伯洋 41%（差 8%），八大媒體已正式聯名邀約首場電視辯論會，青年與白營選票流向成破局關鍵。',
-        detailedBrief: '台北市選情出現重大結構性演變。10月8日 TVBS 發布最新雙底冊調查，現任市長蔣萬安以 49% 領先民進黨參選人沈伯洋 41%，雙方差距從5月下旬的 28 個百分點大幅縮小至 8 個百分點。交叉分析揭示關鍵動能：沈伯洋在 20-29 歲年輕族群以 52% 逆轉超車蔣萬安 44%，且 2022 年投給黃珊珊的選民中高達 53% 轉向支持沈伯洋（僅 39% 支持蔣萬安）。10月中旬八家主流媒體已聯名發出交叉詰問電視辯論會邀約，模型加權後蔣萬安預估得票率為 57.0% vs 沈伯洋 43.0%（勝率 97.2% vs 2.8%），電視辯論會表現將是沈伯洋能否啟動低機率逆轉路徑的最大轉捩點。',
+        shortBrief: '蔣萬安維持領先但差距顯著收斂，預估得票率約 56.7% vs 43.3%（差距 13.4%；開啟 2022 實際得票回溯加權則收斂至 54.6% vs 45.4%）。10月8日 TVBS 調查蔣萬安 49% 領先沈伯洋 41%（差 8%），八大媒體已正式聯名邀約首場電視辯論會。',
+        detailedBrief: '台北市選情出現重大結構性演變。10月8日 TVBS 發布最新雙底冊調查，現任市長蔣萬安以 49% 領先民進黨參選人沈伯洋 41%，雙方差距從5月下旬的 28 個百分點大幅縮小至 8 個百分點。交叉分析揭示關鍵動能：沈伯洋在 20-29 歲年輕族群以 52% 逆轉超車蔣萬安 44%，且 2022 年投給黃珊珊的選民中高達 53% 轉向支持沈伯洋（僅 39% 支持蔣萬安）。10月中旬八家主流媒體已聯名發出交叉詰問電視辯論會邀約，模型在先驗錨定未表態分配下預估蔣萬安得票率為 56.7% vs 沈伯洋 43.3%（若於沙盒開啟「2022 實際得票回溯加權」校正勝選者記憶偏誤，差距更收斂至 54.6% vs 45.4%），電視辯論會表現將是最大轉捩點。',
         factors: [
           '核心勝負手：八大媒體聯合電視辯論會交鋒、2022黃珊珊選票流向(53%轉沈)與青年投票率',
           '基本盤結構：台北傳統藍大於綠，但泛綠高度團結(陳時中票93%流向沈)',
@@ -827,7 +1064,7 @@ const ClearPollModel = {
         confidence: '優勢領先 (差距顯著收窄)'
       },
       taoyuan: {
-        shortBrief: '現任市長張善政享有壓倒性優勢，預估得票率約 68.2% vs 31.8%。新台灣國策智庫最新民調張善政 47.0% 領先黃世杰 25.9%，施政滿意度達 58.2%，連任毫無懸念。',
+        shortBrief: '現任市長張善政享有壓倒性優勢，預估得票率約 66.9% vs 33.1%。新台灣國策智庫最新民調張善政 47.0% 領先黃世杰 25.9%，施政滿意度達 58.2%，連任毫無懸念。',
         detailedBrief: '桃園市選情呈現穩定單邊態勢。張善政上任以來以理性專業形象獲得高度民意肯定，新台灣國策智庫最新調查顯示張善政以 47.0% 大幅領先黃世杰 25.9%，施政滿意度達 58.2%、看好度高達 64.0%。民進黨雖由曾任法務部政次的黃世杰出馬，但其知名度尚待提升，尚未能在南桃園與中壢等藍營重鎮形成威脅。模型評估張善政連任機會極高，為六都中差距最穩固的選區。',
         factors: [
           '核心勝負手：南北桃園宗親與科技園區選民',
@@ -837,7 +1074,7 @@ const ClearPollModel = {
         confidence: '絕對優勢 (機會極高)'
       },
       tainan: {
-        shortBrief: '綠營陳亭妃位居絕對領先，預估得票率約 60.1% vs 39.9%。謝龍介主打藍白合與『只做四年』口號，但現任市長黃偉哲滿意度破七成並掌舵競總，綠營堡壘難以撼動。',
+        shortBrief: '綠營陳亭妃位居絕對領先，預估得票率約 60.0% vs 40.0%。謝龍介主打藍白合與『只做四年』口號，但現任市長黃偉哲滿意度破七成並掌舵競總，綠營堡壘難以撼動。',
         detailedBrief: '台南市為傳統綠營核心堡壘。國民黨謝龍介以『做四年、絕不連任』為口號，並積極爭取在野聯盟與中立選民支持，街頭宣講具備相當熱度。然而民進黨迅速完成黨內整合，施政滿意度逾七成的市長黃偉哲親任陳亭妃競選總部主委，展現接棒傳承之勢。科學民調陳亭妃均維持 48%~53% 的穩定領先，深綠選民歸隊迅速，模型評估陳亭妃勝選機會極高。',
         factors: [
           '核心勝負手：溪北原縣區農漁民與深綠動員',
@@ -847,8 +1084,8 @@ const ClearPollModel = {
         confidence: '絕對優勢 (機會極高)'
       },
       keelung: {
-        shortBrief: '現任市長謝國樑保持領先，預估得票率約 54.0% vs 46.0%（差距 8.0%，勝率 95.7% vs 4.3%）。10月15日趨勢民調謝國樑 42.9% vs 童子瑋 38.3%（差 4.6%），9月下旬山水民調謝 38.0% vs 童 34.2%，藍綠差距持續貼近。',
-        detailedBrief: '基隆市選情呈現藍營領先、綠營緊咬態勢。10月15日國民黨基隆市黨部公布委託趨勢民調最新結果，謝國樑以 42.9% 領先童子瑋 38.3%（差距 4.6 個百分點，看好度謝 50.4% vs 童 34.3%）；此前9月24日山水民調謝國樑 38.0% vs 童子瑋 34.2%（差距 3.8%），一定投票族群童反超 1.5%。童子瑋展現強勁基層追趕力道，模型綜合評估謝國樑預估得票率為 54.0% vs 童子瑋 46.0%（勝率 95.7% vs 4.3%），選戰進入短兵相接。',
+        shortBrief: '現任市長謝國樑保持領先，預估得票率約 53.5% vs 46.5%（差距 7.0%）。10月15日趨勢民調謝國樑 42.9% vs 童子瑋 38.3%（差 4.6%），9月下旬山水民調謝 38.0% vs 童 34.2%，藍綠差距持續貼近。',
+        detailedBrief: '基隆市選情呈現藍營領先、綠營緊咬態勢。10月15日國民黨基隆市黨部公布委託趨勢民調最新結果，謝國樑以 42.9% 領先童子瑋 38.3%（差距 4.6 個百分點，看好度謝 50.4% vs 童 34.3%）；此前9月24日山水民調謝國樑 38.0% vs 童子瑋 34.2%（差距 3.8%），一定投票族群童反超 1.5%。童子瑋展現強勁基層追趕力道，模型綜合評估謝國樑預估得票率為 53.5% vs 童子瑋 46.5%，選戰進入短兵相接。',
         factors: [
           '核心勝負手：積極投票族群動員率 vs 謝國樑基本盤防線',
           '基本盤結構：基隆傳統版圖藍略大於綠 (歷史結構約 52:48)',
@@ -857,7 +1094,7 @@ const ClearPollModel = {
         confidence: '機會高 (緊咬拉鋸)'
       },
       hsinchucity: {
-        shortBrief: '現任市長高虹安在三腳督中維持相對領先，預估得票率約 46.0% vs 莊競程 34.4% vs 何志勇 19.6%。科技選民偏好與反綠板塊分流為關鍵。',
+        shortBrief: '現任市長高虹安在三腳督中維持相對領先，預估得票率約 45.1% vs 莊競程 35.0% vs 何志勇 20.0%。科技選民偏好與反綠板塊分流為關鍵。',
         detailedBrief: '新竹市呈現高張力三腳督格局。高虹安雖受停職與司法案件爭議衝擊，但在竹科園區年輕家庭與中間選民中仍保有強大辨識度與支持度，匯流民調顯示其維持 38.2% 領跑。民進黨徵召具生醫與立委專業的莊競程出戰，學者形象良好在綠營基本盤快速整合，但外溢效應仍受藍白板塊擠壓。無黨籍何志勇分流部分知識藍選票，模型評估高虹安保有相對優勢。',
         factors: [
           '核心勝負手：竹科高學歷青年選民之投票意願',
@@ -867,17 +1104,17 @@ const ClearPollModel = {
         confidence: '相對領先 (機會極高)'
       },
       hsinchucounty: {
-        shortBrief: '全台五五波最激烈翻盤戰區！鄭朝方與徐欣瑩預估得票率 50.3% vs 49.7%（差距僅 0.6%，勝率 53.5% vs 46.5%）。9月21日年代民調鄭朝方以 35.1% 逆轉超車徐欣瑩 28.7%（領先 6.4%），新竹縣首度呈現綠營黃金交叉！',
-        detailedBrief: '新竹縣迎來數十年來最緊繃的翻盤戰役。9月21日年代民調中心最新電話調查顯示，竹北市長鄭朝方以 35.1% 支持度首度大幅逆轉超車徐欣瑩 28.7%（差距 6.4 個百分點），看好度亦以 39.9% 領先徐欣瑩 22.4%。鄭朝方憑藉竹北市亮眼市政表現，在佔全縣人口逾三分之一的科技重鎮橫掃年輕新移民；徐欣瑩則在傳統客家鄉鎮力守基本盤。模型在納入4波科學民調後，鄭朝方以 50.3% vs 49.7%（勝率 53.5% vs 46.5%）微幅領先，屬全台最膠著戰場。',
+        shortBrief: '全台五五波最激烈翻盤戰區！鄭朝方與徐欣瑩預估得票率 50.0% vs 50.0%（完全平盤，傳統等比分配為鄭 50.3% vs 徐 49.7%）。9月21日年代民調鄭朝方以 35.1% 逆轉超車徐欣瑩 28.7%（領先 6.4%），新竹縣進入極限割喉戰！',
+        detailedBrief: '新竹縣迎來數十年來最緊繃的翻盤戰役。9月21日年代民調中心最新電話調查顯示，竹北市長鄭朝方以 35.1% 支持度首度大幅逆轉超車徐欣瑩 28.7%（差距 6.4 個百分點），看好度亦以 39.9% 領先徐欣瑩 22.4%。鄭朝方憑藉竹北市亮眼市政表現，在佔全縣人口逾三分之一的科技重鎮橫掃年輕新移民；徐欣瑩則在傳統客家鄉鎮力守基本盤。模型在納入先驗錨定未表態分配後，雙方預估得票率呈現 50.0% vs 50.0% 的極限平手（傳統 100% 等比分配為鄭朝方 50.3% vs 徐欣瑩 49.7%），屬全台最膠著戰場。',
         factors: [
           '核心勝負手：竹北市新興科技人口投票率 vs 傳統鄉鎮客家動員力',
           '基本盤結構：傳統深藍鐵票區正因竹北科技移入而巨幅重組',
           '機構效應：年代民調(+6.4%綠) vs TVBS(+3.2%藍) 形成黃金交叉'
         ],
-        confidence: '五五波拉鋸 (綠微幅逆轉)'
+        confidence: '五五波拉鋸 (50:50 極限平盤)'
       },
       miaoli: {
-        shortBrief: '現任縣長鍾東錦回歸藍營掌握壓倒性優勢，預估得票率約 70.4% vs 29.6%。藍營基層與派系高度整合，陳品安難以突破山海線結構。',
+        shortBrief: '現任縣長鍾東錦回歸藍營掌握壓倒性優勢，預估得票率約 69.6% vs 30.4%。藍營基層與派系高度整合，陳品安難以突破山海線結構。',
         detailedBrief: '苗栗縣選情呈現現任者全面掌控格局。鍾東錦自重返國民黨並獲提名後，施政滿意度長年位居全台前列，歷次民調均大幅領先民進黨對手陳品安 30 個百分點以上。苗栗山線客家與海線閩南派系全面歸隊，模型評估鍾東錦連任毫無懸念。',
         factors: [
           '核心勝負手：山海線地方農漁會與宗親派系整合度',
@@ -887,8 +1124,8 @@ const ClearPollModel = {
         confidence: '絕對優勢 (機會極高)'
       },
       changhua: {
-        shortBrief: '中台灣指標戰場，綠營陳素月擴大領先優勢，預估得票率約 52.4% vs 魏平政 28.8% vs 邱建富 18.7%。10月19日聯合報最新民調陳素月 32% 穩居第一、魏平政 16% 居次、邱建富 10%，在野分裂使陳素月勝券在握。',
-        detailedBrief: '彰化縣向來為台灣大選『搖擺州』，但本屆呈現綠營一枝獨秀格局。10月19日聯合報系民調中心公布最新電話調查（N=1,003），民進黨立委陳素月以 32% 支持度穩居第一（看好度 36%），大幅領先國民黨魏平政的 16%（看好度 12%）、前彰化市長邱建富的 10%（看好度 9%）及無黨籍陳重嘉 0.3%，未決定達 42%。連同9月鏡新聞民調（陳 37.2% vs 魏 22.5% vs 邱 13.0%），模型評估陳素月在三腳督中預估得票率擴大至 52.4%，領先魏平政逾 23 個百分點，勝選機會極高。',
+        shortBrief: '中台灣指標戰場，綠營陳素月穩居領先，預估得票率約 50.8% vs 魏平政 30.0% vs 邱建富 19.2%（傳統等比分配為 52.4% : 28.8% : 18.7%）。10月19日聯合報最新民調陳素月 32% 穩居第一、魏平政 16% 居次、邱建富 10%，在野分裂使陳素月勝券在握。',
+        detailedBrief: '彰化縣向來為台灣大選『搖擺州』，但本屆呈現綠營一枝獨秀格局。10月19日聯合報系民調中心公布最新電話調查（N=1,003），民進黨立委陳素月以 32% 支持度穩居第一（看好度 36%），大幅領先國民黨魏平政的 16%（看好度 12%）、前彰化市長邱建富的 10%（看好度 9%）及無黨籍陳重嘉 0.3%，未決定高達 42%。針對高達四成二的未表態群體，模型導入「先驗錨定未表態分配（70% 中立選民動能 + 30% 地方結構先驗）」防範等比放大偏誤後，陳素月預估得票率為 50.8% vs 魏平政 30.0% vs 邱建富 19.2%（傳統 100% 等比分配為 52.4% : 28.8% : 18.7%），領先逾 20 個百分點，勝選機會極高。',
         factors: [
           '核心勝負手：42%高比例未決定選民流向與藍營農水會系統能否止跌',
           '基本盤結構：邱建富退黨參選僅拿10%，未能動搖陳素月泛綠基本盤',

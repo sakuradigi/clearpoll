@@ -622,18 +622,41 @@
    * Render all charts.
    */
   function renderCharts(result) {
-    const { candidates, weightedPolls, predictionLog, predictedVoteShares } = result;
+    const { candidates, weightedPolls, predictionLog, predictedVoteShares, events = [] } = result;
+
+    // Render Event Timeline Bar above pollTrendChart
+    const eventBar = $('chartEventTimelineBar');
+    if (eventBar) {
+      if (events && events.length > 0) {
+        const typeColorMap = {
+          debate: { bg: 'rgba(139, 92, 246, 0.14)', border: 'rgba(139, 92, 246, 0.45)', text: '#7c3aed', icon: '🎙️' },
+          milestone: { bg: 'rgba(59, 130, 246, 0.12)', border: 'rgba(59, 130, 246, 0.4)', text: '#2563eb', icon: '📌' },
+          election: { bg: 'rgba(239, 68, 68, 0.14)', border: 'rgba(239, 68, 68, 0.45)', text: '#dc2626', icon: '🗳️' },
+        };
+        eventBar.innerHTML = `<span style="font-size: 0.78rem; font-weight: 700; color: var(--color-text-secondary); margin-right: 4px;">📅 選戰關鍵節點與辯論標記：</span>` +
+          events.map(ev => {
+            const st = typeColorMap[ev.type] || typeColorMap.milestone;
+            return `<span title="${ev.description || ev.label} (${ev.date})" style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; background: ${st.bg}; border: 1px solid ${st.border}; color: ${st.text}; cursor: help;">
+              <span>${st.icon}</span>
+              <span>${ev.date.slice(5)} ${ev.label}</span>
+            </span>`;
+          }).join('');
+        eventBar.style.display = 'flex';
+      } else {
+        eventBar.style.display = 'none';
+      }
+    }
 
     try {
-      // Poll trend scatter chart
-      ClearPollCharts.renderPollTrendChart('pollTrendChart', weightedPolls, candidates);
+      // Poll trend scatter chart with event annotations
+      ClearPollCharts.renderPollTrendChart('pollTrendChart', weightedPolls, candidates, events);
     } catch (e) {
       console.error('[ClearPoll] Failed to render pollTrendChart (possibly missing date adapter):', e);
     }
 
     try {
-      // Win probability trend chart
-      ClearPollCharts.renderWinProbChart('winProbChart', predictionLog, candidates);
+      // Win probability trend chart with event annotations
+      ClearPollCharts.renderWinProbChart('winProbChart', predictionLog, candidates, events);
     } catch (e) {
       console.error('[ClearPoll] Failed to render winProbChart:', e);
     }
@@ -1764,6 +1787,7 @@
       `根據 ${analysisResult.pollCount} 筆民調加權分析，標準誤差 ±${analysisResult.standardError}%。${fundText}`;
 
     renderPredictionSummaryTable(analysisResult, pastResults);
+    renderScenarioComparisonBanner(analysisResult);
     renderPollTable(analysisResult);
     renderPredictionLog(analysisResult);
     renderHistoricalComparison(selectedCity, pastResults);
@@ -1778,12 +1802,58 @@
     });
   }
 
+  function renderScenarioComparisonBanner(result) {
+    const banner = $('simComparisonBanner');
+    if (!banner) return;
+
+    if (!result || !result.scenarioActive || !result.baselineComparison) {
+      banner.style.display = 'none';
+      banner.innerHTML = '';
+      return;
+    }
+
+    const { defaultShares, deltas } = result.baselineComparison;
+    const opts = getScenarioOptions();
+    const activeFlags = [];
+    if (opts.applyRecallRaking) activeFlags.push('🗳️ 2022 實際得票回溯加權 (Recall-Vote Raking)');
+    if (!opts.usePriorUndecided) activeFlags.push('📐 傳統 100% 等比分配未表態 (關閉先驗錨定)');
+    if (!opts.applyBiasCorrection) activeFlags.push('🚫 關閉機構效應校正');
+    if (opts.undecidedLean !== 0) activeFlags.push(`⚖️ 未表態游離頃向位移 (${opts.undecidedLean > 0 ? '+' : ''}${(opts.undecidedLean * 6).toFixed(1)}%)`);
+
+    const itemsHtml = (result.candidates || []).map(c => {
+      const base = defaultShares[c.id] || 0;
+      const curr = result.predictedVoteShares[c.id] || 0;
+      const d = deltas[c.id] || 0;
+      const sign = d > 0 ? '+' : '';
+      const deltaColor = d > 0.05 ? '#10b981' : (d < -0.05 ? '#ef4444' : 'var(--color-text-secondary)');
+      return `<span style="display: inline-flex; align-items: center; gap: 6px; margin-right: 16px;">
+        <b style="color: ${c.color};">${c.name}</b>
+        <span>基準 ${base.toFixed(1)}% ➔ <b>${curr.toFixed(1)}%</b></span>
+        <span style="font-weight: 700; color: ${deltaColor};">(${sign}${d.toFixed(1)}%)</span>
+      </span>`;
+    }).join('');
+
+    banner.innerHTML = `
+      <div style="margin-bottom: 4px; font-weight: 700; color: var(--color-text-primary);">
+        🔬 沙盒模擬啟用中：${activeFlags.join(' ＋ ')}
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+        ${itemsHtml}
+      </div>
+    `;
+    banner.style.display = 'block';
+  }
+
   function getScenarioOptions() {
     const undecidedLeanEl = $('simUndecidedLean');
     const applyBiasEl = $('simApplyBias');
+    const priorUndecidedEl = $('simPriorUndecided');
+    const recallRakingEl = $('simRecallRaking');
     return {
       undecidedLean: undecidedLeanEl ? parseFloat(undecidedLeanEl.value) : 0,
       applyBiasCorrection: applyBiasEl ? applyBiasEl.checked : true,
+      usePriorUndecided: priorUndecidedEl ? priorUndecidedEl.checked : true,
+      applyRecallRaking: recallRakingEl ? recallRakingEl.checked : false,
     };
   }
 
@@ -1821,6 +1891,10 @@
       else if (pollsterObj.leanDirection?.includes('green')) leanText = '偏綠 (機構效應校正中)';
     }
 
+    const rakedNotice = poll.recallRaked
+      ? `<div style="margin-top: 6px; color: #f59e0b; font-weight: 600;">🗳️ 已套用 2022 實際得票回溯加權 (Recall-Vote Raking)</div>`
+      : '';
+
     modalBody.innerHTML = `
       <div style="margin-bottom: var(--space-md); font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.7; background: var(--color-bg-secondary); padding: 12px; border-radius: var(--radius-md);">
         <div><b>調查日期：</b> ${poll.date}</div>
@@ -1828,6 +1902,7 @@
         <div><b>抽樣誤差：</b> ±${poll.marginOfError}%</div>
         <div><b>機構信譽得分：</b> ${pollsterObj ? pollsterObj.credibilityScore : 0.75} (${leanText})</div>
         ${poll.commissioner ? `<div><b>委託單位：</b> ${poll.commissioner}</div>` : ''}
+        ${rakedNotice}
       </div>
 
       <h4 style="font-weight: 700; margin-bottom: var(--space-xs); font-size: 0.95rem;">📊 交叉分析與偏差校正比對表</h4>
@@ -1893,6 +1968,10 @@
     const valBadge = $('simUndecidedLeanVal');
     const biasCheck = $('simApplyBias');
     const biasBadge = $('simBiasVal');
+    const priorCheck = $('simPriorUndecided');
+    const priorBadge = $('simPriorVal');
+    const recallCheck = $('simRecallRaking');
+    const recallBadge = $('simRecallVal');
     const resetBtn = $('resetSimBtn');
 
     if (!slider || !biasCheck) return;
@@ -1917,6 +1996,26 @@
         biasBadge.textContent = '未啟動';
         biasBadge.style.background = 'var(--color-text-tertiary)';
       }
+
+      if (priorCheck && priorBadge) {
+        if (priorCheck.checked) {
+          priorBadge.textContent = '70/30 先驗錨定';
+          priorBadge.style.background = 'var(--color-accent-green)';
+        } else {
+          priorBadge.textContent = '100% 傳統等比';
+          priorBadge.style.background = 'var(--color-text-tertiary)';
+        }
+      }
+
+      if (recallCheck && recallBadge) {
+        if (recallCheck.checked) {
+          recallBadge.textContent = '已套用 2022 結構';
+          recallBadge.style.background = '#f59e0b';
+        } else {
+          recallBadge.textContent = '標準模式';
+          recallBadge.style.background = 'var(--color-text-tertiary)';
+        }
+      }
     }
 
     slider.addEventListener('input', async () => {
@@ -1933,10 +2032,30 @@
       }
     });
 
+    if (priorCheck) {
+      priorCheck.addEventListener('change', async () => {
+        updateLabels();
+        if (currentElectionId) {
+          await loadAndRender(currentElectionId);
+        }
+      });
+    }
+
+    if (recallCheck) {
+      recallCheck.addEventListener('change', async () => {
+        updateLabels();
+        if (currentElectionId) {
+          await loadAndRender(currentElectionId);
+        }
+      });
+    }
+
     if (resetBtn) {
       resetBtn.addEventListener('click', async () => {
         slider.value = 0;
         biasCheck.checked = true;
+        if (priorCheck) priorCheck.checked = true;
+        if (recallCheck) recallCheck.checked = false;
         updateLabels();
         if (currentElectionId) {
           await loadAndRender(currentElectionId);

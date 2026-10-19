@@ -152,6 +152,12 @@
         "chiang": 40.0,
         "shen": 36.0
       },
+      "recallCrossTab": {
+        "2022_kmt": { "share2022": 28.63, "chiang": 87.0, "shen": 10.0 },
+        "2022_dpp": { "share2022": 21.62, "chiang": 5.0, "shen": 93.0 },
+        "2022_other": { "share2022": 17.02, "chiang": 39.0, "shen": 53.0 },
+        "2022_nonvoter": { "share2022": 32.73, "chiang": 34.0, "shen": 52.0 }
+      },
       "undecided": 10.0,
       "notes": "10/3、10/5-7調查，TVBS執行市話隨機抽樣。蔣萬安49%領先沈伯洋41%（差距8%），未決定11%。沈伯洋在20-29歲以52%領先蔣萬安44%；2022年投黃珊珊者53%轉向沈伯洋、39%轉向蔣萬安；中立選民蔣40%領先沈36%",
       "source": "https://www.tvbs.com.tw/poll-center"

@@ -323,17 +323,17 @@
       <!-- ===== Scenario Simulator Section ===== -->
       <section class="section fade-in" id="scenarioSimulatorSection">
         <div class="simulator-card">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs); flex-wrap: wrap; gap: 8px;">
             <h3 style="font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
-              <span>🎛️</span> 互動式選情情境模擬器 (Scenario Simulator)
+              <span>🎛️</span> 互動式選情情境模擬器 (Argon Scenario Sandbox)
             </h3>
             <button id="resetSimBtn" class="btn-secondary" style="padding: 4px 12px; font-size: 0.78rem;">重設為預設模式</button>
           </div>
           <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.6;">
-            自由調控中間/未表態選民流向與機構校正，即時模擬不同選情情境下的預測結果與蒙地卡羅勝率。
+            自由調控中間/未表態選民流向、機構效應校正、<b>2022 上屆實際得票回溯加權</b>與<b>高未表態先驗錨定分配</b>，即時對比不同統計假設下的預測得票率與蒙地卡羅勝率。
           </p>
 
-          <div class="sim-controls-grid">
+          <div class="sim-controls-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
             <div class="sim-control-item">
               <div class="sim-control-label">
                 <span>未表態選民歸向偏向 (Undecided Lean)</span>
@@ -349,14 +349,40 @@
 
             <div class="sim-control-item" style="justify-content: center;">
               <div class="sim-control-label" style="margin-bottom: 8px;">
-                <span>機構效應偏差校正 (House Effect Calibration)</span>
+                <span>機構效應偏差校正 (House Effect)</span>
                 <span class="sim-val-badge" id="simBiasVal" style="background: var(--color-accent-green);">已啟動</span>
               </div>
-              <label style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; cursor: pointer;">
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 0.86rem; cursor: pointer;">
                 <input type="checkbox" id="simApplyBias" checked style="width: 18px; height: 18px; accent-color: var(--color-accent-blue);">
-                <span>自動抵消藍綠媒體/調查機構之系統性偏差</span>
+                <span>自動抵消藍綠媒體與中立子樣本之機構偏誤</span>
               </label>
             </div>
+
+            <div class="sim-control-item" style="justify-content: center;">
+              <div class="sim-control-label" style="margin-bottom: 8px;">
+                <span>高未表態先驗錨定 (Prior Undecided)</span>
+                <span class="sim-val-badge" id="simPriorVal" style="background: var(--color-accent-green);">70%中立+30%基本盤</span>
+              </div>
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 0.86rem; cursor: pointer;">
+                <input type="checkbox" id="simPriorUndecided" checked style="width: 18px; height: 18px; accent-color: var(--color-accent-blue);">
+                <span>防範高未決定率選區等比例放大領先者差距</span>
+              </label>
+            </div>
+
+            <div class="sim-control-item" style="justify-content: center; border: 1px dashed rgba(99, 102, 241, 0.45); background: rgba(99, 102, 241, 0.04); padding: 10px 12px; border-radius: var(--radius-md);">
+              <div class="sim-control-label" style="margin-bottom: 8px;">
+                <span>🗳️ 2022 上屆得票回溯加權 (Recall Raking)</span>
+                <span class="sim-val-badge" id="simRecallVal" style="background: var(--color-text-tertiary);">標準模式</span>
+              </div>
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 0.86rem; cursor: pointer;">
+                <input type="checkbox" id="simRecallRaking" style="width: 18px; height: 18px; accent-color: #6366F1;">
+                <span>依 2022 中選會實際得票與轉移矩陣回溯校準</span>
+              </label>
+            </div>
+          </div>
+
+          <div id="simComparisonBanner" class="hidden" style="margin-top: var(--space-md); padding: 10px 14px; border-radius: var(--radius-md); background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); font-size: 0.85rem; color: var(--color-text-primary);">
+            <!-- Populated dynamically by app.js when custom scenario is active -->
           </div>
         </div>
       </section>
@@ -365,11 +391,14 @@
       <section class="section fade-in" id="pollTrendSection">
         <div class="section-header">
           <div>
-            <h2 class="section-title"><span class="icon">📈</span> 民調趨勢</h2>
-            <p class="section-subtitle">各候選人支持度隨時間變化（圓點大小代表權重）</p>
+            <h2 class="section-title"><span class="icon">📈</span> 民調趨勢與重大選戰事件衝擊</h2>
+            <p class="section-subtitle">各候選人支持度隨時間變化（圓點大小代表權重，垂直虛線標記提名、民調轉折與電視辯論會）</p>
           </div>
         </div>
         <div class="chart-card">
+          <div id="chartEventTimelineBar" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--space-sm); padding-bottom: var(--space-xs); border-bottom: 1px solid var(--color-border-light);">
+            <!-- Dynamically populated campaign & debate event badges -->
+          </div>
           <div class="chart-wrapper" style="height: 400px;">
             <canvas id="pollTrendChart"></canvas>
           </div>
