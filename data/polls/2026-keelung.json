@@ -117,6 +117,27 @@
       "undecided": 18.8,
       "notes": "10/7-9調查，趨勢民調執行。謝國樑42.9%領先童子瑋38.3%（差距4.6%），看好度謝國樑50.4%領先童子瑋34.3%",
       "source": "https://udn.com/"
+    },
+    {
+      "id": "kl2026-007",
+      "date": "2026-10-20",
+      "pollster": "appro",
+      "pollsterName": "全國公信力民調（國民黨基隆市黨部委託）",
+      "commissioner": "中國國民黨基隆市黨部",
+      "sampleSize": 1071,
+      "method": "phone",
+      "marginOfError": 2.99,
+      "results": {
+        "hsieh": 41.3,
+        "tung": 35.7
+      },
+      "neutralResults": {
+        "hsieh": 34.5,
+        "tung": 31.8
+      },
+      "undecided": 23.0,
+      "notes": "10/13-16調查，全國公信力民調執行CATI電話調查（N=1071，誤差±2.99%）。謝國樑41.3%領先童子瑋35.7%（差距5.6%），當選看好度謝國樑45.0% vs 童子瑋26.5%，謝國樑施政滿意度52.7% vs 不滿意36.6%",
+      "source": "https://www.tvbs.com.tw/"
     }
   ]
 }
