@@ -1424,7 +1424,7 @@
         let candidateTitle = c.name;
         if (electionType === 'mayor') {
           const pLabel = visual.partyLabel || (c.party === 'IND' ? '無黨籍' : c.party);
-          candidateTitle = `${c.name} (${pLabel})`;
+          candidateTitle = c.id === 'others' || c.name === '其他候選人' ? c.name : `${c.name} (${pLabel})`;
         } else if (electionType === 'president') {
           const pLabel = (c.party === 'OTHER' && c.name.includes('宋楚瑜')) ? '親民黨' : (visual.partyLabel || c.party);
           candidateTitle = `${c.name} (${pLabel})`;
@@ -1565,7 +1565,7 @@
           <!-- Layout Switcher -->
           <div class="hist-toggle-group">
             <button type="button" class="hist-btn hist-layout-btn ${historicalViewLayout === 'grid' ? 'active' : ''}" data-layout="grid">
-              ⊞ 多欄並排模式
+              ⊞ 雙欄並排模式
             </button>
             <button type="button" class="hist-btn hist-layout-btn ${historicalViewLayout === 'table' ? 'active' : ''}" data-layout="table">
               ☰ 滿版表格模式
@@ -1648,9 +1648,7 @@
       <div class="historical-groups-container" style="display:flex; flex-direction:column; gap:var(--space-xl);">
         ${visibleCycles.map(cycle => {
           const cardsHtml = cycle.items.map(item => renderCard(item.r, item.title, item.type)).join('');
-          const gridClass = historicalViewLayout === 'table'
-            ? 'historical-table-stack'
-            : (cycle.items.length === 3 ? 'historical-triple-grid' : 'historical-pair-grid');
+          const gridClass = historicalViewLayout === 'table' ? 'historical-table-stack' : 'historical-pair-grid';
           return `
             <div class="historical-group">
               <div class="historical-group-header">

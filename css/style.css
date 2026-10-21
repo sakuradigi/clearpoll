@@ -2314,26 +2314,25 @@ p {
 
 .historical-pair-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-lg);
+}
+
+/* 3-item cycle (e.g. 2022/2018/2014 mayoral): 2 cards on top row, 3rd card spans full width below for symmetrical balance */
+.historical-pair-grid > .historical-card:nth-child(3):last-child {
+  grid-column: 1 / -1;
 }
 
 .historical-triple-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-md);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg);
 }
 
 .historical-table-stack {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
-}
-
-@media (max-width: 1120px) {
-  .historical-triple-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 820px) {
@@ -2344,6 +2343,8 @@ p {
 }
 
 .historical-card {
+  min-width: 0;
+  max-width: 100%;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
