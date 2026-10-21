@@ -2431,6 +2431,1284 @@
           "elected": false
         }
       ]
+    },
+    {
+      "electionId": "2018-keelung-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 60.95,
+      "totalVotes": 188696,
+      "candidates": [
+        {
+          "id": "lin_y",
+          "name": "林右昌",
+          "party": "DPP",
+          "votes": 102167,
+          "voteShare": 54.14,
+          "elected": true
+        },
+        {
+          "id": "hsieh_l",
+          "name": "謝立功",
+          "party": "KMT",
+          "votes": 86529,
+          "voteShare": 45.86,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2018-hsinchucity-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 65.44,
+      "totalVotes": 217103,
+      "candidates": [
+        {
+          "id": "lin_c",
+          "name": "林智堅",
+          "party": "DPP",
+          "votes": 107612,
+          "voteShare": 49.57,
+          "elected": true
+        },
+        {
+          "id": "hsu_m",
+          "name": "許明財",
+          "party": "KMT",
+          "votes": 60508,
+          "voteShare": 27.87,
+          "elected": false
+        },
+        {
+          "id": "hsieh_w",
+          "name": "謝文進",
+          "party": "IND",
+          "votes": 44101,
+          "voteShare": 20.31,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 4882,
+          "voteShare": 2.25,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2018-hsinchucounty-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 67.95,
+      "totalVotes": 282405,
+      "candidates": [
+        {
+          "id": "yang_w",
+          "name": "楊文科",
+          "party": "KMT",
+          "votes": 107877,
+          "voteShare": 38.2,
+          "elected": true
+        },
+        {
+          "id": "hsu_h",
+          "name": "徐欣瑩",
+          "party": "OTHER",
+          "votes": 91190,
+          "voteShare": 32.29,
+          "elected": false
+        },
+        {
+          "id": "cheng_c",
+          "name": "鄭朝方",
+          "party": "DPP",
+          "votes": 78170,
+          "voteShare": 27.68,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 5168,
+          "voteShare": 1.83,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2018-miaoli-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 70.74,
+      "totalVotes": 304370,
+      "candidates": [
+        {
+          "id": "hsu_y",
+          "name": "徐耀昌",
+          "party": "KMT",
+          "votes": 175756,
+          "voteShare": 57.74,
+          "elected": true
+        },
+        {
+          "id": "hsu_t",
+          "name": "徐定禎",
+          "party": "IND",
+          "votes": 112704,
+          "voteShare": 37.03,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 15910,
+          "voteShare": 5.23,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2018-changhua-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 70.9,
+      "totalVotes": 711153,
+      "candidates": [
+        {
+          "id": "wang_h",
+          "name": "王惠美",
+          "party": "KMT",
+          "votes": 377795,
+          "voteShare": 53.18,
+          "elected": true
+        },
+        {
+          "id": "wei_m",
+          "name": "魏明谷",
+          "party": "DPP",
+          "votes": 283269,
+          "voteShare": 39.87,
+          "elected": false
+        },
+        {
+          "id": "huang_w",
+          "name": "黃文玲",
+          "party": "IND",
+          "votes": 34690,
+          "voteShare": 4.88,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 15399,
+          "voteShare": 2.07,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2018-nantou-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 72.75,
+      "totalVotes": 292845,
+      "candidates": [
+        {
+          "id": "lin_m",
+          "name": "林明溱",
+          "party": "KMT",
+          "votes": 195385,
+          "voteShare": 66.72,
+          "elected": true
+        },
+        {
+          "id": "hung_k",
+          "name": "洪國浩",
+          "party": "DPP",
+          "votes": 97460,
+          "voteShare": 33.28,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2018-yunlin-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 71.57,
+      "totalVotes": 391519,
+      "candidates": [
+        {
+          "id": "chang_l",
+          "name": "張麗善",
+          "party": "KMT",
+          "votes": 210770,
+          "voteShare": 53.83,
+          "elected": true
+        },
+        {
+          "id": "lee_c",
+          "name": "李進勇",
+          "party": "DPP",
+          "votes": 163325,
+          "voteShare": 41.72,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 17424,
+          "voteShare": 4.45,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2018-chiayicity-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 67.91,
+      "totalVotes": 142208,
+      "candidates": [
+        {
+          "id": "huang_m",
+          "name": "黃敏惠",
+          "party": "KMT",
+          "votes": 58558,
+          "voteShare": 41.18,
+          "elected": true
+        },
+        {
+          "id": "tu_h",
+          "name": "涂醒哲",
+          "party": "DPP",
+          "votes": 56256,
+          "voteShare": 39.56,
+          "elected": false
+        },
+        {
+          "id": "hsiao_s",
+          "name": "蕭淑麗",
+          "party": "IND",
+          "votes": 25572,
+          "voteShare": 17.98,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 1822,
+          "voteShare": 1.28,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2018-chiayicounty-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 70.75,
+      "totalVotes": 285147,
+      "candidates": [
+        {
+          "id": "weng_c",
+          "name": "翁章梁",
+          "party": "DPP",
+          "votes": 145288,
+          "voteShare": 50.95,
+          "elected": true
+        },
+        {
+          "id": "wu_y",
+          "name": "吳育仁",
+          "party": "KMT",
+          "votes": 84243,
+          "voteShare": 29.54,
+          "elected": false
+        },
+        {
+          "id": "wu_f",
+          "name": "吳芳銘",
+          "party": "IND",
+          "votes": 51020,
+          "voteShare": 17.89,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 4596,
+          "voteShare": 1.61,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2018-pingtung-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 71.09,
+      "totalVotes": 470146,
+      "candidates": [
+        {
+          "id": "pan_m",
+          "name": "潘孟安",
+          "party": "DPP",
+          "votes": 262809,
+          "voteShare": 55.9,
+          "elected": true
+        },
+        {
+          "id": "su_c",
+          "name": "蘇清泉",
+          "party": "KMT",
+          "votes": 197518,
+          "voteShare": 42.01,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 9819,
+          "voteShare": 2.09,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2018-yilan-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 69.09,
+      "totalVotes": 250121,
+      "candidates": [
+        {
+          "id": "lin_t",
+          "name": "林姿妙",
+          "party": "KMT",
+          "votes": 123767,
+          "voteShare": 49.48,
+          "elected": true
+        },
+        {
+          "id": "chen_o",
+          "name": "陳歐珀",
+          "party": "DPP",
+          "votes": 95609,
+          "voteShare": 38.23,
+          "elected": false
+        },
+        {
+          "id": "lin_h",
+          "name": "林信華",
+          "party": "IND",
+          "votes": 27399,
+          "voteShare": 10.95,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 3346,
+          "voteShare": 1.34,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2018-hualien-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 64.87,
+      "totalVotes": 169596,
+      "candidates": [
+        {
+          "id": "hsu_c",
+          "name": "徐榛蔚",
+          "party": "KMT",
+          "votes": 121297,
+          "voteShare": 71.52,
+          "elected": true
+        },
+        {
+          "id": "liu_h",
+          "name": "劉曉玫",
+          "party": "DPP",
+          "votes": 43879,
+          "voteShare": 25.87,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 4420,
+          "voteShare": 2.61,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2018-taitung-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 68.33,
+      "totalVotes": 119518,
+      "candidates": [
+        {
+          "id": "rao_c",
+          "name": "饒慶鈴",
+          "party": "KMT",
+          "votes": 70577,
+          "voteShare": 59.05,
+          "elected": true
+        },
+        {
+          "id": "liu_c",
+          "name": "劉櫂豪",
+          "party": "DPP",
+          "votes": 44264,
+          "voteShare": 37.04,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 4677,
+          "voteShare": 3.91,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2018-penghu-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 62.88,
+      "totalVotes": 52915,
+      "candidates": [
+        {
+          "id": "lai_f",
+          "name": "賴峰偉",
+          "party": "KMT",
+          "votes": 20570,
+          "voteShare": 38.87,
+          "elected": true
+        },
+        {
+          "id": "chen_k",
+          "name": "陳光復",
+          "party": "DPP",
+          "votes": 17347,
+          "voteShare": 32.78,
+          "elected": false
+        },
+        {
+          "id": "chen_t",
+          "name": "陳大松",
+          "party": "IND",
+          "votes": 5822,
+          "voteShare": 11.0,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 9176,
+          "voteShare": 17.34,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2018-kinmen-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 42.76,
+      "totalVotes": 49229,
+      "candidates": [
+        {
+          "id": "yang_c",
+          "name": "楊鎮浯",
+          "party": "KMT",
+          "votes": 23520,
+          "voteShare": 47.78,
+          "elected": true
+        },
+        {
+          "id": "chen_f",
+          "name": "陳福海",
+          "party": "IND",
+          "votes": 22719,
+          "voteShare": 46.15,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 2990,
+          "voteShare": 6.07,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2018-lienchiang-mayor",
+      "date": "2018-11-24",
+      "turnoutRate": 71.31,
+      "totalVotes": 7408,
+      "candidates": [
+        {
+          "id": "liu_t",
+          "name": "劉增應",
+          "party": "KMT",
+          "votes": 4861,
+          "voteShare": 65.62,
+          "elected": true
+        },
+        {
+          "id": "chu_h",
+          "name": "朱秀珍",
+          "party": "IND",
+          "votes": 1284,
+          "voteShare": 17.33,
+          "elected": false
+        },
+        {
+          "id": "su_p",
+          "name": "蘇柏豪",
+          "party": "OTHER",
+          "votes": 927,
+          "voteShare": 12.51,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 336,
+          "voteShare": 4.54,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-taipei-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 70.46,
+      "totalVotes": 1494046,
+      "candidates": [
+        {
+          "id": "ko",
+          "name": "柯文哲",
+          "party": "IND",
+          "votes": 853983,
+          "voteShare": 57.16,
+          "elected": true
+        },
+        {
+          "id": "lien",
+          "name": "連勝文",
+          "party": "KMT",
+          "votes": 609932,
+          "voteShare": 40.82,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 30131,
+          "voteShare": 2.02,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-newtaipei-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 61.65,
+      "totalVotes": 1916198,
+      "candidates": [
+        {
+          "id": "chu",
+          "name": "朱立倫",
+          "party": "KMT",
+          "votes": 959302,
+          "voteShare": 50.06,
+          "elected": true
+        },
+        {
+          "id": "yu",
+          "name": "游錫堃",
+          "party": "DPP",
+          "votes": 934774,
+          "voteShare": 48.78,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 22122,
+          "voteShare": 1.15,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-taoyuan-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 62.73,
+      "totalVotes": 965564,
+      "candidates": [
+        {
+          "id": "cheng_w",
+          "name": "鄭文燦",
+          "party": "DPP",
+          "votes": 492414,
+          "voteShare": 51.0,
+          "elected": true
+        },
+        {
+          "id": "wu_c",
+          "name": "吳志揚",
+          "party": "KMT",
+          "votes": 463133,
+          "voteShare": 47.97,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 10017,
+          "voteShare": 1.04,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-taichung-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 71.93,
+      "totalVotes": 1484815,
+      "candidates": [
+        {
+          "id": "lin_c",
+          "name": "林佳龍",
+          "party": "DPP",
+          "votes": 847284,
+          "voteShare": 57.06,
+          "elected": true
+        },
+        {
+          "id": "hu_c",
+          "name": "胡志強",
+          "party": "KMT",
+          "votes": 637531,
+          "voteShare": 42.94,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-tainan-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 65.88,
+      "totalVotes": 976093,
+      "candidates": [
+        {
+          "id": "lai",
+          "name": "賴清德",
+          "party": "DPP",
+          "votes": 711557,
+          "voteShare": 72.9,
+          "elected": true
+        },
+        {
+          "id": "huang_h",
+          "name": "黃秀霜",
+          "party": "KMT",
+          "votes": 264536,
+          "voteShare": 27.1,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-kaohsiung-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 66.44,
+      "totalVotes": 1459092,
+      "candidates": [
+        {
+          "id": "chen_c",
+          "name": "陳菊",
+          "party": "DPP",
+          "votes": 993300,
+          "voteShare": 68.08,
+          "elected": true
+        },
+        {
+          "id": "yang_c",
+          "name": "楊秋興",
+          "party": "KMT",
+          "votes": 450647,
+          "voteShare": 30.89,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 15145,
+          "voteShare": 1.04,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-keelung-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 63.92,
+      "totalVotes": 190038,
+      "candidates": [
+        {
+          "id": "lin_y",
+          "name": "林右昌",
+          "party": "DPP",
+          "votes": 101010,
+          "voteShare": 53.15,
+          "elected": true
+        },
+        {
+          "id": "hsieh_l",
+          "name": "謝立功",
+          "party": "KMT",
+          "votes": 52198,
+          "voteShare": 27.47,
+          "elected": false
+        },
+        {
+          "id": "huang_c",
+          "name": "黃景泰",
+          "party": "IND",
+          "votes": 30914,
+          "voteShare": 16.27,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 5916,
+          "voteShare": 3.11,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-hsinchucity-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 62.9,
+      "totalVotes": 199637,
+      "candidates": [
+        {
+          "id": "lin_c",
+          "name": "林智堅",
+          "party": "DPP",
+          "votes": 76578,
+          "voteShare": 38.36,
+          "elected": true
+        },
+        {
+          "id": "hsu_m",
+          "name": "許明財",
+          "party": "KMT",
+          "votes": 75564,
+          "voteShare": 37.85,
+          "elected": false
+        },
+        {
+          "id": "tsai_j",
+          "name": "蔡仁堅",
+          "party": "IND",
+          "votes": 40480,
+          "voteShare": 20.28,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 7015,
+          "voteShare": 3.51,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-hsinchucounty-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 68.76,
+      "totalVotes": 264821,
+      "candidates": [
+        {
+          "id": "chiu_c",
+          "name": "邱鏡淳",
+          "party": "KMT",
+          "votes": 124309,
+          "voteShare": 46.94,
+          "elected": true
+        },
+        {
+          "id": "cheng_y",
+          "name": "鄭永金",
+          "party": "IND",
+          "votes": 118698,
+          "voteShare": 44.82,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 21814,
+          "voteShare": 8.24,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-miaoli-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 67.87,
+      "totalVotes": 316663,
+      "candidates": [
+        {
+          "id": "hsu_y",
+          "name": "徐耀昌",
+          "party": "KMT",
+          "votes": 147547,
+          "voteShare": 46.59,
+          "elected": true
+        },
+        {
+          "id": "wu_y",
+          "name": "吳宜臻",
+          "party": "DPP",
+          "votes": 89838,
+          "voteShare": 28.37,
+          "elected": false
+        },
+        {
+          "id": "kang_s",
+          "name": "康世儒",
+          "party": "IND",
+          "votes": 60356,
+          "voteShare": 19.06,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 18922,
+          "voteShare": 5.98,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-changhua-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 72.93,
+      "totalVotes": 719410,
+      "candidates": [
+        {
+          "id": "wei_m",
+          "name": "魏明谷",
+          "party": "DPP",
+          "votes": 386405,
+          "voteShare": 53.71,
+          "elected": true
+        },
+        {
+          "id": "lin_t",
+          "name": "林滄敏",
+          "party": "KMT",
+          "votes": 284738,
+          "voteShare": 39.58,
+          "elected": false
+        },
+        {
+          "id": "huang_w",
+          "name": "黃文玲",
+          "party": "IND",
+          "votes": 37593,
+          "voteShare": 5.23,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 10674,
+          "voteShare": 1.48,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-nantou-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 73.11,
+      "totalVotes": 293080,
+      "candidates": [
+        {
+          "id": "lin_m",
+          "name": "林明溱",
+          "party": "KMT",
+          "votes": 149361,
+          "voteShare": 50.96,
+          "elected": true
+        },
+        {
+          "id": "lee_w",
+          "name": "李文忠",
+          "party": "DPP",
+          "votes": 143719,
+          "voteShare": 49.04,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-yunlin-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 74.09,
+      "totalVotes": 408762,
+      "candidates": [
+        {
+          "id": "lee_c",
+          "name": "李進勇",
+          "party": "DPP",
+          "votes": 232900,
+          "voteShare": 56.98,
+          "elected": true
+        },
+        {
+          "id": "chang_l",
+          "name": "張麗善",
+          "party": "KMT",
+          "votes": 175862,
+          "voteShare": 43.02,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-chiayicity-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 70.96,
+      "totalVotes": 145302,
+      "candidates": [
+        {
+          "id": "tu_h",
+          "name": "涂醒哲",
+          "party": "DPP",
+          "votes": 74698,
+          "voteShare": 51.41,
+          "elected": true
+        },
+        {
+          "id": "chen_y",
+          "name": "陳以真",
+          "party": "KMT",
+          "votes": 66108,
+          "voteShare": 45.5,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 4496,
+          "voteShare": 3.09,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-chiayicounty-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 74.19,
+      "totalVotes": 306592,
+      "candidates": [
+        {
+          "id": "chang_h",
+          "name": "張花冠",
+          "party": "DPP",
+          "votes": 193399,
+          "voteShare": 63.09,
+          "elected": true
+        },
+        {
+          "id": "weng_c",
+          "name": "翁重鈞",
+          "party": "KMT",
+          "votes": 104554,
+          "voteShare": 34.1,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 8639,
+          "voteShare": 2.82,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-pingtung-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 71.3,
+      "totalVotes": 490980,
+      "candidates": [
+        {
+          "id": "pan_m",
+          "name": "潘孟安",
+          "party": "DPP",
+          "votes": 308953,
+          "voteShare": 62.93,
+          "elected": true
+        },
+        {
+          "id": "chien_t",
+          "name": "簡太郎",
+          "party": "KMT",
+          "votes": 182027,
+          "voteShare": 37.07,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-yilan-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 70.76,
+      "totalVotes": 250573,
+      "candidates": [
+        {
+          "id": "lin_t",
+          "name": "林聰賢",
+          "party": "DPP",
+          "votes": 160253,
+          "voteShare": 63.95,
+          "elected": true
+        },
+        {
+          "id": "chiu_s",
+          "name": "邱淑媞",
+          "party": "KMT",
+          "votes": 90320,
+          "voteShare": 36.05,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-hualien-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 61.77,
+      "totalVotes": 157529,
+      "candidates": [
+        {
+          "id": "fu_k",
+          "name": "傅崐萁",
+          "party": "IND",
+          "votes": 89048,
+          "voteShare": 56.53,
+          "elected": true
+        },
+        {
+          "id": "tsai_c",
+          "name": "蔡啟塔",
+          "party": "KMT",
+          "votes": 43504,
+          "voteShare": 27.62,
+          "elected": false
+        },
+        {
+          "id": "ko_s",
+          "name": "柯賜海",
+          "party": "IND",
+          "votes": 14954,
+          "voteShare": 9.49,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 10023,
+          "voteShare": 6.36,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-taitung-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 67.82,
+      "totalVotes": 118132,
+      "candidates": [
+        {
+          "id": "huang_c",
+          "name": "黃健庭",
+          "party": "KMT",
+          "votes": 64272,
+          "voteShare": 54.41,
+          "elected": true
+        },
+        {
+          "id": "liu_c",
+          "name": "劉櫂豪",
+          "party": "DPP",
+          "votes": 53860,
+          "voteShare": 45.59,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-penghu-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 67.82,
+      "totalVotes": 52697,
+      "candidates": [
+        {
+          "id": "chen_k",
+          "name": "陳光復",
+          "party": "DPP",
+          "votes": 29164,
+          "voteShare": 55.34,
+          "elected": true
+        },
+        {
+          "id": "su_k",
+          "name": "蘇崑雄",
+          "party": "KMT",
+          "votes": 23533,
+          "voteShare": 44.66,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-kinmen-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 45.15,
+      "totalVotes": 45416,
+      "candidates": [
+        {
+          "id": "chen_f",
+          "name": "陳福海",
+          "party": "IND",
+          "votes": 23965,
+          "voteShare": 52.77,
+          "elected": true
+        },
+        {
+          "id": "lee_w",
+          "name": "李沃士",
+          "party": "KMT",
+          "votes": 15146,
+          "voteShare": 33.35,
+          "elected": false
+        },
+        {
+          "id": "hsu_n",
+          "name": "許乃權",
+          "party": "IND",
+          "votes": 3834,
+          "voteShare": 8.44,
+          "elected": false
+        },
+        {
+          "id": "others",
+          "name": "其他候選人",
+          "party": "OTHER",
+          "votes": 2471,
+          "voteShare": 5.44,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
+    },
+    {
+      "electionId": "2014-lienchiang-mayor",
+      "date": "2014-11-29",
+      "turnoutRate": 67.05,
+      "totalVotes": 6619,
+      "candidates": [
+        {
+          "id": "liu_t",
+          "name": "劉增應",
+          "party": "KMT",
+          "votes": 4385,
+          "voteShare": 66.25,
+          "elected": true
+        },
+        {
+          "id": "yang_s",
+          "name": "楊綏生",
+          "party": "KMT",
+          "votes": 2234,
+          "voteShare": 33.75,
+          "elected": false
+        }
+      ],
+      "type": "mayor"
     }
   ]
 }

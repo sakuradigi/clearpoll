@@ -737,18 +737,19 @@
       'yilan', 'hualien', 'taitung', 'penghu', 'kinmen', 'lienchiang'
     ];
 
-    if (selectedYear === '2022' || selectedYear === '2018') {
+    if (selectedYear === '2022' || selectedYear === '2018' || selectedYear === '2014') {
       if (DOM.nationalOverviewSection) DOM.nationalOverviewSection.style.display = 'none';
       if (DOM.sixMetrosSection) DOM.sixMetrosSection.style.display = 'none';
       if (DOM.otherCountiesSection) DOM.otherCountiesSection.style.display = 'none';
       if (DOM.historicalTableContainer) {
         DOM.historicalTableContainer.style.display = 'block';
 
-        const rowsHtml = metroCityOrder.map(city => {
+        const buildHistoryRows = (cityList) => cityList.map(city => {
           const electionId = `${selectedYear}-${city}-mayor`;
           const electionMeta = electionsMetadata.find(e => e.id === electionId || (e.city === city && e.year === selectedYear));
           const cityName = electionMeta ? electionMeta.cityName : city;
           const result = pastResultsData ? pastResultsData.results.find(r => r.electionId === electionId) : null;
+          const titleLabel = cityName.endsWith('市') ? `${cityName}長` : `${cityName}長`;
 
           if (!result) {
             return `
@@ -771,7 +772,7 @@
           return `
             <tr data-city="${city}" data-election-id="${electionId}" style="cursor: pointer;" class="hover-row">
               <td style="padding: var(--space-md) var(--space-md); font-weight: 700; color: var(--color-accent-blue); vertical-align: middle;">
-                ${cityName}長
+                ${titleLabel}
               </td>
               <td style="padding: var(--space-md) var(--space-md); vertical-align: middle;">
                 <span style="font-weight: 700; color: ${winnerColor};">${winner.name}</span>
@@ -800,15 +801,19 @@
           `;
         }).join('');
 
+        const metroRowsHtml = buildHistoryRows(metroCityOrder);
+        const otherRowsHtml = buildHistoryRows(otherCityOrder);
+
         DOM.historicalTableContainer.innerHTML = `
           <div class="card" style="padding: var(--space-xl); margin-top: var(--space-md); overflow-x: auto;">
             <h2 style="font-size: 1.4rem; margin-bottom: var(--space-md); font-weight: 800; text-align: center;" class="text-gradient">
-              ${selectedYear} 年直轄市長選舉實際開票統計總表
+              ${selectedYear} 年全國 22 縣市長選舉實際開票統計總表
             </h2>
             <p style="text-align: center; color: var(--color-text-secondary); font-size: 0.9rem; margin-bottom: var(--space-lg);">
-              以下為中選會公布之法定實際開票結果。點擊任何直轄市行可切換至該市的深度分析與詳細對照表。
+              以下為中選會公布之法定實際開票結果（含六都與 16 縣市）。點擊任何縣市行可切換至該選區的深度分析與詳細對照表。
             </p>
-            <div class="table-container">
+            <h3 style="font-size: 1.05rem; font-weight: 700; margin: var(--space-md) 0 var(--space-sm) 0; color: var(--color-text-primary);">🏙️ 直轄市（六都）</h3>
+            <div class="table-container" style="margin-bottom: var(--space-xl);">
               <table class="data-table" style="width: 100%; border-collapse: collapse; min-width: 800px;">
                 <thead>
                   <tr>
@@ -823,7 +828,27 @@
                   </tr>
                 </thead>
                 <tbody>
-                  ${rowsHtml}
+                  ${metroRowsHtml}
+                </tbody>
+              </table>
+            </div>
+            <h3 style="font-size: 1.05rem; font-weight: 700; margin: var(--space-md) 0 var(--space-sm) 0; color: var(--color-text-primary);">🗺️ 臺灣省及離島（16 縣市）</h3>
+            <div class="table-container">
+              <table class="data-table" style="width: 100%; border-collapse: collapse; min-width: 800px;">
+                <thead>
+                  <tr>
+                    <th style="text-align: left; padding: var(--space-sm) var(--space-md);">縣市</th>
+                    <th style="text-align: left; padding: var(--space-sm) var(--space-md);">當選人 (政黨)</th>
+                    <th style="text-align: right; padding: var(--space-sm) var(--space-md);">當選得票數</th>
+                    <th style="text-align: right; padding: var(--space-sm) var(--space-md);">當選得票率</th>
+                    <th style="text-align: left; padding: var(--space-sm) var(--space-md);">次高票對手 (政黨)</th>
+                    <th style="text-align: right; padding: var(--space-sm) var(--space-md);">次高票得票率</th>
+                    <th style="text-align: right; padding: var(--space-sm) var(--space-md);">領先幅度</th>
+                    <th style="text-align: right; padding: var(--space-sm) var(--space-md);">投票率</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${otherRowsHtml}
                 </tbody>
               </table>
             </div>
@@ -1534,13 +1559,13 @@
       <div class="historical-filter-bar" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:var(--space-md); background:var(--color-bg-secondary); padding:10px 16px; border-radius:12px; border:1px solid var(--color-border);">
         <div style="font-size:0.85rem; color:var(--color-text-secondary); font-weight:600; display:flex; align-items:center; gap:6px;">
           <span>🗳️ 歷屆中選會選舉真實得票紀錄</span>
-          <span style="font-size:0.75rem; color:var(--color-text-tertiary); font-weight:normal;">（依年份週期成對排列・已收錄 2016~2024 總統、政黨票及市長選舉）</span>
+          <span style="font-size:0.75rem; color:var(--color-text-tertiary); font-weight:normal;">（依年份週期排列・已收錄 2014~2024 縣市長、總統及政黨票選舉）</span>
         </div>
         <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
           <!-- Layout Switcher -->
           <div class="hist-toggle-group">
             <button type="button" class="hist-btn hist-layout-btn ${historicalViewLayout === 'grid' ? 'active' : ''}" data-layout="grid">
-              ⊞ 雙欄並排 (2+2+2)
+              ⊞ 多欄並排模式
             </button>
             <button type="button" class="hist-btn hist-layout-btn ${historicalViewLayout === 'table' ? 'active' : ''}" data-layout="table">
               ☰ 滿版表格模式
@@ -1550,10 +1575,10 @@
           <!-- Range Switcher -->
           <div class="hist-toggle-group">
             <button type="button" class="hist-btn hist-range-btn ${historicalRangeMode === 'all' ? 'active' : ''}" data-range="all">
-              📜 完整歷屆 (2016~2024)
+              📜 完整歷屆 (2014~2024)
             </button>
             <button type="button" class="hist-btn hist-range-btn ${historicalRangeMode === 'recent' ? 'active' : ''}" data-range="recent">
-              🔥 精選近三屆 (2+2+2)
+              🔥 精選核心週期
             </button>
           </div>
         </div>
@@ -1569,6 +1594,8 @@
       });
     }
 
+    const mayorLabel = cityName.endsWith('市') ? `${cityName}長` : `${cityName}長`;
+
     const allCycles = [
       {
         id: '2024',
@@ -1582,12 +1609,13 @@
       },
       {
         id: 'mayor-cycle',
-        title: '🏛️ 歷屆縣市長地方選舉',
-        desc: `地方首長選舉真實開票（2022、2018 地方執政版圖與首長選情結構）`,
+        title: '🏛️ 歷屆縣市長地方選舉 (2022・2018・2014)',
+        desc: `地方首長選舉真實開票（2022、2018、2014 三屆地方執政版圖與首長選情結構對照）`,
         isRecent: true,
         items: [
-          { r: findElection('2022', 'mayor'), title: `2022 ${cityName}長選舉`, type: 'mayor' },
-          { r: findElection('2018', 'mayor'), title: `2018 ${cityName}長選舉`, type: 'mayor' }
+          { r: findElection('2022', 'mayor'), title: `2022 ${mayorLabel}選舉`, type: 'mayor' },
+          { r: findElection('2018', 'mayor'), title: `2018 ${mayorLabel}選舉`, type: 'mayor' },
+          { r: findElection('2014', 'mayor'), title: `2014 ${mayorLabel}選舉`, type: 'mayor' }
         ].filter(x => x.r)
       },
       {
@@ -1616,19 +1644,20 @@
       ? allCycles.filter(c => c.isRecent && c.items.length > 0)
       : allCycles.filter(c => c.items.length > 0);
 
-    const containerClass = historicalViewLayout === 'table' ? 'historical-table-stack' : 'historical-pair-grid';
-
     let groupsHtml = `
       <div class="historical-groups-container" style="display:flex; flex-direction:column; gap:var(--space-xl);">
         ${visibleCycles.map(cycle => {
           const cardsHtml = cycle.items.map(item => renderCard(item.r, item.title, item.type)).join('');
+          const gridClass = historicalViewLayout === 'table'
+            ? 'historical-table-stack'
+            : (cycle.items.length === 3 ? 'historical-triple-grid' : 'historical-pair-grid');
           return `
             <div class="historical-group">
               <div class="historical-group-header">
                 <h4 class="historical-group-title">${cycle.title}</h4>
                 <span class="historical-group-desc">${cycle.desc}</span>
               </div>
-              <div class="${containerClass}">
+              <div class="${gridClass}">
                 ${cardsHtml}
               </div>
             </div>

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-23",
+  "lastUpdated": "2026-10-21",
   "elections": [
     {
       "id": "2024-presidential",
@@ -612,6 +612,86 @@
           "green": 44.8,
           "blue": 53.87,
           "white": 1.33
+        },
+        "keelung": {
+          "green": 54.14,
+          "blue": 45.86,
+          "white": 0.0
+        },
+        "hsinchucity": {
+          "green": 49.57,
+          "blue": 27.87,
+          "white": 22.56
+        },
+        "hsinchucounty": {
+          "green": 27.68,
+          "blue": 38.2,
+          "white": 34.12
+        },
+        "miaoli": {
+          "green": 37.03,
+          "blue": 57.74,
+          "white": 5.23
+        },
+        "changhua": {
+          "green": 39.87,
+          "blue": 53.18,
+          "white": 6.95
+        },
+        "nantou": {
+          "green": 33.28,
+          "blue": 66.72,
+          "white": 0.0
+        },
+        "yunlin": {
+          "green": 41.72,
+          "blue": 53.83,
+          "white": 4.45
+        },
+        "chiayicity": {
+          "green": 39.56,
+          "blue": 41.18,
+          "white": 19.26
+        },
+        "chiayicounty": {
+          "green": 50.95,
+          "blue": 29.54,
+          "white": 19.5
+        },
+        "pingtung": {
+          "green": 55.9,
+          "blue": 42.01,
+          "white": 2.09
+        },
+        "yilan": {
+          "green": 38.23,
+          "blue": 49.48,
+          "white": 12.29
+        },
+        "hualien": {
+          "green": 25.87,
+          "blue": 71.52,
+          "white": 2.61
+        },
+        "taitung": {
+          "green": 37.04,
+          "blue": 59.05,
+          "white": 3.91
+        },
+        "penghu": {
+          "green": 32.78,
+          "blue": 38.87,
+          "white": 28.35
+        },
+        "kinmen": {
+          "green": 0.0,
+          "blue": 47.78,
+          "white": 52.22
+        },
+        "lienchiang": {
+          "green": 0.0,
+          "blue": 65.62,
+          "white": 34.38
         }
       }
     },
@@ -656,6 +736,130 @@
           "green": 63.39,
           "blue": 26.0,
           "white": 10.61
+        }
+      }
+    },
+    {
+      "id": "2014-mayoral",
+      "year": 2014,
+      "type": "mayoral",
+      "weightType": 0.2,
+      "weightTime": 0.25,
+      "results": {
+        "national": {
+          "green": 47.55,
+          "blue": 40.7,
+          "white": 11.75
+        },
+        "taipei": {
+          "green": 42.0,
+          "blue": 40.82,
+          "white": 17.18
+        },
+        "newtaipei": {
+          "green": 48.78,
+          "blue": 50.06,
+          "white": 1.16
+        },
+        "taoyuan": {
+          "green": 51.0,
+          "blue": 47.97,
+          "white": 1.03
+        },
+        "taichung": {
+          "green": 57.06,
+          "blue": 42.94,
+          "white": 0.0
+        },
+        "tainan": {
+          "green": 72.9,
+          "blue": 27.1,
+          "white": 0.0
+        },
+        "kaohsiung": {
+          "green": 68.08,
+          "blue": 30.89,
+          "white": 1.03
+        },
+        "keelung": {
+          "green": 53.15,
+          "blue": 27.47,
+          "white": 19.38
+        },
+        "hsinchucity": {
+          "green": 38.36,
+          "blue": 37.85,
+          "white": 23.79
+        },
+        "hsinchucounty": {
+          "green": 0.0,
+          "blue": 46.94,
+          "white": 53.06
+        },
+        "miaoli": {
+          "green": 28.37,
+          "blue": 46.59,
+          "white": 25.04
+        },
+        "changhua": {
+          "green": 53.71,
+          "blue": 39.58,
+          "white": 6.71
+        },
+        "nantou": {
+          "green": 49.04,
+          "blue": 50.96,
+          "white": 0.0
+        },
+        "yunlin": {
+          "green": 56.98,
+          "blue": 43.02,
+          "white": 0.0
+        },
+        "chiayicity": {
+          "green": 51.41,
+          "blue": 45.5,
+          "white": 3.09
+        },
+        "chiayicounty": {
+          "green": 63.09,
+          "blue": 34.1,
+          "white": 2.81
+        },
+        "pingtung": {
+          "green": 62.93,
+          "blue": 37.07,
+          "white": 0.0
+        },
+        "yilan": {
+          "green": 63.95,
+          "blue": 36.05,
+          "white": 0.0
+        },
+        "hualien": {
+          "green": 0.0,
+          "blue": 27.62,
+          "white": 72.38
+        },
+        "taitung": {
+          "green": 45.59,
+          "blue": 54.41,
+          "white": 0.0
+        },
+        "penghu": {
+          "green": 55.34,
+          "blue": 44.66,
+          "white": 0.0
+        },
+        "kinmen": {
+          "green": 0.0,
+          "blue": 33.35,
+          "white": 66.65
+        },
+        "lienchiang": {
+          "green": 0.0,
+          "blue": 100.0,
+          "white": 0.0
         }
       }
     }
