@@ -2452,3 +2452,347 @@ p {
 .vote-bar-fill.npp { background: #f59e0b; }
 .vote-bar-fill.ind { background: #64748b; }
 
+
+
+/* =====================================================================
+   RESPONSIVE HARDENING (Mobile-first QA pass, 2026-10-22)
+   Goals: no horizontal page overflow, tables never break their cells,
+   cards stack gracefully, touch-friendly controls on phones/tablets.
+   ===================================================================== */
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+img, svg, canvas, video { max-width: 100%; }
+
+/* Allow flex/grid children to shrink instead of forcing page overflow */
+.main-container, .hero-section, .section, .card, .chart-card, .table-container,
+.prediction-table-card, .dashboard-card, .historical-card, .demographics-card,
+.simulator-card, .national-stats-card, .sim-control-item { min-width: 0; }
+
+.main-container {
+  padding-left: max(var(--space-lg), env(safe-area-inset-left));
+  padding-right: max(var(--space-lg), env(safe-area-inset-right));
+}
+
+/* Auto-fit grids must never demand more width than the viewport offers */
+.grid-auto { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+.prediction-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+.methodology-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+.dashboard-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.sim-control-item, .sim-title-group { overflow-wrap: break-word; }
+
+.table-container { -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; max-width: 100%; }
+
+/* Desktop-only rules for tables that become cards on phones */
+.hist-summary-card { padding: var(--space-xl); margin-top: var(--space-md); overflow-x: auto; }
+.hist-summary-table { width: 100%; min-width: 800px; border-collapse: collapse; }
+.pollster-weights-table { width: 100%; min-width: 600px; border-collapse: collapse; }
+.poll-sort-mobile { display: none; }
+
+/* Chart event legend (numbered pills above the trend chart) */
+.chart-event-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: help;
+  white-space: nowrap;
+  max-width: 100%;
+}
+.chart-event-no {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+.taiwan-map-tooltip { max-width: min(290px, calc(100vw - 20px)); }
+
+/* Touch devices: no sticky hover lifts */
+@media (hover: none) {
+  .dashboard-card:hover, .prediction-card:hover, .card-glass:hover,
+  .historical-card:hover, .btn-demo-link:hover, .party-stat-box:hover { transform: none; }
+  .dashboard-card:hover .dash-detail-link { transform: none; }
+}
+@media (pointer: coarse) {
+  .font-btn, .city-btn, .year-btn, .region-btn, .hist-btn { min-height: 34px; }
+  .county-chip { padding: 5px 10px; }
+}
+
+/* ---------- Tablet (<= 1024px) ---------- */
+@media (max-width: 1024px) {
+  .header-nav { margin-left: var(--space-md); gap: var(--space-xs); }
+  .taiwan-map-wrapper { position: static; }
+  .taiwan-map-container { height: auto; aspect-ratio: 5 / 7; max-height: 560px; }
+  .section-header { flex-wrap: wrap; }
+}
+
+/* ---------- Large phones / small tablets (<= 768px) ---------- */
+@media (max-width: 768px) {
+  html { font-size: calc(16px * var(--font-scale)); }
+
+  /* Header: row 1 = logo + font controls, row 2 = scrollable nav tabs */
+  .site-header {
+    position: sticky;
+    top: 0;
+    height: auto;
+    padding: 8px max(12px, env(safe-area-inset-right)) 8px max(12px, env(safe-area-inset-left));
+  }
+  .header-inner { flex-wrap: wrap; gap: 6px 8px; }
+  .site-logo { order: 1; font-size: 1.1rem; }
+  .header-actions { order: 2; margin-left: auto; }
+  .font-adjuster-label { display: none; }
+  .header-nav {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .header-nav::-webkit-scrollbar { display: none; }
+  .nav-link { flex: 1 0 auto; text-align: center; white-space: nowrap; padding: 8px 14px; }
+
+  /* Sub-navigation (city / year chips): not sticky on phones to avoid offset mismatches */
+  .nav-switcher-container { position: static; }
+  .nav-switcher { padding: 8px max(12px, env(safe-area-inset-left)); }
+  .city-selector, .year-selector {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    padding-bottom: 6px;
+  }
+  .city-btn, .year-btn, .city-select-dropdown { flex: 0 0 auto; scroll-snap-align: start; }
+
+  .main-container { padding: var(--space-md) max(12px, env(safe-area-inset-left)); }
+  .section { margin-bottom: var(--space-2xl); }
+  .section-header, .section-title-bar { flex-wrap: wrap; align-items: flex-start; gap: var(--space-sm); }
+  .section-heading { font-size: 1.2rem; }
+  .section-subtitle, .section-subheading { font-size: 0.8rem; }
+
+  .hero-section { padding: var(--space-lg) var(--space-md); border-radius: var(--radius-lg); margin-bottom: var(--space-lg); }
+  .hero-title { font-size: 1.45rem; }
+  .card, .chart-card, .simulator-card, .demographics-card { padding: var(--space-md); }
+  .methodology-section { padding: var(--space-lg) var(--space-md); }
+  .info-callout { padding: var(--space-sm) var(--space-md); }
+
+  /* Region filter bar scrolls instead of overflowing */
+  .region-filter-bar {
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-radius: var(--radius-lg);
+  }
+  .region-filter-bar::-webkit-scrollbar { display: none; }
+  .region-btn { flex: 0 0 auto; white-space: nowrap; }
+
+  /* Dashboard cards */
+  .dashboard-card { min-height: 0; padding: var(--space-md); }
+  .dashboard-grid { padding-bottom: var(--space-xl); }
+
+  /* National map & stats */
+  .taiwan-map-wrapper { padding: var(--space-md); }
+  .national-stats-card { padding: var(--space-md); gap: var(--space-md); }
+  .stats-title { font-size: 1.05rem; }
+  .party-stats-grid { grid-template-columns: 1fr; }
+  .seats-segment { font-size: 0.72rem; padding: 0 4px; }
+
+  /* Prediction summary table: compact, sticky label column, scroll if 3+ candidates */
+  .prediction-summary-table { min-width: 100%; font-size: 0.85rem; }
+  .prediction-summary-table th, .prediction-summary-table td { padding: 10px 8px; }
+  .prediction-summary-table th:first-child { width: 96px !important; min-width: 96px; font-size: 0.8rem; }
+  .prediction-summary-table td.row-label { width: 96px; min-width: 96px; font-size: 0.78rem; padding-left: 8px; }
+  .prediction-summary-table th { font-size: 0.85rem; }
+  .val-large { font-size: 1.15rem; }
+  .win-opportunity-badge { padding: 3px 8px; font-size: 0.75rem; white-space: nowrap; }
+  .ci-bounds-text { font-size: 0.68rem !important; }
+  .ai-detail-assessment-card { padding: var(--space-md); }
+
+  /* Data tables: tighter cells */
+  .data-table { font-size: 0.8rem; }
+  .data-table thead th { font-size: 0.7rem; padding: 10px 8px; }
+  .data-table tbody td { padding: 8px; }
+
+  /* Simulator */
+  .sim-control-item { padding: 12px; }
+
+  /* Demographics (CDPSM) */
+  .demo-header-bar { flex-direction: column; align-items: flex-start; gap: var(--space-sm); }
+  .demo-index-tags { flex-wrap: wrap; }
+  .demo-tag { font-size: 0.78rem; padding: 3px 8px; }
+  .demo-stack-bar { height: 32px; }
+  .demo-stack-seg { font-size: 0.68rem; padding: 0 2px; }
+  .demo-table th, .demo-table td { padding: 8px 4px; font-size: 0.78rem; white-space: normal; }
+
+  /* Historical comparison */
+  .historical-filter-bar { flex-direction: column; align-items: stretch !important; padding: 10px 12px !important; }
+  .historical-filter-bar > div { flex-wrap: wrap; }
+  .hist-toggle-group { width: 100%; }
+  .hist-btn { flex: 1 1 0; padding: 7px 6px; font-size: 0.76rem; white-space: normal; line-height: 1.25; text-align: center; }
+  .historical-group-header { flex-direction: column; align-items: flex-start; }
+  .historical-card-title { white-space: normal; font-size: 0.95rem; }
+  .hist-summary-card { padding: var(--space-md); overflow: visible; }
+
+  /* Methodology page */
+  #methodologyViewSection .card { padding: var(--space-md) !important; }
+  #methodologyViewSection { padding-left: 0; padding-right: 0; }
+
+  /* Footer */
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: var(--space-md); }
+  .site-footer { padding: var(--space-xl) max(12px, env(safe-area-inset-left)) calc(var(--space-xl) + env(safe-area-inset-bottom)); }
+  .footer-links { gap: var(--space-md); }
+
+  /* Modal becomes a bottom sheet */
+  .modal-backdrop { padding: 8px; align-items: flex-end; }
+  .modal-card { padding: var(--space-md); max-height: 90vh; border-radius: var(--radius-lg); }
+}
+
+/* ---------- Phones (<= 640px): tables become cards, charts shrink ---------- */
+@media (max-width: 640px) {
+
+  /* Stacked "card" tables (poll list, history summary, pollster ratings) */
+  .stack-table, .stack-table tbody, .stack-table tr, .stack-table td {
+    display: block;
+    width: 100%;
+    min-width: 0 !important;
+  }
+  .stack-table thead { display: none; }
+  .table-container:has(> .stack-table) {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    overflow: visible;
+  }
+  .stack-table tbody tr {
+    margin: 0 0 12px;
+    padding: 4px 12px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+  .stack-table tbody tr:hover { background: var(--color-surface); }
+  .stack-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0 !important;
+    border-bottom: 1px dashed var(--color-border-light);
+    text-align: right !important;
+    font-size: 0.86rem;
+    overflow-wrap: anywhere;
+  }
+  .stack-table tbody td:last-child { border-bottom: none; }
+  .stack-table tbody td::before {
+    content: attr(data-label);
+    flex: 0 0 auto;
+    max-width: 45%;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--color-text-tertiary);
+    text-align: left;
+  }
+  /* First cell acts as the card header (no label) */
+  .stack-table tbody td:not([data-label])::before { display: none; }
+  .stack-table tbody td:not([data-label]) {
+    justify-content: flex-start;
+    text-align: left !important;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .stack-table tbody td.poll-date-cell, .stack-table tbody td.pollster-cell { font-weight: 700; }
+  .stack-table td > .cell-val { min-width: 0; text-align: right; }
+  .stack-table tbody td[data-label="信譽得分"] .vote-bar-track { margin: 4px 0 0 auto !important; }
+  .stack-table tbody td:not([data-label]) { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .stack-table tbody td[data-label="信譽與加權說明"],
+  .stack-table tbody td[data-label="調查方法"] { align-items: flex-start; }
+  .stack-table tbody td[data-label="信譽與加權說明"] { flex-direction: column; text-align: left !important; }
+  .stack-table tbody td[data-label="信譽與加權說明"]::before { max-width: 100%; }
+  .stack-table .weight-cell { align-items: flex-start; }
+
+  /* Mobile sort control replaces clickable <th> headers */
+  .poll-sort-mobile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: var(--space-sm);
+    flex-wrap: wrap;
+  }
+  .poll-sort-mobile label { font-size: 0.8rem; font-weight: 600; color: var(--color-text-secondary); }
+  .poll-sort-mobile select {
+    flex: 1 1 140px;
+    min-width: 0;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    padding: 8px 10px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+  }
+  .poll-sort-mobile button {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    white-space: nowrap;
+  }
+
+  /* Historical vote cards: name + numbers on one line, bar underneath (no horizontal scroll) */
+  .historical-table, .historical-table tbody { display: block; width: 100%; }
+  .historical-table tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 8px;
+    padding: 6px 0;
+  }
+  .historical-table td { display: block; padding: 0 !important; width: auto; }
+  .historical-table .candidate-col { white-space: normal; width: auto; }
+  .historical-table .candidate-col > div { white-space: normal !important; flex-wrap: wrap; }
+  .historical-table .bar-col { grid-column: 1 / -1; grid-row: 2; padding: 4px 0 2px !important; }
+  .historical-table .stat-col { white-space: nowrap; text-align: right; width: auto; }
+  .historical-card .card-header { flex-wrap: wrap; }
+
+  /* Charts */
+  .chart-card .chart-wrapper { height: 300px !important; min-height: 240px; }
+  .chart-card .chart-wrapper[style*="max-width"] { height: 280px !important; }
+  #chartEventTimelineBar { gap: 6px !important; }
+  #chartEventTimelineBar > span:first-child { width: 100%; white-space: normal !important; }
+  .chart-event-pill { white-space: normal; line-height: 1.3; font-size: 0.72rem; }
+
+  /* Prediction log stays a compact horizontally-scrollable table */
+  #predictionLogTable { min-width: 460px; }
+
+  .hero-election-name { margin-bottom: var(--space-lg); }
+  .number-large { font-size: 1.75rem; }
+}
+
+/* ---------- Small phones (<= 380px) ---------- */
+@media (max-width: 380px) {
+  .site-logo .logo-icon { width: 28px; height: 28px; }
+  .site-logo { font-size: 1rem; }
+  .font-btn { padding: 4px 8px; }
+  .city-btn, .year-btn { padding: 5px 10px; font-size: 0.76rem; }
+  .prediction-summary-table th:first-child,
+  .prediction-summary-table td.row-label { width: 82px; min-width: 82px; }
+  .hero-title { font-size: 1.3rem; }
+  .hist-btn { font-size: 0.72rem; }
+}
+
+/* Landscape phones: keep header compact */
+@media (max-height: 480px) and (orientation: landscape) {
+  .site-header { position: static; }
+  .modal-card { max-height: 94vh; }
+}

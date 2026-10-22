@@ -19,14 +19,28 @@ const ClearPollCharts = {
   },
 
   /**
+   * Responsive helper: true on phone-sized viewports.
+   */
+  _isMobile() {
+    return typeof window !== 'undefined' && window.innerWidth < 640;
+  },
+
+  /**
    * Common light-theme defaults for all charts.
    */
   _getDefaults() {
+    const mobile = this._isMobile();
     return {
       fontFamily: "'Inter', 'Noto Sans TC', sans-serif",
       gridColor: 'rgba(0, 0, 0, 0.06)',
       tickColor: '#6B7280',
       bgColor: '#FFFFFF',
+      mobile,
+      legendFont: mobile ? 11 : 12,
+      legendPadding: mobile ? 10 : 16,
+      tickFont: mobile ? 10 : 11,
+      showAxisTitle: !mobile,
+      maxXTicks: mobile ? 5 : 12,
     };
   },
 
@@ -53,6 +67,7 @@ const ClearPollCharts = {
         const { ctx, chartArea, scales } = chart;
         const xScale = scales.x;
         if (!xScale || !chartArea) return;
+        const isCompact = chart.width < 560;
 
         ctx.save();
         events.forEach((ev, idx) => {
@@ -75,6 +90,21 @@ const ClearPollCharts = {
 
           // Staggered pill label at top of chart
           ctx.setLineDash([]);
+          if (isCompact) {
+            // Compact mode (phones): numbered dot marker; full labels are listed in the timeline bar above the chart
+            const r = 8;
+            const cy = chartArea.top + 10 + (idx % 2) * 18;
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(clampedX, cy, r, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = "700 10px 'Inter', 'Noto Sans TC', sans-serif";
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(String(idx + 1), clampedX, cy + 0.5);
+            return;
+          }
           const text = ev.label || ev.date;
           ctx.font = "600 10.5px 'Inter', 'Noto Sans TC', sans-serif";
           const textWidth = ctx.measureText(text).width;
@@ -196,11 +226,11 @@ const ClearPollCharts = {
             display: true,
             position: 'top',
             labels: {
-              font: { family: defaults.fontFamily, size: 12 },
+              font: { family: defaults.fontFamily, size: defaults.legendFont },
               color: defaults.tickColor,
               usePointStyle: true,
               pointStyle: 'circle',
-              padding: 16,
+              padding: defaults.legendPadding,
               filter: (item) => !item.text.includes('趨勢'),
             },
           },
@@ -242,12 +272,14 @@ const ClearPollCharts = {
             },
             grid: { color: defaults.gridColor, drawBorder: false },
             ticks: {
-              font: { family: defaults.fontFamily, size: 11 },
+              font: { family: defaults.fontFamily, size: defaults.tickFont },
               color: defaults.tickColor,
               maxRotation: 0,
+              maxTicksLimit: defaults.maxXTicks,
+              autoSkip: true,
             },
             title: {
-              display: true,
+              display: defaults.showAxisTitle,
               text: '日期',
               font: { family: defaults.fontFamily, size: 12, weight: '600' },
               color: defaults.tickColor,
@@ -258,13 +290,13 @@ const ClearPollCharts = {
             max: 100,
             grid: { color: defaults.gridColor, drawBorder: false },
             ticks: {
-              font: { family: defaults.fontFamily, size: 11 },
+              font: { family: defaults.fontFamily, size: defaults.tickFont },
               color: defaults.tickColor,
               callback: (val) => val + '%',
               stepSize: 10,
             },
             title: {
-              display: true,
+              display: defaults.showAxisTitle,
               text: '支持度 (%)',
               font: { family: defaults.fontFamily, size: 12, weight: '600' },
               color: defaults.tickColor,
@@ -351,10 +383,10 @@ const ClearPollCharts = {
             display: true,
             position: 'top',
             labels: {
-              font: { family: defaults.fontFamily, size: 12 },
+              font: { family: defaults.fontFamily, size: defaults.legendFont },
               color: defaults.tickColor,
               usePointStyle: true,
-              padding: 16,
+              padding: defaults.legendPadding,
             },
           },
           tooltip: {
@@ -382,12 +414,14 @@ const ClearPollCharts = {
             },
             grid: { color: defaults.gridColor, drawBorder: false },
             ticks: {
-              font: { family: defaults.fontFamily, size: 11 },
+              font: { family: defaults.fontFamily, size: defaults.tickFont },
               color: defaults.tickColor,
               maxRotation: 0,
+              maxTicksLimit: defaults.maxXTicks,
+              autoSkip: true,
             },
             title: {
-              display: true,
+              display: defaults.showAxisTitle,
               text: '日期',
               font: { family: defaults.fontFamily, size: 12, weight: '600' },
               color: defaults.tickColor,
@@ -398,13 +432,13 @@ const ClearPollCharts = {
             max: 100,
             grid: { color: defaults.gridColor, drawBorder: false },
             ticks: {
-              font: { family: defaults.fontFamily, size: 11 },
+              font: { family: defaults.fontFamily, size: defaults.tickFont },
               color: defaults.tickColor,
               callback: (val) => val + '%',
               stepSize: 20,
             },
             title: {
-              display: true,
+              display: defaults.showAxisTitle,
               text: '勝選機率 (%)',
               font: { family: defaults.fontFamily, size: 12, weight: '600' },
               color: defaults.tickColor,
@@ -470,10 +504,10 @@ const ClearPollCharts = {
             display: true,
             position: 'bottom',
             labels: {
-              font: { family: defaults.fontFamily, size: 12 },
+              font: { family: defaults.fontFamily, size: defaults.legendFont },
               color: defaults.tickColor,
               usePointStyle: true,
-              padding: 16
+              padding: defaults.legendPadding
             }
           },
           tooltip: {

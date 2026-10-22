@@ -512,34 +512,55 @@
           neutralHtml = `<div class="neutral-sub">中立: ${nVal.toFixed(1)}%</div>`;
         }
         
-        return `<td class="number-cell text-right" style="color: ${c.color}; font-weight: 500; vertical-align: middle;">
-          <div>${displayVal}</div>
-          ${neutralHtml}
+        return `<td class="number-cell text-right" data-label="${c.name} (${c.party})" style="color: ${c.color}; font-weight: 500; vertical-align: middle;">
+          <div class="cell-val"><div>${displayVal}</div>${neutralHtml}</div>
         </td>`;
       }).join('');
 
       html += `
         <tr data-poll-id="${poll.id}" style="cursor: pointer;" title="點擊檢視民調交叉分析與校正細項">
-          <td>${poll.date}</td>
-          <td class="pollster-cell">${poll.pollsterName || poll.pollster}</td>
-          <td><span class="method-badge">${methodLabels[poll.method] || poll.method}</span></td>
-          <td class="number-cell text-right">${poll.sampleSize.toLocaleString()}</td>
+          <td data-label="日期" class="poll-date-cell">${poll.date}</td>
+          <td data-label="民調機構" class="pollster-cell">${poll.pollsterName || poll.pollster}</td>
+          <td data-label="方法"><span class="method-badge">${methodLabels[poll.method] || poll.method}</span></td>
+          <td data-label="樣本數" class="number-cell text-right">${poll.sampleSize.toLocaleString()}</td>
           ${candidateCells}
-          <td class="number-cell text-right">${poll.undecided != null ? poll.undecided.toFixed(1) + '%' : '-'}</td>
-          <td class="weight-cell text-right" style="vertical-align: middle; line-height: 1.3;">
-            <div style="font-weight: 700;">${(w * 100).toFixed(1)}% ${weightBar}</div>
-            <div style="font-size: 0.72rem; color: var(--color-text-tertiary); margin-top: 2px;">
-              時效:${Math.round((poll.weights?.recency || 0) * 100)}% | 
-              樣本:${Math.round((poll.weights?.sample || 0) * 100)}% | 
-              信譽:${Math.round((poll.weights?.credibility || 0) * 100)}%
+          <td data-label="未決定" class="number-cell text-right">${poll.undecided != null ? poll.undecided.toFixed(1) + '%' : '-'}</td>
+          <td data-label="權重" class="weight-cell text-right" style="vertical-align: middle; line-height: 1.3;">
+            <div class="cell-val">
+              <div style="font-weight: 700;">${(w * 100).toFixed(1)}% ${weightBar}</div>
+              <div style="font-size: 0.72rem; color: var(--color-text-tertiary); margin-top: 2px;">
+                時效:${Math.round((poll.weights?.recency || 0) * 100)}% | 
+                樣本:${Math.round((poll.weights?.sample || 0) * 100)}% | 
+                信譽:${Math.round((poll.weights?.credibility || 0) * 100)}%
+              </div>
             </div>
           </td>
-          <td>${poll.source ? `<a href="${poll.source}" class="source-link" target="_blank" rel="noopener">🔗 來源</a>` : '-'}</td>
+          <td data-label="來源">${poll.source ? `<a href="${poll.source}" class="source-link" target="_blank" rel="noopener">🔗 來源</a>` : '-'}</td>
         </tr>
       `;
     }
 
     DOM.pollDataBody.innerHTML = html;
+
+    // Sync mobile sort controls (select + direction button)
+    const sortSelect = $('pollSortSelect');
+    const sortDirBtn = $('pollSortDirBtn');
+    if (sortSelect) {
+      const sortOptions = [
+        { key: 'date', label: '日期' },
+        { key: 'pollster', label: '民調機構' },
+        { key: 'sampleSize', label: '樣本數' },
+        ...candidates.map(c => ({ key: `candidate_${c.id}`, label: `${c.name} 支持度` })),
+        { key: 'undecided', label: '未決定' },
+        { key: 'weight', label: '權重' },
+      ];
+      sortSelect.innerHTML = sortOptions
+        .map(o => `<option value="${o.key}"${o.key === tableSortColumn ? ' selected' : ''}>${o.label}</option>`)
+        .join('');
+    }
+    if (sortDirBtn) {
+      sortDirBtn.textContent = tableSortAsc ? '▲ 由小到大' : '▼ 由大到小';
+    }
   }
 
   /**
@@ -636,9 +657,10 @@
           nomination: { bg: 'rgba(59, 130, 246, 0.12)', border: 'rgba(59, 130, 246, 0.4)', text: '#2563eb', icon: '📌' },
         };
         eventBar.innerHTML = `<span style="font-size: 0.78rem; font-weight: 700; color: var(--color-text-secondary); margin-right: 4px; white-space: nowrap;">📅 選戰關鍵節點與辯論標記：</span>` +
-          events.map(ev => {
+          events.map((ev, evIdx) => {
             const st = typeColorMap[ev.category || ev.type] || typeColorMap.nomination;
-            return `<span title="${ev.description || ev.label} (${ev.date})" style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; background: ${st.bg}; border: 1px solid ${st.border}; color: ${st.text}; cursor: help; white-space: nowrap;">
+            return `<span class="chart-event-pill" title="${ev.description || ev.label} (${ev.date})" style="background: ${st.bg}; border: 1px solid ${st.border}; color: ${st.text};">
+              <span class="chart-event-no" style="background: ${ev.color || st.text};">${evIdx + 1}</span>
               <span>${st.icon}</span>
               <span>${ev.date.slice(5)} ${ev.label}</span>
             </span>`;
@@ -771,30 +793,34 @@
 
           return `
             <tr data-city="${city}" data-election-id="${electionId}" style="cursor: pointer;" class="hover-row">
-              <td style="padding: var(--space-md) var(--space-md); font-weight: 700; color: var(--color-accent-blue); vertical-align: middle;">
+              <td class="hist-sum-name" style="padding: var(--space-md) var(--space-md); font-weight: 700; color: var(--color-accent-blue); vertical-align: middle;">
                 ${titleLabel}
               </td>
-              <td style="padding: var(--space-md) var(--space-md); vertical-align: middle;">
-                <span style="font-weight: 700; color: ${winnerColor};">${winner.name}</span>
-                <span class="label" style="font-size: 0.72rem; margin-left: 4px; background: var(--color-bg-tertiary);">${winner.party}</span>
+              <td data-label="當選人" style="padding: var(--space-md) var(--space-md); vertical-align: middle;">
+                <div class="cell-val">
+                  <span style="font-weight: 700; color: ${winnerColor};">${winner.name}</span>
+                  <span class="label" style="font-size: 0.72rem; margin-left: 4px; background: var(--color-bg-tertiary);">${winner.party}</span>
+                </div>
               </td>
-              <td style="text-align: right; padding: var(--space-md) var(--space-md); font-weight: 600; vertical-align: middle;">
+              <td data-label="當選得票數" style="text-align: right; padding: var(--space-md) var(--space-md); font-weight: 600; vertical-align: middle;">
                 ${winner.votes.toLocaleString()} 票
               </td>
-              <td style="text-align: right; padding: var(--space-md) var(--space-md); font-weight: 800; color: ${winnerColor}; vertical-align: middle;">
+              <td data-label="當選得票率" style="text-align: right; padding: var(--space-md) var(--space-md); font-weight: 800; color: ${winnerColor}; vertical-align: middle;">
                 ${winner.voteShare.toFixed(2)}%
               </td>
-              <td style="padding: var(--space-md) var(--space-md); vertical-align: middle;">
-                <span style="font-weight: 600; color: ${runnerColor};">${runnerUp.name}</span>
-                <span class="label" style="font-size: 0.72rem; margin-left: 4px; background: var(--color-bg-tertiary);">${runnerUp.party}</span>
+              <td data-label="次高票對手" style="padding: var(--space-md) var(--space-md); vertical-align: middle;">
+                <div class="cell-val">
+                  <span style="font-weight: 600; color: ${runnerColor};">${runnerUp.name}</span>
+                  <span class="label" style="font-size: 0.72rem; margin-left: 4px; background: var(--color-bg-tertiary);">${runnerUp.party}</span>
+                </div>
               </td>
-              <td style="text-align: right; padding: var(--space-md) var(--space-md); font-weight: 600; vertical-align: middle;">
+              <td data-label="次高票得票率" style="text-align: right; padding: var(--space-md) var(--space-md); font-weight: 600; vertical-align: middle;">
                 ${runnerUp.voteShare.toFixed(2)}%
               </td>
-              <td style="text-align: right; padding: var(--space-md) var(--space-md); font-weight: 700; color: var(--color-danger); vertical-align: middle;">
+              <td data-label="領先幅度" style="text-align: right; padding: var(--space-md) var(--space-md); font-weight: 700; color: var(--color-danger); vertical-align: middle;">
                 +${lead.toFixed(2)}%
               </td>
-              <td style="text-align: right; padding: var(--space-md) var(--space-md); color: var(--color-text-secondary); vertical-align: middle;">
+              <td data-label="投票率" style="text-align: right; padding: var(--space-md) var(--space-md); color: var(--color-text-secondary); vertical-align: middle;">
                 ${result.turnoutRate.toFixed(2)}%
               </td>
             </tr>
@@ -805,7 +831,7 @@
         const otherRowsHtml = buildHistoryRows(otherCityOrder);
 
         DOM.historicalTableContainer.innerHTML = `
-          <div class="card" style="padding: var(--space-xl); margin-top: var(--space-md); overflow-x: auto;">
+          <div class="card hist-summary-card" style="margin-top: var(--space-md);">
             <h2 style="font-size: 1.4rem; margin-bottom: var(--space-md); font-weight: 800; text-align: center;" class="text-gradient">
               ${selectedYear} 年全國 22 縣市長選舉實際開票統計總表
             </h2>
@@ -814,7 +840,7 @@
             </p>
             <h3 style="font-size: 1.05rem; font-weight: 700; margin: var(--space-md) 0 var(--space-sm) 0; color: var(--color-text-primary);">🏙️ 直轄市（六都）</h3>
             <div class="table-container" style="margin-bottom: var(--space-xl);">
-              <table class="data-table" style="width: 100%; border-collapse: collapse; min-width: 800px;">
+              <table class="data-table stack-table hist-summary-table">
                 <thead>
                   <tr>
                     <th style="text-align: left; padding: var(--space-sm) var(--space-md);">直轄市</th>
@@ -834,7 +860,7 @@
             </div>
             <h3 style="font-size: 1.05rem; font-weight: 700; margin: var(--space-md) 0 var(--space-sm) 0; color: var(--color-text-primary);">🗺️ 臺灣省及離島（16 縣市）</h3>
             <div class="table-container">
-              <table class="data-table" style="width: 100%; border-collapse: collapse; min-width: 800px;">
+              <table class="data-table stack-table hist-summary-table">
                 <thead>
                   <tr>
                     <th style="text-align: left; padding: var(--space-sm) var(--space-md);">縣市</th>
@@ -1100,6 +1126,22 @@
   // ---- Table Sorting ----
 
   function initTableSorting() {
+    const sortSelect = $('pollSortSelect');
+    const sortDirBtn = $('pollSortDirBtn');
+    if (sortSelect) {
+      sortSelect.addEventListener('change', () => {
+        tableSortColumn = sortSelect.value;
+        tableSortAsc = tableSortColumn === 'pollster';
+        if (analysisResult) renderPollTable(analysisResult);
+      });
+    }
+    if (sortDirBtn) {
+      sortDirBtn.addEventListener('click', () => {
+        tableSortAsc = !tableSortAsc;
+        if (analysisResult) renderPollTable(analysisResult);
+      });
+    }
+
     const table = $('pollDataTable');
     if (!table) return;
 
@@ -1261,20 +1303,22 @@
       
       return `
         <tr>
-          <td style="padding: var(--space-sm) var(--space-md); vertical-align: middle;">
+          <td class="pollster-name-cell" style="padding: var(--space-sm) var(--space-md); vertical-align: middle;">
             <div style="font-weight: 700;">${p.name}</div>
             <div style="font-size: 0.75rem; color: var(--color-text-tertiary);">${p.fullName}</div>
           </td>
-          <td style="text-align: center; padding: var(--space-sm) var(--space-md); vertical-align: middle;">
-            <div style="font-weight: 800; font-size: 1.1rem; color: var(--color-accent-blue);">${p.credibilityScore.toFixed(2)}</div>
-            <div class="vote-bar-track" style="width: 80px; height: 6px; margin: 4px auto 0 auto; border-radius: 3px;">
-              <div class="vote-bar-fill" style="width: ${p.credibilityScore * 100}%; height: 100%; background: var(--color-accent-blue); border-radius: 3px;"></div>
+          <td data-label="信譽得分" style="text-align: center; padding: var(--space-sm) var(--space-md); vertical-align: middle;">
+            <div class="cell-val">
+              <div style="font-weight: 800; font-size: 1.1rem; color: var(--color-accent-blue);">${p.credibilityScore.toFixed(2)}</div>
+              <div class="vote-bar-track" style="width: 80px; height: 6px; margin: 4px auto 0 auto; border-radius: 3px;">
+                <div class="vote-bar-fill" style="width: ${p.credibilityScore * 100}%; height: 100%; background: var(--color-accent-blue); border-radius: 3px;"></div>
+              </div>
             </div>
           </td>
-          <td style="padding: var(--space-sm) var(--space-md); font-size: 0.85rem; color: var(--color-text-secondary); vertical-align: middle;">
+          <td data-label="調查方法" style="padding: var(--space-sm) var(--space-md); font-size: 0.85rem; color: var(--color-text-secondary); vertical-align: middle;">
             ${p.methodology || '電話調查'}
           </td>
-          <td style="padding: var(--space-sm) var(--space-md); font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.5; vertical-align: middle;">
+          <td data-label="信譽與加權說明" style="padding: var(--space-sm) var(--space-md); font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.5; vertical-align: middle;">
             <div>${p.notes || ''}</div>
             <div style="font-size: 0.72rem; margin-top: 4px; ${leanStyle}">傾向偏向：${leanText} (偏差值: ${p.leanMagnitude || 0.0})</div>
           </td>
@@ -1519,7 +1563,7 @@
             <p style="font-size: 0.9rem; line-height: 1.6; color: var(--color-text-secondary); margin-bottom: var(--space-md);">
               ${shift.summary}
             </p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); gap: 12px;">
               <div style="background: var(--color-bg-secondary); padding: 12px; border-radius: 8px; border: 1px solid var(--color-border);">
                 <div style="font-size: 0.75rem; color: var(--color-text-tertiary); font-weight:600;">泛藍板塊消長</div>
                 <div style="font-size: 1.3rem; font-weight: 800; color: #3b82f6; margin: 4px 0;">
@@ -2252,6 +2296,20 @@
     initSPANavigation();
     initPollModal();
     initScenarioSimulator();
+
+    // Re-render charts when crossing the phone breakpoint (rotation / resize)
+    let lastCompact = window.innerWidth < 640;
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const compact = window.innerWidth < 640;
+        if (compact !== lastCompact) {
+          lastCompact = compact;
+          if (analysisResult && activeTab === 'detail') renderCharts(analysisResult);
+        }
+      }, 250);
+    });
 
     // Set initial tab state
     switchTab('dashboard');

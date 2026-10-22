@@ -72,13 +72,16 @@ const ClearPollMap = {
         path.classList.add('is-tossup');
       }
 
-      // Hover events
+      // Hover events (skipped on touch-only devices to avoid a stuck tooltip after tapping)
+      const canHover = () => window.matchMedia && window.matchMedia('(hover: hover)').matches;
       path.addEventListener('mouseenter', (e) => {
+        if (!canHover()) return;
         path.classList.add('is-hovered');
         this.showTooltip(tooltip, data, e);
       });
 
       path.addEventListener('mousemove', (e) => {
+        if (!canHover()) return;
         this.positionTooltip(tooltip, e);
       });
 
@@ -87,9 +90,11 @@ const ClearPollMap = {
         this.hideTooltip(tooltip);
       });
 
-      // Click event
+      // Click / tap event
       path.addEventListener('click', (e) => {
         e.preventDefault();
+        path.classList.remove('is-hovered');
+        this.hideTooltip(tooltip);
         if (onCountyClick) {
           onCountyClick(cityKey, data.election.id);
         }

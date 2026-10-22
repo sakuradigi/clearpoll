@@ -2,7 +2,8 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#FFFFFF">
   <meta name="description" content="ClearPoll 透析民調 — 台灣選舉民調科學分析平台，透過加權模型與數據透明化，提供精準的選情預測。">
   <meta name="keywords" content="台灣選舉, 民調分析, 選情預測, ClearPoll, 透析民調, 2022高雄市長, 2026高雄市長">
   <meta name="author" content="ClearPoll 透析民調">
@@ -264,7 +265,7 @@
           ClearPoll 根據民調機構之<b>調查方法透明度</b>、<b>歷史預測準確度</b>、<b>機構獨立性</b>等維度進行信譽度評估。評估得分（0.5-1.0）會作為加權模型中的重要參數：
         </p>
         <div class="table-container" style="overflow-x: auto;">
-          <table class="data-table" style="width: 100%; border-collapse: collapse; min-width: 600px;">
+          <table class="data-table stack-table pollster-weights-table">
             <thead>
               <tr>
                 <th style="text-align: left; padding: var(--space-sm) var(--space-md);">民調機構</th>
@@ -455,12 +456,17 @@
         <div class="section-header">
           <div>
             <h2 class="section-title"><span class="icon">📋</span> 民調資料</h2>
-            <p class="section-subtitle">點擊欄位標題可排序</p>
+            <p class="section-subtitle">點擊欄位標題可排序（手機版請使用下方排序選單）</p>
           </div>
           <span class="label" id="pollCountLabel">共 0 筆民調</span>
         </div>
+        <div class="poll-sort-mobile" id="pollSortMobile">
+          <label for="pollSortSelect">排序依據</label>
+          <select id="pollSortSelect" aria-label="民調資料排序欄位"></select>
+          <button type="button" id="pollSortDirBtn" aria-label="切換升冪或降冪">▼ 由大到小</button>
+        </div>
         <div class="table-container">
-          <table class="data-table" id="pollDataTable">
+          <table class="data-table stack-table" id="pollDataTable">
             <thead>
               <!-- Dynamically populated -->
             </thead>
