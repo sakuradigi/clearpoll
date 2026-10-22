@@ -139,6 +139,10 @@ button {
   background: none;
 }
 
+button, a, select, input, .dashboard-card, .county-chip {
+  -webkit-tap-highlight-color: transparent;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;

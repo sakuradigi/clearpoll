@@ -1196,6 +1196,7 @@
       selectedCity = btn.dataset.city;
 
       updateElectionId();
+      syncUrlHash();
       await loadAndRender(currentElectionId);
     });
 
@@ -1209,6 +1210,7 @@
         selectedCity = city;
 
         updateElectionId();
+        syncUrlHash();
         await loadAndRender(currentElectionId);
       });
     }
@@ -1223,6 +1225,7 @@
       selectedYear = btn.dataset.year;
 
       updateElectionId();
+      syncUrlHash();
 
       if (activeTab === 'dashboard') {
         renderDashboard();
@@ -1252,6 +1255,7 @@
       selectedYear = targetYear;
       
       updateElectionId();
+      syncUrlHash();
       await loadAndRender(currentElectionId);
     });
   }
@@ -1347,7 +1351,71 @@
     initScrollAnimations();
   }
 
-  function switchTab(tab) {
+  function updateDocumentTitle() {
+    if (activeTab === 'dashboard') {
+      document.title = selectedYear === '2026'
+        ? 'ClearPoll 透析民調 — 2026 全台選戰版圖總覽'
+        : `ClearPoll 透析民調 — ${selectedYear} 全國市長實際開票統計`;
+    } else if (activeTab === 'methodology') {
+      document.title = 'ClearPoll 透析民調 — 預測模型方法說明';
+    } else if (activeTab === 'detail') {
+      const meta = electionsMetadata ? electionsMetadata.find(e => e.id === currentElectionId) : null;
+      const titleName = meta ? meta.name : `${selectedCity}選情預測`;
+      document.title = `${titleName} — ClearPoll 透析民調`;
+    }
+  }
+
+  function syncUrlHash(replace = false) {
+    let hash = '';
+    if (activeTab === 'dashboard') {
+      hash = selectedYear !== '2026' ? `#dashboard/${selectedYear}` : '#dashboard';
+    } else if (activeTab === 'methodology') {
+      hash = '#methodology';
+    } else if (activeTab === 'detail') {
+      hash = `#detail/${selectedYear}/${selectedCity}`;
+    }
+    if (window.location.hash !== hash) {
+      if (replace) {
+        history.replaceState(null, '', hash);
+      } else {
+        history.pushState(null, '', hash);
+      }
+    }
+    updateDocumentTitle();
+  }
+
+  function handleHashRoute() {
+    const rawHash = (window.location.hash || '').replace(/^#/, '').trim();
+    if (!rawHash || rawHash === 'dashboard' || rawHash.startsWith('dashboard/')) {
+      const parts = rawHash.split('/');
+      if (parts[1]) {
+        selectedYear = parts[1];
+        document.querySelectorAll('#yearSelector .year-btn').forEach(b => {
+          b.classList.toggle('active', b.dataset.year === selectedYear);
+        });
+      }
+      switchTab('dashboard', false);
+    } else if (rawHash === 'methodology') {
+      switchTab('methodology', false);
+    } else if (rawHash.startsWith('detail')) {
+      const parts = rawHash.split('/');
+      if (parts.length >= 3) {
+        selectedYear = parts[1];
+        selectedCity = parts[2];
+      } else if (parts.length === 2) {
+        selectedCity = parts[1];
+      }
+      updateElectionId();
+      updateCitySelectorUI(selectedCity);
+      document.querySelectorAll('#yearSelector .year-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.year === selectedYear);
+      });
+      switchTab('detail', false);
+    }
+    updateDocumentTitle();
+  }
+
+  function switchTab(tab, updateHash = true) {
     activeTab = tab;
     
     // Update header nav active styles
@@ -1366,6 +1434,12 @@
     if (activeSection) {
       activeSection.classList.add('visible');
       activeSection.querySelectorAll('.fade-in, .slide-up').forEach(el => el.classList.add('visible'));
+    }
+
+    if (updateHash) {
+      syncUrlHash();
+    } else {
+      updateDocumentTitle();
     }
 
     if (tab === 'detail') {
@@ -1396,6 +1470,7 @@
     $('navLinkDashboard').addEventListener('click', () => switchTab('dashboard'));
     $('navLinkDetail').addEventListener('click', () => switchTab('detail'));
     $('navLinkMethodology').addEventListener('click', () => switchTab('methodology'));
+    window.addEventListener('popstate', handleHashRoute);
   }
 
   // ---- Font Size Adjuster ----
@@ -1853,6 +1928,7 @@
       DOM.heroUpdateTime.textContent = `開票日期：${actual ? actual.date : election.date}`;
       renderHistoricalOnlyResults(election, pastResults);
       setViewState('content');
+      updateDocumentTitle();
       return;
     }
 
@@ -1896,6 +1972,7 @@
     renderDemographics(selectedCity);
 
     setViewState('content');
+    updateDocumentTitle();
 
     // Wait a tick for DOM to settle, then render charts
     requestAnimationFrame(() => {
@@ -2046,6 +2123,12 @@
 
       modal.addEventListener('click', (e) => {
         if (e.target === modal) {
+          modal.classList.add('hidden');
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
           modal.classList.add('hidden');
         }
       });
@@ -2338,8 +2421,12 @@
       }, 250);
     });
 
-    // Set initial tab state
-    switchTab('dashboard');
+    // Set initial tab state from URL hash or default to dashboard
+    if (window.location.hash) {
+      handleHashRoute();
+    } else {
+      switchTab('dashboard', false);
+    }
   });
 
 })();
