@@ -717,6 +717,11 @@
   }
 
   async function renderDashboard() {
+    // Immediately render base SVG map outline so users never see a blank or stuck card
+    if (window.ClearPollMap) {
+      ClearPollMap.renderPlaceholderMap('taiwanMapContainer');
+    }
+
     if (DOM.sixMetrosGrid) {
       DOM.sixMetrosGrid.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 40px 0;">

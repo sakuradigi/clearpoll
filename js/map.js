@@ -5,6 +5,49 @@
 const ClearPollMap = {
   svgLoaded: false,
   svgContent: null,
+  svgPromise: null,
+
+  /**
+   * Preload SVG map immediately to eliminate network waterfall delays.
+   */
+  preloadSvg() {
+    if (!this.svgPromise) {
+      this.svgPromise = fetch('data/taiwan_counties.svg?v=20261022')
+        .then(resp => {
+          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+          return resp.text();
+        })
+        .then(text => {
+          this.svgContent = text;
+          this.svgLoaded = true;
+          return text;
+        })
+        .catch(err => {
+          console.error('[ClearPollMap] Failed to load SVG map:', err);
+          return null;
+        });
+    }
+    return this.svgPromise;
+  },
+
+  /**
+   * Immediately render base outline map so users see the map instantly on load.
+   * @param {string} containerId - Container DOM ID
+   */
+  async renderPlaceholderMap(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    if (!this.svgContent) {
+      await this.preloadSvg();
+    }
+    if (this.svgContent && container && !container.querySelector('.taiwan-map-svg')) {
+      container.innerHTML = this.svgContent;
+      container.querySelectorAll('.taiwan-county-path').forEach(path => {
+        path.style.fill = 'var(--color-bg-tertiary)';
+        path.style.opacity = '0.55';
+      });
+    }
+  },
 
   /**
    * Initialize and render the Taiwan Map with real ClearPoll model data.
@@ -13,23 +56,21 @@ const ClearPollMap = {
    * @param {Object} countyResults - Map of cityKey -> { election, result, leader, runner, margin, rating }
    * @param {Function} onCountyClick - Callback when a county is clicked
    */
-  async renderMap(containerId, electionsMeta, countyResults, onCountyClick) {
+  async renderMap(containerId, electionsMeta, countyResults = {}, onCountyClick) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
     if (!this.svgContent) {
-      try {
-        const resp = await fetch('data/taiwan_counties.svg');
-        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        this.svgContent = await resp.text();
-      } catch (err) {
-        console.error('[ClearPollMap] Failed to load SVG map:', err);
-        container.innerHTML = `<div class="card text-center" style="padding: 40px;">地圖載入失敗</div>`;
-        return;
-      }
+      await this.preloadSvg();
+    }
+    if (!this.svgContent) {
+      container.innerHTML = `<div class="card text-center" style="padding: 40px;">地圖載入失敗</div>`;
+      return;
     }
 
-    container.innerHTML = this.svgContent;
+    if (!container.querySelector('.taiwan-map-svg')) {
+      container.innerHTML = this.svgContent;
+    }
 
     // Get or create tooltip
     let tooltip = document.getElementById('clearPollMapTooltip');
@@ -312,4 +353,6 @@ const ClearPollMap = {
 
 if (typeof window !== 'undefined') {
   window.ClearPollMap = ClearPollMap;
+  // Automatically preload SVG map immediately
+  ClearPollMap.preloadSvg();
 }
