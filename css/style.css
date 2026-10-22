@@ -904,6 +904,31 @@ p {
    13. Animations
    ------------------------------------------ */
 
+/* Page containers must never be hidden by animation styles */
+#dashboardSection,
+#methodologyViewSection,
+#appContent {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+#dashboardSection.hidden,
+#methodologyViewSection.hidden,
+#appContent.hidden {
+  display: none !important;
+}
+
+/* On mobile / small screens, disable hidden opacity on scroll animations to prevent blank sections */
+@media (max-width: 768px) {
+  .fade-in,
+  .slide-up,
+  .stagger-children > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* Fade in on scroll */
 .fade-in {
   opacity: 0;

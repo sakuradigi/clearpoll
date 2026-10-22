@@ -1099,6 +1099,14 @@
   // ---- Scroll Animations ----
 
   function initScrollAnimations() {
+    // Immediately mark visible any elements already within or near the viewport
+    document.querySelectorAll('.fade-in, .slide-up').forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 100) {
+        el.classList.add('visible');
+      }
+    });
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -1109,12 +1117,12 @@
         }
       },
       {
-        rootMargin: '0px 0px -60px 0px',
-        threshold: 0.1,
+        rootMargin: '100px 0px 100px 0px',
+        threshold: 0,
       }
     );
 
-    document.querySelectorAll('.fade-in, .slide-up').forEach((el) => {
+    document.querySelectorAll('.fade-in:not(.visible), .slide-up:not(.visible)').forEach((el) => {
       observer.observe(el);
     });
   }
@@ -1331,6 +1339,11 @@
       `;
     }).join('');
 
+    // Trigger MathJax re-render for formulas in methodology tab if available
+    if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
+      window.MathJax.typesetPromise([DOM.methodologyViewSection]).catch(() => {});
+    }
+
     initScrollAnimations();
   }
 
@@ -1345,6 +1358,15 @@
     // Update section visibility
     DOM.dashboardSection.classList.toggle('hidden', tab !== 'dashboard');
     DOM.methodologyViewSection.classList.toggle('hidden', tab !== 'methodology');
+
+    // Ensure all elements in the shown section are marked visible immediately (never stay opacity: 0)
+    const activeSection = tab === 'dashboard' ? DOM.dashboardSection
+                        : tab === 'methodology' ? DOM.methodologyViewSection
+                        : DOM.appContent;
+    if (activeSection) {
+      activeSection.classList.add('visible');
+      activeSection.querySelectorAll('.fade-in, .slide-up').forEach(el => el.classList.add('visible'));
+    }
 
     if (tab === 'detail') {
       document.querySelector('.nav-switcher-container').classList.remove('hidden');
