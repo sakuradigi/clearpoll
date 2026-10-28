@@ -76,6 +76,27 @@
       },
       "undecided": 36.2,
       "source": "https://www.erantv.com/"
+    },
+    {
+      "id": "hcc2026-005",
+      "date": "2026-10-27",
+      "pollster": "pearson",
+      "pollsterName": "皮爾森數據（鄭朝方競辦委託）",
+      "commissioner": "鄭朝方競選辦公室",
+      "sampleSize": 3054,
+      "method": "online",
+      "marginOfError": 1.77,
+      "results": {
+        "cheng_c_f": 50.30,
+        "hsu": 34.87
+      },
+      "neutralResults": {
+        "cheng_c_f": 54.95,
+        "hsu": 25.49
+      },
+      "undecided": 11.24,
+      "notes": "10/12-18調查，10/27公布。鄭朝方競選辦公室委託皮爾森數據執行網路主動發放加權調查（N=3054，誤差±1.77%）。鄭朝方50.30%首度突破五成、領先徐欣瑩34.87%（差距15.43%），未表態11.24%。中立選民鄭朝方54.95%領先徐欣瑩25.49%。",
+      "source": "https://www.ltn.com.tw/"
     }
   ]
 }

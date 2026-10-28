@@ -65,6 +65,20 @@
       "neutralResults": { "chen_t": 45.0, "hsie": 29.0 },
       "undecided": 18.7,
       "source": "https://rwnews.tw/"
+    },
+    {
+      "id": "tn2026-006",
+      "date": "2026-10-21",
+      "pollster": "asia-pacific",
+      "pollsterName": "新台灣國策智庫",
+      "commissioner": "凱達格蘭基金會新台灣國策智庫",
+      "sampleSize": 1071,
+      "method": "phone",
+      "marginOfError": 2.98,
+      "results": { "chen_t": 59.4, "hsie": 22.6 },
+      "undecided": 17.0,
+      "notes": "10/13-15調查，10/21公布。新台灣國策智庫執行市話調查（N=1071，誤差±2.98%）。陳亭妃59.4%大幅領先謝龍介22.6%（差距36.8%），葉人文0.9%、蕭燐洪0.1%，未表態17.0%。看好度陳亭妃70.5% vs 謝龍介15.9%。",
+      "source": "http://www.braintrust.tw/"
     }
   ]
 }

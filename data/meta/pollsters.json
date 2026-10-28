@@ -252,6 +252,28 @@
       "historicalAccuracy": 0.78,
       "methodology": "CATI電腦輔助電話訪問",
       "notes": "國內老牌大學學術民調中心，長期接受政府機關、政黨與媒體委託執行大型電訪，抽樣與加權嚴謹"
+    },
+    {
+      "id": "yuqing",
+      "name": "雨晴指標",
+      "fullName": "雨晴指標行銷股份有限公司",
+      "credibilityScore": 0.65,
+      "leanDirection": "slightly-blue",
+      "leanMagnitude": 0.15,
+      "historicalAccuracy": 0.65,
+      "methodology": "CATI電腦輔助市內電話訪問",
+      "notes": "民意調查與市場研究機構，常接受藍營智庫或地方陣營委託執行電話民調"
+    },
+    {
+      "id": "pearson",
+      "name": "皮爾森數據",
+      "fullName": "皮爾森數據股份有限公司",
+      "credibilityScore": 0.65,
+      "leanDirection": "neutral",
+      "leanMagnitude": 0.12,
+      "historicalAccuracy": 0.65,
+      "methodology": "網路主動發放調查（性別、年齡、戶籍加權）",
+      "notes": "大樣本網路民調執行機構，常受菱傳媒、鉅聞天下及地方陣營委託執行網路抽樣加權調查"
     }
   ]
 }
