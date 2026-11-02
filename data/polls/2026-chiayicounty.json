@@ -13,10 +13,6 @@
         "tsai_y_y": 52.1,
         "wu_p_j": 29.8
       },
-      "neutralResults": {
-        "tsai_y_y": 44.0,
-        "wu_p_j": 22.0
-      },
       "undecided": 18.1,
       "source": "https://www.mnews.tw/"
     },
@@ -32,10 +28,6 @@
         "tsai_y_y": 53.8,
         "wu_p_j": 28.5
       },
-      "neutralResults": {
-        "tsai_y_y": 46.0,
-        "wu_p_j": 21.0
-      },
       "undecided": 17.7,
       "source": "https://cnews.com.tw/"
     },
@@ -50,10 +42,6 @@
       "results": {
         "tsai_y_y": 54.5,
         "wu_p_j": 27.8
-      },
-      "neutralResults": {
-        "tsai_y_y": 47.0,
-        "wu_p_j": 21.0
       },
       "undecided": 17.7,
       "source": "https://news.tvbs.com.tw/"

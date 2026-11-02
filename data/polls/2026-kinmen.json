@@ -13,10 +13,6 @@
         "chen_y_c": 53.8,
         "lee_w_l": 37.5
       },
-      "neutralResults": {
-        "chen_y_c": 47.0,
-        "lee_w_l": 33.0
-      },
       "undecided": 8.7,
       "source": "https://www.chinatimes.com/"
     },
@@ -32,10 +28,6 @@
         "chen_y_c": 55.4,
         "lee_w_l": 36.2
       },
-      "neutralResults": {
-        "chen_y_c": 49.0,
-        "lee_w_l": 32.0
-      },
       "undecided": 8.4,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -50,10 +42,6 @@
       "results": {
         "chen_y_c": 56.2,
         "lee_w_l": 35.8
-      },
-      "neutralResults": {
-        "chen_y_c": 49.5,
-        "lee_w_l": 31.5
       },
       "undecided": 8.0,
       "source": "https://udn.com/"

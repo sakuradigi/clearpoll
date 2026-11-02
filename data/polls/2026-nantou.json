@@ -13,10 +13,6 @@
         "hsu_s_h": 52.8,
         "wen_s_c": 29.2
       },
-      "neutralResults": {
-        "hsu_s_h": 46.0,
-        "wen_s_c": 23.0
-      },
       "undecided": 18.0,
       "source": "https://www.storm.mg/"
     },
@@ -32,10 +28,6 @@
         "hsu_s_h": 54.2,
         "wen_s_c": 28.5
       },
-      "neutralResults": {
-        "hsu_s_h": 48.0,
-        "wen_s_c": 22.0
-      },
       "undecided": 17.3,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -50,10 +42,6 @@
       "results": {
         "hsu_s_h": 55.2,
         "wen_s_c": 27.6
-      },
-      "neutralResults": {
-        "hsu_s_h": 49.0,
-        "wen_s_c": 22.0
       },
       "undecided": 17.2,
       "source": "https://rwnews.tw/"

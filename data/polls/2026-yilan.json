@@ -13,10 +13,6 @@
         "lin_k_c": 38.2,
         "wu_t_h": 33.5
       },
-      "neutralResults": {
-        "lin_k_c": 31.0,
-        "wu_t_h": 27.0
-      },
       "undecided": 28.3,
       "source": "https://www.storm.mg/"
     },
@@ -31,10 +27,6 @@
       "results": {
         "lin_k_c": 39.5,
         "wu_t_h": 32.8
-      },
-      "neutralResults": {
-        "lin_k_c": 33.0,
-        "wu_t_h": 26.5
       },
       "undecided": 27.7,
       "source": "https://www.upmedia.mg/"
@@ -51,10 +43,6 @@
         "lin_k_c": 40.2,
         "wu_t_h": 34.1
       },
-      "neutralResults": {
-        "lin_k_c": 35.0,
-        "wu_t_h": 28.0
-      },
       "undecided": 25.7,
       "source": "https://rwnews.tw/"
     },
@@ -69,10 +57,6 @@
       "results": {
         "lin_k_c": 39.8,
         "wu_t_h": 35.2
-      },
-      "neutralResults": {
-        "lin_k_c": 36.0,
-        "wu_t_h": 32.5
       },
       "undecided": 25.0,
       "source": "https://rwnews.tw/"

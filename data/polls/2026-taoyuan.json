@@ -10,7 +10,6 @@
       "method": "phone",
       "marginOfError": 3.1,
       "results": { "chang": 58.0, "huang": 22.0 },
-      "neutralResults": { "chang": 48.0, "huang": 18.0 },
       "undecided": 20.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -23,7 +22,6 @@
       "method": "online",
       "marginOfError": 2.98,
       "results": { "chang": 56.5, "huang": 24.5 },
-      "neutralResults": { "chang": 46.0, "huang": 20.0 },
       "undecided": 19.0,
       "source": "https://www.ettoday.net/"
     },
@@ -36,7 +34,6 @@
       "method": "phone",
       "marginOfError": 3.02,
       "results": { "chang": 54.0, "huang": 25.0 },
-      "neutralResults": { "chang": 44.0, "huang": 21.0 },
       "undecided": 21.0,
       "source": "https://cnews.com.tw/"
     },
@@ -49,7 +46,6 @@
       "method": "phone",
       "marginOfError": 3.0,
       "results": { "chang": 52.0, "huang": 27.0 },
-      "neutralResults": { "chang": 42.0, "huang": 22.0 },
       "undecided": 21.0,
       "source": "https://www.eranews.com.tw/"
     },
@@ -62,7 +58,6 @@
       "method": "phone",
       "marginOfError": 2.97,
       "results": { "chang": 55.4, "huang": 24.2 },
-      "neutralResults": { "chang": 50.0, "huang": 21.0 },
       "undecided": 20.4,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -75,7 +70,6 @@
       "method": "phone",
       "marginOfError": 2.99,
       "results": { "chang": 47.0, "huang": 25.9 },
-      "neutralResults": { "chang": 41.0, "huang": 21.5 },
       "undecided": 27.1,
       "notes": "9月下旬調查，張善政支持度47.0%領先黃世杰25.9%，施政滿意度58.2%，看好度64.0%",
       "source": "https://www.setn.com/"

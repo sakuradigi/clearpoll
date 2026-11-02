@@ -7,10 +7,9 @@
       "pollster": "ettoday",
       "pollsterName": "ETtoday",
       "sampleSize": 1000,
-      "method": "phone",
+      "method": "online",
       "marginOfError": 3.1,
       "results": { "chen_t": 49.0, "hsie": 34.0 },
-      "neutralResults": { "chen_t": 41.0, "hsie": 28.0 },
       "undecided": 17.0,
       "source": "https://www.ettoday.net/"
     },
@@ -23,7 +22,6 @@
       "method": "phone",
       "marginOfError": 3.02,
       "results": { "chen_t": 53.0, "hsie": 30.0 },
-      "neutralResults": { "chen_t": 45.0, "hsie": 24.0 },
       "undecided": 17.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -36,7 +34,6 @@
       "method": "phone",
       "marginOfError": 2.99,
       "results": { "chen_t": 51.5, "hsie": 32.5 },
-      "neutralResults": { "chen_t": 43.0, "hsie": 26.0 },
       "undecided": 16.0,
       "source": "https://www.my-formosa.com/"
     },
@@ -49,7 +46,6 @@
       "method": "phone",
       "marginOfError": 3.0,
       "results": { "chen_t": 48.0, "hsie": 35.0 },
-      "neutralResults": { "chen_t": 39.0, "hsie": 29.0 },
       "undecided": 17.0,
       "source": "https://www.eranews.com.tw/"
     },
@@ -62,7 +58,6 @@
       "method": "online",
       "marginOfError": 2.89,
       "results": { "chen_t": 49.2, "hsie": 32.1 },
-      "neutralResults": { "chen_t": 45.0, "hsie": 29.0 },
       "undecided": 18.7,
       "source": "https://rwnews.tw/"
     },

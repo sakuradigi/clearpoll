@@ -13,10 +13,6 @@
         "chung": 54.2,
         "chen_p_a": 23.5
       },
-      "neutralResults": {
-        "chung": 48.0,
-        "chen_p_a": 18.0
-      },
       "undecided": 22.3,
       "source": "https://rwnews.tw/"
     },
@@ -32,10 +28,6 @@
         "chung": 56.4,
         "chen_p_a": 24.8
       },
-      "neutralResults": {
-        "chung": 50.0,
-        "chen_p_a": 19.5
-      },
       "undecided": 18.8,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -50,10 +42,6 @@
       "results": {
         "chung": 56.5,
         "chen_p_a": 23.2
-      },
-      "neutralResults": {
-        "chung": 50.0,
-        "chen_p_a": 18.0
       },
       "undecided": 20.3,
       "source": "https://cnews.com.tw/"

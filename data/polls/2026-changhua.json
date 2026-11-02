@@ -14,11 +14,6 @@
         "wei_p_c": 25.5,
         "chiu_c_f": 14.0
       },
-      "neutralResults": {
-        "chen_s_y": 30.5,
-        "wei_p_c": 22.0,
-        "chiu_c_f": 12.5
-      },
       "undecided": 25.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -35,11 +30,6 @@
         "wei_p_c": 11.0,
         "chiu_c_f": 12.0
       },
-      "neutralResults": {
-        "chen_s_y": 24.0,
-        "wei_p_c": 10.0,
-        "chiu_c_f": 11.0
-      },
       "undecided": 49.0,
       "source": "https://www.keypo.com.tw/"
     },
@@ -49,17 +39,12 @@
       "pollster": "ettoday",
       "pollsterName": "ETtoday民調雲",
       "sampleSize": 1150,
-      "method": "phone",
+      "method": "online",
       "marginOfError": 2.89,
       "results": {
         "chen_s_y": 36.4,
         "wei_p_c": 19.4,
         "chiu_c_f": 12.7
-      },
-      "neutralResults": {
-        "chen_s_y": 32.0,
-        "wei_p_c": 18.0,
-        "chiu_c_f": 11.5
       },
       "undecided": 31.5,
       "source": "https://www.ettoday.net/"
@@ -77,11 +62,6 @@
         "wei_p_c": 20.2,
         "chiu_c_f": 13.5
       },
-      "neutralResults": {
-        "chen_s_y": 32.5,
-        "wei_p_c": 18.5,
-        "chiu_c_f": 12.0
-      },
       "undecided": 29.5,
       "source": "https://www.mnews.tw/"
     },
@@ -98,11 +78,6 @@
         "wei_p_c": 22.5,
         "chiu_c_f": 13.0
       },
-      "neutralResults": {
-        "chen_s_y": 33.0,
-        "wei_p_c": 21.0,
-        "chiu_c_f": 12.0
-      },
       "undecided": 27.3,
       "source": "https://news.mnews.tw/"
     },
@@ -112,7 +87,7 @@
       "pollster": "udn",
       "pollsterName": "聯合報系民意調查中心",
       "sampleSize": 1003,
-      "method": "phone",
+      "method": "phone+cell",
       "marginOfError": 3.1,
       "results": {
         "chen_s_y": 32.0,
@@ -120,12 +95,12 @@
         "chiu_c_f": 10.0
       },
       "neutralResults": {
-        "chen_s_y": 27.5,
-        "wei_p_c": 14.5,
-        "chiu_c_f": 9.5
+        "chen_s_y": 19.0,
+        "wei_p_c": 4.0,
+        "chiu_c_f": 12.0
       },
       "undecided": 42.0,
-      "notes": "10/13-15調查，聯合報系民調中心執行CATI電話調查（N=1003，誤差±3.1%）。四人參選下陳素月32%穩居第一，魏平政16%居次，邱建富10%，陳重嘉0.3%，未決定42%。看好度陳素月36%、魏平政12%、邱建富9%",
+      "notes": "10/13-15調查，聯合報系民調中心執行市話及手機雙底冊電話調查（N=1003，誤差±3.1%）。四人參選下陳素月32%穩居第一，魏平政16%居次，邱建富10%，陳重嘉0.3%，未決定42%。中立選民陳素月19%、邱建富12%、魏平政4%（逾六成觀望）。看好度陳素月36%、魏平政12%、邱建富9%",
       "source": "https://udn.com/news/story/124234/"
     }
   ]

@@ -7,15 +7,11 @@
       "pollster": "ettoday",
       "pollsterName": "ETtoday",
       "sampleSize": 1000,
-      "method": "phone",
+      "method": "online",
       "marginOfError": 3.1,
       "results": {
         "chiang_k": 51.0,
         "ho": 32.4
-      },
-      "neutralResults": {
-        "chiang_k": 42.0,
-        "ho": 27.0
       },
       "undecided": 16.6,
       "source": "https://www.ettoday.net/"
@@ -32,10 +28,6 @@
         "chiang_k": 54.0,
         "ho": 28.0
       },
-      "neutralResults": {
-        "chiang_k": 45.0,
-        "ho": 23.0
-      },
       "undecided": 18.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -50,10 +42,6 @@
       "results": {
         "chiang_k": 40.6,
         "ho": 24.4
-      },
-      "neutralResults": {
-        "chiang_k": 34.0,
-        "ho": 20.0
       },
       "undecided": 35.0,
       "source": "https://cnews.com.tw/"
@@ -70,10 +58,6 @@
         "chiang_k": 52.0,
         "ho": 31.0
       },
-      "neutralResults": {
-        "chiang_k": 43.0,
-        "ho": 25.0
-      },
       "undecided": 17.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -88,10 +72,6 @@
       "results": {
         "chiang_k": 49.5,
         "ho": 33.5
-      },
-      "neutralResults": {
-        "chiang_k": 41.0,
-        "ho": 27.0
       },
       "undecided": 17.0,
       "source": "https://www.my-formosa.com/"
@@ -108,10 +88,6 @@
         "chiang_k": 38.2,
         "ho": 24.1
       },
-      "neutralResults": {
-        "chiang_k": 32.0,
-        "ho": 20.0
-      },
       "undecided": 37.7,
       "source": "https://cnews.com.tw/"
     },
@@ -127,10 +103,6 @@
         "chiang_k": 42.8,
         "ho": 36.1
       },
-      "neutralResults": {
-        "chiang_k": 36.0,
-        "ho": 30.0
-      },
       "undecided": 21.1,
       "source": "http://www.braintrust.tw/"
     },
@@ -145,10 +117,6 @@
       "results": {
         "chiang_k": 47.8,
         "ho": 32.5
-      },
-      "neutralResults": {
-        "chiang_k": 42.0,
-        "ho": 28.5
       },
       "undecided": 19.7,
       "source": "https://udn.com/"
@@ -166,10 +134,6 @@
         "chiang_k": 45.1,
         "ho": 32.5
       },
-      "neutralResults": {
-        "chiang_k": 39.5,
-        "ho": 31.0
-      },
       "undecided": 22.4,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -185,10 +149,6 @@
       "results": {
         "chiang_k": 34.3,
         "ho": 32.4
-      },
-      "neutralResults": {
-        "chiang_k": 28.5,
-        "ho": 27.2
       },
       "undecided": 33.3,
       "notes": "10/5-6調查，循證民調執行市話調查。江啟臣34.3%微幅領先何欣純32.4%（差距1.9%，誤差範圍內五五波），洪麗華1.1%，尚未決定32.2%。何欣純在北屯、北區逆轉領先，39歲以下青年族群何欣純具優勢，看好度江啟臣48.6%勝何欣純20.1%",
@@ -208,11 +168,28 @@
         "ho": 28.7
       },
       "neutralResults": {
-        "chiang_k": 33.5,
-        "ho": 24.5
+        "chiang_k": 31.5,
+        "ho": 22.0
       },
       "undecided": 31.5,
-      "notes": "10/15-16調查，世新大學民意調查中心執行CATI電話調查（N=1070，誤差±3.0%）。江啟臣39.8%領先何欣純28.7%（差距11.1%），未表態31.5%。看好度江啟臣39.6%領先何欣純23.3%（未表態37.1%）",
+      "notes": "10/15-16調查，世新大學民意調查中心執行CATI電話調查（N=1070，誤差±3.0%）。江啟臣39.8%領先何欣純28.7%（差距11.1%），未表態31.5%。中間選民江啟臣31.5%領先何欣純22.0%。看好度江啟臣39.6%領先何欣純23.3%（未表態37.1%）",
+      "source": "https://www.chinatimes.com/"
+    },
+    {
+      "id": "tc2026-012",
+      "date": "2026-11-02",
+      "pollster": "fgu",
+      "pollsterName": "佛光大學民調中心（台中市議會國民黨團委託）",
+      "commissioner": "台中市議會國民黨團",
+      "sampleSize": 1003,
+      "method": "phone",
+      "marginOfError": 3.10,
+      "results": {
+        "chiang_k": 38.3,
+        "ho": 28.1
+      },
+      "undecided": 25.3,
+      "notes": "10/28-30調查，11/2公布。佛光大學民調中心執行CATI市話調查（N=1003，誤差±3.10%）。江啟臣38.3%領先何欣純28.1%（差距10.2%），尚未決定25.3%、都不支持/不投票8.3%。各行政區江啟臣普遍領先，盧秀燕施政滿意度逾六成發揮助選拉抬效應。",
       "source": "https://www.chinatimes.com/"
     }
   ]

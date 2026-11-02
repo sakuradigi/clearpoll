@@ -13,10 +13,6 @@
         "chiang": 54.0,
         "shen": 28.0
       },
-      "neutralResults": {
-        "chiang": 45.0,
-        "shen": 22.0
-      },
       "undecided": 18.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -32,10 +28,6 @@
         "chiang": 52.9,
         "shen": 29.7
       },
-      "neutralResults": {
-        "chiang": 42.0,
-        "shen": 24.0
-      },
       "undecided": 17.4,
       "source": "http://www.braintrust.tw/"
     },
@@ -50,10 +42,6 @@
       "results": {
         "chiang": 58.0,
         "shen": 30.0
-      },
-      "neutralResults": {
-        "chiang": 48.0,
-        "shen": 23.0
       },
       "undecided": 12.0,
       "source": "https://news.tvbs.com.tw/"
@@ -84,15 +72,11 @@
       "pollster": "ettoday",
       "pollsterName": "ETtoday民調雲",
       "sampleSize": 1180,
-      "method": "phone",
+      "method": "online",
       "marginOfError": 2.85,
       "results": {
         "chiang": 53.8,
         "shen": 27.5
-      },
-      "neutralResults": {
-        "chiang": 48.5,
-        "shen": 23.0
       },
       "undecided": 18.7,
       "source": "https://www.ettoday.net/"
@@ -109,10 +93,6 @@
         "chiang": 52.6,
         "shen": 28.4
       },
-      "neutralResults": {
-        "chiang": 45.0,
-        "shen": 27.5
-      },
       "undecided": 19.0,
       "source": "https://udn.com/"
     },
@@ -128,10 +108,6 @@
       "results": {
         "chiang": 41.7,
         "shen": 40.5
-      },
-      "neutralResults": {
-        "chiang": 37.5,
-        "shen": 36.5
       },
       "undecided": 17.8,
       "source": "https://www.ettoday.net/"
@@ -239,7 +215,7 @@
       "pollster": "udn",
       "pollsterName": "聯合報系民意調查中心",
       "sampleSize": 1115,
-      "method": "phone",
+      "method": "phone+cell",
       "marginOfError": 2.93,
       "results": {
         "chiang": 41.0,
@@ -250,7 +226,7 @@
         "shen": 40.0
       },
       "undecided": 13.0,
-      "notes": "10/20-22、25調查，10/28公布。聯合報系民調中心執行CATI電話調查（N=1115，另264人拒訪，誤差±2.93%）。沈伯洋45%微幅超前蔣萬安41%（差距4%，在抽樣誤差範圍內），未決定13%（其餘4名候選人合計小於1%）。當選看好度蔣萬安48%仍明顯高於沈伯洋35%。政黨交叉：綠營支持者91%挺沈、藍營支持者86%挺蔣；關鍵「政黨中立／無政黨傾向」選民中，沈伯洋40%領先蔣萬安33%（26%仍在觀望）；40歲以下年輕選民沈佔優勢，40歲以上蔣維持領先。",
+      "notes": "10/20-22、25調查，10/28公布。聯合報系民調中心執行市話及手機雙底冊電話調查（N=1115，另264人拒訪，誤差±2.93%）。沈伯洋45%微幅超前蔣萬安41%（差距4%，在抽樣誤差範圍內），未決定13%（其餘4名候選人合計小於1%）。當選看好度蔣萬安48%仍明顯高於沈伯洋35%。政黨交叉：綠營支持者91%挺沈、藍營支持者86%挺蔣；關鍵「政黨中立／無政黨傾向」選民中，沈伯洋40%領先蔣萬安33%（26%仍在觀望）；40歲以下年輕選民沈佔優勢，40歲以上蔣維持領先。",
       "source": "https://udn.com/"
     },
     {

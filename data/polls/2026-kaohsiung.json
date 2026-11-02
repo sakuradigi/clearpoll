@@ -10,7 +10,6 @@
       "method": "phone",
       "marginOfError": 2.9,
       "results": { "lai": 41.0, "ke": 41.0 },
-      "neutralResults": { "lai": 31.0, "ke": 37.0 },
       "undecided": 18.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -23,7 +22,6 @@
       "method": "phone",
       "marginOfError": 2.85,
       "results": { "lai": 42.0, "ke": 40.0 },
-      "neutralResults": { "lai": 31.0, "ke": 36.0 },
       "undecided": 18.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -36,22 +34,21 @@
       "method": "phone",
       "marginOfError": 2.8,
       "results": { "lai": 40.3, "ke": 39.7 },
-      "neutralResults": { "lai": 29.0, "ke": 35.0 },
       "undecided": 20.0,
       "source": "https://news.tvbs.com.tw/"
     },
     {
       "id": "kh2026-002",
-      "date": "2026-06-09",
+      "date": "2026-06-15",
       "pollster": "rwnews",
       "pollsterName": "鏡新聞（大地民調委託）",
       "commissioner": "鏡新聞",
       "sampleSize": 1116,
-      "method": "phone",
+      "method": "phone+cell",
       "marginOfError": 2.93,
       "results": { "lai": 45.1, "ke": 24.8 },
-      "neutralResults": { "lai": 34.0, "ke": 22.0 },
-      "undecided": 30.1,
+      "undecided": 29.3,
+      "notes": "6/13-14調查，6/15公布。鏡新聞委託大地民意研究執行市話558+手機558雙底冊抽樣（N=1116，誤差±2.93%）。賴瑞隆45.1%領先柯志恩24.8%（差距20.3%），未決定29.3%。",
       "source": "https://www.mnews.tw/"
     },
     {
@@ -63,7 +60,6 @@
       "method": "phone",
       "marginOfError": 2.96,
       "results": { "lai": 46.2, "ke": 28.4 },
-      "neutralResults": { "lai": 36.0, "ke": 24.0 },
       "undecided": 25.4,
       "source": "http://www.braintrust.tw/"
     },
@@ -71,12 +67,11 @@
       "id": "kh2026-004",
       "date": "2026-06-19",
       "pollster": "ettoday",
-      "pollsterName": "ETtoday",
+      "pollsterName": "ETtoday民調雲",
       "sampleSize": 1070,
       "method": "online",
       "marginOfError": 3.0,
       "results": { "lai": 42.0, "ke": 46.8 },
-      "neutralResults": { "lai": 32.0, "ke": 41.0 },
       "undecided": 11.2,
       "source": "https://www.ettoday.net/"
     },
@@ -91,6 +86,7 @@
       "results": { "lai": 36.2, "ke": 23.6 },
       "neutralResults": { "lai": 10.6, "ke": 17.4 },
       "undecided": 40.2,
+      "notes": "7月中旬調查，7/20公布。年代民調中心執行CATI市話調查（N=1071，誤差±3.0%）。賴瑞隆36.2%領先柯志恩23.6%（差距12.6%），未表態40.2%。中立選民支持度柯志恩17.4%領先賴瑞隆10.6%。",
       "source": "https://www.eranews.com.tw/"
     },
     {
@@ -114,34 +110,20 @@
       "method": "online",
       "marginOfError": 2.4,
       "results": { "lai": 47.78, "ke": 46.14 },
-      "neutralResults": { "lai": 45.0, "ke": 43.0 },
       "undecided": 4.24,
       "source": "https://www.ftnn.com.tw/"
     },
     {
-      "id": "kh2026-008",
-      "date": "2026-09-08",
-      "pollster": "rwnews",
-      "pollsterName": "鏡新聞民調中心",
-      "sampleSize": 1095,
-      "method": "phone+cell",
-      "marginOfError": 2.96,
-      "results": { "lai": 44.6, "ke": 39.2 },
-      "neutralResults": { "lai": 40.0, "ke": 35.0 },
-      "undecided": 16.2,
-      "source": "https://www.mnews.tw/"
-    },
-    {
       "id": "kh2026-009",
-      "date": "2026-09-18",
+      "date": "2026-09-11",
       "pollster": "ettoday",
       "pollsterName": "ETtoday民調雲",
-      "sampleSize": 1180,
-      "method": "phone",
-      "marginOfError": 2.85,
+      "sampleSize": 1283,
+      "method": "online",
+      "marginOfError": 2.74,
       "results": { "ke": 43.8, "lai": 43.5 },
-      "neutralResults": { "ke": 39.0, "lai": 39.2 },
-      "undecided": 12.7,
+      "undecided": 12.5,
+      "notes": "8/22-30調查，9/11公布。ETtoday民調雲以EDM及手機簡訊執行網路問卷加權調查（N=1283，誤差±2.74%）。柯志恩43.8%與賴瑞隆43.5%差距僅0.3%陷入膠著，不投票/廢票4.2%、不知道/未決定8.3%（合計未表態12.5%）。當選看好度賴瑞隆47.7%領先柯志恩40.3%（中間選民看好度柯40.4% vs 賴30.3%）。",
       "source": "https://www.ettoday.net/"
     },
     {
@@ -171,6 +153,28 @@
       "undecided": 26.0,
       "notes": "10/28-31調查，11/2公布。聯合報系民調中心執行市話及手機雙底冊尾數隨機抽樣（N=1101，另279人拒訪，誤差±3.0%）。賴瑞隆40%領先柯志恩33%（差距7%），其他3人合計<1%，未決定26%。當選看好度賴瑞隆49%大幅領先柯志恩21%（國民黨支持者亦有29%看好賴勝選、55%看好柯）。性別交叉：男性柯38% vs 賴37%，女性賴43%大幅領先柯29%（+14%）。年齡交叉：40歲以下賴37%領先柯6%、40-59歲賴41% vs 柯38%、60歲以上賴41%領先柯11%。政黨交叉：國民黨支持者88%挺柯、民進黨支持者82%挺賴、民眾黨支持者60%挺柯 vs 9%挺賴；中立選民柯志恩25% vs 賴瑞隆22%（53%觀望）。選情關心度62%（明顯低於台北79%）。",
       "source": "https://udn.com/"
+    },
+    {
+      "id": "kh2026-012",
+      "date": "2026-11-02",
+      "pollster": "ftnn",
+      "pollsterName": "鋒燦傳媒（台大張佑宗教授執行）",
+      "commissioner": "鋒燦傳媒（FTNN）",
+      "sampleSize": 1824,
+      "method": "phone+cell",
+      "marginOfError": 2.30,
+      "results": { "lai": 47.8, "ke": 27.4 },
+      "neutralResults": { "lai": 18.9, "ke": 23.4 },
+      "partyAffiliation": {
+        "dpp": 46.6,
+        "kmt": 16.7,
+        "tpp": 6.2,
+        "independent": 26.5,
+        "other": 4.0
+      },
+      "undecided": 22.4,
+      "notes": "10/16-21調查，11/2公布。鋒燦傳媒委託台大政治系張佑宗教授負責抽樣設計與統計分析（有效樣本1824份：市話CATI 1014份＋網路問卷810份，誤差±2.30%）。賴瑞隆47.8%大幅領先柯志恩27.4%（差距20.4%），其他3位參選人合計2.4%，未表態22.4%。政黨交叉：民進黨支持者86.9%挺賴，國民黨支持者83.9%挺柯，民眾黨支持者64.6%挺柯 vs 14.2%挺賴；無政黨傾向／中立選民（占26.5%）中柯志恩23.4%領先賴瑞隆18.9%（未表態高達53.9%）。樣本政黨支持度：民進黨46.6%、國民黨16.7%、民眾黨6.2%、中立26.5%（綠營樣本占比較高）。",
+      "source": "https://www.ftnn.com.tw/"
     }
   ]
 }

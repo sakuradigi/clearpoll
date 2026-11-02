@@ -13,10 +13,6 @@
         "chou_c_m": 49.5,
         "su_c_c": 36.2
       },
-      "neutralResults": {
-        "chou_c_m": 41.0,
-        "su_c_c": 29.0
-      },
       "undecided": 14.3,
       "source": "https://www.upmedia.mg/"
     },
@@ -32,10 +28,6 @@
         "chou_c_m": 48.2,
         "su_c_c": 37.5
       },
-      "neutralResults": {
-        "chou_c_m": 39.5,
-        "su_c_c": 31.0
-      },
       "undecided": 14.3,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -50,10 +42,6 @@
       "results": {
         "chou_c_m": 48.8,
         "su_c_c": 37.1
-      },
-      "neutralResults": {
-        "chou_c_m": 40.0,
-        "su_c_c": 31.0
       },
       "undecided": 14.1,
       "source": "https://www.mnews.tw/"

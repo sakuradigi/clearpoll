@@ -13,10 +13,6 @@
         "wang_c_m": 60.1,
         "tsao_e_y": 36.2
       },
-      "neutralResults": {
-        "wang_c_m": 54.0,
-        "tsao_e_y": 32.5
-      },
       "undecided": 3.7,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -31,10 +27,6 @@
       "results": {
         "wang_c_m": 58.5,
         "tsao_e_y": 37.2
-      },
-      "neutralResults": {
-        "wang_c_m": 52.0,
-        "tsao_e_y": 34.0
       },
       "undecided": 4.3,
       "source": "https://www.matsu-news.gov.tw/"

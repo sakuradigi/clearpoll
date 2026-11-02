@@ -13,10 +13,6 @@
         "hsieh": 45.0,
         "tung": 30.0
       },
-      "neutralResults": {
-        "hsieh": 38.0,
-        "tung": 25.0
-      },
       "undecided": 25.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -31,10 +27,6 @@
       "results": {
         "hsieh": 38.5,
         "tung": 36.0
-      },
-      "neutralResults": {
-        "hsieh": 33.0,
-        "tung": 31.0
       },
       "undecided": 25.5,
       "source": "https://www.mnews.tw/"
@@ -51,10 +43,6 @@
         "hsieh": 38.6,
         "tung": 33.2
       },
-      "neutralResults": {
-        "hsieh": 32.5,
-        "tung": 29.8
-      },
       "undecided": 28.2,
       "source": "https://www.upmedia.mg/"
     },
@@ -70,10 +58,6 @@
         "hsieh": 41.5,
         "tung": 33.8
       },
-      "neutralResults": {
-        "hsieh": 35.0,
-        "tung": 29.5
-      },
       "undecided": 24.7,
       "source": "https://www.mnews.tw/"
     },
@@ -88,10 +72,6 @@
       "results": {
         "hsieh": 38.0,
         "tung": 34.2
-      },
-      "neutralResults": {
-        "hsieh": 31.0,
-        "tung": 31.5
       },
       "undecided": 27.8,
       "notes": "9/20-21調查，山水民調執行。謝國樑38.0%領先童子瑋34.2%（差距3.8%），一定會投票族群童子瑋反超1.5%",
@@ -110,10 +90,6 @@
         "hsieh": 42.9,
         "tung": 38.3
       },
-      "neutralResults": {
-        "hsieh": 36.5,
-        "tung": 33.0
-      },
       "undecided": 18.8,
       "notes": "10/7-9調查，趨勢民調執行。謝國樑42.9%領先童子瑋38.3%（差距4.6%），看好度謝國樑50.4%領先童子瑋34.3%",
       "source": "https://udn.com/"
@@ -130,10 +106,6 @@
       "results": {
         "hsieh": 41.3,
         "tung": 35.7
-      },
-      "neutralResults": {
-        "hsieh": 34.5,
-        "tung": 31.8
       },
       "undecided": 23.0,
       "notes": "10/13-16調查，全國公信力民調執行CATI電話調查（N=1071，誤差±2.99%）。謝國樑41.3%領先童子瑋35.7%（差距5.6%），當選看好度謝國樑45.0% vs 童子瑋26.5%，謝國樑施政滿意度52.7% vs 不滿意36.6%",

@@ -14,11 +14,6 @@
         "chen_c_c": 29.2,
         "yeh_c_l": 22.1
       },
-      "neutralResults": {
-        "wu_s_c": 25.0,
-        "chen_c_c": 26.0,
-        "yeh_c_l": 23.5
-      },
       "undecided": 18.2,
       "source": "https://www.upmedia.mg/"
     },
@@ -35,11 +30,6 @@
         "yeh_c_l": 20.9,
         "wu_s_c": 19.2
       },
-      "neutralResults": {
-        "chen_c_c": 28.0,
-        "yeh_c_l": 22.0,
-        "wu_s_c": 16.5
-      },
       "undecided": 27.1,
       "source": "https://www.storm.mg/"
     },
@@ -55,11 +45,6 @@
         "chen_c_c": 33.5,
         "yeh_c_l": 22.0,
         "wu_s_c": 19.8
-      },
-      "neutralResults": {
-        "chen_c_c": 29.0,
-        "yeh_c_l": 23.0,
-        "wu_s_c": 17.0
       },
       "undecided": 24.7,
       "source": "https://cnews.com.tw/"

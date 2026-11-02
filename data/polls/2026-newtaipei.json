@@ -13,10 +13,6 @@
         "li": 48.0,
         "su": 33.0
       },
-      "neutralResults": {
-        "li": 39.0,
-        "su": 26.0
-      },
       "undecided": 19.0,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -31,10 +27,6 @@
       "results": {
         "li": 35.5,
         "su": 34.5
-      },
-      "neutralResults": {
-        "li": 28.0,
-        "su": 27.0
       },
       "undecided": 30.0,
       "source": "https://www.my-formosa.com/"
@@ -52,10 +44,6 @@
         "li": 39.6,
         "su": 34.8
       },
-      "neutralResults": {
-        "li": 32.0,
-        "su": 28.0
-      },
       "undecided": 25.6,
       "source": "https://www.zmedia.com.tw/"
     },
@@ -71,10 +59,6 @@
         "li": 42.5,
         "su": 41.7
       },
-      "neutralResults": {
-        "li": 35.0,
-        "su": 34.0
-      },
       "undecided": 15.8,
       "source": "https://www.ettoday.net/"
     },
@@ -89,10 +73,6 @@
       "results": {
         "li": 40.0,
         "su": 40.2
-      },
-      "neutralResults": {
-        "li": 33.0,
-        "su": 34.0
       },
       "undecided": 19.8,
       "source": "http://www.braintrust.tw/"
@@ -130,10 +110,6 @@
         "li": 43.7,
         "su": 36.8
       },
-      "neutralResults": {
-        "li": 36.0,
-        "su": 30.0
-      },
       "undecided": 19.5,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -149,10 +125,6 @@
         "li": 39.3,
         "su": 37.3
       },
-      "neutralResults": {
-        "li": 34.0,
-        "su": 32.0
-      },
       "undecided": 23.4,
       "source": "https://www.ettoday.net/"
     },
@@ -167,10 +139,6 @@
       "results": {
         "li": 32.2,
         "su": 37.8
-      },
-      "neutralResults": {
-        "li": 25.0,
-        "su": 32.0
       },
       "undecided": 30.0,
       "source": "https://www.eranews.com.tw/"
@@ -188,10 +156,6 @@
         "su": 35.2,
         "li": 34.7
       },
-      "neutralResults": {
-        "su": 30.0,
-        "li": 29.0
-      },
       "undecided": 30.1,
       "source": "https://www.cmmedia.com.tw/"
     },
@@ -208,10 +172,6 @@
         "li": 39.8,
         "su": 33.1
       },
-      "neutralResults": {
-        "li": 33.0,
-        "su": 27.0
-      },
       "undecided": 27.1,
       "source": "https://news.tvbs.com.tw/"
     },
@@ -227,10 +187,6 @@
         "li": 38.6,
         "su": 37.8
       },
-      "neutralResults": {
-        "li": 33.5,
-        "su": 33.0
-      },
       "undecided": 23.6,
       "source": "https://cnews.com.tw/"
     },
@@ -245,10 +201,6 @@
       "results": {
         "li": 38.2,
         "su": 38.0
-      },
-      "neutralResults": {
-        "li": 34.0,
-        "su": 33.5
       },
       "undecided": 23.8,
       "source": "http://www.my-formosa.com/"
@@ -267,11 +219,18 @@
         "li": 37.1
       },
       "neutralResults": {
-        "su": 32.5,
-        "li": 32.6
+        "su": 19.7,
+        "li": 18.8
+      },
+      "partyAffiliation": {
+        "dpp": 33.4,
+        "kmt": 28.7,
+        "tpp": 10.6,
+        "independent": 24.0,
+        "other": 3.3
       },
       "undecided": 22.1,
-      "notes": "9/20-21調查，蘇巧慧逆轉超車李四川1.1%，看好度李四川42.0%領先蘇巧慧36.8%",
+      "notes": "9/20-21調查，蘇巧慧38.2%逆轉超車李四川37.1%（差距1.1%），不偏任何政黨選民蘇巧慧19.7% vs 李四川18.8%（無意見60.0%），看好度李四川42.0%領先蘇巧慧36.8%",
       "source": "https://www.zmedia.com.tw/"
     },
     {
@@ -286,10 +245,6 @@
       "results": {
         "su": 39.1,
         "li": 34.5
-      },
-      "neutralResults": {
-        "su": 33.0,
-        "li": 30.5
       },
       "undecided": 26.4,
       "notes": "9/30-10/1調查，山水民調執行。蘇巧慧39.1%領先李四川34.5%（差距4.6%），一定會投票族群蘇巧慧48.7%領先李四川39.3%（差距9.4%），看好度蘇37.7%勝李36.7%",
@@ -313,7 +268,7 @@
         "su": 21.6
       },
       "undecided": 21.5,
-      "notes": "9/29-10/3調查，TVBS執行。李四川42.6%領先蘇巧慧35.9%（差距6.7%），中間選民李四川領先12.3%，三重新莊李45.4%領先蘇34.6%，板橋蘇43.4%領先李41.0%",
+      "notes": "9/29-10/3調查，TVBS執行。李四川42.6%領先蘇巧慧35.9%（差距6.7%），中間選民李四川33.9%領先蘇巧慧21.6%（差距12.3%），三重新莊李45.4%領先蘇34.6%，板橋蘇43.4%領先李41.0%",
       "source": "https://news.tvbs.com.tw/politics/"
     },
     {
@@ -330,11 +285,11 @@
         "li": 30.0
       },
       "neutralResults": {
-        "su": 36.5,
-        "li": 28.0
+        "su": 23.7,
+        "li": 15.8
       },
       "undecided": 25.4,
-      "notes": "10/6-8調查，市話750+手機323雙底冊。蘇巧慧43.1%大幅領先李四川30.0%（差距13.1%），蘇輝湟1.5%，不表態15.8%，呈現剪刀口走勢引發政壇熱議",
+      "notes": "10/6-8調查，市話750+手機323雙底冊。蘇巧慧43.1%大幅領先李四川30.0%（差距13.1%），蘇輝湟1.5%，不表態15.8%；中立選民蘇巧慧23.7%領先李四川15.8%（不投票/廢票21.3%、未明確回答35.9%），呈現剪刀口走勢引發政壇熱議",
       "source": "https://www.storm.mg/"
     },
     {
@@ -350,9 +305,10 @@
         "li": 45.74,
         "su": 45.18
       },
-      "neutralResults": {
-        "li": 41.2,
-        "su": 40.8
+      "partyAffiliation": {
+        "dpp": 33.09,
+        "kmt": 25.56,
+        "tpp": 7.38
       },
       "undecided": 9.08,
       "notes": "9/28-10/3調查，皮爾森數據執行分層隨機抽樣加權。李四川45.74%與蘇巧慧45.18%差距僅0.56%，較7月調查李四川下滑逾5個百分點，雙方呈現五五波平盤",

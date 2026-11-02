@@ -274,6 +274,28 @@
       "historicalAccuracy": 0.65,
       "methodology": "網路主動發放調查（性別、年齡、戶籍加權）",
       "notes": "大樣本網路民調執行機構，常受菱傳媒、鉅聞天下及地方陣營委託執行網路抽樣加權調查"
+    },
+    {
+      "id": "ftnn",
+      "name": "鋒燦傳媒",
+      "fullName": "鋒燦傳媒（委託台大政治系張佑宗教授執行）",
+      "credibilityScore": 0.78,
+      "leanDirection": "slightly-green",
+      "leanMagnitude": 0.12,
+      "historicalAccuracy": 0.76,
+      "methodology": "市話CATI＋網路問卷混合抽樣（由台大政治系張佑宗教授團隊負責抽樣設計與統計加權）",
+      "notes": "委託國立台灣大學政治系張佑宗教授執行，採市話與網路混合調查，完整揭露政黨傾向與交叉分析"
+    },
+    {
+      "id": "fgu",
+      "name": "佛光大學",
+      "fullName": "佛光大學民意調查研究中心",
+      "credibilityScore": 0.75,
+      "leanDirection": "neutral",
+      "leanMagnitude": 0.08,
+      "historicalAccuracy": 0.73,
+      "methodology": "CATI電腦輔助電話訪問",
+      "notes": "大學學術民調中心，接受地方議會黨團及公共機構委託執行電話抽樣調查"
     }
   ]
 }
