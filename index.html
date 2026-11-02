@@ -51,7 +51,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=20261102a">
+  <link rel="stylesheet" href="css/style.css?v=20261102b">
 
   <!-- MathJax for LaTeX Rendering -->
   <script>
@@ -240,16 +240,16 @@
           </div>
 
           <div style="border-left: 3px solid var(--color-info); padding-left: var(--space-md);">
-            <h4 style="font-weight: 700; margin-bottom: 2px;">第四步：中立選民加權校正</h4>
+            <h4 style="font-weight: 700; margin-bottom: 2px;">第四步：自適應中立選民校正與樣本偏誤調節</h4>
             <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7;">
-              為減少政黨支持者帶來的機構效應（House Effect），若該民調提供「中間選民/中立選民」交叉分析數據，我們以 50% 權重混合中立選民支持度，以中和政黨歸屬帶來的統計偏差。
+              由於已表態之中立選民已包含於全體支持度中，且後續未表態分配亦以 70% 中立選民動能為基準，模型對標準民調採用 15% 基底中立平滑權重（避免重複計入中立選民而抹除地方政黨基本盤）；若民調公布之政黨傾向結構與地方 CDPSM 基本盤出現顯著樣本偏差，則動態調升中立混合權重最高至 50% 以校正抽樣偏誤。
             </p>
           </div>
 
           <div style="border-left: 3px solid var(--color-danger); padding-left: var(--space-md);">
-            <h4 style="font-weight: 700; margin-bottom: 2px;">第五步：未決定選民（未表態率）等比分配</h4>
+            <h4 style="font-weight: 700; margin-bottom: 2px;">第五步：先驗錨定未決定選民分配</h4>
             <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7;">
-              由於最終大選投票不會有「未表態」選項，模型會將民調中的未決定選民，依照加權計算後的候選人支持度比例，等比例分配至各候選人，轉換為最終「預測得票率」。
+              針對民調中的未決定選民池（Undecided Pool），模型不採取傳統 100% 等比例放大，而是結合「70% 中立選民表態動能 + 30% 地方歷史選民結構先驗（CDPSM）」進行分配，再與已表態基本盤合併正規化為最終「預測得票率」。
             </p>
           </div>
 
@@ -621,9 +621,9 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
   <!-- App modules -->
-  <script src="js/model.js?v=20261102a"></script>
-  <script src="js/charts.js?v=20261102a"></script>
-  <script src="js/map.js?v=20261102a"></script>
-  <script src="js/app.js?v=20261102a"></script>
+  <script src="js/model.js?v=20261102b"></script>
+  <script src="js/charts.js?v=20261102b"></script>
+  <script src="js/map.js?v=20261102b"></script>
+  <script src="js/app.js?v=20261102b"></script>
 </body>
 </html>
