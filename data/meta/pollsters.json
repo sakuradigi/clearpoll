@@ -296,6 +296,17 @@
       "historicalAccuracy": 0.73,
       "methodology": "CATI電腦輔助電話訪問",
       "notes": "大學學術民調中心，接受地方議會黨團及公共機構委託執行電話抽樣調查"
+    },
+    {
+      "id": "taolue",
+      "name": "台灣韜略策進學會",
+      "fullName": "台灣韜略策進學會（委託窩窩科技執行AI民調）",
+      "credibilityScore": 0.65,
+      "leanDirection": "slightly-green",
+      "leanMagnitude": 0.15,
+      "historicalAccuracy": 0.65,
+      "methodology": "AI語音雙底冊電話調查（市話+手機，性別、年齡、地區、教育程度加權，未含政黨傾向加權）",
+      "notes": "2026年委託窩窩科技執行AI語音雙底冊電訪，未採政黨傾向加權，歷史選舉驗證資料較少，機構與學者背景略偏綠營"
     }
   ]
 }
