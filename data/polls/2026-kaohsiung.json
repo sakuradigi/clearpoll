@@ -143,6 +143,34 @@
       "neutralResults": { "ke": 39.0, "lai": 39.2 },
       "undecided": 12.7,
       "source": "https://www.ettoday.net/"
+    },
+    {
+      "id": "kh2026-010",
+      "date": "2026-10-30",
+      "pollster": "ettoday",
+      "pollsterName": "ETtoday民調雲",
+      "sampleSize": 1338,
+      "method": "online",
+      "marginOfError": 2.68,
+      "results": { "lai": 43.2, "ke": 43.1 },
+      "neutralResults": { "lai": 20.6, "ke": 38.8 },
+      "undecided": 12.7,
+      "notes": "10/20-25調查，10/30高雄市長電視辯論當天上午公布。ETtoday民調雲執行網路問卷加權調查（N=1338，誤差±2.68%）。賴瑞隆43.2%與柯志恩43.1%差距僅0.1%幾近完全平手，未決定12.7%。當選看好度賴瑞隆51.6%領先柯志恩36.8%；中間選民支持度柯志恩38.8%領先賴瑞隆20.6%。",
+      "source": "https://www.ettoday.net/"
+    },
+    {
+      "id": "kh2026-011",
+      "date": "2026-11-02",
+      "pollster": "udn",
+      "pollsterName": "聯合報系民意調查中心",
+      "sampleSize": 1101,
+      "method": "phone",
+      "marginOfError": 3.00,
+      "results": { "lai": 40.0, "ke": 33.0 },
+      "neutralResults": { "lai": 22.0, "ke": 25.0 },
+      "undecided": 26.0,
+      "notes": "10/28-31調查（涵蓋10/30電視辯論期間），11/2公布。聯合報系民調中心執行CATI電話調查（N=1101，另279人拒訪，誤差±3.0%）。賴瑞隆40%領先柯志恩33%（差距7%），未決定26%。當選看好度賴瑞隆49%大幅領先柯志恩21%。政黨交叉：國民黨支持者88%挺柯、民進黨支持者82%挺賴、民眾黨支持者60%挺柯；中立選民柯志恩25%略高於賴瑞隆22%。",
+      "source": "https://udn.com/"
     }
   ]
 }
