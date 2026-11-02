@@ -184,9 +184,9 @@ const ClearPollCharts = {
         borderColor: candidate.color,
         borderWidth: 1.5,
         pointRadius: (ctx) => {
-          // Size based on weight
-          const w = ctx.raw?.weight ?? 0.5;
-          return 3 + w * 6;
+          // Size based on normalized weight (typically 0.05 to 0.35)
+          const w = ctx.raw?.weight ?? 0.15;
+          return 3.5 + Math.min(w, 0.45) * 14;
         },
         pointHoverRadius: 8,
         pointHoverBackgroundColor: candidate.color,
