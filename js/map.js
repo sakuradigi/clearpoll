@@ -113,6 +113,13 @@ const ClearPollMap = {
         path.classList.add('is-tossup');
       }
 
+      // Remove native SVG <title> to prevent the browser's default tooltip from overlapping the custom tooltip
+      const nativeTitle = path.querySelector('title');
+      if (nativeTitle) {
+        path.setAttribute('aria-label', nativeTitle.textContent);
+        nativeTitle.remove();
+      }
+
       // Hover events (skipped on touch-only devices to avoid a stuck tooltip after tapping)
       const canHover = () => window.matchMedia && window.matchMedia('(hover: hover)').matches;
       path.addEventListener('mouseenter', (e) => {
@@ -149,35 +156,74 @@ const ClearPollMap = {
   showTooltip(tooltip, data, event) {
     const { election, result, leader, runner, margin, rating } = data;
     const isTossUp = margin <= 3.5;
-    const ratingBadge = `<span class="win-opportunity-badge ${rating.level}" style="font-size: 0.72rem; padding: 2px 6px;">${rating.text}</span>`;
-    const tossUpBadge = isTossUp ? `<span class="badge" style="background:#EF4444; color:#fff; font-size:0.7rem; margin-left:4px; padding:2px 6px; border-radius:4px;">激戰五五波</span>` : '';
+
+    // High-contrast badge palette tailored for dark tooltip background
+    const darkBadgeStyles = {
+      high: 'background: rgba(16, 185, 129, 0.22); color: #6EE7B7; border: 1px solid rgba(52, 211, 153, 0.45);',
+      medium: 'background: rgba(245, 158, 11, 0.22); color: #FCD34D; border: 1px solid rgba(251, 191, 36, 0.45);',
+      low: 'background: rgba(239, 68, 68, 0.22); color: #FCA5A5; border: 1px solid rgba(248, 113, 113, 0.45);',
+      none: 'background: rgba(148, 163, 184, 0.2); color: #CBD5E1; border: 1px solid rgba(148, 163, 184, 0.35);'
+    };
+    const badgeStyle = darkBadgeStyles[rating.level] || darkBadgeStyles.medium;
+    const ratingBadge = `<span style="display:inline-block; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; ${badgeStyle}">${rating.text}</span>`;
+    const tossUpBadge = isTossUp && rating.text !== '五五波'
+      ? `<span style="display:inline-block; background: rgba(239, 68, 68, 0.25); color: #FCA5A5; border: 1px solid rgba(248, 113, 113, 0.5); font-size: 0.7rem; font-weight: 700; margin-left: 5px; padding: 2px 7px; border-radius: 999px;">激戰區</span>`
+      : '';
+
+    // High-contrast candidate colors for dark slate (#0F172A) background
+    const darkTextColors = {
+      'KMT': '#60A5FA',
+      'DPP': '#34D399',
+      'TPP': '#22D3EE',
+      'IND': '#C084FC',
+      'OTHER': '#CBD5E1'
+    };
+    const darkBarColors = {
+      'KMT': '#3B82F6',
+      'DPP': '#10B981',
+      'TPP': '#06B6D4',
+      'IND': '#A855F7',
+      'OTHER': '#94A3B8'
+    };
 
     const candidates = election.candidates.map(c => {
       const share = result.predictedVoteShares[c.id] || 0;
-      const prob = result.winProbabilities ? (result.winProbabilities[c.id] || 0) : 0;
-      return { ...c, share, prob };
+      const rawProb = result.winProbabilities ? (result.winProbabilities[c.id] || 0) : 0;
+      // Convert 0~1 probability to 0~100 percentage if needed
+      const probPct = rawProb <= 1.0 && rawProb > 0 ? rawProb * 100 : rawProb;
+      return { ...c, share, probPct };
     }).sort((a, b) => b.share - a.share);
 
-    const rows = candidates.map(c => `
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px; font-size: 0.85rem;">
-        <span style="color: ${c.color}; font-weight: 700;">${c.name} (${c.party})</span>
-        <span style="font-weight: 800; color: ${c.color};">${c.share.toFixed(1)}% <span style="font-size:0.72rem; opacity:0.8;">(${c.prob.toFixed(0)}%勝率)</span></span>
+    const rows = candidates.map(c => {
+      const partyKey = (c.party || 'OTHER').toUpperCase();
+      const textColor = darkTextColors[partyKey] || '#E2E8F0';
+      const barColor = darkBarColors[partyKey] || c.color || '#60A5FA';
+      return `
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 8px; font-size: 0.86rem; gap: 10px;">
+        <span style="color: ${textColor}; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: ${barColor}; display: inline-block; flex-shrink: 0;"></span>
+          ${c.name} <span style="font-size: 0.75rem; color: #CBD5E1; font-weight: 600;">(${c.party})</span>
+        </span>
+        <span style="font-weight: 800; color: #F8FAFC; font-variant-numeric: tabular-nums;">
+          ${c.share.toFixed(1)}% <span style="font-size: 0.74rem; color: ${textColor}; font-weight: 600; margin-left: 2px;">(${c.probPct.toFixed(1)}%勝率)</span>
+        </span>
       </div>
-      <div style="width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; margin-top: 2px;">
-        <div style="width: ${c.share.toFixed(1)}%; height: 100%; background-color: ${c.color};"></div>
+      <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.12); border-radius: 999px; overflow: hidden; margin-top: 4px;">
+        <div style="width: ${c.share.toFixed(1)}%; height: 100%; background-color: ${barColor}; border-radius: 999px;"></div>
       </div>
-    `).join('');
+    `;
+    }).join('');
 
     tooltip.innerHTML = `
-      <div style="padding: 10px 12px; min-width: 200px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 6px; margin-bottom: 6px;">
-          <strong style="font-size: 1rem; color: #fff;">${election.cityName}</strong>
-          <div>${ratingBadge}${tossUpBadge}</div>
+      <div style="padding: 12px 14px; min-width: 235px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.14); padding-bottom: 8px; margin-bottom: 4px; gap: 8px;">
+          <strong style="font-size: 1.02rem; color: #FFFFFF; letter-spacing: 0.02em;">${election.cityName}</strong>
+          <div style="display: flex; align-items: center;">${ratingBadge}${tossUpBadge}</div>
         </div>
         ${rows}
-        <div style="margin-top: 8px; font-size: 0.75rem; color: rgba(255,255,255,0.7); display: flex; justify-content: space-between;">
-          <span>領先差距：${margin.toFixed(1)}%</span>
-          <span style="color: #60A5FA;">點擊查看卡片 ➔</span>
+        <div style="margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.76rem; color: #CBD5E1; display: flex; justify-content: space-between; align-items: center;">
+          <span>領先差距：<strong style="color: #FFFFFF;">${margin.toFixed(1)}%</strong></span>
+          <span style="color: #93C5FD; font-weight: 600;">點擊查看卡片 ➔</span>
         </div>
       </div>
     `;
