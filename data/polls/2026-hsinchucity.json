@@ -48,6 +48,58 @@
       },
       "undecided": 15.6,
       "source": "https://rwnews.tw/"
+    },
+    {
+      "id": "hc2026-004",
+      "date": "2026-09-16",
+      "pollster": "ettoday",
+      "pollsterName": "ETtoday民調雲",
+      "sampleSize": 1069,
+      "method": "online",
+      "marginOfError": 3.00,
+      "results": {
+        "kao": 48.6,
+        "chuang_c_c": 21.2,
+        "ho_c_y": 1.8
+      },
+      "undecided": 28.4,
+      "notes": "9/3-10調查，9/16公布。ETtoday民調雲以EDM及手機簡訊通知進行封閉式網路問卷調查（N=1069，誤差±3.0%）。三腳督局勢下高虹安48.6%大幅領先莊競程21.2%（差距27.4%）、何志勇1.8%，未決定25.5%、不投票/廢票2.9%。高虹安施政滿意度62.0%（不滿意32.7%），連任支持度51.0% vs 不支持29.5%。",
+      "source": "https://www.ettoday.net/"
+    },
+    {
+      "id": "hc2026-005",
+      "date": "2026-09-22",
+      "pollster": "cnews",
+      "pollsterName": "CNEWS匯流民調",
+      "sampleSize": 1070,
+      "method": "phone",
+      "marginOfError": 3.00,
+      "results": {
+        "kao": 49.5,
+        "chuang_c_c": 25.7,
+        "ho_c_y": 6.1
+      },
+      "undecided": 18.7,
+      "notes": "9月中旬調查，9/22公布。CNEWS匯流新聞網執行CATI市話抽樣調查（N=1070，誤差±3.00%）。高虹安49.5%居冠，領先莊競程25.7%（差距23.8%）與何志勇6.1%，未明確回答18.7%。中間選民52.6%支持高虹安、18.3%支持莊競程；連任支持度中70.2%中間選民支持高虹安連任。",
+      "source": "https://cnews.com.tw/"
+    },
+    {
+      "id": "hc2026-006",
+      "date": "2026-11-03",
+      "pollster": "evidence",
+      "pollsterName": "循證民調（Newtalk新聞委託）",
+      "commissioner": "Newtalk新聞（先驅媒體）",
+      "sampleSize": 1068,
+      "method": "phone",
+      "marginOfError": 3.00,
+      "results": {
+        "kao": 38.1,
+        "chuang_c_c": 36.1,
+        "ho_c_y": 1.9
+      },
+      "undecided": 23.9,
+      "notes": "10/28-29調查，11/3公布。Newtalk新聞委託循證民調（蘇孔志博士主持）執行CATI市話調查（N=1068，誤差±3.0%）。高虹安38.1%微幅領先莊競程36.1%（差距僅2.0%，進入抽樣誤差範圍五五波），未決定23.9%（其餘1.9%）。在占65.2%「一定會去投票」核心選民中，莊競程以39.4%反超高虹安36.1%（領先3.3%）。負面觀感（不欣賞度）高虹安34.2% vs 莊競程10.9%；女性選民莊36.4%勝高32.2%，30-39歲及50歲以上莊競程取得領先。",
+      "source": "https://newtalk.tw/"
     }
   ]
 }
