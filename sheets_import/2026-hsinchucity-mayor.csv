@@ -1,7 +1,8 @@
 id,date,pollster,pollsterName,sampleSize,method,marginOfError,results,neutralResults,undecided,source
 hc2026-001,2026-06-25,rwnews,鏡新聞,1085,phone,2.97,"kao:37.5,chuang_c_c:30.2,ho_c_y:16.1",,16.2,https://www.mnews.tw/
-hc2026-002,2026-08-12,cnews,匯流民調,1068,phone,3.0,"kao:38.2,chuang_c_c:29.5,ho_c_y:16.4",,15.9,https://cnews.com.tw/
+hc2026-002,2026-08-12,cnews,匯流民調,1068,phone,3,"kao:38.2,chuang_c_c:29.5,ho_c_y:16.4",,15.9,https://cnews.com.tw/
 hc2026-003,2026-09-08,rwreport,菱傳媒（皮爾森數據）,1125,online,2.92,"kao:38.5,chuang_c_c:30.1,ho_c_y:15.8",,15.6,https://rwnews.tw/
-hc2026-004,2026-09-16,ettoday,ETtoday民調雲,1069,online,3.0,"kao:48.6,chuang_c_c:21.2,ho_c_y:1.8",,28.4,https://www.ettoday.net/
-hc2026-005,2026-09-22,cnews,CNEWS匯流民調,1070,phone,3.0,"kao:49.5,chuang_c_c:25.7,ho_c_y:6.1",,18.7,https://cnews.com.tw/
-hc2026-006,2026-11-03,evidence,循證民調（Newtalk新聞委託）,1068,phone,3.0,"kao:38.1,chuang_c_c:36.1,ho_c_y:1.9",,23.9,https://newtalk.tw/
+hc2026-004,2026-09-16,ettoday,ETtoday民調雲,1069,online,3,"kao:48.6,chuang_c_c:21.2,ho_c_y:1.8",,28.4,https://www.ettoday.net/
+hc2026-005,2026-09-22,cnews,CNEWS匯流民調,1070,phone,3,"kao:49.5,chuang_c_c:25.7,ho_c_y:6.1",,18.7,https://cnews.com.tw/
+hc2026-006,2026-11-03,evidence,循證民調（Newtalk新聞委託）,1068,phone,3,"kao:38.1,chuang_c_c:36.1,ho_c_y:1.9",,23.9,https://newtalk.tw/
+hc2026-007,2026-11-05,tvbs,TVBS民調中心（文大陳毓麒教授委託）,1098,phone,3,"kao:46.0,chuang_c_c:31.0,ho_c_y:2.0","kao:42.0,chuang_c_c:13.0,ho_c_y:2.0",20,https://news.tvbs.com.tw/
