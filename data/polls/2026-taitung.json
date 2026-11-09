@@ -45,6 +45,22 @@
       },
       "undecided": 14.7,
       "source": "https://www.mnews.tw/"
+    },
+    {
+      "id": "tt2026-004",
+      "date": "2026-11-07",
+      "pollster": "ettoday",
+      "pollsterName": "ETtoday民調雲",
+      "sampleSize": 1071,
+      "method": "online",
+      "marginOfError": 2.99,
+      "results": {
+        "wu_s_h": 43.6,
+        "chen_y": 29.3
+      },
+      "undecided": 22.9,
+      "notes": "10/25-11/2調查，11/7公布。ETtoday民調雲針對設籍台東縣16鄉鎮市年滿20歲民眾，以EDM與手機簡訊通知封閉式網路問卷加權調查（N=1071，誤差±2.99%）。吳秀華43.6%領先陳瑩29.3%（差距14.3%），李吳穎智2.0%、王志偉0.4%，尚未表態22.9%。當選看好度吳秀華42.7% vs 陳瑩25.7%（差距17.0%）。",
+      "source": "https://www.ettoday.net/"
     }
   ]
 }
