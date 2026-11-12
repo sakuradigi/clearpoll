@@ -307,6 +307,17 @@
       "historicalAccuracy": 0.65,
       "methodology": "AI語音雙底冊電話調查（市話+手機，性別、年齡、地區、教育程度加權，未含政黨傾向加權）",
       "notes": "2026年委託窩窩科技執行AI語音雙底冊電訪，未採政黨傾向加權，歷史選舉驗證資料較少，機構與學者背景略偏綠營"
+    },
+    {
+      "id": "dadi",
+      "name": "大地民調",
+      "fullName": "大地民意研究股份有限公司",
+      "credibilityScore": 0.68,
+      "leanDirection": "slightly-green",
+      "leanMagnitude": 0.15,
+      "historicalAccuracy": 0.68,
+      "methodology": "CATI電腦輔助電話訪問",
+      "notes": "國內民意調查執行機構，常接受鏡新聞及綠營地方競選陣營委託執行電話抽樣調查"
     }
   ]
 }
