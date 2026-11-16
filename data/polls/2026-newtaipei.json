@@ -369,7 +369,7 @@
       "pollsterName": "鋒燦傳媒（台大張佑宗教授執行）",
       "commissioner": "鋒燦傳媒（FTNN）",
       "sampleSize": 2033,
-      "method": "phone+cell",
+      "method": "mixed",
       "marginOfError": 2.17,
       "results": {
         "li": 35.6,
