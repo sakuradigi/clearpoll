@@ -45,6 +45,23 @@
       },
       "undecided": 8.0,
       "source": "https://udn.com/"
+    },
+    {
+      "id": "km2026-004",
+      "date": "2026-11-14",
+      "pollster": "shihhsin",
+      "pollsterName": "世新大學民調中心（金門同鄉會許奮鬥委託）",
+      "commissioner": "台北市金門同鄉會榮譽理事長許奮鬥",
+      "sampleSize": 1070,
+      "method": "phone",
+      "marginOfError": 3.00,
+      "results": {
+        "chen_y_c": 45.1,
+        "lee_w_l": 14.8
+      },
+      "undecided": 30.0,
+      "notes": "11/2-5調查，11/14公布。台北市金門同鄉會榮譽理事長許奮鬥出資委託世新大學民調中心執行市話抽樣（N=1070，誤差±3.0%）。陳玉珍45.1%大幅領先李文良14.8%與張國威6.7%（其餘候選人皆低於2%）。在「一定會投票」積極選民中，陳玉珍49.0% vs 李文良17.2% vs 張國威8.5%；當選看好度陳玉珍高達67.0% vs 李文良4.5%。",
+      "source": "https://udn.com/"
     }
   ]
 }
