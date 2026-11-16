@@ -279,12 +279,12 @@
       "id": "ftnn",
       "name": "鋒燦傳媒",
       "fullName": "鋒燦傳媒（委託台大政治系張佑宗教授執行）",
-      "credibilityScore": 0.78,
-      "leanDirection": "slightly-green",
-      "leanMagnitude": 0.12,
-      "historicalAccuracy": 0.76,
-      "methodology": "市話CATI＋網路問卷混合抽樣（由台大政治系張佑宗教授團隊負責抽樣設計與統計加權）",
-      "notes": "委託國立台灣大學政治系張佑宗教授執行，採市話與網路混合調查，完整揭露政黨傾向與交叉分析"
+      "credibilityScore": 0.86,
+      "leanDirection": "neutral",
+      "leanMagnitude": 0.05,
+      "historicalAccuracy": 0.85,
+      "methodology": "1:1 市話CATI＋實名制網路Panel（台大NTUWS＋創市際iX）混合抽樣（由台大社科院院長張佑宗教授團隊規劃設計）",
+      "notes": "由台大政治系教授（社科院院長）張佑宗團隊負責抽樣設計與多變數反覆加權（Raking），結合1000份CATI市話與1000份台大/創市際實名Panel，於2022（菱傳媒）與2024總統大選封關預測創下極高準確度"
     },
     {
       "id": "fgu",

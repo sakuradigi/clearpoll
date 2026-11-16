@@ -53,12 +53,13 @@ const ClearPollModel = {
    * @returns {number} weight between 0 and 1
    */
   calcSampleWeight(sampleSize, method) {
-    // Sample size component: sqrt(n) / sqrt(1000), capped at 1
-    const sizeWeight = Math.min(Math.sqrt(sampleSize) / Math.sqrt(1000), 1.0);
+    // Sample size component: sqrt(n) / sqrt(1000), capped at 1.25 for large-sample (N >= 1562) polls
+    const sizeWeight = Math.min(Math.sqrt(sampleSize) / Math.sqrt(1000), 1.25);
 
     // Method quality multiplier
     const methodMultipliers = {
       'face-to-face': 1.0,
+      'mixed': 0.96,
       'phone+cell': 0.95,
       'phone': 0.92,
       'online': 0.80,
@@ -145,23 +146,33 @@ const ClearPollModel = {
     const adjusted = {};
     const baseResults = applyBiasCorrection && pollsters.length > 0
       ? this.calibratePollsterBias(poll, pollsters, candidates, 1.0)
-      : poll.results;
+      : { ...poll.results };
 
     const neutralCalibrated = (poll.neutralResults && applyBiasCorrection && pollsters.length > 0)
       ? this.calibratePollsterBias({ ...poll, results: poll.neutralResults }, pollsters, candidates, 0.5)
       : poll.neutralResults;
 
     // Dynamic sample-skew calibration (Raking) when poll discloses sample partyAffiliation:
-    // If the sample's DPP-KMT gap deviates from local CDPSM fundamentals (> 3% skew),
-    // dampen the excess partisan gap proportionally rather than blending unnormalized subgroup rates.
+    // Deducts any house-effect shift already applied by calibratePollsterBias to prevent double-counting,
+    // and allows a ±5.0% natural political climate band before applying mild (15%, max ±1.2%) dampening.
     if (poll.partyAffiliation && fundamentals) {
-      const sampleGap = (poll.partyAffiliation.dpp || 0) - (poll.partyAffiliation.kmt || 0);
+      let alreadyShiftedGap = 0;
+      const pollsterObj = pollsters.find(p => p.id === poll.pollster);
+      if (applyBiasCorrection && pollsterObj && pollsterObj.leanDirection && pollsterObj.leanDirection !== 'neutral') {
+        const mag = pollsterObj.leanMagnitude || 0.1;
+        const shiftPP = mag * 12.0;
+        if (pollsterObj.leanDirection.includes('green')) alreadyShiftedGap = 2 * shiftPP;
+        else if (pollsterObj.leanDirection.includes('blue')) alreadyShiftedGap = -2 * shiftPP;
+      }
+
+      const rawSampleGap = (poll.partyAffiliation.dpp || 0) - (poll.partyAffiliation.kmt || 0);
+      const effectiveSampleGap = rawSampleGap - alreadyShiftedGap;
       const fundGap = (fundamentals.green || 40) - (fundamentals.blue || 40);
-      const skew = sampleGap - fundGap; // positive = sample over-sampled DPP; negative = sample over-sampled KMT
-      if (Math.abs(skew) > 3.0) {
-        const excess = Math.sign(skew) * (Math.abs(skew) - 3.0);
-        // Dampen 25% of excess partisan sample skew (capped at ±2.5% per candidate)
-        const shift = Math.max(-2.5, Math.min(2.5, excess * 0.25));
+      const skew = effectiveSampleGap - fundGap; // positive = sample over-sampled DPP; negative = sample over-sampled KMT
+      if (Math.abs(skew) > 5.0) {
+        const excess = Math.sign(skew) * (Math.abs(skew) - 5.0);
+        // Dampen 15% of excess partisan sample skew beyond climate band (capped at ±1.2% per candidate)
+        const shift = Math.max(-1.2, Math.min(1.2, excess * 0.15));
         for (const cid of Object.keys(baseResults)) {
           const cand = candidates.find(c => c.id === cid);
           const party = (cand?.party || '').toUpperCase();
@@ -1133,24 +1144,24 @@ const ClearPollModel = {
 
     const assessments = {
       newtaipei: {
-        shortBrief: '全台最大票倉封關前陷入毫釐五五波肉搏！模型預估蘇巧慧 50.4% vs 李四川 49.6%（差距僅 0.8%，勝率 56.1% vs 43.9%；若開啟 2022 實際得票回溯加權則為李四川 52.6% vs 蘇巧慧 47.4%）。11月16日《中國時報／艾普羅》（李 37.0% vs 蘇 33.4%）與 11月13日《台灣研究學會／關鍵調查》（李 43.1% vs 蘇 38.4%）使藍營追平，與 11/13《鋒燦》（蘇 44.0% vs 李 35.6%）及 11/9《聯合報》（蘇 42% vs 李 39%）全面對沖！',
-        detailedBrief: '新北市選情在封關前夕進入最膠著的五五波對決！繼 11 月 13 日《鋒燦傳媒》混合民調顯示蘇巧慧 44.0% 領先李四川 35.6%（經樣本政黨結構 Raking 收斂與中立選民分配後呈現 50:50 平盤）後，藍營亦有兩份封關前調查追擊：11 月 13 日《台灣研究學會》公布「關鍵調查」雙底冊電訪（N=1,373，誤差 ±2.64%），李四川以 43.1% 領先蘇巧慧 38.4%（看好度 44.2% vs 39.1%）；11 月 16 日《中國時報》委託「艾普羅」執行市話民調（11/11-13 執行，N=1,083，誤差 ±3.0%），全體李四川 37.0% 領先蘇巧慧 33.4%，而在具投票意願選民中李四川 38.9% vs 蘇巧慧 36.1% 差距縮小至 2.8%（蘇支持者 76.0% 一定會投高於李 73.3%）。ClearPoll 模型同時納入 11/16 中時艾普羅（13.5%）、11/13 鋒燦（13.1%）、11/9 聯合報（12.9%）與 11/13 台灣研究學會（12.4%）等五大最新民調，推算蘇巧慧 50.4% vs 李四川 49.6%（差距僅 0.8%，若於沙盒開啟 2022 實際得票回溯加權則為李四川 52.6% vs 蘇巧慧 47.4%），勝負取決於投票率與中間選民臨場動向！',
+        shortBrief: '全台最大票倉封關前陷入毫釐五五波肉搏！模型預估蘇巧慧 50.9% vs 李四川 49.1%（差距 1.8%，勝率 63.7% vs 36.3%；若開啟 2022 實際得票回溯加權則為李四川 52.3% vs 蘇巧慧 47.7%）。11月13日《鋒燦傳媒》（台大張佑宗教授）1:1混合大樣本調查獲最高權重 16.2%（蘇 44.0% vs 李 35.6%），與 11/16《中時艾普羅》（李 37.0% vs 蘇 33.4%）及 11/13《台灣研究學會》（李 43.1% vs 蘇 38.4%）正面對沖！',
+        detailedBrief: '新北市選情在封關前夕進入最膠著的五五波對決！升級模型解除大樣本上限並消除雙重偏誤扣減後，11 月 13 日《鋒燦傳媒》（台大社科院院長張佑宗教授團隊主持，市話 1,005＋實名網路 Panel 1,028 共 N=2,033）以最高單筆權重 16.2% 領銜大盤（蘇巧慧 44.0% vs 李四川 35.6%，溫和樣本收斂後單筆推估蘇 52.6% vs 李 47.4%）。同時藍營亦有兩份封關前調查追擊：11 月 13 日《台灣研究學會》（關鍵調查，雙底冊 N=1,373）李四川 43.1% 領先蘇巧慧 38.4%；11 月 16 日《中國時報／艾普羅》（市話 N=1,083）全體李四川 37.0% 領先蘇巧慧 33.4%（具投票意願李 38.9% vs 蘇 36.1%）。ClearPoll 綜合納入 11/13 鋒燦（16.2%）、11/13 台灣研究學會（13.1%）、11/16 中時艾普羅（12.6%）與 11/9 聯合報（12.3%）後，推算蘇巧慧 50.9% vs 李四川 49.1%（差距 1.8%，開啟 2022 回溯加權則為李四川 52.3% vs 蘇巧慧 47.7%），勝負取決於投票率與近半觀望中立選民臨場動向！',
         factors: [
-          '11/16 中時艾普羅 & 11/13 台灣研究學會追近：李四川分別領先 3.6%（具投票意願縮至 2.8%）與 4.7%，拉平綠營前段民調優勢',
-          '11/13 鋒燦 & 11/9 聯合報對沖：鋒燦大樣本蘇 44.0% 對 李 35.6%（中立李 24.4% 對蘇 21.7%），聯合報蘇 42% 對 李 39%（中立蘇 31% 對李 29%）',
-          '投票意願與動員關鍵：蘇巧慧支持者 76.0% 一定會投略高於李四川 73.3%，標準模型 50.4:49.6 呈極限五五波，回溯加權李四川 52.6% 具組織優勢'
+          '11/13 鋒燦 1:1 混合大樣本（N=2,033，權重 16.2%）：蘇 44.0% 勝李 35.6%（一定投票 47.7% 對 36.7%，中立選民李 24.4% 對蘇 21.7%）',
+          '11/16 中時艾普羅 & 11/13 台灣研究學會追近：李四川分別領先 3.6%（具投票意願縮至 2.8%）與 4.7%，拉近前段綠營民調優勢',
+          '投票意願與侯光環移轉：蘇支持者 76.0% 一定會投略高於李 73.3%，標準模型蘇 50.9% : 李 49.1% 呈五五波拉鋸'
         ],
-        confidence: '五五波拉鋸 (差距僅0.8%)'
+        confidence: '五五波拉鋸 (差距1.8%)'
       },
       kaohsiung: {
-        shortBrief: '港都選情進入最後決戰，綠營賴瑞隆穩固領跑！模型預估賴瑞隆 53.6% vs 柯志恩 46.4%（差距 7.2%，勝率 90.7% vs 9.3%；開啟 2022 實際得票回溯加權則為賴瑞隆 54.4% vs 柯志恩 45.6%）。11月2日《聯合報》雙底冊民調賴瑞隆 40% 領先柯志恩 33%（看好度賴 49% vs 柯 21%），同日《鋒燦傳媒》（台大張佑宗執行）賴 47.8% 大勝柯 27.4%，與 10月30日《ETtoday》網路調查（43.2% vs 43.1%）形成鮮明對照！',
-        detailedBrief: '高雄市選情在 10 月 30 日首場電視辯論會後迎來兩份重量級民調！11 月 2 日《聯合報》公布涵蓋辯論期間之雙底冊電訪（N=1,101），民進黨賴瑞隆以 40% 支持度領先國民黨柯志恩的 33%（未決定 26%，當選看好度賴 49% 遠高於柯 21%）；同日《鋒燦傳媒》（委託台大政治系張佑宗教授執行，市話 1,014 + 網路 810 共 1,824 份）顯示賴瑞隆以 47.8% 大幅領先柯志恩 27.4%（未表態 22.4%）。交叉分析顯示，柯志恩在「無政黨傾向／中立選民」（聯合報柯 25% vs 賴 22%、鋒燦柯 23.4% vs 賴 18.9%、ETtoday 網路調查柯 38.8% vs 賴 20.6%）與民眾黨支持者（60%~64.6% 挺柯）中具跨陣營吸票力；惟高雄具備深厚綠營結構基本盤（CDPSM 綠藍比約 60:40），模型完整分離「已表態基本盤（含樣本政黨結構偏差自動收斂）」與「未決定選池（70% 中立動能 + 30% 結構先驗）」並核實ETtoday網路調查權重（0.70）後，推算賴瑞隆以 53.6% vs 柯志恩 46.4%（差距 7.2%）穩健領先，若開啟「2022 實際得票回溯加權」則賴瑞隆以 54.4% vs 45.6% 穩守港都！',
+        shortBrief: '港都選情進入最後決戰，綠營賴瑞隆穩固領跑！模型預估賴瑞隆 54.7% vs 柯志恩 45.3%（差距 9.4%，勝率 93.8% vs 6.2%；開啟 2022 實際得票回溯加權則為賴瑞隆 55.1% vs 柯志恩 44.9%）。11月2日《鋒燦傳媒》（台大張佑宗執行，權重 34.9%）賴 47.8% 大勝柯 27.4%，與同日《聯合報》（賴 40% vs 柯 33%）共同確立綠營優勢！',
+        detailedBrief: '高雄市選情在 10 月 30 日首場電視辯論會後迎來兩份重量級民調！升級模型消除雙重偏誤扣減並開放大樣本加權上限後，11 月 2 日《鋒燦傳媒》（委託台大政治系張佑宗教授執行，市話 1,014 + 網路 810 共 1,824 份）取得 34.9% 核心權重（賴瑞隆 47.8% 大幅領先柯志恩 27.4%，單筆推估賴 58.9% vs 柯 41.1%）；同日《聯合報》雙底冊電訪（N=1,101）亦顯示賴瑞隆 40% 領先柯志恩 33%（當選看好度賴 49% 遠高於柯 21%）。交叉分析顯示，柯志恩在「無政黨傾向／中立選民」（聯合報柯 25% vs 賴 22%、鋒燦柯 23.4% vs 賴 18.9%、ETtoday 網路調查柯 38.8% vs 賴 20.6%）與民眾黨支持者（60%~64.6% 挺柯）中具跨陣營吸票力；惟高雄具備深厚綠營結構基本盤，模型綜合加權並核實 ETtoday 網路調查權重（22.0%）後，推算賴瑞隆以 54.7% vs 柯志恩 45.3%（差距 9.4%）穩健領先，若開啟「2022 實際得票回溯加權」則為 55.1% vs 44.9% 穩守港都！',
         factors: [
-          '雙民調驗證綠營基本盤：11/2聯合報賴40%勝柯33%（看好度49%對21%）、11/2鋒燦賴47.8%勝柯27.4%，綠營女性與長者基本盤穩固',
+          '雙民調驗證綠營基本盤：11/2 鋒燦（權重 34.9%）賴 47.8% 勝柯 27.4%、11/2 聯合報賴 40% 勝柯 33%（看好度 49% 對 21%）',
           '中立與白營追擊動能：聯合報(25% vs 22%)與鋒燦(23.4% vs 18.9%)中立選民均由柯微幅占優且白營逾六成挺柯，惟逾五成中立者仍在觀望',
-          '網路與電訪方法論校正：ETtoday兩波網路問卷(9/11、10/30)呈五五波且未表態僅12%，模型依方法論賦予0.70網路權重避免扭曲電訪基本盤'
+          '網路與電訪方法論校正：ETtoday 兩波網路問卷(9/11、10/30)呈五五波且未表態僅 12%，模型依方法論權重平衡各抽樣管道'
         ],
-        confidence: '優勢領先 (綠領先7.2%)'
+        confidence: '優勢領先 (綠領先9.4%)'
       },
       taichung: {
         shortBrief: '藍營江啟臣在 11/9 世新大學最新民調穩住陣腳，模型預估江啟臣 53.5% vs 何欣純 46.5%（差距 7.0%，勝率 85.4% vs 14.6%；開啟 2022 回溯加權為江 54.7% vs 何 45.3%）。11月9日《世新大學》市話民調江啟臣以 39.2% 領先何欣純 30.0%（差 9.2%），與 11月3日《信民協會》（何 41.1% vs 江 30.4%）形成市話與雙底冊的正面交鋒！',
@@ -1163,15 +1174,15 @@ const ClearPollModel = {
         confidence: '優勢領先 (藍領先7.0%)'
       },
       taipei: {
-        shortBrief: '封關前首都選情進入終極五五波膠著！模型預估蔣萬安 50.7% vs 沈伯洋 49.3%（差距僅 1.4%，勝率 59.6% vs 40.4%；開啟 2022 回溯加權為蔣 51.0% vs 沈 49.0%）。11月16日《鋒燦傳媒》（沈 44.7% vs 蔣 43.0%，中立選民蔣 40.7% vs 沈 28.6%）與 11月15日《新台灣國策智庫》（沈 46.3% vs 蔣 42.2%，中立沈 52.1% vs 蔣 27.1%）兩份最新民調經過樣本政黨結構 Raking 校正後，首都呈現毫釐拉鋸！',
-        detailedBrief: '台北市選情在民調封關倒數階段迎來兩份重量級調查正面檢驗！11 月 15 日凱達格蘭基金會《新台灣國策智庫》公布委託「趨勢民調」執行之全市話調查（N=1,071，誤差 ±2.99%），沈伯洋以 46.3% 領先蔣萬安 42.2%（看好度 46.9% vs 40.8%，不偏任何黨之中間選民沈 52.1% vs 蔣 27.1%，民眾黨認同者 93.6% 挺蔣）；隔日 11 月 16 日《鋒燦傳媒》（台大張佑宗教授主持）公布市話 1,008＋網路 1,018 混合大樣本調查（N=2,026，誤差 ±2.18%），沈伯洋 44.7% 與蔣萬安 43.0% 僅差 1.7%（誤差範圍內），而在占 27.1% 之中立選民中蔣萬安以 40.7% 領先沈伯洋 28.6%（民眾黨支持者 81.2% 挺蔣）。值得注意的是，兩份調查樣本政黨結構皆呈綠大於藍（國策智庫 37.3% vs 29.0%、鋒燦 36.3% vs 24.9%），ClearPoll 模型自動啟動「樣本政黨結構 Raking 收斂與機構校正」後，鋒燦單筆推估蔣 54.0% vs 沈 46.0%、國策智庫推估蔣 51.1% vs 沈 48.9%，綜合 TVBS（蔣 46% vs 沈 42%）、聯合報（沈 45% vs 蔣 41%）與 ETtoday 後，模型推算蔣萬安 50.7% vs 沈伯洋 49.3%（開啟 2022 回溯加權則為 51.0% vs 49.0%），勝負僅在 1.5% 以內！',
+        shortBrief: '封關前首都選情進入終極五五波膠著！模型預估蔣萬安 50.2% vs 沈伯洋 49.8%（差距僅 0.4%，勝率 53.3% vs 46.7%；開啟 2022 回溯加權為蔣 50.8% vs 沈 49.2%）。11月16日《鋒燦傳媒》（台大張佑宗教授，權重躍居第一達 16.5%，沈 44.7% vs 蔣 43.0%、中立選民蔣 40.7% vs 沈 28.6%）與 11月15日《新台灣國策智庫》（沈 46.3% vs 蔣 42.2%，中立沈 52.1% vs 蔣 27.1%）顯示雙雄幾乎完全戰平！',
+        detailedBrief: '台北市選情在民調封關倒數階段迎來兩份重量級調查正面檢驗！升級模型解除大樣本上限並消除雙重偏誤扣減後，11 月 16 日《鋒燦傳媒》（台大社科院院長張佑宗教授主持，市話 1,008＋實名網路 Panel 1,018 共 N=2,026，誤差 ±2.18%）以最高單筆權重 16.5% 領銜定錨，沈伯洋 44.7% 與蔣萬安 43.0% 僅差 1.7%，而在占 27.1% 之中立選民中蔣萬安以 40.7% 領先沈伯洋 28.6%（民眾黨支持者 81.2% 挺蔣），溫和樣本結構收斂與未表態分配後單筆推估為蔣 51.1% vs 沈 48.9%。前一日 11 月 15 日凱達格蘭基金會《新台灣國策智庫》（趨勢民調執行全市話 N=1,071，權重 10.8%）則為沈伯洋 46.3% 領先蔣萬安 42.2%（單筆推估沈 50.7% vs 蔣 49.3%，中間選民沈 52.1% vs 蔣 27.1%）。綜合 TVBS（蔣 46% vs 沈 42%）、聯合報（沈 45% vs 蔣 41%）與 ETtoday 後，模型推算蔣萬安 50.2% vs 沈伯洋 49.8%（差距僅 0.4%，開啟 2022 回溯加權則為 50.8% vs 49.2%），首都呈現極限平手！',
         factors: [
-          '11/16 鋒燦混合調查（N=2,026）：沈伯洋44.7% vs 蔣萬安43.0%（差1.7%），中立選民蔣40.7%大幅領先沈28.6%',
-          '11/15 新台灣國策智庫（N=1,071）：沈伯洋46.3%領先蔣萬安42.2%（看好度46.9% vs 40.8%，中間選民沈52.1% vs 蔣27.1%）',
-          '樣本政黨結構自動 Raking 校正：兩份新民調綠營受訪比例偏高（36%~37%對25%~29%），模型自動平衡校正後雙強呈現50.7% vs 49.3%五五波',
-          '藍白整合 vs 青年返鄉動員：白營支持者81%~93%高比例轉挺蔣萬安，而沈伯洋依靠中間選民與年輕世代投票率力拚翻轉'
+          '11/16 鋒燦 1:1 混合大樣本（N=2,026，權重 16.5%）：沈 44.7% vs 蔣 43.0%（差 1.7%），中立選民蔣 40.7% 領先沈 28.6%',
+          '11/15 新台灣國策智庫（N=1,071，權重 10.8%）：沈 46.3% 領先蔣 42.2%（看好度 46.9% vs 40.8%，中間選民沈 52.1% vs 蔣 27.1%）',
+          '防範雙重扣減校正：系統修正「機構效應＋政黨結構」重複折減問題並保留 ±5% 氣候帶，使雙雄戰局收斂至 50.2% : 49.8%',
+          '藍白整合 vs 青年返鄉動員：白營支持者 81%~93% 高比例轉挺蔣萬安，而沈伯洋依靠中間選民與年輕世代投票率力拚翻轉'
         ],
-        confidence: '五五波拉鋸 (差距僅1.4%)'
+        confidence: '五五波拉鋸 (差距僅0.4%)'
       },
       taoyuan: {
         shortBrief: '現任市長張善政維持穩定領先，惟 11/10 信民協會雙底冊顯示黃世杰急起直追！模型預估張善政 57.7% vs 黃世杰 42.3%（差距 15.4%，勝率 99.7%；開啟 2022 回溯加權為張 57.2% vs 黃 42.8%）。11月10日《信民協會》（戴立安規劃）雙底冊民調張善政 36.9% vs 黃世杰 32.8%（差 4.1%，中立選民張 24.6% vs 黃 14.8%，一定投票選民黃 42.7% 反超張 41.4%，看好度張 56.4% vs 黃 14.8%）！',
