@@ -318,6 +318,28 @@
       "historicalAccuracy": 0.68,
       "methodology": "CATI電腦輔助電話訪問",
       "notes": "國內民意調查執行機構，常接受鏡新聞及綠營地方競選陣營委託執行電話抽樣調查"
+    },
+    {
+      "id": "tia",
+      "name": "台灣勵志協會",
+      "fullName": "台灣勵志協會（委託故鄉市場調查執行）",
+      "credibilityScore": 0.72,
+      "leanDirection": "slightly-green",
+      "leanMagnitude": 0.14,
+      "historicalAccuracy": 0.70,
+      "methodology": "市話＋手機雙架構隨機抽樣（性別、年齡、行政區加權，未含政黨傾向加權）",
+      "notes": "本土公民組織台灣勵志協會（TIA）委託故鄉市場調查執行雙底冊電訪，未進行政黨傾向加權，政治光譜略偏泛綠本土陣營"
+    },
+    {
+      "id": "utaipei",
+      "name": "臺北市立大學",
+      "fullName": "臺北市立大學民意與政策研究中心",
+      "credibilityScore": 0.72,
+      "leanDirection": "slightly-blue",
+      "leanMagnitude": 0.10,
+      "historicalAccuracy": 0.70,
+      "methodology": "MISS-CATI電腦輔助市內電話訪問",
+      "notes": "國立大學學術民調機構，常接受地方議會或政黨縣市黨部委託執行電話抽樣調查"
     }
   ]
 }
