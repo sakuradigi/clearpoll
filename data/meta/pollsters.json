@@ -216,7 +216,7 @@
       "credibilityScore": 0.72,
       "leanDirection": "slightly-blue",
       "leanMagnitude": 0.1,
-      "historicalAccuracy": 0.70,
+      "historicalAccuracy": 0.7,
       "methodology": "CATI電腦輔助電話訪問",
       "notes": "長期委託或自製各縣市大選調查"
     },
@@ -227,7 +227,7 @@
       "credibilityScore": 0.72,
       "leanDirection": "neutral",
       "leanMagnitude": 0.08,
-      "historicalAccuracy": 0.70,
+      "historicalAccuracy": 0.7,
       "methodology": "CATI電腦輔助市內電話訪問",
       "notes": "具備學術研究背景顧問，長期執行地方公共政策與選情電話民意調查"
     },
@@ -326,7 +326,7 @@
       "credibilityScore": 0.72,
       "leanDirection": "slightly-green",
       "leanMagnitude": 0.14,
-      "historicalAccuracy": 0.70,
+      "historicalAccuracy": 0.7,
       "methodology": "市話＋手機雙架構隨機抽樣（性別、年齡、行政區加權，未含政黨傾向加權）",
       "notes": "本土公民組織台灣勵志協會（TIA）委託故鄉市場調查執行雙底冊電訪，未進行政黨傾向加權，政治光譜略偏泛綠本土陣營"
     },
@@ -336,10 +336,21 @@
       "fullName": "臺北市立大學民意與政策研究中心",
       "credibilityScore": 0.72,
       "leanDirection": "slightly-blue",
-      "leanMagnitude": 0.10,
-      "historicalAccuracy": 0.70,
+      "leanMagnitude": 0.1,
+      "historicalAccuracy": 0.7,
       "methodology": "MISS-CATI電腦輔助市內電話訪問",
       "notes": "國立大學學術民調機構，常接受地方議會或政黨縣市黨部委託執行電話抽樣調查"
+    },
+    {
+      "id": "wowo",
+      "name": "窩窩科技",
+      "fullName": "窩窩科技（AI語音電話民調）",
+      "credibilityScore": 0.65,
+      "leanDirection": "slightly-green",
+      "leanMagnitude": 0.12,
+      "historicalAccuracy": 0.62,
+      "methodology": "AI語音雙底冊電話訪問（市話+手機，年齡/性別/地區/政黨傾向加權）",
+      "notes": "2026年執行AI語音雙底冊電訪（市話+手機），採人口與政黨傾向加權；歷史選舉驗證資料較少，計畫主持人林冠年背景略偏綠"
     }
   ]
 }

@@ -34,13 +34,30 @@
       "source": "https://www.storm.mg/"
     },
     {
+      "id": "hl2026-005",
+      "date": "2026-11-13",
+      "pollster": "wowo",
+      "pollsterName": "窩窩科技AI電訪（臺北國際商會委託）",
+      "commissioner": "臺北國際商會",
+      "sampleSize": 1077,
+      "method": "ivr",
+      "marginOfError": 3,
+      "results": {
+        "yu_s_c": 25.3,
+        "wei_c_h": 25.1,
+        "chang_c": 25
+      },
+      "notes": "11/11-12調查，11/13-14公布。臺北國際商會委託窩窩科技（計畫主持人林冠年）執行市話(713份)＋手機(364份)AI語音雙底冊訪問（N=1077，誤差±3.0%，加權設計效果後±3.5%）。游淑貞25.3%、魏嘉賢25.1%、張峻25.0%呈三強極限拉鋸，報導稱近三成未表態（100%扣除三人支持度餘24.6%）。一對一模擬：魏嘉賢40.1% vs 游淑貞26.3%；游淑貞36.1% vs 張峻35.2%。",
+      "source": "https://www.upmedia.mg/"
+    },
+    {
       "id": "hl2026-004",
       "date": "2026-11-15",
       "pollster": "storm",
       "pollsterName": "風傳媒封關民調",
       "sampleSize": 1068,
       "method": "phone",
-      "marginOfError": 3.00,
+      "marginOfError": 3,
       "results": {
         "yu_s_c": 30.5,
         "chang_c": 19.1,

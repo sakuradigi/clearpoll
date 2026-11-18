@@ -10,10 +10,10 @@
       "method": "phone",
       "marginOfError": 2.95,
       "results": {
-        "li": 48.0,
-        "su": 33.0
+        "li": 48,
+        "su": 33
       },
-      "undecided": 19.0,
+      "undecided": 19,
       "source": "https://news.tvbs.com.tw/"
     },
     {
@@ -23,12 +23,12 @@
       "pollsterName": "美麗島",
       "sampleSize": 1070,
       "method": "phone",
-      "marginOfError": 3.0,
+      "marginOfError": 3,
       "results": {
         "li": 35.5,
         "su": 34.5
       },
-      "undecided": 30.0,
+      "undecided": 30,
       "source": "https://www.my-formosa.com/"
     },
     {
@@ -39,7 +39,7 @@
       "commissioner": "震傳媒",
       "sampleSize": 1070,
       "method": "phone",
-      "marginOfError": 3.0,
+      "marginOfError": 3,
       "results": {
         "li": 39.6,
         "su": 34.8
@@ -71,7 +71,7 @@
       "method": "phone",
       "marginOfError": 2.97,
       "results": {
-        "li": 40.0,
+        "li": 40,
         "su": 40.2
       },
       "undecided": 19.8,
@@ -105,7 +105,7 @@
       "commissioner": "國民黨新北市議會黨團",
       "sampleSize": 1050,
       "method": "phone",
-      "marginOfError": 3.0,
+      "marginOfError": 3,
       "results": {
         "li": 43.7,
         "su": 36.8
@@ -135,12 +135,12 @@
       "pollsterName": "年代民調",
       "sampleSize": 1070,
       "method": "phone",
-      "marginOfError": 3.0,
+      "marginOfError": 3,
       "results": {
         "li": 32.2,
         "su": 37.8
       },
-      "undecided": 30.0,
+      "undecided": 30,
       "source": "https://www.eranews.com.tw/"
     },
     {
@@ -151,7 +151,7 @@
       "commissioner": "台北市信民兩岸研究協會",
       "sampleSize": 1071,
       "method": "phone",
-      "marginOfError": 3.0,
+      "marginOfError": 3,
       "results": {
         "su": 35.2,
         "li": 34.7
@@ -200,7 +200,7 @@
       "marginOfError": 2.98,
       "results": {
         "li": 38.2,
-        "su": 38.0
+        "su": 38
       },
       "undecided": 23.8,
       "source": "http://www.my-formosa.com/"
@@ -226,7 +226,7 @@
         "dpp": 33.4,
         "kmt": 28.7,
         "tpp": 10.6,
-        "independent": 24.0,
+        "independent": 24,
         "other": 3.3
       },
       "undecided": 22.1,
@@ -258,7 +258,7 @@
       "commissioner": "國民黨新北市議會黨團智庫",
       "sampleSize": 1210,
       "method": "phone",
-      "marginOfError": 2.80,
+      "marginOfError": 2.8,
       "results": {
         "li": 42.6,
         "su": 35.9
@@ -279,10 +279,10 @@
       "commissioner": "台北市信民兩岸研究協會",
       "sampleSize": 1073,
       "method": "phone+cell",
-      "marginOfError": 3.00,
+      "marginOfError": 3,
       "results": {
         "su": 43.1,
-        "li": 30.0
+        "li": 30
       },
       "neutralResults": {
         "su": 23.7,
@@ -300,7 +300,7 @@
       "commissioner": "鉅聞天下新聞網",
       "sampleSize": 1066,
       "method": "online",
-      "marginOfError": 3.00,
+      "marginOfError": 3,
       "results": {
         "li": 45.74,
         "su": 45.18
@@ -333,8 +333,8 @@
       },
       "partyAffiliation": {
         "dpp": 40.7,
-        "kmt": 23.0,
-        "tpp": 9.0,
+        "kmt": 23,
+        "tpp": 9,
         "other": 2.4,
         "independent": 24.8
       },
@@ -349,16 +349,16 @@
       "pollsterName": "聯合報系民意調查中心",
       "sampleSize": 1114,
       "method": "phone+cell",
-      "marginOfError": 3.00,
+      "marginOfError": 3,
       "results": {
-        "li": 39.0,
-        "su": 42.0
+        "li": 39,
+        "su": 42
       },
       "neutralResults": {
-        "li": 29.0,
-        "su": 31.0
+        "li": 29,
+        "su": 31
       },
-      "undecided": 19.0,
+      "undecided": 19,
       "notes": "11/1-7調查，11/9公布。聯合報系民調中心執行市話與手機雙電話底冊隨機抽樣（N=1114，另261人拒訪，誤差±3.0%）。蘇巧慧42%微幅領先李四川39%（差距3%，在抽樣誤差範圍內，蘇輝湟小於1%），未決定19%。中立選民蘇巧慧31% vs 李四川29%（39%仍在觀望）。政黨交叉：民進黨支持者91%挺蘇、國民黨支持者86%挺李、民眾黨支持者82%挺李（10%挺蘇）。當選看好度李四川37% vs 蘇巧慧36%（勢均力敵，僅差1%）。",
       "source": "https://udn.com/"
     },
@@ -373,7 +373,7 @@
       "marginOfError": 2.17,
       "results": {
         "li": 35.6,
-        "su": 44.0
+        "su": 44
       },
       "neutralResults": {
         "li": 24.4,
@@ -381,7 +381,7 @@
       },
       "partyAffiliation": {
         "dpp": 37.4,
-        "kmt": 22.0,
+        "kmt": 22,
         "tpp": 7.9,
         "independent": 28.3,
         "other": 4.4
@@ -415,14 +415,34 @@
       "commissioner": "中國時報",
       "sampleSize": 1083,
       "method": "phone",
-      "marginOfError": 3.00,
+      "marginOfError": 3,
       "results": {
-        "li": 37.0,
+        "li": 37,
         "su": 33.4
       },
       "undecided": 29.6,
       "notes": "11/11-13調查，11/16公布。中國時報出資委託艾普羅執行市話隨機抽樣（N=1083，誤差±3.0%）。全體受訪者中李四川37.0%領先蘇巧慧33.4%（差距3.6%，在誤差範圍內）；若僅計「一定會」與「可能會」具投票意願選民，李四川38.9% vs 蘇巧慧36.1%（差距縮小至2.8%，未表態14.6%）。蘇巧慧支持者76.0%表示一定會投票，略高於李四川支持者的73.3%。",
       "source": "https://www.chinatimes.com/"
+    },
+    {
+      "id": "nt2026-021",
+      "date": "2026-11-17",
+      "pollster": "tvbs",
+      "pollsterName": "TVBS民調中心（封關民調）",
+      "sampleSize": 1327,
+      "method": "phone+cell",
+      "marginOfError": 2.7,
+      "results": {
+        "li": 42.4,
+        "su": 43
+      },
+      "neutralResults": {
+        "li": 38.5,
+        "su": 27.8
+      },
+      "undecided": 13.6,
+      "notes": "11/15-16調查，11/17公布封關民調。TVBS執行市話(779份)與手機(548份)雙底冊人員電話訪問（N=1327，誤差±2.7%；市話拒訪率14.5%、手機拒訪率3.4%）。86.9%表示會投票（一定會68.5%、可能會18.4%）；在有投票意願選民中，蘇巧慧43.0%首度超車李四川42.4%（黃金交叉，僅差0.6%，在誤差範圍內），蘇輝湟0.9%，尚未決定13.6%。中立選民李四川38.5%領先蘇巧慧27.8%（33.2%尚未決定）。政黨交叉：民進黨認同者92.9%挺蘇、國民黨認同者90.8%挺李、民眾黨認同者81.7%挺李（9.6%挺蘇）；上屆投侯友宜者66.7%挺李、24.4%轉投蘇；投林佳龍者93.7%挺蘇。TVBS AI模型預估62%投票率下蘇50.5% vs 李48.1%。",
+      "source": "https://news.tvbs.com.tw/"
     }
   ]
 }
