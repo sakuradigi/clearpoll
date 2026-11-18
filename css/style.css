@@ -2530,11 +2530,17 @@ img, svg, canvas, video { max-width: 100%; }
   gap: 4px;
   padding: 3px 10px;
   border-radius: 999px;
+  font-family: inherit;
   font-size: 0.75rem;
   font-weight: 600;
+  line-height: 1.35;
   cursor: help;
   white-space: nowrap;
   max-width: 100%;
+}
+.chart-event-pill:focus-visible {
+  outline: 3px solid #2563EB;
+  outline-offset: 2px;
 }
 .chart-event-no {
   width: 16px;
@@ -2856,4 +2862,207 @@ img, svg, canvas, video { max-width: 100%; }
 @media (max-height: 480px) and (orientation: landscape) {
   .site-header { position: static; }
   .modal-card { max-height: 94vh; }
+}
+
+/* ---------- Screen-reader visually hidden utility ---------- */
+.visually-hidden {
+  position: absolute;
+  clip-path: inset(50%);
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+}
+
+/* ---------- Chart Date Range Zoom Toolbar ---------- */
+.chart-range-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+}
+
+.chart-range-presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.chart-toolbar-sep {
+  display: inline-block;
+  align-self: stretch;
+  min-height: 22px;
+  border-inline-start: 1px solid var(--color-border);
+  margin-inline: 2px;
+}
+
+.chart-range-custom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.chart-range-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.chart-range-tilde {
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  user-select: none;
+}
+
+.range-btn,
+.range-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 24px;
+  min-block-size: 30px;
+  padding: 4px 11px;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.range-btn[aria-pressed="true"] {
+  background: var(--color-text-primary);
+  color: var(--color-text-inverse);
+  border-color: var(--color-text-primary);
+  box-shadow: 0 0 0 1px var(--color-text-primary);
+}
+
+.range-reset-btn[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.chart-date-input {
+  font: inherit;
+  font-size: 0.78rem;
+  min-block-size: 30px;
+  padding: 3px 8px;
+  border: 1px solid #9ca3af;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+.range-btn:focus-visible,
+.range-reset-btn:focus-visible,
+.chart-date-input:focus-visible {
+  outline: 3px solid #2563EB;
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .range-btn:hover,
+  .range-reset-btn:not([aria-disabled="true"]):hover {
+    color: var(--color-text-primary);
+    border-color: var(--color-text-secondary);
+    background: var(--color-surface);
+  }
+  .range-btn[aria-pressed="true"]:hover {
+    color: var(--color-text-inverse);
+    background: var(--color-text-primary);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .range-btn,
+  .range-reset-btn,
+  .chart-date-input {
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+  }
+}
+
+.chart-range-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 12px;
+  margin-bottom: var(--space-sm);
+  font-size: 0.76rem;
+  color: var(--color-text-secondary);
+}
+
+.chart-range-status {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.chart-range-hint {
+  color: var(--color-text-tertiary);
+}
+
+.chart-event-pill.is-clickable {
+  cursor: pointer;
+}
+
+.chart-event-pill.is-out-of-range {
+  opacity: 0.42;
+}
+
+.chart-wrapper canvas.is-zoom-draggable {
+  cursor: crosshair;
+}
+
+@media (pointer: coarse) {
+  .range-btn,
+  .range-reset-btn {
+    min-block-size: 40px;
+    padding: 6px 12px;
+  }
+  .chart-date-input {
+    min-block-size: 40px;
+    font-size: max(1rem, 1em);
+  }
+}
+
+@media (max-width: 768px) {
+  .chart-toolbar-sep {
+    opacity: 0;
+    width: 100%;
+    min-height: 0;
+    height: 0;
+    border-inline-start: 0;
+  }
+  .chart-range-hint {
+    display: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .range-btn,
+  .range-reset-btn,
+  .chart-date-input,
+  .chart-toolbar-sep {
+    border-color: ButtonText;
+    color: ButtonText;
+  }
+  .range-btn[aria-pressed="true"] {
+    background: Highlight;
+    color: HighlightText;
+    border-color: Highlight;
+  }
 }

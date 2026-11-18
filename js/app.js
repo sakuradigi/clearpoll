@@ -17,6 +17,7 @@
   let activeTab = 'dashboard'; // 'dashboard' | 'detail' | 'methodology'
   let historicalRangeMode = 'all'; // 'all' (2016-2024) | 'recent' (2+2+2: 2020-2024)
   let historicalViewLayout = 'grid'; // 'grid' (2+2+2) | 'table' (full-width stacked tables)
+  let chartRangeState = { preset: 'all', start: null, end: null }; // 'all' | '90d' | '60d' | '30d' | '14d' | 'custom'
   
   let electionsMetadata = null;
   let analysisResult = null;
@@ -642,8 +643,164 @@
   /**
    * Render all charts.
    */
+  function shiftIsoDate(dateStr, deltaDays) {
+    if (!dateStr) return null;
+    const [y, m, d] = dateStr.split('-').map(Number);
+    if (!y || !m || !d) return dateStr;
+    const dt = new Date(y, m - 1, d + deltaDays);
+    return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+  }
+
+  function getRaceDateBounds(result) {
+    const dates = [
+      ...(result?.weightedPolls || []).map(p => p.date),
+      ...(result?.predictionLog || []).map(p => p.date),
+      ...(result?.events || []).map(ev => ev.date),
+    ].filter(Boolean).sort();
+    return {
+      min: dates[0] || '',
+      max: dates[dates.length - 1] || '',
+    };
+  }
+
+  function resolveChartRange(bounds) {
+    const { min, max } = bounds;
+    if (!min || !max || chartRangeState.preset === 'all') {
+      return { preset: 'all', start: null, end: null, displayStart: min, displayEnd: max };
+    }
+    const dayPresets = { '90d': 90, '60d': 60, '30d': 30, '14d': 14 };
+    if (dayPresets[chartRangeState.preset]) {
+      const shifted = shiftIsoDate(max, -dayPresets[chartRangeState.preset]);
+      const start = shifted && shifted > min ? shifted : min;
+      return { preset: chartRangeState.preset, start, end: max, displayStart: start, displayEnd: max };
+    }
+    let start = chartRangeState.start || min;
+    let end = chartRangeState.end || max;
+    if (start > end) [start, end] = [end, start];
+    // Reset if custom window doesn't overlap current race dates
+    if (end < min || start > max) {
+      chartRangeState = { preset: 'all', start: null, end: null };
+      return { preset: 'all', start: null, end: null, displayStart: min, displayEnd: max };
+    }
+    start = start < min ? min : start;
+    end = end > max ? max : end;
+    return { preset: 'custom', start, end, displayStart: start, displayEnd: end };
+  }
+
+  function syncChartRangeToolbarUI(bounds, resolved, result) {
+    const toolbar = $('chartRangeToolbar');
+    if (toolbar) {
+      toolbar.querySelectorAll('.range-btn').forEach(btn => {
+        const active = btn.dataset.range === resolved.preset;
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+    }
+    const startInput = $('chartRangeStart');
+    const endInput = $('chartRangeEnd');
+    if (startInput && endInput) {
+      startInput.min = bounds.min;
+      startInput.max = bounds.max;
+      endInput.min = bounds.min;
+      endInput.max = bounds.max;
+      startInput.value = resolved.displayStart || '';
+      endInput.value = resolved.displayEnd || '';
+    }
+    const resetBtn = $('chartRangeResetBtn');
+    if (resetBtn) {
+      resetBtn.setAttribute('aria-disabled', resolved.preset === 'all' ? 'true' : 'false');
+    }
+    const statusEl = $('chartRangeStatus');
+    if (statusEl) {
+      const polls = result?.weightedPolls || [];
+      if (resolved.preset === 'all' || !resolved.start || !resolved.end) {
+        statusEl.textContent = bounds.min && bounds.max
+          ? `顯示全部區間：${bounds.min} ～ ${bounds.max}（共 ${polls.length} 筆民調）`
+          : `顯示全部時間區間（共 ${polls.length} 筆民調）`;
+      } else {
+        const visibleCount = polls.filter(p => p.date >= resolved.start && p.date <= resolved.end).length;
+        statusEl.textContent = `放大區間：${resolved.start} ～ ${resolved.end}（${visibleCount} / ${polls.length} 筆民調）`;
+      }
+    }
+  }
+
+  function applyChartRange(nextState) {
+    chartRangeState = nextState;
+    if (analysisResult) {
+      renderCharts(analysisResult);
+    }
+  }
+
+  function initChartRangeControls() {
+    const toolbar = $('chartRangeToolbar');
+    if (!toolbar) return;
+
+    toolbar.querySelectorAll('.range-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const preset = btn.dataset.range || 'all';
+        applyChartRange({ preset, start: null, end: null });
+      });
+    });
+
+    const startInput = $('chartRangeStart');
+    const endInput = $('chartRangeEnd');
+    const onDateInputChange = () => {
+      if (!startInput || !endInput || !startInput.value || !endInput.value) return;
+      let start = startInput.value;
+      let end = endInput.value;
+      if (start > end) {
+        [start, end] = [end, start];
+        startInput.value = start;
+        endInput.value = end;
+      }
+      applyChartRange({ preset: 'custom', start, end });
+    };
+    if (startInput) startInput.addEventListener('change', onDateInputChange);
+    if (endInput) endInput.addEventListener('change', onDateInputChange);
+
+    const resetBtn = $('chartRangeResetBtn');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (resetBtn.getAttribute('aria-disabled') === 'true') return;
+        applyChartRange({ preset: 'all', start: null, end: null });
+      });
+    }
+
+    // Progressive enhancement fallback where native focusgroup is unsupported
+    if (!('focusGroup' in HTMLElement.prototype)) {
+      const items = Array.from(toolbar.querySelectorAll('button, input'));
+      items.forEach((el, idx) => { el.tabIndex = idx === 0 ? 0 : -1; });
+      toolbar.addEventListener('focusin', ({ target }) => {
+        if (items.includes(target)) {
+          items.forEach(el => { el.tabIndex = el === target ? 0 : -1; });
+        }
+      });
+      toolbar.addEventListener('keydown', (e) => {
+        const active = document.activeElement;
+        if (!items.includes(active)) return;
+        // Preserve native Left/Right segment stepping inside date inputs
+        if (active.tagName === 'INPUT' && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) return;
+        const rtl = getComputedStyle(toolbar).direction === 'rtl';
+        const step = e.key === 'ArrowRight' ? (rtl ? -1 : 1)
+          : e.key === 'ArrowLeft' ? (rtl ? 1 : -1)
+          : e.key === 'Home' ? -items.length
+          : e.key === 'End' ? items.length
+          : 0;
+        if (!step) return;
+        e.preventDefault();
+        const cur = items.indexOf(active);
+        const nextIdx = e.key === 'Home' ? 0
+          : e.key === 'End' ? items.length - 1
+          : (cur + step + items.length) % items.length;
+        items[nextIdx].focus();
+      });
+    }
+  }
+
   function renderCharts(result) {
     const { candidates, weightedPolls, predictionLog, predictedVoteShares, events = [] } = result;
+    const bounds = getRaceDateBounds(result);
+    const rangeInfo = resolveChartRange(bounds);
+    syncChartRangeToolbarUI(bounds, rangeInfo, result);
 
     // Render Event Timeline Bar above pollTrendChart
     const eventBar = $('chartEventTimelineBar');
@@ -659,12 +816,24 @@
         eventBar.innerHTML = `<span style="font-size: 0.78rem; font-weight: 700; color: var(--color-text-secondary); margin-right: 4px; white-space: nowrap;">📅 選戰關鍵節點與辯論標記：</span>` +
           events.map((ev, evIdx) => {
             const st = typeColorMap[ev.category || ev.type] || typeColorMap.nomination;
-            return `<span class="chart-event-pill" title="${ev.description || ev.label} (${ev.date})" style="background: ${st.bg}; border: 1px solid ${st.border}; color: ${st.text};">
+            const outOfRange = Boolean(rangeInfo.start && rangeInfo.end && (ev.date < rangeInfo.start || ev.date > rangeInfo.end));
+            return `<button type="button" class="chart-event-pill is-clickable${outOfRange ? ' is-out-of-range' : ''}" data-ev-date="${ev.date}" title="${ev.description || ev.label} (${ev.date})｜點擊聚焦前後 15 天" style="background: ${st.bg}; border: 1px solid ${st.border}; color: ${st.text};">
               <span class="chart-event-no" style="background: ${ev.color || st.text};">${evIdx + 1}</span>
               <span>${st.icon}</span>
               <span>${ev.date.slice(5)} ${ev.label}</span>
-            </span>`;
+            </button>`;
           }).join('');
+        eventBar.querySelectorAll('.chart-event-pill[data-ev-date]').forEach(pill => {
+          pill.addEventListener('click', () => {
+            const evDate = pill.dataset.evDate;
+            if (!evDate) return;
+            const s = shiftIsoDate(evDate, -15);
+            const e = shiftIsoDate(evDate, 15);
+            const clampedStart = bounds.min && s < bounds.min ? bounds.min : s;
+            const clampedEnd = bounds.max && e > bounds.max ? bounds.max : e;
+            applyChartRange({ preset: 'custom', start: clampedStart, end: clampedEnd });
+          });
+        });
         eventBar.classList.remove('hidden');
         eventBar.style.display = 'flex';
       } else {
@@ -673,16 +842,23 @@
       }
     }
 
+    const rangeOptions = {
+      start: rangeInfo.start,
+      end: rangeInfo.end,
+      onRangeSelect: ({ start, end }) => applyChartRange({ preset: 'custom', start, end }),
+      onRangeReset: () => applyChartRange({ preset: 'all', start: null, end: null }),
+    };
+
     try {
-      // Poll trend scatter chart with event annotations
-      ClearPollCharts.renderPollTrendChart('pollTrendChart', weightedPolls, candidates, events);
+      // Poll trend scatter chart with event annotations & range zoom
+      ClearPollCharts.renderPollTrendChart('pollTrendChart', weightedPolls, candidates, events, rangeOptions);
     } catch (e) {
       console.error('[ClearPoll] Failed to render pollTrendChart (possibly missing date adapter):', e);
     }
 
     try {
-      // Win probability trend chart with event annotations
-      ClearPollCharts.renderWinProbChart('winProbChart', predictionLog, candidates, events);
+      // Win probability trend chart with event annotations & range zoom
+      ClearPollCharts.renderWinProbChart('winProbChart', predictionLog, candidates, events, rangeOptions);
     } catch (e) {
       console.error('[ClearPoll] Failed to render winProbChart:', e);
     }
@@ -2406,6 +2582,7 @@
     initSPANavigation();
     initPollModal();
     initScenarioSimulator();
+    initChartRangeControls();
 
     // Re-render charts when crossing the phone breakpoint (rotation / resize)
     let lastCompact = window.innerWidth < 640;

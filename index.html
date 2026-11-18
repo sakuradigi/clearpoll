@@ -51,7 +51,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=20261118a">
+  <link rel="stylesheet" href="css/style.css?v=20261118b">
 
   <!-- MathJax for LaTeX Rendering -->
   <script>
@@ -415,6 +415,28 @@
           </div>
         </div>
         <div class="chart-card">
+          <div class="chart-range-toolbar" id="chartRangeToolbar" role="toolbar" focusgroup="toolbar wrap" aria-label="民調趨勢圖時間區間控制" aria-controls="pollTrendChart winProbChart">
+            <div class="chart-range-presets" role="group" aria-label="快速時間區間">
+              <button type="button" class="range-btn" data-range="all" aria-pressed="true">全部</button>
+              <button type="button" class="range-btn" data-range="90d" aria-pressed="false">近 90 天</button>
+              <button type="button" class="range-btn" data-range="60d" aria-pressed="false">近 60 天</button>
+              <button type="button" class="range-btn" data-range="30d" aria-pressed="false">近 30 天</button>
+              <button type="button" class="range-btn" data-range="14d" aria-pressed="false">近 14 天</button>
+            </div>
+            <span role="separator" aria-orientation="vertical" class="chart-toolbar-sep"></span>
+            <div class="chart-range-custom" role="group" aria-label="自訂起訖日期">
+              <label for="chartRangeStart" class="chart-range-label">自訂區間</label>
+              <input type="date" id="chartRangeStart" name="chart_range_start" class="chart-date-input">
+              <span class="chart-range-tilde" aria-hidden="true">～</span>
+              <label for="chartRangeEnd" class="visually-hidden">結束日期</label>
+              <input type="date" id="chartRangeEnd" name="chart_range_end" class="chart-date-input">
+              <button type="button" id="chartRangeResetBtn" class="range-reset-btn" aria-disabled="true" title="重設為全部時間區間">重設</button>
+            </div>
+          </div>
+          <div class="chart-range-meta">
+            <span id="chartRangeStatus" role="status" class="chart-range-status">顯示全部時間區間</span>
+            <span class="chart-range-hint">💡 可點選區間、選擇起訖日期，或在圖表上橫向拖曳框選放大（雙擊重設）</span>
+          </div>
           <div id="chartEventTimelineBar" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--space-sm); padding-bottom: var(--space-xs); border-bottom: 1px solid var(--color-border-light);">
             <!-- Dynamically populated campaign & debate event badges -->
           </div>
@@ -621,9 +643,9 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
   <!-- App modules -->
-  <script src="js/model.js?v=20261118a"></script>
-  <script src="js/charts.js?v=20261118a"></script>
-  <script src="js/map.js?v=20261118a"></script>
-  <script src="js/app.js?v=20261118a"></script>
+  <script src="js/model.js?v=20261118b"></script>
+  <script src="js/charts.js?v=20261118b"></script>
+  <script src="js/map.js?v=20261118b"></script>
+  <script src="js/app.js?v=20261118b"></script>
 </body>
 </html>
